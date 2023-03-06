@@ -1,9 +1,9 @@
 ---
 title: atan
-description: arctangent function
+description: trigonometric functions
 categories:
 - object
-pdcategory: vanilla, Data Math
+pdcategory: Math
 see_also:
 - +~
 - +
@@ -12,11 +12,13 @@ see_also:
 inlets:
   1st:
   - type: float
-    description: input value
+    description: input value to given function.
 outlets:
   1st:
   - type: float
-    description: the result of the operation
+    description: the result of the operation.
 draft: false
 ---
 Unlike the signal version cos~, control-rate trigonometric functions take inputs in radians.
+
+{{< md_include "objects/trigonometric-functions.md" >}}

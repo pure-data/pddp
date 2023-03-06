@@ -1,9 +1,9 @@
 ---
 title: file copy
-description: copy a file around
+description: copy a file around.
 categories:
 - object
-pdcategory: vanilla, File Management
+pdcategory: Misc
 last_update: '0.52'
 see_also:
 - text
@@ -26,24 +26,23 @@ see_also:
 - file splitext
 - file splitname
 flags:
-- name: -q
-  description: set quiet verbosity
-- name: -v
-  description: set loud verbosity
+- description: set quiet verbosity.
+  flag: -q
+- description: set loud verbosity.
+  flag: -v
 inlets:
   1st:
   - type: list
-    description: source and destination
+    description: source and destination.
+  - type: verbose <float>
+    description: set verbosity on or off.
 outlets:
   1st:
   - type: list
-    description: source and destination on success
+    description: source and destination on success.
   2nd:
   - type: bang
-    description: if an error occurs
-methods:
-  - type: verbose <float>
-    description: set verbosity on or off
+    description: if an error occurs.
 draft: false
 ---
 [file copy] duplicates the content of a file to a destination.

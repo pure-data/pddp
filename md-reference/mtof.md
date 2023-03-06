@@ -1,9 +1,9 @@
 ---
 title: mtof
-description: MIDI to frequency conversion
+description: convert acoustical units
 categories:
 - object
-pdcategory: vanilla, Converters, Tuning, MIDI
+pdcategory: Math
 last_update: '0.40'
 see_also:
 - mtof~
@@ -11,7 +11,7 @@ see_also:
 inlets:
   1st:
   - type: float
-    description: incoming value to be converted
+    description: incomming value to be converted.
 outlets:
   1st:
   - type: float

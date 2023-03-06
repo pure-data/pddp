@@ -9,19 +9,17 @@ see_also:
 - array
 - tabwrite~
 - tabreceive~
-pdcategory: vanilla, Arrays and Tables, Mixing and Routing
+pdcategory: Audio Oscillators And Tables
 last_update: '0.43'
 inlets:
   1st:
   - type: signal
-    description: signal to send to matching tabreceive~ object(s)
+    description: signal to send to matching tabreceive~ object(s).
+  - type: set <name>
+    description: set table name.
 arguments:
   - type: symbol
-    description: send symbol name 
-    default: empty symbol
-methods:
-  - type: set <name>
-    description: set table name
+    description: send symbol name (default empty symbol).
 draft: false
 ---
 By default a block is 64 samples but this can be changed with the block~ object.

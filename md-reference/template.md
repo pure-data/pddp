@@ -3,7 +3,7 @@ title: template
 description: (use struct now)
 categories:
 - object
-pdcategory: vanilla, Data Structures
+pdcategory: Obsolete
 inlets:
   1st:
 outlets:

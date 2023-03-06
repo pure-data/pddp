@@ -1,31 +1,32 @@
 ---
 title: atan2
-description: 2-argument arctangent function
+description: trigonometric functions
 categories:
 - object
-pdcategory: vanilla, Data Math
+pdcategory: Math
 see_also:
 - +~
 - +
 - div
 - expr
 arguments:
-- description: initialize value of right inlet 
-  default: 0
+- description: initialize value of right inlet (default 0).
   type: float
 inlets:
   1st:
   - type: bang
-    description: trigger calculation and output value
+    description: output the operation on the previously set values.
   - type: float
-    description: set value on left-hand side and trigger output
+    description: value to the left side of operation and output.
   2nd:
   - type: float
-    description: set value on right-hand side
+    description: value to the right side of operation.
 outlets:
   1st:
   - type: float
-    description: the result of the operation
+    description: the result of the operation.
 draft: false
 ---
-The atan2 version takes an (x, y
+The atan2 version takes an (x, y) pair and gives you an output between -pi and pi, it also takes a bang message in the left inlet to evaluate the operation with the previously set values.
+
+{{< md_include "objects/trigonometric-functions.md" >}}

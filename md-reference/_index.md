@@ -5,7 +5,7 @@ pdcategories:
 - General
 - Time
 - Math
-- I/O 
+- I/O via MIDI, OSC, and FUDI
 - Arrays & Tables
 - Misc
 - Audio Math
@@ -16,7 +16,7 @@ pdcategories:
 - Subwindows
 - Data Templates
 - Accessing Data
-- Extra
+- "'EXTRA' (patches and externs in pd/extra)"
 - Obsolete
 
 draft: false

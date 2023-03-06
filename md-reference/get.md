@@ -11,24 +11,23 @@ see_also:
 - setsize
 - element
 - struct
-pdcategory: vanilla, Data Structures
+pdcategory: Accessing Data
 last_update: '0.47'
 inlets:
   1st:
   - type: pointer
-    description: pointer to a data structure scalar
+    description: pointer to a Data Structure scalar.
+  - type: set <symbol, symbol>
+    description: set template and field name (if none or just one argument is given).
 outlets:
-  nth:
+  "'n': outlets depends on number of arguments":
   - type: float/symbol
-    description: field value
+    description: field value. 
 arguments:
 - type: symbol
-  description: template name
+  description: template name.
 - type: list
-  description: one or more field names (defines number of outlets)
-methods:
-  - type: set <symbol, symbol>
-    description: set template and field name (if none or just one argument is given)
+  description: one or more field names (defines number of outlets).
 draft: false
 ---
 "Get", when sent a pointer to a scalar, retrieves fields from it by name. The fields can be floats or symbols.

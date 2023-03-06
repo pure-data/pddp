@@ -3,7 +3,7 @@ title: ctlin
 description: MIDI input
 categories:
 - object
-pdcategory: vanilla, MIDI
+pdcategory: I/O via MIDI, OSC, and FUDI
 last_update: 0.48-2
 see_also:
 - notein
@@ -16,13 +16,14 @@ arguments:
 outlets:
   1st:
   - type: float
-    description: MIDI controller value
+    description: MIDI controller value.
   2nd:
   - type: float
     description: MIDI controller number
   3rd:
   - type: float
     description: MIDI channel/port
+  'n: (number depends on number of arguments)':
 draft: false
 ---
 

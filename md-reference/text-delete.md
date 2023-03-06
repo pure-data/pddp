@@ -1,9 +1,9 @@
 ---
 title: text delete
-description: delete a line or clear
+description: delete a line or clear.
 categories:
 - object
-pdcategory: vanilla, Data Management
+pdcategory: Misc
 last_update: '0.49'
 see_also:
 - list
@@ -20,21 +20,20 @@ see_also:
 - text search
 - text sequence
 arguments:
-- description: array name if no flags are given 
-  default: none
+- description: 'text name if no flags are given (default: none).'
   type: symbol
 flags:
-- name: -s <symbol, symbol>
-  description: struct name and field name of main structure
-
+- description: struct name and field name of main structure.
+  flag: -s <symbol, symbol>
 inlets:
   1st:
   - type: float
-    description: line number to delete (negative deletes all text)
+    description: line number to delete (negative deletes all lines).
   2nd:
   - type: symbol
-    description: set text name
+    description: set text name.
   - type: pointer
-    description: pointer to the text if -s flag is used
+    description: pointer to the text if -s flag is used.
 draft: false
 ---
+"text delete" deletes the nth line.

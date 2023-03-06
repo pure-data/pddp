@@ -1,9 +1,9 @@
 ---
 title: file delete
-description: remove files and directories
+description: remove files and directories.
 categories:
 - object
-pdcategory: vanilla, File Management
+pdcategory: Misc
 last_update: '0.52'
 see_also:
 - text
@@ -26,24 +26,23 @@ see_also:
 - file splitext
 - file splitname
 flags:
-- name: -q
-  description: set quiet verbosity
-- name: -v
-  description: set loud verbosity
+- description: set quiet verbosity.
+  flag: -q
+- description: set loud verbosity.
+  flag: -v
 inlets:
   1st:
   - type: symbol
-    description: file or directory to be deleted
+    description: file or directory to be deleted.
+  - type: verbose <float>
+    description: set verbosity on or off.
 outlets:
   1st:
   - type: symbol
-    description: the deleted path on success
+    description: the deleted path on success.
   2nd:
   - type: bang
-    description: if an error occurs
-methods:
-  - type: verbose <float>
-    description: set verbosity on or off
+    description: if an error occurs.
 draft: false
 ---
 NOTE: deleting destroys data. there is no confirmation dialog or anything of that kind.

@@ -1,6 +1,6 @@
 ---
 title: lop~
-description: one-pole lowpass filter
+description: one-pole low pass filter.
 categories:
 - object
 see_also:
@@ -12,26 +12,24 @@ see_also:
 - slop~
 - cpole~
 - fexpr~
-pdcategory: vanilla, Filters
+pdcategory: Audio Filters
 last_update: '0.38'
 inlets:
   1st:
   - type: signal
-    description: audio signal to be filtered
+    description: audio signal to be filtered.
+  - type: clear
+    description: clear filter's memory.
   2nd:
   - type: float
-    description: rolloff frequency
+    description: rolloff frequency.	
 outlets:
   1st:
   - type: signal
-    description: filtered signal
+    description: filtered signal. 
 arguments:
   - type: float
-    description: rolloff frequency in Hz 
-    default: 0
-methods:
-  - type: clear
-    description: clear filter's memory
+    description: rolloff frequency in Hz (default 0).
 draft: false
 ---
-lop~ is a one-pole lowpass filter with a specified rolloff frequency. The left inlet is the incoming audio signal. The right inlet is the cutoff frequency in Hz.
+lop~ is a one-pole low pass filter with a specified rolloff frequency. The left inlet is the incoming audio signal. The right inlet is the cutoff frequency in Hz.

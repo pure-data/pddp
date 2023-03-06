@@ -3,22 +3,22 @@ title: fudiformat
 description: FUDI messages to and from Pd lists
 categories:
 - object
-pdcategory: vanilla, Networking
+pdcategory: I/O via MIDI, OSC, and FUDI
 last_update: '0.48'
 see_also:
 - fudiparse
 - oscformat
 flags:
-- name: -u
-  description: switches to "UDP" mode
+- description: "switches to \u201CUDP\u201D mode"
+  flag: -u
 inlets:
   1st:
   - type: anything
-    description: any message to convert to a FUDI packet
+    description: any message to convert to a FUDI packet.
 outlets:
   1st:
   - type: list
-    description: converted FUDI packet
+    description: converted FUDI packet.
 bref: FUDI messages to and from Pd lists
 draft: false
 ---
