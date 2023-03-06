@@ -1,13 +1,13 @@
 ---
 title: symbolbox
-description: symbol box
-pdcategory: vanilla, UI
+description: Symbol box
+pdcategory: GUI
 inlets:
   1st:
   - type: symbol
-    description: set and output symbol
+    description: Set and output symbol
   - type: bang
-    description: output symbol
+    description: Output symbol
 outlets:
   1st:
   - type: symbol

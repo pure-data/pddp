@@ -3,7 +3,7 @@ title: sysexin
 description: MIDI input
 categories:
 - object
-pdcategory: vanilla, MIDI
+pdcategory: I/O 
 last_update: 0.48-2
 see_also:
 - notein

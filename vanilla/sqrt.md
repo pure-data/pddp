@@ -3,7 +3,7 @@ title: sqrt
 description: math functions
 categories:
 - object
-pdcategory: vanilla, Data Math
+pdcategory: Math
 see_also:
 - +~
 - +
@@ -12,11 +12,11 @@ see_also:
 inlets:
   1st:
   - type: float
-    description: input value
+    description: Input value.
 outlets:
   1st:
   - type: float
-    description: the result of the operation
+    description: The result of the operation.
 draft: false
 ---
 
