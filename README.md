@@ -12,6 +12,4 @@ This is just a page/repository under https://github.com/pure-data to discuss all
 
 See https://github.com/pure-data/pddp/issues and https://github.com/pure-data/pddp/discussions/ or open issues/discussions yourself if you want to collaborate. 
 
-Documentation changes regarding contents of https://github.com/pure-data/pure-data (manual/help files) should be made via a PR to that repository.
-
-Most documentation changes are being made by Alex Porres in this branch: https://github.com/porres/pure-data/tree/Documentation you can also submit PRs to it.
+Documentation changes regarding contents of https://github.com/pure-data/pure-data (manual/help files) should be made via a PR to that repository under the permanent documentation branch, which is curated by Alexandre Porres, see <https://github.com/pure-data/pure-data/tree/Documentation>.
