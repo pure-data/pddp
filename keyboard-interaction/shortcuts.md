@@ -8,8 +8,8 @@
 * `cmd + 1` creates object via 
   * `hsl` creates a horizontal slider
   * `vsl` creates a vertical slider
-  * `hradio` creates a horizontal radiobutton
-  * `vradio` creates a vertical radiobutton
+  * `hradio` creates a horizontal radio button
+  * `vradio` creates a vertical radio button
   * `bng` creates bang object
   * `tgl` creates toggle object
 * `cmd + 2` creates message box
@@ -60,7 +60,6 @@
 
 ## console
 * `cmd + r` to show/hide Pd window/console
-
 
 ---
 
