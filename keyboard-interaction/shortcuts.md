@@ -68,6 +68,6 @@ here are videos demonstrating the mechanisms of "intelligent patching":
 * https://vimeo.com/279631360
 * https://vimeo.com/340437816
 
-and here is more discussion and context around these features on the technical siede (⚠️ this is just a reference here while editing - will remove this for the actual documentation obviously):
+and here is more discussion and context around these features on the technical side (⚠️ this is just a reference here while editing - will remove this for the actual documentation obviously):
 * https://github.com/pure-data/pure-data/pull/575
 
