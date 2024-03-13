@@ -49,8 +49,8 @@
 * `dragging` from unselected object while multiple target objects are selected: pressing `shift` creates multiple connections to same target inlet
 * `cmd + d` while connection is selected: add parallel connection
 * `shift + click` on other connection while connection is selected: flip connection inlets or outlets (depending on the selected combination - facilitates trigger management)  
-* cycling through outlets while dragging via `tab` or `shift + tab`
-* cycling through target inlets while dragging via `tab` (only possible on Linux and Windows since it relies on manipulating the mouse position)
+* `tab` or `shift + tab` for cycling through outlets while dragging
+* `tab` cycling through target inlets while dragging (only possible on Linux and Windows since it relies on manipulating the mouse position)
 
 ## trigger management
 * `cmd + t` while 1 object is selected with multiple connections from single outlet: inserts [trigger] object to distribute outgoing connections
@@ -61,11 +61,14 @@
 ## console
 * `cmd + r` to show/hide Pd window/console
 
-here are 3 videos displaying these and more mechanisms of "intelligent patching":
+
+---
+
+here are videos demonstrating the mechanisms of "intelligent patching":
 * https://vimeo.com/273707442
 * https://vimeo.com/279631360
 * https://vimeo.com/340437816
 
-and here is more discussion and context around these developments on the vanilla side:
+and here is more discussion and context around these features on the technical siede (⚠️ this is just a reference here while editing - will remove this for the actual documentation obviously):
 * https://github.com/pure-data/pure-data/pull/575
 
