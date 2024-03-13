@@ -1,6 +1,8 @@
 ## mode management
 * `cmd + e` to switch between edit- and run-mode
 * pressing `cmd` while in edit-mode allows interactions like run-mode
+* `tab` to confirm object text entry / move focus out of text editing
+* `esc` to cancel selection (unselect everything)
 
 ## object creation
 * `cmd + 1` creates object via 
@@ -13,11 +15,6 @@
 * `cmd + 2` creates message box
 * `cmd + 3` creates number box 
 * `cmd + 4` creates list box 
-* `tab` to confirm entry / move focus out of text editing
-* `cmd + d` to duplicate (without connections), adds duplicated object at (10, 10) pixels offset
-* `cmd + c` --> `cmd + v` inserts object (without connections) at (10, 10) pixels offset or at identical position in different canvas
-* `cmd + x` --> `cmd + v` cuts / pastes object at identical position (without connections)
-* `paste and replace` replaces all selected objects with object on clipboard (only available through menu)
 
 #### connect new object to selected object
 * all interactions above create connected objects while the source object is selected
@@ -25,6 +22,12 @@
 #### insert objects to connection
 * `cmd + t` to insert trigger object in selected control connection (with selected text input)
 * `cmd + t` to insert nop signal subpatch in selected signal connection (with selected text input)
+
+#### copy/paste
+* `cmd + d` to duplicate (without connections), adds duplicated object at (10, 10) pixels offset
+* `cmd + c` --> `cmd + v` inserts object (without connections) at (10, 10) pixels offset or at identical position in different canvas
+* `cmd + x` --> `cmd + v` cuts / pastes object at identical position (without connections)
+* `paste and replace` replaces all selected objects with object on clipboard (only available through menu)
 
 ## aligning objects
 * `cmd + shift + r` to align objects (vertically or horizontally depending on their positions)
