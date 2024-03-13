@@ -1,7 +1,13 @@
 ## object creation (while an object is selected)
 * create connected object via `cmd + 1`
+  * `hsl` creates a horizontal slider
+  * `vsl` creates a vertical slider
+  * `hradio` creates a horizontal radiobutton
+  * `vradio` creates a vertical radiobutton
+  * `bng` creates bang object
+  * `tgl` creates toggle object
 * create connected message via `cmd + 2`
-* create connected numberbox via `cmd + 3`
+* create connected number object via `cmd + 3`
 * create connected listbox via `cmd + 4`
 * `tab` to confirm entry / move focus out of text editing
 * `cmd + d` to duplicate (without connections), adds duplicated object at (10, 10) pixels offset
@@ -38,7 +44,7 @@
 * cycling through outlets while dragging via `tab` or `shift + tab`
 * cycling through target inlets while dragging via `tab` (only possible on Linux and Windows since it relies on manipulating the mouse position)
 
-#### trigger management
+## trigger management
 * `cmd + t` while 1 object is selected with multiple connections from single outlet: inserts [trigger] object to distribute outgoing connections
 * `cmd + t` while trigger object is selected with connections for each outlet: adds anything-outlet on the left
 * `cmd + t` while trigger object is selected with less connections than outlets: removes unnecessary outlets
@@ -54,3 +60,4 @@ here are 3 videos displaying these and more mechanisms of "intelligent patching"
 
 and here is more discussion and context around these developments on the vanilla side:
 * https://github.com/pure-data/pure-data/pull/575
+
