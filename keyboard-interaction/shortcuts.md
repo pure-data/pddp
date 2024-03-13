@@ -1,11 +1,11 @@
 ## mode management
-* `cmd + e` to switch between edit- and run-mode
-* pressing `cmd` while in edit-mode allows interactions like run-mode
-* `tab` to confirm object text entry / move focus out of text editing
-* `esc` to cancel selection (unselect everything)
+* `cmd + e` switches between edit mode and run mode
+* pressing `cmd` while in edit mode allows run mode interactions
+* `tab` confirms object text entry / removes focus from text editing
+* `esc` cancels selection (unselects everything)
 
 ## object creation
-* `cmd + 1` creates object via 
+* `cmd + 1` creates object and sets focus to text entry
   * `hsl` creates a horizontal slider
   * `vsl` creates a vertical slider
   * `hradio` creates a horizontal radio button
@@ -13,30 +13,30 @@
   * `bng` creates bang object
   * `tgl` creates toggle object
 * `cmd + 2` creates message box
-* `cmd + 3` creates number box 
-* `cmd + 4` creates list box 
+* `cmd + 3` creates number box
+* `cmd + 4` creates list box
 
 #### connect new object to selected object
-* all interactions above create connected objects while the source object is selected
+* all interactions above create connected objects from a selected object
 
 #### insert objects to connection
-* `cmd + t` to insert trigger object in selected control connection (with selected text input)
-* `cmd + t` to insert nop signal subpatch in selected signal connection (with selected text input)
+* `cmd + t` to insert trigger object in selected control connection
+* `cmd + t` to insert nop~ (no operation, i.e. just output the input) subpatch in selected signal connection
 
 #### copy/paste
-* `cmd + d` to duplicate (without connections), adds duplicated object at (10, 10) pixels offset
+* `cmd + d` duplicates object (without connections), adds new object at (10, 10) pixels offset
 * `cmd + c` --> `cmd + v` inserts object (without connections) at (10, 10) pixels offset or at identical position in different canvas
 * `cmd + x` --> `cmd + v` cuts / pastes object at identical position (without connections)
 * `paste and replace` replaces all selected objects with object on clipboard (only available through menu)
 
 ## aligning objects
 * `cmd + shift + r` to align objects (vertically or horizontally depending on their positions)
-* `arrow keys` to move objects pixel-wise
-* `shift + arrow keys` to quicker move objects (10-pixel-steps)
+* `arrow keys` moves objects pixelwise
+* `shift + arrow keys` moves objects in 10 pixel steps
 
 ## connection management
-* `dragging` from outlet without mouseup allows to create multiple connections by pressing `shift` for each target inlet
-* `cmd + k` while 2 objects without connections selected: creates connection from upper to lower object
+* `dragging` from outlet allows creation of multiple connections by pressing `shift` for each target inlet while dragging
+* `cmd + k` while 2 objects without connections are selected: creates connection from upper to lower object
   * repeatedly pressing `cmd + k` when upper object has 1 outlet and lower one has more: connects multiple connections to all inlets of lower object
   * repeatedly pressing `cmd + k` when upper object has multiple outlets: creates parallel connections
 * `cmd + k` while object and connection are selected: inserts object in connection
