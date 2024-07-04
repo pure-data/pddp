@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="audio-streaming.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="audio-streaming.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Streaming Audio</h1>
+
+  <p>We shall look at streaming <strong>mp3</strong> to a streaming server using <strong>Pure Data</strong>. You should have a running version of Pd installed.</p>
+
+  <p>Additionally, you should have access to a <strong>streaming server</strong>.</p>
+
+  <p>If you have somebody that can lend you a server for this trial, then you will need to know to from them the following:</p>
+
+  <ul>
+    <li>what <strong>mountpoint</strong> do you use?</li>
+
+    <li>the <strong>hostname</strong> or <strong>IP Address</strong> of the server</li>
+
+    <li>the <strong>password</strong> for sending streams</li>
+
+    <li>the <strong>port number</strong> of the server</li>
+
+    <li>the <strong>type</strong> of server (Icecast2? Icecast1? Darwin? Shoutcast?)</li>
+  </ul>
+
+  <h2>1. Create the mp3cast object</h2>
+
+  <p>Now create a new object and type <strong>mp3cast~</strong> :</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3cast-en.jpg" alt="pd_mp3cast.jpg"></p>
+
+  <p>If all is installed well the object will look like the above. If there is a problem the object will be surrounded by dotted lines, this means that the object couldn't be created.&nbsp;</p>
+
+  <h2>2. Connect an osc~ object</h2>
+
+  <p>If all is ok, you can now add an audio object to the page so that we can send some audio to the <strong>signal inlet</strong> of the <strong>patch</strong>. We will use the <strong>osc~</strong> object.</p>
+
+  <p>The <strong>osc~</strong> object is created in the same way and it we will also give it a parameter. This parameter sets the frequency of the <strong>osc~</strong> sound wave, and we will use <strong>440</strong> (Hz). Then attach the <strong>signal outlet</strong> of <strong>osc~</strong> to the <strong>signal inlet</strong> of <strong>mp3cast~</strong>:</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_osc_mp3-en.jpg" alt="pd_osc_mp3.jpg"></p>
+
+  <p>Now we have a mono input to <strong>mp3cast~</strong> but we want a stereo connection, so we will connect the same <strong>signal outlet</strong> to <strong>right signal inlet</strong> of <strong>mp3cast~</strong> :</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_osc_mp3_2-en.jpg" alt="pd_osc_mp3_2.jpg"></p>
+
+  <h2>3. Settings</h2>
+
+  <p>We now want to send our server details to the mp3cast object so first we need to create 4 empty <strong>messages boxes</strong>. Put them on your document like so:</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3cast1-en.jpg" alt="pd_mp3cast1.jpg"></p>
+
+  <p>Enter the following into these newly created <strong>message boxes</strong>. One should contain the following:</p>
+  <pre>
+passwd 
+</pre>
+
+  <p>another should have:</p>
+  <pre>
+connect 
+</pre>
+
+  <p>the third should have:</p>
+  <pre>
+mountpoint 
+</pre>
+
+  <p>and the last:</p>
+  <pre>
+icecast2 
+</pre>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3cast2-en.jpg" alt="pd_mp3cast2.jpg"></p>
+
+  <p>OK, so now we are ready to enter the details of our streaming server.</p>
+
+  <p>In the <strong>passwd message box</strong> type a <strong>space</strong> after 'passwd' and enter your <strong>password</strong>. In this example the I will use the <strong>password</strong> 'hackme', and I would type this:</p>
+  <pre>
+passwd hackme 
+</pre>
+
+  <p>So I get this:</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3_pwd-en.jpg" alt="pd_mp3_pwd.jpg"></p>
+
+  <p>Then we enter the <strong>mountpoint</strong> in a similar fashion into the <strong>mountpoint message box</strong> . I will use the <strong>mountpoint</strong> <strong>live.mp3</strong>.</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3_mnt-en.jpg" alt="pd_mp3_mnt.jpg"></p>
+
+  <p><strong>note</strong> : you do not need to enter the suffix <strong>".</strong>mp3" in the <strong>mountpoint</strong>.</p>
+
+  <p>We also wish to enter the <strong>hostname</strong> and <strong>port</strong> of the streaming server. I will use the non-existant <strong>ice.streamingsuitcase.com</strong> as the <strong>hostname</strong> and <strong>port 8000</strong>:</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3_con-en.jpg" alt="pd_mp3_con.jpg"></p>
+
+  <p><strong>note</strong> : do <strong>not</strong> put in the leading <a target="_top" href="http://en.flossmanuals.net/bin/view/PureData/AudioStreaming">http://</a> in the <strong>hostname</strong>.</p>
+
+  <p>Lastly, we have the <strong>icecast2 message box</strong>. This defines what kind of server you are logging into. If you are using an <strong>Icecast1</strong> server you would instead have <strong>icecast</strong> in this box. Similar for <strong>shoutcast</strong>. If you are streaming to a <strong>Darwin</strong> server use <strong>icecast</strong>.</p>
+
+  <p>Connect all the <strong>control outlets</strong> from these <strong>message boxes</strong> to the <strong>left control inlet</strong> of the <strong>mp3cast~ object box</strong>. You may have to move the boxes around a bit to make space :</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3cast3-en.jpg" alt="pd_mp3cast3.jpg"></p>
+
+  <h2><a name="Start_the_Stream" id="Start_the_Stream"></a> 4. Start the Stream</h2>
+
+  <p>Now, to start to stream you must goto <strong>run mode</strong> and press the boxes in the following order:</p>
+
+  <ol>
+    <li>press <strong>passwd</strong> to set the <strong>password</strong></li>
+
+    <li>press <strong>icecast2</strong> (or whatever server type you are using) to set the <strong>server type</strong></li>
+
+    <li>press <strong>mountpoint</strong> to set the <strong>mountpoint</strong></li>
+  </ol>
+
+  <p>Now...this process has loaded <strong>mp3cast~</strong> with the server settings. Click the <strong>connect message box</strong> and you should be streaming!</p>
+
+  <p>To test connect with your favourite player using the the following syntax :</p>
+  <pre>
+http://hostname:port/mountpoint 
+</pre>
+
+  <p>In my case this would be:</p>
+  <pre>
+http://ice.streamingsuitcase.com:8000/live.mp3 
+</pre>
+
+  <h2><a name="Streaming_from_The_Mic" id="Streaming_from_The_Mic"></a> 5. Streaming from The Mic</h2>
+
+  <p>Lets replace the <strong>osc~</strong> with <strong>adc~</strong> like so:</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3cast4-en.jpg" alt="pd_mp3cast4.jpg"></p>
+
+  <p>The <strong>adc~</strong> object takes the input from your computers sound input. <strong>adc</strong> is short for <strong>Analog Digital Converter</strong>. If you now stream the sound will be coming from your soundcard input!</p>
+
+  <h2>6. Disconnect</h2>
+
+  <p>Incidentally, if you need to disconnect the stream make a new <strong>message box</strong> , type:</p>
+  <pre>
+disconnect 
+</pre>
+
+  <p>then connect this to the left <strong>control inlet</strong> of <strong>mp3cast~</strong> , return to <strong>run mode</strong> and press it.</p>
+
+  <p><img src="_booki/pure-data/static/Streaming-PureDataAudioStream-pd_mp3cast5-en.jpg" alt="pd_mp3cast5.jpg"></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="audio-streaming.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="audio-streaming.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

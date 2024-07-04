@@ -1,0 +1,535 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="time.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="time.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td sdnum="1031;0;@" width="114" align="left" height="17">
+          <h2>Name</h2>
+        </td>
+
+        <td width="118" align="left">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td width="583" align="left">
+          <h2>Function</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" valign="middle" align="left" height="17">
+          <h1>Time</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" sdnum="1031;0;@" valign="middle" align="left" height="17"><strong>Vanilla Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">cputime</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">measure CPU time</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">delay</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">bang after time delay</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">line</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">ramp generator</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">metro</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">send „bang“ periodically ala metronome</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">pipe</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">delay a message – a message „delay line“</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">realtime</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">ask operating system for elapsed real time</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">timer</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">measure logical time</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" sdnum="1031;0;@" valign="middle" align="left" height="17"><strong>Extended Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">bpm</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">calculate meanvalue of times between clicks</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">clock</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">show (simple) clock</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">help</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">timeconvert shows conversion of hertz, milliseconds, bpm, ...</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">clock</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">chronometer with display in secs</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">date</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">get system date</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">exciter</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">controls a list of bang events scheduled in time</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ISOdate ISOtime</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">output current date / time in ISO format</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">linedrive</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">scale numbers exponentially to use with line~</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">metroplus</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace mjlib</td>
+
+        <td align="left">allows complex timing bangs to be delivered</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">metrum</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">metro with GUI</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">monorhythm</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace mjlib</td>
+
+        <td align="left">basic rhythm pattern building blocks that allows polyrhthms to be generated quickly and easily</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">prob</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">weighted series of random numbers</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">pulse</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace motex</td>
+
+        <td align="left">a better metro</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">step</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">output sequence of numbers (similar to "line")</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">stoppuhr</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">chronometer with 2 layers</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">t3_delay</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">time tagged trigger delay</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">t3_metro</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">time tagged trigger metronom</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">t3_timer</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">time tagged trigger timer</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">time</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">get system time</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">timebang</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">send out bangs at given times of day</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">tripleLine</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace markex</td>
+
+        <td align="left">line object for 3 values</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">uhr</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">shows the time</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">urn</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone flatspace</td>
+
+        <td align="left">rng without duplicate numbers</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">utime</td>
+
+        <td sdnum="1031;0;@" align="left">cxc flatspace</td>
+
+        <td align="left">output seconds since epoch and microsecond faction</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">velocity</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">get velocity of digits per second</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="glue.html">GLUE</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="time.html">TIME</a></li>
+
+  <li><a href="midi.html">MIDI</a></li>
+
+  <li><a href="tables.html">TABLES</a></li>
+
+  <li><a href="misc.html">MISC</a></li>
+
+  <li><a href="audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="gem.html">GEM</a></li>
+
+  <li><a href="pdp.html">PDP</a></li>
+
+  <li><a href="physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="time.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="time.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="messages.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="messages.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Messages<br></h1>
+
+  <p>Pd's objects intercommunicate using messages, which typically flow from an outlet of one object to an inlet of another through black lines called wires, or patch cords.&nbsp; These messages are usually a request to do something, like open a file, compute a sum, or store some data.&nbsp; Apart from audio signals all other data in Pd are messages.</p>
+
+  <h2>Anatomy of a message<br></h2>
+
+  <p>Messages are made up of one or more pieces of data called <strong>atoms</strong>.&nbsp; There are several atom types that may be used in Pd, but the two most important ones are:</p>
+
+  <ul>
+    <li>numeric - a number such as "3," "4.5," or "5.55556e+06"</li>
+
+    <li>symbolic - typically, a word that cannot be interpreted as a number and that contains no white space, such as "open," "pitch," "file001," "reset"</li>
+  </ul>
+
+  <p>Messages in Pd begin with a symbolic atom, called the <strong>selector</strong>, which may be followed by zero or more atoms, referred to as the <strong>elements</strong> of the message (all separated by white-space).&nbsp; Aside from two convenient exceptions covered below, Pd messages follow adhere to the following form: <em>selector element1 element2 etc...</em><br></p>
+
+  <p>The selector of the message tells the object what to do-- that is, when a message arrives at one of its inlets,&nbsp; the object checks the selector and chooses an appropriate action, or <strong>method</strong>, in response.&nbsp; The particular action depends on what the object was designed to do.&nbsp; For example, an object may accept messages consisting of the selector "set" followed by one numeric atom, like "set 12," to store the number 12.&nbsp; Another object might accept a message with the selector "clear" (with no elements) as a way to "forget" the current data stored in the object.&nbsp; (Note: you can usually find out which messages an object accepts by right-clicking it and choosing "Help.")<br></p>
+
+  <p>All Pd objects will send an error to the console if you attempt to send a message that the object doesn't understand.&nbsp; For example, the [change] object accepts "float" and "set" messages, but if you try to send the message "elvis is king," an error will let you know that the selector "elvis" isn't understood: "error: change: no method for 'elvis'."&nbsp; For secondary inlets, the error message will give you a hint as to the correct selector, like: "error: inlet: expected 'float' but got 'elvis'."<br></p>
+
+  <h2>Standard Message Types<br></h2>
+
+  <p>There are many different people who have created and continue to create objects for Pd, designing them to accept messages with whatever selectors they find appropriate to the task at hand (open, vibrato, learn, kill, stop, etc.).&nbsp; So you might wonder how exactly the user is supposed to keep track of all the messages a given Pd object understands.&nbsp; Luckily, there are several standard message types built into Pd:</p>
+
+  <ul>
+    <li><strong>float message</strong> - the word "float" with one element that is a number, like "float -5."&nbsp; Also known as floats (floating point numbers).<br></li>
+
+    <li><strong>symbol message</strong> - the word "symbol" followed by a word. E.g., "symbol foo."<br></li>
+
+    <li><strong>list</strong> - the word "list" followed by groups of numbers and/or symbols and/or pointers.</li>
+
+    <li><strong>bang</strong> - the single word "bang."&nbsp; Often used simply to trigger an object to perform an action.<br></li>
+
+    <li><strong>pointer</strong> - references to data stored in graphical data structures.</li>
+  </ul>
+
+  <p>The standard messages shown above make it easy to perform common tasks in Pd-- for example, if you know that a certain object performs simple arithmetic, you can guess that it will accept float messages as input.<br></p>
+
+  <p>In the example below, notice that Pd provides a shortcut for typing both float messages and lists of numbers; you can leave off both the "float" and "list" selector and the objects will still accept and understand them.&nbsp; Since so much of Pd is basically about passing numbers around, these "implicit" float and list messages allow you to create your patch with less typing.<br></p>
+
+  <p>&nbsp;<img alt="messages01.png" src="_booki/pure-data/static/PureData-Messages-messages01-en.png"></p>
+
+  <h2>Message Boxes<br></h2>
+
+  <p>Messages can go between objects directly - as they do in the bottom two rows of each group shown below - or be sent from <strong>message boxes</strong> (and pass through them, as we'll see later). The message box allows the user to type a message that may be sent to an object by clicking it with the mouse.&nbsp; It also allows the user to view the message directly.<br></p>
+
+  <p>Message boxes also allow the user to send more than one message to an object.&nbsp; If you put a comma at the end of one message, you can then create a separate message which will be sent immediately after the first message. The comma breaks the message, creating a new instance.<br></p>
+
+  <p><img alt="messages02.png" src="_booki/pure-data/static/PureData-Messages-messages02_1-en.png"><br></p>
+
+  <p>The message box also has an advanced feature: it allows you to send messages without wires by using a semicolon.&nbsp; Like commas, semicolons can be used to create separate messages.&nbsp; However, all messages after the first semicolon will be sent to a destination specified by the selector of the message, which below is the [receive] objects name "parameter" and "parameter1."&nbsp; (Messages may also be sent to the Pd engine in this way by using the selector "pd" to specify the destination).&nbsp; This technique is usually used to send several different messages to different destinations.&nbsp; (Note: you can use a leading semicolon if you don't want to send anything to the outlet of the message box.)<br></p>
+
+  <p><img alt="messages03.png" src="_booki/pure-data/static/PureData-Messages-messages03_1-en.png"><br></p>
+
+  <h3><a name="Special%20Methods%20of%20Message%20Boxes"></a> Special Methods of Message Boxes</h3>
+
+  <p>Just like most other Pd objects, message boxes also react in special ways when they receive messages starting with special selectors. For example sending a message starting with the selector-word "set" to a message box will set the content of this message box the whatever follows the "set"-selector. "set 1 2 3" for example will erase the previous content of the message box receiving this message, then fill it with "1 2 3".</p>
+
+  <p>There are many more special methods for message boxes, like "add", "add2", "adddollar" and so on. Please check the help file for message boxes for details. Changing message boxes by these method- or meta-messages dynamically is a powerful feature of Pd, but it can also be a cause for subtle bugs in your patches if you aren't careful. If you want to avoid accidentally deleting the content of a message box, you can guard it with a [list] object in front of the box. This will convert all messages to proper list-messages that have a selector "list". a "set x" sent through [list] will become a "list set x" and it will not delete the message box content anymore. Of course, if you actually want to set the message box to "x" don't add the [list] or add a [list trim] after it as well.</p>
+
+  <h2>Packing elements and variables into a list<br></h2>
+
+  <p>You can create more complex messages by joining several elements together as a list - the most current object for that is [pack]. Elements may be numbers (specified by "f"), symbols ("s"), or a mixture of the two.</p>
+
+  <p><img alt="messages04.png" src="_booki/pure-data/static/PureData-Messages-messages04-en.png"><br></p>
+
+  <p>If you want to work with a list that combines fixed and variable elements, you can use <strong>dollarsign variables</strong> in a message box. These will get filled in by the corresponding elements from the message that arrives at the inlet.  will take the first element,  the second, and so on.&nbsp; Note that  refers to the first element, <strong>not</strong> the selector-- with the message "frequency 660"  would be "660."&nbsp; Also, remember that "13" is shorthand for "float 13," so in the example below the message "time " will expand to "time 13." Finally, note that "symbol end1" is what comes out of the symbol box (which shows how symbol messages can be useful).<br></p>
+
+  <p><img alt="messages05.png" src="_booki/pure-data/static/PureData-Messages-messages05_1-en.png"><br></p>
+
+  <p>Combining the power of [pack] with variables, it's possible to build complex commands for your patches:</p>
+
+  <p><img alt="messages06.png" src="_booki/pure-data/static/PureData-Messages-messages06-en.png"></p>
+
+  <h2>Deconstructing messages: unpack and route</h2>
+
+  <p>After you've built and formatted the commands you need, in the next part of your patch you can decide where to send them. First we can look at [pack]'s evil twin, [unpack]. As the name says, [unpack] separates a list into it's individual elements. This can be useful after you created your list command, to distribute it into the several parts of your synthesizer patch. Be sure to match the creation parameters with the format of the list you're expecting to receive.</p>
+
+  <p><img alt="messages07.png" src="_booki/pure-data/static/PureData-Messages-messages07-en.png"></p>
+
+  <p>Besides deconstructing your messages, you can also sort them qualitatively, through string comparison. For that we use [route]. With [route] you can send different messages to the same input, and sort them out quite easily.</p>
+
+  <p>The [route] object has two modes: the first routes messages according to the selector; this mode is set whenever you provide symbolic atoms as the arguments, like [route dog cat].&nbsp; In this mode, you could use the object to route messages according to the built-in message types - bangs, floats, symbols, lists, etc.:<br></p>
+
+  <p><img alt="messages08.png" src="_booki/pure-data/static/PureData-Messages-messages08-en.png"></p>
+
+  <p>The [route] object typically trims off the atom that is being used for the comparison (except for float and symbol messages).&nbsp; In "selector mode," you can use the message selector as a kind of "filter" to channel the remaining element to a specific outlet, as below:</p>
+
+  <p><img alt="messages09.png" src="_booki/pure-data/static/PureData-Messages-messages09-en.png"></p>
+
+  <p>Below is an example of the [route] object's "float mode," where list messages are selected according to the first element (so that you can easily route lists of numbers).&nbsp; This mode is set by using float parameters with [route], such as [route 1 2 3].&nbsp; (Remember that the message "1 20" is a shorthand for "list 1 20.")<br></p>
+
+  <p><img alt="messages10.png" src="_booki/pure-data/static/PureData-Messages-messages10-en.png"></p>
+
+  <p>If you just send [route] a message consisting of a single selector with no elements, you can use it just to trigger events. In this case, the output is only a bang.<br></p>
+
+  <p><img alt="messages11.png" src="_booki/pure-data/static/PureData-Messages-messages11-en.png"></p>
+
+  <p>And the grand finale: combine all objects (and variables) to create your own complex commands, and distribute them through the various parts of your instruments - all in the same patch:</p>
+
+  <p><img alt="messages12_1.png" src="_booki/pure-data/static/PureData-Messages-messages12_1-en.png"></p>
+
+  <p><br></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="messages.html">MESSAGES</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="lists.html">LISTS</a></li>
+
+  <li><a href="order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="messages.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="messages.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

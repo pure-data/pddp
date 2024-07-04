@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="dollar-signs.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="dollar-signs.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Dollar Sign Arguments</h1>
+
+  <p>Sometimes when you are programming, you want to mark a position where you will later put a value.&nbsp; In Pd this is done by using <strong>dollar sign arguments.&nbsp;</strong> They are used in object boxes and message boxes, but careful, they have different meanings when used in message boxes versus object boxes.&nbsp; In both cases, they could be called "replacement variables": they mark the<img title="examples of dollar sign arguments in message and object boxes" src="http://archive.flossmanuals.net/pure-data/http://en.flossmanuals.net/floss/pub/PureData/" height="0" width="0"> spot where you want to replace them with an actual value.<br></p>
+
+  <p>&nbsp;<img title="dollar_args_in_boxes" alt="dollar_args_in_boxes" src="_booki/pure-data/static/PureData-DataFlow-dollar_args_in_boxes-en.png" height="86" width="290"></p>
+
+  <h2>In Object Boxes<br></h2>
+
+  <p>In the same way as objects like [metro], [random] or [osc~] accept arguments (as in [metro 1000]) an abstraction can accept arguments that can be used inside of it. Consider an abstraction that combines [metro] and [random] objects to produce random numbers that also denote time intervals at which they are produced. In its basic form it could look like this:</p>
+
+  <p><img title="randometro" alt="randometro" src="_booki/pure-data/static/PureData-DataFlow-randometro-en.png" height="214" width="429"></p>
+
+  <p>The abstraction above has two inlets, at left it would receive on/off (1/0 float) input and at right the range for the [random] which will then pass random numbers to [metro] and at abstraction's outlet. As it can be seen, the abstraction will initialize with 1000ms to [metro] object and range from 0 to 1000 to [random] object. Now, imagine you are writing an abstraction not knowing what specific arguments you want to pass on to it. Or, if you would like to change the value of the random object dynamically, you would have to change the value that is passed on to the right inlet.</p>
+
+  <p>However, this can be done differently by passing arguments to the abstraction at the creation time using dollarsigns inside the abstraction. Consider this change including demonstration of usage. (Note: the loadbang object outputs a single bang when the sketch is opened):</p>
+
+  <p><img title="randometro1_1" alt="randometro1_1" src="_booki/pure-data/static/PureData-DataFlow-randometro1_1-en.png" height="355" width="525">&nbsp;</p>
+
+  <p>At the creation time two arguments (<em>1000</em> and <em>1100</em>) are passed to an abstraction [randometro1]. Inside the abstraction,  is substituted with the first argument (<em>1000</em>), and  with the second (<em>1100</em>). The effect (which was goal in the first place) is to be able to define the min-max range (as opposed to only 0-max) at which abstraction works. Because [random] inside the object needs a 0-max range, first argument (presumably smaller) is subtracted from the second. The result is passed to random to produce random numbers which are then added to the first argument. In demonstration of usage in the window behind the abstraction this construct produces random numbers between 1000 and 1100 in the first case, and 500 and 600 in the second.</p>
+
+  <p>While , , ... etc. represent first, second, etc .. argument to the abstraction, there is one special dollarsign that is extremely useful in Pure Data. <content-goes-here/> is a variable that is internally substituted by unique four-digit number per patch or instance of abstraction. In other words, Pd takes care that each instance of an abstraction or patch will be assigned this unique number and stored in <content-goes-here/> variable. The usefulness of this is immediately apparent in the following example of simple delay abstraction where delay-lines with the same name in multiple instances of same abstraction must be avoided:<br></p>
+
+  <p><img title="locdelay" alt="locdelay" src="_booki/pure-data/static/PureData-DataFlow-locdelay-en.png" height="476" width="563">&nbsp;</p>
+
+  <p>It is important to understand that, despite <content-goes-here/> isn't actually substituted with the unique number inside the delwrite~ object, the latter actually writes audio signal to delay-line named "1026-dline". <content-goes-here/> variable is assigned in every opened or called patch, which also solves the problem of two or more instances of same patch (i.e.: simple synth). <content-goes-here/> also saves from situations from unwanted crosstalk of frequently used variables in different patches. An attentive reader/user could also point out a possibility to use , to use an argument passed to an abstraction (like "one" and "two" in above example), in which case care must be still taken to assign unique arguments to abstractions used in the same Pd session.</p>
+
+  <p><content-goes-here/> is at times called localized variable, however, in my view, that is not entirely true. A variable constructed with <content-goes-here/>-something can still be accessed from the global namespace by simply finding that unique number and than calling that appropriate variable (like for example to read the delay-line named 1026-dline from above example from within another independent patch). In fact this can sometimes be even useful. It is however true that using dollar variables is a localization technique.</p>
+
+  <h2>In Message Boxes<br></h2>
+
+  <p>A frequent confusion arrises from the use of dollarsigns in message boxes. It is important to understand that dollar variables in message boxes are actually totally local to that message box itself regardless where they appear. They will be substituted only by what a message box receives on its inlet. In an example of abstraction within which both types of dollar variables are used:</p>
+
+  <p><img title="shotlinedollars_1" alt="shotlinedollars_1" src="_booki/pure-data/static/PureData-DataFlow-shotlinedollars_1-en.png" height="441" width="520">&nbsp;</p>The [shotline] abstraction, which has a goal of producing a ramp of values in specified time from some starting value to ending value, takes three arguments - speed, from-value and end-value. These variables are accessed inside the abstraction with ,  and  in the [pack object]. The latter sends a list of those three arguments to message box, in which ,  and  <em>represent only elements of an incoming list and not directly arguments of the abstraction</em>. Message box first send the second element, followed by a comma - so it resets line to that value, and then a pair of third and first element which correspond to target value and time-frame of a ramp.
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="messages.html">MESSAGES</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="lists.html">LISTS</a></li>
+
+  <li><a href="order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="dollar-signs.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="dollar-signs.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

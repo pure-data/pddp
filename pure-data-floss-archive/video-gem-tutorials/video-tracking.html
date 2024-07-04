@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="video-tracking.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="video-tracking.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Video Tracking<br></h1>
+
+  <p>A precondition of a good working simple motion detection is that you can disable the autofocus on your camera and that you have a good control over the lightning situation (so no sun/cloud change or large shadows).<br></p>
+
+  <p>The first step to determine the position of a moving item in the field of view of your camera is to compare frames to each other. In a stream of video you can either compare the previous to the current frame or a previously selected frame to the current one. The fist method will give us the movement, but we will lose the coordinates when the movement is very small or stops.</p>
+
+  <h3>[pix_movement]</h3>
+
+  <p>Compare the previous frame to the current one. It takes a threshold value (0-1) as an argument and in the second inlet.</p>
+
+  <p><img alt="pix_movement.png" src="_booki/pure-data/static/PureData-GEMPixEffects-pix_movement-en.png" height="193" width="452"></p>
+
+  <p>This will result in all pixel information blacked out exept the space where a difference is detected relative to the previous frame. We will get to the point how to measure that to trigger things when we compared it to<br></p>
+
+  <h3>[pix_background]</h3>
+
+  <p>It is the cousin of pix_movement with the difference that we can set the reference frame to which the current frame is compared. This is called background substraction.<br></p>
+
+  <p><img alt="pix_background.png" src="_booki/pure-data/static/PureData-GEMPixEffects-pix_background-en.png" height="206" width="249"></p>
+
+  <p>Click on the reset message to pix background to set the current frame to the reference frame.&nbsp;<br></p>
+
+  <p>A drawback of pix_background compared to pix_movement is, that if lightning situations change, we will have to re-reset the frame to compare the current frames to.</p>
+
+  <h4>[pix_blob]<br></h4>
+
+  <p>either way, we need another object: [pix_blob]. The monochrome information we receive of Pix_movement/pix_background are called blobs. The [pix_blob] object will give us mre infomations about those blobs, which we need if&nbsp; a) we want to trigger things if something moves in the field of view of the camera (pix_movement) or b) something is in the field of view of the camera what wasn't there when we set the reference frame (pix_background).</p>
+
+  <p><img alt="pix_blob.png" src="_booki/pure-data/static/PureData-GEMPixEffects-pix_blob-en.png" height="333" width="349"></p>
+
+  <p>With this patch, if you move in front of the camera, you will see the output of pix_blob's last outlet changing. Where I left the empty box you can continue to add something you want to have triggered. Possibly a [&gt; 0.001] which is the threshold followed by a [change] and a [select 1] to generate a bang each time the movement goes higher than a defined value.</p>
+
+  <h4>Getting the coordinates</h4>
+
+  <p>OK, we built a motion detector, but what about the coordinates? Where is the actual movement happening in the image? [pix_blob] has two more outlets which are just that.<br></p>
+
+  <p>note: i was trying to translate those patches into a manual:</p>
+
+  <p>http://www.uni-weimar.de/medien/wiki/Bewegungsmelder</p>
+
+  <p>The Chapter needs to be extended to cover&nbsp; pattern recognition (TUIO), pix_opencv (face recognition), blobs and multiblobs, IR illumination, multitouch technology and Kinect depth information/skeleton data.</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="basics.html">BASICS</a></li>
+
+  <li><a href="moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="effects.html">EFFECTS</a></li>
+
+  <li><a href="recording.html">RECORDING</a></li>
+
+  <li><a href="screens.html">SCREENS</a></li>
+
+  <li><a href="video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="video-tracking.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="video-tracking.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

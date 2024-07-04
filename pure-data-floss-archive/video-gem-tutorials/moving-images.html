@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="moving-images.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="moving-images.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Images, Movies and Live Video</h1>For any image processing you need a source image. This can be a file that you load from your harddrive or a live video feed. This chapter will introduce [pix_image], [pix_film], [pix_movie] and [pix_video].<br>
+
+  <h2>[pix_image]</h2>
+
+  <p>In the basics chapter we already used the object [pix_image]. This object allows you to load picture files. Supported formats are *.tif, *jpg, *.png, *.bmp and *.gif.<br></p>
+
+  <p>To load an image into [pix_image] either add the filename as an argument or send it the message <em>open filename</em>. If you want to select a file using a file browser you can use the object [openpanel].<br></p>
+
+  <p><img alt="004_pix_image.png" src="_booki/pure-data/static/PureData-GEM-004_pix_image-en.png" height="195" width="579">&nbsp;</p>
+
+  <h2>[pix_film]</h2>
+
+  <p>As with [pix_image] you can load movie files by passing [pix_film] the file name as an argument, or by sending it an "open" message with the filename. The list of supported formats may vary depending on your installed movie codecs, but usually you should be able to play *.avi, *.mov and *.mpg files.<br></p>
+
+  <p>Please be aware that sound is not supported by [pix_film] ([pix_movie] neither). If you want to sync a soundtrack of a video to your images, you have to first extract it using an external video editor.<br></p>
+
+  <p>[pix film] will play your movie automatically if you send it a message "auto 1". The framerate at which your movie is played is dependent on the framerate that was set with gemwin. The message "auto 0" will cause [pix_film] to just display the current frame. You can use the right inlet to scroll through your movie or jump to a certain frame. That also allows you to play movies at different speeds, even backwards.<br></p>
+
+  <p>The rightmost outlet of pix_film will output a "bang" everytime the end of the film is reached.<br></p>
+
+  <p><img alt="005_pix_film.png" src="_booki/pure-data/static/PureData-GEM-005_pix_film-en.png" height="346" width="302">&nbsp;</p>
+
+  <h2>[pix_movie]</h2><br>
+  [pix_movie] works exactly like pix_film. The only difference is that you don't need [pix_texture]. You can directly connect the outlet of [pix_movie] to a rectangle.<br>
+
+  <h2>[pix_video]</h2>
+
+  <p>[pix_video] will grab live input of a camera that is attached or built into your computer. Usually you can receive a video signal only once on your machine, so if another application or even another Pd patch already uses video input, [pix_video] will not be able to receive a signal. On the other hand, if you have several cameras attached to your system, you can use several [pix_video] objects and specify the the camera devices with messages like <em>"device 0"</em> and <em>"device 1"</em>.<br></p>
+
+  <p>A <em>"dimen"</em> message will let you set the resolution of your video image. If you use a small resolution, your render engine will have less pixels to render and thus be faster, but of course this will also decrease the image quality. To test different resolutions you might want to set the quality setting of [pix_texture] to 0. You will also realize that not all resolutions are supported by your system. Just play around with dimen to figure out how high or low you can set dimensions.<br>
+  <br>
+  <img alt="006_pix_video.png" src="_booki/pure-data/static/PureData-GEM-006_pix_video-en.png" height="343" width="521"><br></p>
+
+  <h2>Related Objects</h2>
+
+  <p>Finally, I also would like to briefly mention some other objects that allow you to "create" images. [pix_multiimage] will allow you to load several images at once. Use the right inlet to switch between them. Also check out [pix_set] if you want to create an empty image. Or play around with [pix_sig2pix~] if you want to feed your audio signal into an image buffer.</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="basics.html">BASICS</a></li>
+
+  <li><a href="moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="effects.html">EFFECTS</a></li>
+
+  <li><a href="recording.html">RECORDING</a></li>
+
+  <li><a href="screens.html">SCREENS</a></li>
+
+  <li><a href="video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="moving-images.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="moving-images.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

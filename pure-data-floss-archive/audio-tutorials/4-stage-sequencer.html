@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="4-stage-sequencer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="4-stage-sequencer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>A Four Stage Filtered Additive Synthesizer</h1>
+
+  <p>Our final example shows all the different elements of a simple synthesizer combined together into an instrument which can be played by the computer keyboard using [key]. It has four distinct sections:</p>
+
+  <ul>
+    <li>The INPUT STAGE: where note information is received and sent to the other stages.</li>
+
+    <li>The OSCILLATOR STAGE: where the notes received from the INPUT STAGE are converted to frequencies which control two detuned Sawtooth Oscillators.&nbsp;</li>
+
+    <li>The FILTER STAGE: where notes received from the INPUT STAGE are turned into an audio signal which sweeps a Voltage Controlled Filter, and where the audio signal from the OSCILLATOR STAGE is filtered.&nbsp;</li>
+
+    <li>And the AMP STAGE: where the "bang" at the start of every note from the INPUT STAGE is used to trigger a message to the [vline~] Envelope Generator, which smoothly changes the volume of the audio from the FILTER STAGE.</li>
+  </ul>
+
+  <p><img title="ctl6_1" alt="ctl6_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl6_1-en.png" height="540" width="549"></p>
+
+  <h2>The Input Stage</h2>
+
+  <p>At the INPUT STAGE, we use the [key] object to get the ASCII values of the computer keys being pressed. This information is passed to the [trigger] object. [trigger] is a very important Pd object used to specify the order in which events happen.</p>
+
+  <p>What [trigger] does depends entirely on its creation arguments. When it receives any input, [trigger] sends messages to its output in a right to left order, based on these creation arguments. In this case, our [trigger] has the creation arguments "float", "float" and "bang". So on any input from [key], which sends a Floating Point Number (a "float"), [trigger] will first send the message "bang" out its right-most outlet, which will go the AMP STAGE. The it will send that float which came in to the center outlet, which will go to the FILTER STAGE. And finally it will send that float to the left-most outlet, which will go the OSCILLATOR STAGE. [trigger] is often abbreviated as [t], so the [trigger] in this example could also be typed as [t f f b].</p>
+
+  <p>For more information on [trigger], please see the Dataflow Tutorials in this FLOSS Manual.</p>
+
+  <h2>The Oscillator Stage</h2>
+
+  <p>This stage is concerned only with the Additive Synthesis of two detuned Sawtooth Oscillators. This means that the output of two [phasor~] objects, whose frequencies are slightly different from each other, will be added together. Since the difference in frequency is quite small (one [phasor~]'s frequency is 99% of the other's), instead of hearing two tones we will hear a periodic modulation of one tone.</p>
+
+  <p>The float from the [trigger] in the INPUT STAGE arrives at an [mtof] object, which converts it to a frequency in Hertz. This frequency is sent immediately to one [phasor~], and also to a Multiplication [*] object, which makes a new frequency number which is 99% of the other, and this new scaled frequency is sent to a second [phasor~].</p>
+
+  <p>The audio output of the two [phasor~] objects is added together in an Audio Multiplier [*~] object, which reduces the overall volume by 50% to prevent clipping when it reaches the soundcard. The resulting audio signal is sent to the FILTER STAGE.</p>
+
+  <h2>The Filter Stage</h2>
+
+  <p>The FILTER STAGE is responsible for taking the audio from the OSCILLATOR STAGE and applying a swept Voltage Controlled Filter [vcf~] object to that signal. The center frequency of the [vcf~] is also determined by the key which has been pressed on the keyboard.</p>
+
+  <p>When the float sent by [trigger] from the INPUT STAGE reaches this stage, it is converted into a frequency number by [mtof]. This number is multiplied by 1.5 so that the center frequency of [vcf~] is a half octave above that of the Sawtooth Oscillators. The number from [mtof] is [pack]ed together with 300 and sent to a [line~] object. This message tells [line~] to ramp to any new number it receives in 300 milliseconds.</p>
+
+  <p>The audio ramp from [line~] is used to control the center frequency of the [vcf~] object. The result is that the [vcf~] will not jump to any new frequency it receives, but it will smoothly ramp there over 300 milliseconds, resulting in the distinctive "filter sweep" sound.</p>
+
+  <p>The audio leaving the Voltage Controlled Filter is now sent to the AMP STAGE.</p>
+
+  <h2>The Amp Stage</h2>
+
+  <p>This final stage controls the overall volume of each note played by this synthesizer. It uses a [vline~] object as a complex Envelope Generator.</p>
+
+  <p>Every time a key on the keyboard is pressed, the [trigger] object in the INPUT STAGE sends the message "bang" to the AMP STAGE. Here it triggers the message "1 150, 0.9 150 150, 0 1000 500", which is sent to the [vline~] and tells [vline~] to make this audio ramp.</p>
+
+  <p>The exact instructions the message tells [vline~] are as follows:</p>
+
+  <ul>
+    <li>First ramp to 1 in 150ms</li>
+
+    <li>Then ramp down to 0.9 in 150ms after a delay of 150ms from the start of the complex ramp.</li>
+
+    <li>After that, ramp down to 0 in 1000ms after a delay of 500ms from the start of the complex ramp</li>
+  </ul>
+
+  <p>This translates to:</p>
+
+  <ul>
+    <li>Attack: 150ms</li>
+
+    <li>Decay: 150ms to a value of 0.9&nbsp;</li>
+
+    <li>Sustain: 200ms (the 500ms of the last ramp minus the 300ms of the first two ramps equals a "rest period" of 200ms)&nbsp;</li>
+
+    <li>Release: 1000ms</li>
+  </ul>
+
+  <p>With these instructions, [vline~] creates an audio ramp which smoothly controls the overall volume of the audio coming from the FILTER SECTION via an Audio Multiplication [*~] object.</p>
+
+  <h2>Subpatches</h2>
+
+  <p>Now that we have an instrument that is separated into four distinct stages, we may want to make the screen a bit easier to look at by putting each stage inside its own Subpatch.</p>
+
+  <p>A Subpatch is simply a visual container which objects can be placed in to get them out of the way. To create a Subpatch in a Pd patch, simply create an object named [pd mysubpatch], where "mysubpatch" can be any name you choose. A new empty patch window opens up and you can cut or copy and paste the objects you want to place in the Subpatch inside this new window. When you close the window, the objects will be inside this Subpatch, still functioning as normal.</p>
+
+  <p>To get information in and out of a Subpatch, you can use the objects [inlet] and [outlet] for numbers and other messages, and the objects [inlet~] and [outlet~] for audio. This will create inlets and outlets in the Subpatch in the main patch you are working in, that you can connect as normal. You can give a creation argument to each inlet or outlet, which could be a reminder of what is supposed to come in our out of that inlet or outlet ("midi_note", "start_trigger", "audio_from_filter", etc etc).</p>
+
+  <p>Here is our Four Stage Subtractive Filtered Synthesizer, with each stage inside it's own Subpatch.</p>
+
+  <p><img title="ctl7-1_1" alt="ctl7-1_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl7-1_1-en.png" height="289" width="200"></p>
+
+  <p><img title="ctl7-2_1" alt="ctl7-2_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl7-2_1-en.png" height="450" width="350"></p>
+
+  <p><img title="ctl7-3_1" alt="ctl7-3_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl7-3_1-en.png" height="450" width="350"></p>
+
+  <p><img title="ctl7-4_1" alt="ctl7-4_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl7-4_1-en.png" height="450" width="350"></p>
+
+  <p><img title="ctl7-5_1" alt="ctl7-5_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl7-5_1-en.png" height="450" width="350"></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="frequency.html">FREQUENCY</a></li>
+
+  <li><a href="additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="filters.html">FILTERS</a></li>
+
+  <li><a href="envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="4-stage-sequencer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="4-stage-sequencer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

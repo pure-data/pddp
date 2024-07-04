@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="controlling-the-synth.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="controlling-the-synth.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Controlling the Synthesizer</h1>
+
+  <p>Reviewing what we've covered in this tutorial, we can see that all the building blocks of a simple synthesizer are present.</p>
+
+  <p>We have various Oscillators to generate the tones. Then there are Low Frequency Oscillators, which provide the possibility to modulate either the frequency or gain of the Oscillator(s), or the frequency of a Filter. There are also different types of Filters, which emphasizes and/or removes certain frequencies. Envelope Generators control changes in frequency or gain over time, and Amplifiers control the final gain of the synthesizer.</p>
+
+  <p>The way each of these elements are put together gives the final definition to the sound and functionality of your synthesizer. And there are an infinite number of was to do this! In the following examples, we'll look at some simple ways to combine the different elements of a basic synthesizer with ways of controlling it, either from the computer keyboard, a MIDI keyboard or a 16 step sequencer which we will build.</p>
+
+  <h2>Input from the Computer Keyboard</h2>
+
+  <p>To get a very crude input from the computer keyboard, we can use the objects [key] and [keyup]. Each key on the computer keyboard has what is called an ASCII value, which is a number used to represent that key. [key] outputs this number when a key is pressed, and [keyup] sends this number when a key is released. Like MIDI Notes, these numbers are within the range of 0 to 127. However, the layout of these ASCII values on the computer keyboard is far from musical! But they are a good way to get some immediate input into a patch, and later on [key] and [keyup] can used to trigger different elements of a Pd patch besides musical notes.</p>
+
+  <p>In the following patch, the ASCII values of the computer keyboard are treated as MIDI notes and control the frequency and volume of a Sine Wave Oscillator. We will use [line~] as a simple Attack/Decay Envelope Generator here, to make the envelope of the note smooth and to avoid clicks.</p>
+
+  <p>When a key is pressed, [key] sends the ASCII value, which becomes a frequency through [mtof] and controls the [osc~]. At the same time, when the key is pressed, the output of [key] is converted to a "bang", which triggers the message "1" to be sent to [pack]. In [pack], this "1" is packed together with "50" to make a message which says "1 50". [line~] interprets the message "0 50" to mean "ramp to 1 in 50 milliseconds". This will smoothly ramp the audio signal from the [osc~] up to full volume.</p>
+
+  <p>When a key is released, then [keyup] will send a number out as well. We will convert this to a "bang", which sends the message "0" to [pack]. [pack] then makes the message "0 50" and sends it to [line~], and [line~] will ramp back down to 0 in 50 milliseconds.</p>
+
+  <p><img title="ctl1" alt="ctl1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl1-en.png" height="464" width="547"></p>
+
+  <h2>Input from a MIDI Keyboard</h2>
+
+  <p>This task is made simpler (and more musical!) with the addition of a MIDI keyboard. Make sure you have selected the proper MIDI input device in your Preferences (see Configuring Pd for more details). The [notein] object receives the MIDI Note and Velocity information from the MIDI keyboard. Because usually you will want to listen to the first MIDI keyboard you plug in, we give [notein] a creation argument of "1", thus [notein 1] will receive MIDI Notes on MIDI Channel 1. The MIDI Note played will come out the left outlet, and the Velocity (how hard the key is pressed) will come out the right outlet.</p>
+
+  <p>The MIDI Note we send to an [mtof], which converts it to a frequency and sends it to the [osc~]. The Velocity we divide by 127 to get a value between 0 and 1. This value gets [pack]ed together with 50, and sent to the&nbsp; [line~] object, which we will use again as an Attack Decay Envelope Generator. [line~] makes a 50 millisecond audio ramp, either to "0" when the MIDI key is released and the Velocity is "0", or to a value between 0 and 1 when the MIDI key is pressed, depending on how hard it has been pressed. [line~] sends an audio ramp to the Audio Multiplier [*~], which smoothly changes the volume of the audio signal form the [osc~].</p>
+
+  <p><img title="ctl2" alt="ctl2" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl2-en.png" height="405" width="519"></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="frequency.html">FREQUENCY</a></li>
+
+  <li><a href="additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="filters.html">FILTERS</a></li>
+
+  <li><a href="envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="controlling-the-synth.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="controlling-the-synth.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

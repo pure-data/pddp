@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch037_math.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch037_math.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Math</h1>
+
+  <p>In order to work your data, using mathematical functions is essential to produce something in Pd. Numerical values can be mathematically manipulated with numerous arithmetic objects. These are divided into sections, according to their function:</p>
+  <pre>
+[+] [-] [*] [/] [pow]                                    simple arithmetic
+[sqrt] [log] [exp] [abs]                                 higher math
+[sin] [cos] [tan] [atan] [atan2]                         trigonometry
+[mod] [div]                                              fraction work
+[max] [min] [clip] [moses]                               numbers and ranges
+[random]                                                 lower math
+[==] [!=] [&gt;] [&lt;] [&gt;=] [&lt;=]                              relational operators
+[mtof] [ftom] [powtodb] [rmstodb] [dbtopow] [dbtorms]    convert acoustical units
+[&amp;] [&amp;&amp;] [|] [||] [%]                                    bit twiddling
+</pre>
+
+  <h2>Simple arithmetic</h2>
+
+  <p>This section deals with basic mathematical functions:</p>
+
+  <ul>
+    <li>[+] - plus</li>
+
+    <li>[-]&nbsp; - minus</li>
+
+    <li>[*] - multiply</li>
+
+    <li>[/]&nbsp; - divide</li>
+
+    <li>[pow] - power</li>
+  </ul>
+
+  <p>Each math object does one operation only, taking usually two parameters for it. For example, if you want to sum 2 + 3 + 4, you need to create the necessary objects in a chain - because in reality you are doing two operations.</p>
+
+  <p><img alt="math01.png" src="_booki/pure-data/static/PureData-math-math01-en.png"></p>
+
+  <p>Don't forget that Pd differentiates between left inlets - the hot inlets - and other inlets - the cold inlets. So if you want to make your operation sucessfully, you must first get the right number in, and only afterwards the left number.</p>
+
+  <p><img alt="math02.png" src="_booki/pure-data/static/PureData-math-math02-en.png"></p>
+
+  <p>So, if you have an operation where you know that one of the numbers is going to be stable, you should connect that number to a cold inlet - in case the numbers can be changed and the operation still makes sense, of course.</p>
+
+  <p><img alt="math03.png" src="_booki/pure-data/static/PureData-math-math03-en.png"></p>
+
+  <p>Or you can use the second number as a parameter of your object. In case you don't have any parameter it's like having 0 as a parameter (which was what happened in the previous examples). In case you put in a new number, the second parameter will be actualized.</p>
+
+  <p><img alt="math04.png" src="_booki/pure-data/static/PureData-math-math04-en.png"></p>
+
+  <p>I guess it isn't necessary to explain how [+], [-], [*] and [/] work. But for the other objects some words will be necessary. [pow] is a basic exponentiation operation, but with some perks to it. First, you can't input any negative base numbers (the left input). And second, you can use negative exponents (right input).</p>
+
+  <p><img alt="math05.png" src="_booki/pure-data/static/PureData-math-math05-en.png"></p>
+
+  <h2>Higher math</h2>
+
+  <p>Here are introduced some objects that are often used in mathematics:</p>
+
+  <ul>
+    <li>[sqrt] to take the square root of a number (no negative numbers allowed)</li>
+
+    <li>[abs] for the absolute value of a number (turns negative numbers into positive numbers)</li>
+
+    <li>[log] and [exp] are the normal functions already known in math</li>
+  </ul>
+
+  <h2>Trigonometry</h2>
+
+  <p>The objects here relate mainly to trigonometry, and they work the same way already explained for the previous objects. In case you need any information about trigonometry, we suggest to look for a more specific manual. Only one detail: there is no symbolic definition of Pi, so in case you need it, you'll have to type the numeric value as precise as necessary.</p>
+
+  <h2>Fraction work</h2>
+
+  <p>With [mod] and [div] you can notice if a fraction produces a remainder and what that remainder is. [div] gives the result of a division without any decimal numbers. [mod] does the opposite, produces the remainder of a division. Note that these objects only work with integer numbers.</p>
+
+  <p><img alt="math06.png" src="_booki/pure-data/static/PureData-math-math06-en.png"></p>
+
+  <p>Although the explanation before might seem to be a bit dry, these objects are quite useful if you want to build a step sequencer. Combining [div] and [mod] you can control higher group orders of numbers, creating bars and beats. For example:</p>
+
+  <p><img alt="math07.png" src="_booki/pure-data/static/PureData-math-math07-en.png"></p>
+
+  <p>In this patch [div 4] divides the total beat count by 4 without any remainder, producing the bar number. [mod 4] shows only the remainder of the same division, which in turn is the beat number. Note that the original results vary between 0 and 3 - but it makes more sense to us to see numbers between 1 and 4, so we add 1 to them.</p>
+
+  <h2>Numbers and ranges</h2>
+
+  <p>It can be important to know how to make number streams fit certain ranges. For that there are several choices around. The most simple operations imply limiting a range on the upper or lower side. For that you can use [min] or [max], respectively.</p>
+
+  <p><img alt="math08.png" src="_booki/pure-data/static/PureData-math-math08-en.png"></p>
+
+  <p>Of course, you can change the parameter at any time, by sending a new value to the right side input. Note also that these objects output a number even if the output doesn't change.</p>
+
+  <p>[clip] acts as a mixture of both [max] and [min]. You just define the range boundaries.</p>
+
+  <p><img alt="math09.png" src="_booki/pure-data/static/PureData-math-math09-en.png"></p>
+
+  <p>Another much used object is [moses]. This one doesn't limits the range, but distributes it through it's outlets - a bit like we already saw with [route]. For example, if we wanted to divide between positive and negative numbers, we would have to use only [moses 0]:</p>
+
+  <p><img alt="math10.png" src="_booki/pure-data/static/PureData-math-math10-en.png"></p>
+
+  <p>This can be quite useful to distribute numbers around several inputs - imagine you have an instrument which plays midi notes up to 60, and another for the higher tones...</p>
+
+  <h2>Random numbers</h2>
+
+  <p>Random numbers are quite important in electronic music. Whenever you want to add some imprevisibility to your patches, you'll need someone else to make decisions for you. For that you can use objects like [random] or [shuffle] to generate numbers for you according to certain rules. These numbers are never completely random, as there is always a certain logic to how they work. But they do feel random, as the repetition pattern is too large for a human to grasp.</p>
+
+  <p>[random] is Pd's standard integer generator. What is makes is that if produces a "random" number between 0 and X-1, being X the generation parameter you give to the object (or feed it on the right side). Each time [random] gets banged, it produces any number in range. Here is a sequence of random numbers with [random]:</p>
+
+  <p><img alt="math11.png" src="_booki/pure-data/static/PureData-math-math11-en.png"></p>
+
+  <p>A quite similar object is [shuffle], a Pd-Extended object. It works on the same way (except that you define the range yourself), but with one big difference: it keeps the numbers in memory, so that no number is repeated until the whole sequence has been gone through. This can make a big difference, for example, if you're playing back random samples, and want them to repeat more or less often. These are two nuber sequences where all possible numbers have been generated.</p>
+
+  <p><img alt="math12.png" src="_booki/pure-data/static/PureData-math-math12-en.png"></p>
+
+  <h2>Relational operators</h2>
+
+  <p>At some point while programming you'll need to compare values to judge situations. Pd offers the normal logical operations that you surealy already know. These objects produce an answer in binay form: 1 for yes and 0 for no.</p>
+
+  <p><img alt="math13.png" src="_booki/pure-data/static/PureData-math-math13-en.png"></p>
+
+  <h2>Conversion between acoustical units</h2>
+
+  <p>Another set of very useful objects is the next group, which makes conversions between the realms of acoustics. Of course it would be possible to program these objects yourself, as long as you know the formula. But since they're quite used, it makes much more sense to have them around ready to use.</p>
+
+  <p>[mtof] transposes from midi pitch into frequency in Hertz. A good reference point is the central C at 60, or the 440Hz central A at 69 - after that add or subtract 12 (semitones) for each octave. Obviously, [ftom] does the inverse operation. By the way, you can also use float numbers - which would produce a microtonal scale.</p>
+
+  <p><img alt="math14.png" src="_booki/pure-data/static/PureData-math-math14-en.png"></p>
+
+  <p>[dbtorms] converts from decibels to linear RMS amplitude, so that 100 dB corresponds to an RMS of 1 Zero amplitude. [rmstodb] takes over the inverse operation.</p>
+
+  <p><img alt="math15.png" src="_booki/pure-data/static/PureData-math-math15-en.png"></p>
+
+  <p>And [dbtopow] converts from decibels to power units, that is, the square of the RMS scale.</p>
+
+  <p><img alt="math16.png" src="_booki/pure-data/static/PureData-math-math16-en.png"></p>
+
+  <h2>Bit twiddling</h2>
+
+  <p>aa</p>
+
+  <h2>Expr</h2>
+
+  <p>aa</p>
+
+  <h2>Audio math</h2>
+
+  <p>aa</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch037_math.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch037_math.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

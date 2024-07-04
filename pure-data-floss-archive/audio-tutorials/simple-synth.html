@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="simple-synth.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="simple-synth.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Building a Simple Synthesizer</h1>
+
+  <p>This tutorial uses the concept of simple electronic musical instruments to introduce some of the core concepts of synthesizing and processing audio in Pure Data. Those who are already familiar with audio synthesis should quickly grasp how it works in Pd, while those with no previous knowledge will be introduced to its theory alongside its practical application in Pd.</p>
+
+  <p><img title="Minimoog" alt="Minimoog" src="_booki/pure-data/static/PureData-SimpleSynthesizer-Minimoog-en.JPG" height="293" width="508"></p>
+
+  <p><em>The MiniMoog is one of the most famous analog synthesizers in the world. We'll take a shot at reproducing some of its basic features in this tutorial. Source: <a href="http://en.wikipedia.org/wiki/Image:Minimoog.JPG">http://en.wikipedia.org/wiki/Image:Minimoog.JPG</a></em></p>
+
+  <p>A synthesizer is one of the most fundamental instruments in electronic music. Its essential function is to generate a musical tone when it receives a note from either a keyboard or a sequencer. In analog electronic music, a synthesizer is built from several <strong>modules</strong>, or parts:</p>
+
+  <ol>
+    <li>The <strong>Oscillators</strong>, which generate the tones.</li>
+
+    <li>The <strong>LFO</strong> (<strong>Low Frequency Oscillator</strong>), which usually modulates either the frequency or <strong>gain</strong> of the Oscillator(s), or the frequency of the Filter.&nbsp;</li>
+
+    <li>The <strong>Filter</strong>, which emphasizes and/or removes certain frequencies.&nbsp;</li>
+
+    <li>The <strong>Envelope Generator</strong>, which controls changes in frequency or gain over the duration of the note.&nbsp;</li>
+
+    <li>The <strong>Amplifier</strong>, which controls the gain of the synthesizer.</li>
+  </ol>
+
+  <p>Synthesizers can be capable of playing one note at a time (<strong>monophonic</strong><em>)</em>, or several notes at a time, allowing for chords (<strong>polyphonic</strong>). The number of simultaneous notes that a synthesizer can play are called its <strong>voices</strong>. Originally, the word "Voltage" was used (i.e. Voltage Controlled Oscillator, Voltage Controlled Filter or Voltage Controlled Amplifier) because in an analog synthesizer each of these modules was controlled by electrical voltage from the keyboard, sequencer or another module. Because we're working in the digital domain, this voltage is replaced by data in the form of numbers, messages and streams of digital audio.</p>
+
+  <p>For this tutorial, we will construct a monophonic synthesizer in Pd based roughly on the design of the famous <strong>MiniMoog</strong> analog synthesizer (but much simpler!), and with a sound which is useful for generating basslines. It will take input from the computer keyboard, a <strong>MIDI</strong> keyboard or the sequencer we will build in the the next tutorial. This synthesizer will be based on two <strong>Oscillators</strong> to produce the note, another oscillator (the <strong>Low Frequency Oscillator</strong>) which will change the gain of the sound, a <strong>Filter</strong> which will only allow only certain frequencies of the sound to pass, an <strong>Envelope Generator</strong> which will control the "shape" of the gain of the note, and a final <strong>Amplifier</strong> which will be controlled by the Envelope Generator and a volume setting on the screen.</p>
+
+  <h2>Downloads</h2>
+
+  <p>The patches used in this tutorial can be downloaded from :</p>
+
+  <p><a title="simple_synth" href="http://en.flossmanuals.net/floss/pub/PureData/SimpleSynthesizer/simple_synth.zip">http://en.flossmanuals.net/floss/pub/PureData/SimpleSynthesizer/simple_synth.zip</a></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="frequency.html">FREQUENCY</a></li>
+
+  <li><a href="additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="filters.html">FILTERS</a></li>
+
+  <li><a href="envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="simple-synth.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="simple-synth.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="antialiasing.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="antialiasing.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Antialiasing</h1>
+
+  <h2>Outline<br></h2>
+
+  <p>This chapter describes different techniques for avoiding aliasing artifacts in digital oscillators in Pd, including the combination of oversampling plus low pass filteringas well as the use of bandlimited oscillators.<br></p>
+
+  <h2>Introduction: What is Aliasing?</h2>
+
+  <p>As discussed in the <u><strong>What is Digital Audio</strong></u> chapter, <strong>aliasing</strong> occurs when frequencies are generated in a Pd patch which are above the <strong>Nyquist frequency</strong>, or half the current audio <strong>sampling rate</strong>. Thus, for a computer replaying audio at the CD audio rate of 44,100 Hz per second, the Nyquist frequency is 22,050 Hz. Trying to reproduce any frequency higher than this creates unwanted extra frequencies in the sound. Subjectively, these aliasing noises are what can cause oscillators to sound "cheap", "cold" or "digital" in comparison with "warm" or "analog" antialiased ones.<br></p>
+
+  <p>All waveforms except a sine wave produce harmonics which are multiples of the fundamental frequency. Even if we never create an oscillator with a frequency higher than 22,050 Hz, the harmonics of any oscillator besides an [osc~] could easily go over this frequency, resulting in aliasing. Aliasing noise is almost impossible to remove once it occurs, so if we do not want to hear these inharmonic sounds, we must do something to prevent them.</p>
+
+  <h2>The Problem: an Aliasing Oscillator<br></h2>
+
+  <p>Looking at some of the oscillators covered earlier, we can see that none of them have any sort of antialiasing built into them. The following square wave, although normalized and DC offset-corrected to a full range of -1 to 1, produces many aliased frequencies which can be heard when the frequency is changed. These are heard as inharmonic sounds which "reflect" down from the Nyquist frequency as the frequency of the oscillator is increased. These aliasing noises are sometimes called "birdies".<br></p>
+
+  <p><img title="antialias.1_1" alt="antialias.1_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-antialias-1_1-en.png" height="174" width="551"><br></p>
+
+  <h2>Oversampling and Filtering<br></h2>
+
+  <p>One technique of antialiasing filtering involves applying a low pass <strong>filter</strong>. Because no filter is perfect, every filter has a slope from the <strong>cutoff frequency</strong>, which is the frequency at which it starts to affect the sound, to the point where the frequencies are completely removed. In order to remove the high frequency harmonics which cause aliasing, we would need a filter which has sufficient attenuation at those frequencies to reduce them below the level of hearing.<br></p>
+
+  <p>In order to create such a filter, we need to increase the sampling rate to give us the frequency range required. This process is called <strong>oversampling</strong>, and in Pd this can be done with the object [block~]. When given the creation arguments "1024 1 16", [block~] will oversample the audio which comes into a <strong>subpatch</strong> by a factor of 16 (i.e. up to 705.6 KHz if the current sampling rate is 44.1 KHz), in chunks of 1024 samples at a time. The signal can then be digitally filtered, removing the higher harmonics which could cause aliasing, and when it leaves the subpatch it will be downsampled back to the original sampling rate.</p>
+
+  <p><img title="antialias.2" alt="antialias.2" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-antialias-2-en.png" height="587" width="589">&nbsp;</p>
+
+  <p><em>The antialiasing filter shown above is taken from the example <u>J07.oversampling.pd</u> in the <u>03.audio.examples</u> folder found in the Pd Documentation Browser in the application.</em><br></p>
+
+  <p>Because this is a very CPU intensive process, it is wise to only include the oscillators you wish to antialias in this subpatch, and to control them via the [inlet]s of the subpatch!</p>
+
+  <h2>Bandlimited Waveforms</h2>
+
+  <p>Another solution to this problem is to use waveforms which produce fewer harmonics for the oscillators. These waveforms are said to be <strong>bandlimited</strong>, because the number of harmonics in them have been limited by the shape of the wave. Bandlimited waveforms are usually the product of a combination of sine waveforms which add together to produce a certain shape. An example of this is shown below.</p>
+
+  <p><img title="antialias.3" alt="antialias.3" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-antialias-3-en.png" height="519" width="600"></p>
+
+  <p><em>Example taken from audio design coursework by Andy Farnell.</em></p>
+
+  <p>The message</p>
+  <pre>
+; saw1 sinesum 2051 1 0.5 0.33 0.25 0.2 0.16 0.14 0.12 0.11
+</pre>is an internal message which tells Pd to fill up 2051 places of the table "saw 1" with the product of a series of nine sinewaves. You can see the table, "saw 1" on the left, with the bandlimited waveform, and it's properties are shown below. To play the table back, the ramp of a [phasor~] is multiplied by 2048 and is sent to a [tabread4~] object, which uses the incoming audio as the index to play back table "saw 1". The audio which comes out must be scaled slightly because, as can be seen from the table, the waveform has extremes outside the normal -1 to 1 bounds.
+
+  <p>It should be noted that no technique can completely eliminate aliasing noise, as eventually any oscillator which is not a pure sinewave will eventually produce harmonics above the Nyquist frequency when its frequency is increased. The above oscillator is no exception, and sounds best when used as a bass synthesizer. For more information on bandlimited oscillators, see the <strong><u>Generating Waveforms</u></strong> chapter in this FLOSS Manual.<br></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="frequency.html">FREQUENCY</a></li>
+
+  <li><a href="additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="filters.html">FILTERS</a></li>
+
+  <li><a href="envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="antialiasing.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="antialiasing.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

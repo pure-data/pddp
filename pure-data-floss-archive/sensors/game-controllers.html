@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="game-controllers.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="game-controllers.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Game Controllers</h1>
+
+  <p>&nbsp;First, download the patches for this chapter: <a title="GameControllers" href="http://en.flossmanuals.net/floss/pub/PureData/GameControllers/GameControllers.zip">GameControllers.zip</a><br></p>
+
+  <p>There are many off-the-shelf <strong>Human Interface Devices</strong> (HIDs) which can serve as performance controllers. Most game controllers perform quite well in live performance since they were designed for fast paced video games. Gaming mice and joysticks and graphics tablets are especially good controllers. These types of devices can be used with Pd with very good accuracy.</p>
+
+  <h2>Start with the Keyboard</h2>
+
+  <p>The most basic game controller is the keyboard, and basically every computer has one, so its a good place to start learning about how to use game controllers with Pd. Pd comes with a set of very simple <strong>objects</strong> for getting the key press information: [key], [keyup], and [keyname]. In the example below, you can see the result of pressing and releasing the "Escape" key.</p>
+
+  <p align="center">&nbsp;<img title="key_keyup" alt="key_keyup" src="_booki/pure-data/static/PureData-GameControllers-key_keyup-en.png" height="49" width="223"></p>
+
+  <p>Let's start with [key] and its partner [keyup]. [key] outputs when the key is pressed down, and [keyup] outputs when the key Both of these have a single <strong>outlet</strong> which outputs a number based on which key was used, so here "Escape" has a key number of 27. This key number is based only on the position of the key, not the letter it types. This is useful since there are many keyboard layouts for different languages and countries.</p>
+
+  <p align="center"><img title="key_select" alt="use select to get a specific key press or release" src="_booki/pure-data/static/PureData-GameControllers-key_select-en.png" height="72" width="467">&nbsp;</p>
+
+  <p>So we can now attach messages to the [select] boxes to make the space bar (key number 32) control a noise burst, and the Escape key (key number 27) control a 250 <strong>Hz</strong> sine wave. We make [key] send a 1 to make the [noise~] output sound to the [dac~], then [keyup] sends a 0 to turn off the noise.</p>
+
+  <p align="center"><img title="key_keyup_sound" alt="make some noise with the keyboard" src="_booki/pure-data/static/PureData-GameControllers-key_keyup_sound-en.png" height="140" width="467"></p>
+
+  <p>So that illustrates the most basic way of getting data from the keyboard. It is useful for many things, like turning the DSP on and off, creating the [gemwin], or toggling different parts in a performance patch. You could all of the keys to make a laptop piano.</p>
+
+  <h2>Mouse Cursor</h2>
+
+  <p>Basically every computer has a mouse that controls a little arrow on the screen. This little arrow is the mouse cursor. In Pd, we can get information about that mouse cursor using the [cursor] object. One piece of information that is fun to play with is the position of the cursor on the screen, called the x, y coordinates. When you <strong>bang</strong> the [cursor] object, it will output the current information about the position of mouse pointer. The "motion" message gives us the x, y coordinates. The message looks like "motion x 361" where 361 is the x position in pixels, or there is also "motion y 237" and 237 is the y position in pixels. If you use [print] you can see the "motion" messages in the <strong>Pd window</strong>.</p>
+
+  <p align="center"><img title="motion_message" alt="motion_message" src="_booki/pure-data/static/PureData-GameControllers-motion_message-en.png" height="117" width="137"><br></p>
+
+  <p>Right now, we are only interested in the "motion" information, so we are going to use [route] to get just the "motion" messages from the first outlet on [cursor]. To get updated position information automatically, we can "turn on" the [cursor].&nbsp; It has a built-in clock, so you can turn it on just like [metro].&nbsp; The difference is when you turn on [metro] you get regular bangs, when you turn on [cursor] you get regular information about the mouse cursor and mouse buttons. A few [route] objects will sort this information to get just the x, y position off the cursor on the screen.&nbsp; The [route motion] sorts out just the messages related to the mouse motion, or x, y position.&nbsp; Then [route x y] sorts out the x and y positions to separate number boxes so that we can see them.</p>
+
+  <p align="center"><img title="xycoords" alt="xycoords" src="_booki/pure-data/static/PureData-GameControllers-xycoords-en.png" height="121" width="121"><br>
+  &nbsp;</p>
+
+  <p>So now we have two floats to work with, perfect for controlling the frequency of two [osc~] sine wave <strong>oscillators</strong>. Create two [osc~] objects, then connect one float to each, then connect both [osc~] objects to a [dac~] to output the sound to the speakers. Be sure to turn on the DSP audio computation, and you can now control these two oscillators with the mouse!</p>
+
+  <p align="center"><img title="mouse_motion_oscillator" alt="mouse_motion_oscillator" src="_booki/pure-data/static/PureData-GameControllers-mouse_motion_oscillator-en.png" height="180" width="121"><br>
+  &nbsp;</p>
+
+  <h2>USB <strong>HID</strong></h2>
+
+  <p>You can also use just about any HID, such as joysticks, digitizer tablets, gamepads and ‘stomp-pads’ are widely available and inexpensive. Most of these HIDs are well built but not expensive, since they are made for the mass game market. The HIDs that are designed for "gamers", serious video gamer players, are very good quality but can cost quite a bit more.</p>
+
+  <p align="center"><img title="Logitech_Wingman_Gamepad_Extreme" alt="Logitech Wingman Gamepad Extreme" src="_booki/pure-data/static/PureData-GameControllers-Logitech_Wingman_Gamepad_Extreme-en.png" height="325" width="389"></p>
+
+  <p>Plug your USB joystick or gamepad into your computer, for example, and they will be recognized by your <strong>operating system</strong> as HID devices. Pd can get data from HID devices that your operating system recognizes using the [hid] object. For this example, we are going to start with a gamepad. This one is called the Logitech WingMan Gamepad Extreme, it is old so you can buy it for less than US. It is more fun than your average gamepad because it had a tilt sensor in it.</p>
+
+  <p><img title="hid_print" alt="sending a print message to [hid]" src="_booki/pure-data/static/PureData-GameControllers-hid_print-en.png" height="482" width="589"></p>
+
+  <p>Start by creating an [hid] object and see what it finds. Send the "print" message to [hid] to get the list of HID devices that the operating system recognizes. We are looking for <code>Device 6: 'Logitech Inc.' 'WingMan Gamepad Extreme' version 259 @ location 0x1a200000</code>, the name matches the name of the gamepad above.</p>
+
+  <p>The gamepad is device 6, so send [hid] the "open 6" message. Then create a "toggle" from the "Put" menu, hook it up to the left outlet of the [hid] object. [hid] has two outlets: data comes out of the left outlet and status messages come out of the right outlet. We want the data, so we are only going to use the left outlet for now. Create a [print] and attach the left outlet of [hid] to that [print]. Now we are ready to see some data in the Pd window, turn on the toggle and you should see a lot of data when you move the gamepad and press buttons. <strong>NOTE</strong> Make sure you select your (device #) before turning on the toggle switch in order for it to work properly.</p>
+
+  <p><img title="get_gamepad_data" alt="printing the gamepad data to the Pd window" src="_booki/pure-data/static/PureData-GameControllers-get_gamepad_data-en.png" height="479" width="586">&nbsp;</p>
+
+  <p>Now we can do something a lot more fun, let's make a simple instrument. We can make the left-right X axis of the gamepad control the <strong>frequency</strong> and the back-forth Y axis control the <strong>amplitude</strong>. We need to understand a little about the messages coming out of the left data outlet to use them. The data messages that come out of the left outlet of [hid] always have three parts: "type", "element", and "data". A message representing the gamepad's left-right X axis might look like "abs abs_x 254" or "abs abs_x 3". So we need to [route] those messages to get just the numbers. Then hook up some number boxes to see the numbers change.</p>
+
+  <p align="center"><img title="gamepad_xy" alt="gamepad_xy" src="_booki/pure-data/static/PureData-GameControllers-gamepad_xy-en.png" height="165" width="146">&nbsp;</p>
+
+  <p>Now, the last step is the best, we get to make some noise. This example uses an [osc~] but you can use any synthesizer that you want, or even movie players, 3D shapes, or whatever else you can control using numbers. After all, once you have a number in Pd, it is just a number no different than any other, and you can use that number to control anything else. So we can use the X value directly to control the frequency, so hook that up to the left inlet of the [osc~]. Then create a [*~] to control the amplitude. For amplitude we want a number between 0 and 1. This gamepad has a maximum value of 1023, you can find that out by moving the gamepad around and watching the numbers. So we will divide the Y value using [/ 1023]. Then connect the [/ 1023] to the right inlet of the [*~]. Last, create a [dac~] to output the sound to the speakers, and connect the outlet of the [*~] to the [dac~]. Turn on the DSP, and you have a simple instrument!</p>
+
+  <p>&nbsp;<img title="gamepad_instrument1" alt="use [route] to isolate the x,y data" src="_booki/pure-data/static/PureData-GameControllers-gamepad_instrument1-en.png" align="top" height="156" width="148"><img title="gamepad_instrument2" alt="attach an oscillator to the X axis" src="_booki/pure-data/static/PureData-GameControllers-gamepad_instrument2-en.png" align="top" height="196" width="151"><img title="gamepad_instrument3" alt="gamepad_instrument3" src="_booki/pure-data/static/PureData-GameControllers-gamepad_instrument3-en.png" align="top" height="219" width="148"><img title="gamepad_instrument4" alt="connect the [dac~] and turn on the audio DSP!" src="_booki/pure-data/static/PureData-GameControllers-gamepad_instrument4-en.png" align="top" height="248" width="149"></p>
+
+  <h3>What do "abs", "rel", and "key" mean?</h3>
+
+  <p>Any data message from [hid] that has "key" as its first element means that it is a button or key of some kind. This includes keyboard keys, mouse buttons, joystick buttons, etc. The X,Y,Z and other axes are often labeled as "abs", which is short for "absolute". That means that a given left-right position of the gamepad will always have the same value. So it is an "absolute" measurement of the position. There is another kind of data that is in contrast to the absolute "abs" data, it is "relative", which [hid] calls "rel". A mouse outputs relative data, for example. Each time it outputs data about the left-right X position, it reports how much it moved since the last time it sent the X position. So it tells you the "relative" position of the mouse, it is always "relative" to the last time the mouse sent data.</p>
+
+  <h2>Make Your Own HID</h2>
+
+  <p>It´s possible also to build a custom USB HID device with a microcontroller and few more parts to plug analog sensors to it and then send the data to pd. This is a USB HID board called "minia" based on the microcontroller atmega 8:</p>
+
+  <p align="center">&nbsp;<img alt="minia.png" src="_booki/pure-data/static/PureData-pd_midi-minia-en.png" height="229" width="409"></p>
+
+  <p>and this is the USB HID&nbsp; controller finished with infrared sensors, accelerometer, potentiometers, and pushbuttons.</p>
+
+  <p>&nbsp; <img alt="techno_tambourine.png" src="_booki/pure-data/static/PureData-pd_midi-techno_tambourine-en.png" height="301" width="450"></p>
+
+  <p>&nbsp;HID It´s also the protocol used to transmit the data of the sensors, buttons, etc,&nbsp; through the usb cable and also via bluetooth or infrared...&nbsp;<br></p>
+
+  <p>One of the advantages of this protocol is that is "plug&amp;play" by definition and most of the USB HID devices doesn´t need any drivers to work.</p>
+
+  <p>Another good thing about HID protocol is that it´s optimized for usb, so is faster and easier to use respect to other protocols like "serial" that requires more complex hardware and it´s own drivers.</p>
+
+  <h2>&nbsp;HID to Pd</h2>
+
+  <p>To read HID data from a device in pd there are several possible objects.&nbsp; we can use the object [hid] in linux / osX and [hidin] in windows.</p>
+
+  <p>Before opening pd, we should plug the device, otherwise this probably will not show up..</p>
+
+  <p>To "inspect" for HID devices (internal and connected to the usb) we send the message "print" to the object [hid] and&nbsp; then, we can see in the console which HID devices are detected with pd</p>
+
+  <p>NOTE: In some computers, there are small electrical differences between&nbsp; the USB plugs so sometimes, if a USB HID device doesn´t show up,&nbsp; we can solve this&nbsp; by changing the plug and restarting pd.</p>
+
+  <p>To "inspect" for HID devices (internal and connected to the usb) we send the message "print" to the object [hid] ([hidin] in windows) and&nbsp; then, we can see in the console which HID devices are detected.</p>
+
+  <p>We can see here also that pd assigns a number to each device.</p>
+
+  <p>&nbsp; this number is used to select which HID device we are going to use to get data.</p>
+
+  <p><img alt="consoleHIDdevices.png" src="_booki/pure-data/static/PureData-pd_midi-consoleHIDdevices-en.png" height="482" width="553">&nbsp;</p>
+
+  <p>This device "5" (xxxxx-avr) is that USB HID device with sensors and potentiometers that we can see in the other picture.</p>
+
+  <p><img alt="hidsimple.png" src="_booki/pure-data/static/PureData-pd_midi-hidsimple-en.png" height="271" width="494"></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="pduino.html">PDUINO</a></li>
+
+  <li><a href="installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="game-controllers.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="game-controllers.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

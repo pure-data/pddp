@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch031_step-sequencer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch031_step-sequencer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Building a 16-Step Sequencer</h1>
+
+  <p>Besides using a keyboard, another way to control a synthesizer is with a <strong>Sequencer</strong>, which stores MIDI Notes and plays them back in sequence, and at a speed which can be changed from faster to slower.</p>
+
+  <h2>A Counter</h2>
+
+  <p>Before we can build the note-storing section of the Sequencer, however, we have to learn a little bit about dataflow in Pd in order to make a counter. This counter will count from 0 to 15, and each number it sends out will trigger one of the steps in a 16-Step Sequencer.</p>
+
+  <p>The patch below shows a counter, built with basic Pd objects.</p>
+
+  <p><img title="ctl3" alt="ctl3" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl3-en.png" height="365" width="530"></p>
+
+  <p>[metro] is used to send the message "bang" every so many milliseconds. This interval is set by a Number sent to the right inlet. The [metro] is turned on and off by sending either a "1" or a "0" to the left inlet. We use the [toggle] object to send these messages.</p>
+
+  <h2>Hot and Cold</h2>
+
+  <p>Below the [metro] is a construction which takes advantage of one of the most fundamental lessons in learning about dataflow in Pd: "hot" and "cold" inlets. The left-most inlet of almost any non-audio Pd object is called the "hot" inlet. Any input to the hot inlet of an object gives immediate output. Any other inlet to the right of the hot inlet is called a "cold" inlet. Input to a cold inlet is stored in the object, waiting for input on the hot side. In this case, when a new number comes to the hot side of the [*], it is multiplied by the number stored in the cold side. The information in the cold inlets is kept there until new information received at that inlet changes it, or until the object is re-created (by retyping its name, cutting/pasting the object or by reopening the patch).</p>
+
+  <p><img title="hotcold1" alt="hotcold1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-hotcold1-en.png" height="297" width="449"></p>
+
+  <p><img title="hotcold2" alt="hotcold2" src="_booki/pure-data/static/PureData-SimpleSynthesizer-hotcold2-en.png" height="297" width="449"></p>
+
+  <p>So in our counter, there is an object called [float], which stores and outputs a <strong>Floating Point Number</strong>. Floating Point Number is another name for a number with a decimal place, usually called simply a "float". The opposite of a "float" is an Integer, or "int", which has no decimal place. All numbers in Pd are assumed to be floats. When [float] receives a "bang" to its left ("hot") inlet, it outputs the float which is stored on it's right ("cold") inlet. When this [float] outputs a number, it is also sent to the inlet of a [+ 1] object, where 1 is added to that number and sent back to the "cold" inlet of [float] to wait for the next "bang". So, every time this construction receives a "bang", the number it will output will be 1 more than before.</p>
+
+  <p>For more information on "hot" and "cold", as well as other descriptions of how to get used to how dataflow works in Pd, please see the Dataflow Tutorials in this FLOSS Manual.</p>
+
+  <p>The numbers sent from our counter will increase endlessly. In order to keep them within the bounds of our 16-Step Sequencer, we need a way to "wrap" these numbers around so that they start over when the counter reaches 16, and every other division of 16 that comes later on. [mod] is the object which does this. Technically, [mod] means "modulo", and it outputs the remainder of a division operation using the number in the creation argument. Thus "16" becomes "0", "17" becomes "1", "18" becomes "2" and so on.</p>
+
+  <h2>Storing and Retrieving MIDI Note Values</h2>
+
+  <p>In the next patch, we see how to store and recall a number from an [hslider] using the [float] object as well. Here, [float] has been abbreviated to the commonly used [f]. At the bottom of our counter construction from the previous example, we have replace the Number with an [hradio] array of buttons, so that we can see which step of our Sequencer we are at. (Right or Control+Click on the [hradio] to see its properties, and type "16" in the "number" field to set the size.)</p>
+
+  <p>Below the counter we have the object [select]. This object checks the input on its left inlet against either the input on the right inlet, or in this case against a series of creation arguments. When the input on the left matches one of the creation arguments, then the message "bang" comes out of the corresponding outlet. Thus, an input of "0" will send a "bang" out the first outlet, an input of "1" sends a"bang" out the second outlet, etc etc. In this way, we have a separate "bang" for each step in the Sequencer.</p>
+
+  <p>For each step in the Sequencer, we will use a [f] object to store a MIDI Note send from a [vslider]. The range of the [vslider] is 0-127, and the number it outputs is sent to the "cold" inlet of [f], to wait for a "bang" to come to the "hot" inlet. When that "bang" comes, the MIDI Note is sent out. You can change the value of the [vslider] with the mouse at any time, and the MIDI note will only be sent at step 0 of the sequence.</p>
+
+  <p><img title="ctl4" alt="ctl4" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl4-en.png" height="477" width="462"></p>
+
+  <h2>The Finished 16-Step Sequencer Patch</h2>
+
+  <p>And here we have the finished patch, with all 16 steps included, connected to a simple synthesizer. Each step of the sequence sends a MIDI Note to [mtof], which controls the frequency of a [phasor~] as well as the frequency of a Band Pass Filter [bp~]. The creation arguments of the [bp~] set it's starting frequency as 220 Hz, but this is changed every time it receives a new number from the [mtof], which has been multiplied by 1.5 to make the center frequency of the filter a half octave above that of the Sawtooth Oscillator [phasor~]. The resonance is set very high, at "5", so the harsh sound of the [phasor~] is softened.</p>
+
+  <p><img title="ctl5" alt="ctl5" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-ctl5-en.png" height="628" width="500"></p>
+
+  <p>In this version, no Envelope Generator is used, so the volume of the audio going to the soundcard remains constant. This leads to noticeable clicks when the frequencies of the MIDI Notes change. An Envelope Generator based on [line~], [vline~] or [tabread4~] could be inserted between the output of [bp~] and the [dac~] if desired.</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch031_step-sequencer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch031_step-sequencer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

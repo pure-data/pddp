@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="trouble-shooting.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="trouble-shooting.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Troubleshooting</h1>
+
+  <p>There are many small things that might not work straight away. Here are some of the most common issues you might come across.</p>
+
+  <p><strong>I don't hear any sound!</strong></p>
+
+  <p>First make sure that the box marked "compute audio" is checked in the main Pd window. Then check to see that you have selected the right soundcard and drivers for your system, and that the soundcard is connected and operating. On OS X, make sure the check-boxes next to your selected soundcard have been checked in "Audio Settings". On Linux or OS X with Jack, make sure the Jack application is running. On all platforms, check the audio control panel which comes with your Operating System and make sure the proper output is enabled there, and that its playback volume is turned up. Also make sure you are using the correct sampling rate in Pd to match that of your soundcard.</p>
+
+  <p><img alt="linux_compute_audio.png" src="_booki/pure-data/static/PureData-Troubleshooting-linux_compute_audio-en.png" height="147" width="214"><img alt="linux_audio_config.png" src="_booki/pure-data/static/PureData-Troubleshooting-linux_audio_config-en.png" height="132" width="263"></p>
+
+  <p><em>Left: the "compute audio" button in the main Pd window. Right: the "Audio Settings" dialog.</em></p>
+
+  <p><strong>There are clicks, glitches or crackles in the test tone!</strong></p>
+
+  <p>More than likely you have chosen a latency that is too fast for your computer and soundcard to handle. Return to the "Audio Settings" menu and increase the "delay" time there. On Linux, it is also possible that other processes running on your computer, or even a badly configured or slow graphics card, can affect the performance of Pd. Consider running Pd with the "-rt" flag enabled (Linux only!). This can be done from the command line, or by adding "-rt" to the "startup flags" under the "Startup" menu. On Linux or OS X with Jack, it is possible to set the latency of the Jack application to a greater amount and reduce glitches (called "xruns" in Jack) there as well.</p>
+
+  <p><strong>The test tone sounds distorted!</strong></p>
+
+  <p>It is possible that you are playing the sound too loud for your soundcard. Using the controls of your soundcard to reduce the playback volume. Also make sure you are using the correct sampling rate in Pd to match that of your soundcard.</p>
+
+  <p><strong>I'm not seeing any audio input!</strong></p>
+
+  <p>Perhaps you did not enable sound input. On OS X, make sure the check-boxes next to your selected soundcard have been checked in "Audio Settings". Also, some cards with an uneven number of in and out channels can have problems in Pd. Try setting the number of channels the same for the input and output. On all platforms, check the audio control panel which comes with your Operating System and make sure the proper input is enabled there, and that it's recording volume is turned up.</p>
+
+  <p><img alt="linux_jack_audio.png" src="_booki/pure-data/static/PureData-Troubleshooting-linux_jack_audio-en.png" height="339" width="459">&nbsp;</p>
+
+  <p><em>The QJackCTL application on Linux allows easy routing of audio signals between applications and the soundcard, or between applications on the same computer.</em></p>
+
+  <p><strong>I don't see any MIDI input!</strong></p>
+
+  <p>Check to see that your MIDI devices or programs are actually sending data, and that your Operating System is correctly sending this data to Pd. On OS X, check to see that you have selected the proper MIDI devices, and that the "Audio MIDI Setup.app" was running before you started Pd. On Linux using the default MIDI drivers, check to see that you selected the proper MIDI device at startup. On Linux with the ALSA-MIDI drivers, make sure you have properly connected your MIDI devices or MIDI programs to Pd. Using Jack with the "QJackctl" application is recommended for this purpose. On Windows, consider using an application like MIDI Ox/MIDI Yoke Junction to see, analyze and manage your MIDI connections.</p>
+
+  <p><img alt="linux_alsa_midi.png" src="_booki/pure-data/static/PureData-Troubleshooting-linux_alsa_midi-en.png" height="54" width="197"></p>
+
+  <p><em>The "MIDI Settings" dialog</em>.</p>
+
+  <p><img title="midi_settings" alt="midi_settings" src="_booki/pure-data/static/PureData-Troubleshooting-midi_settings-en.png" height="354" width="470"></p>
+
+  <p><em>It is necessary to have the "Audio MIDI Setup" application on OSX running in to connect MIDI hardware and software ports to Pure Data.</em></p>
+
+  <p><img alt="linux_jack_midi.png" src="_booki/pure-data/static/PureData-Troubleshooting-linux_jack_midi-en.png" height="337" width="459"></p>
+
+  <p><em>QJackCTL also allows Linux users to route ALSA MIDI between applications and hardware MIDI ports.</em></p>
+
+  <p><strong>I get the message "... couldn't create" when I type an object's name and there's a dashed line around my object!</strong></p>
+
+  <p>The reason for this error is that you have asked Pd to create an object which does not exist. There can be several reasons for this error, and the most common one is spelling. Object names in Pd must be spelled correctly, and they are case sensitive. [<em>Osc~</em>] or [<em>OSC~</em>] will not create in place of [<em>osc~</em>], for example, nor will [<em>osc</em>] without the tilde. Sometimes users accidentally combine the <strong>creation argument</strong> and the object name, such as [<em>+1</em>] instead of [<em>+ 1</em>]. A creation argument is additional information given to an object and sets the parameters for it.</p>
+
+  <p>New Pd users also often get confused between Objects and Messages, which are very different types of elements that can be placed in the patch from the "Put" Menu. You can use the "Find last error" function under the "Find" menu to track down which objects did not create. Please see the chapter called "The Interface" for more details.</p>
+
+  <p><img title="wrong_right" alt="wrong_right" src="_booki/pure-data/static/PureData-DataFlow-wrong_right-en.png" height="66" width="370"></p>
+
+  <p><strong>I get the message "... couldn't create" when I open a patch and there's a dashed line around my object!&nbsp;</strong></p>
+
+  <p>If you get this error when opening a patch which you're pretty sure works otherwise (i.e. you've downloaded it from the internet or you created it in a previous Pd session), then it's likely that there is an External Object which was available when the patch was created, but is not available now. You can use the "Find last error" function under the "Find" menu to track down which objects did not create. Pd will preserve the location and connections of an object which fails to create, but it will not function. While most of the Pd Externals are available in the Pd Extended distribution, some are not, or require additional configuration of the "Path" and "Startup" settings. Please see the relevant sections in the "Configuring Pd" chapter. If the External is not available in Pd Extended, you may need to install it yourself.</p>
+
+  <p><strong>I get the message "error: signal outlet connect to nonsignal inlet (ignored)" when I open a patch.</strong></p>
+
+  <p>This error tends to go with the previous error "I get the message '... couldn't create' when I open a patch...". Often this error means that an object has failed to create, usually because it uses an External Object which is not available in the current installation or configuration of Pd. Pd will preserve the location and connections of an object which fails to create, but it will not function. You can use the "Find last error" function under the "Find" menu to track down which objects caused errors. Pd will treat uncreated objects as Dataflow Objects even if they were originally Audio Objects, so this error will follow the previous one. Please see the relevant sections in the "Configuring Pd" chapter for information about setting the "Path" and "Startup" options. If the External is not available in Pd Extended, you may need to install it yourself.</p>
+
+  <p><strong>I get the message "error: can't connect signal outlet to control inlet" and I cannot connect two objects together!</strong></p>
+
+  <p>The output of Audio Objects (those with a tilde ~ in their name) normally cannot be connected to Dataflow Objects (those without a tilde ~ in their name). So Pd will not allow these connections to be made. You might want to look at your patch and make sure that you are using the proper combination of objects.</p>
+
+  <p><strong>I get the message"error: DSP loop detected (some tilde objects not scheduled)" when I click "Audio ON", and the sound is not working!</strong></p>
+
+  <p>In an analog electronic system, you can easily connect the output of a mixer back to one of the inputs, turn up the channel and get feedback. This is because everything in an analog system happens pretty much simultaneously. Computers do not work like this, however, and therefore you cannot ask a Pd patch to compute results based on it's own simultaneous output.&nbsp; Pd works in what are called Blocks (i.e. a group of samples, such as the default number of 64 samples), and all the Samples in each Block must be computed before they are output. So a DSP loop occurs when a patch needs information which is calculated inside the same Block in order to create output. You can use the "Find last error" function under the "Find" menu to track down which objects are causing the DSP loop.&nbsp; The easiest way around this problem is to create at least a one Block delay between the objects which are connected together. The objects [<em>send~</em>] and [<em>receive~</em>] are useful for this, because they have a built-in delay of one Block. To change the number of Samples computer in each Block, you can use the [<em>block~</em>] object.</p>
+
+  <p><img title="dsp_loop" alt="dsp_loop" src="_booki/pure-data/static/PureData-DataFlow-dsp_loop-en.png" height="166" width="596"></p>
+
+  <p><strong>I get the message "error: stack overflow" when I connect two Dataflow Objects together!</strong></p>
+
+  <p>&nbsp;A "stack overflow" happens when you have asked Pd to compute a recursive operation, and this operation causes Pd to run out of memory. Often this is the first step before crashing Pd! A common example of a recursive operation which could cause this error is the classic counter, using <strong>[<em>float</em>]</strong> and [<em>+ 1</em>]. A [float] stores a floating point number on its right inlet, and outputs the result when it receives a bang.&nbsp; If the output of [<em>float</em>] is connected to the input of [<em>+ 1</em>], and the output of [<em>+ 1</em>] is connected to the right-most ("cold") inlet of [<em>float</em>], then a "bang" message sent to the left-most ("hot") [<em>float</em>] will output a number which increases by one every time that message is sent.</p>
+
+  <p>If, however, the output of [<em>+ 1</em>] is connected to the left-most ("hot") inlet of [float], then sending the message "bang" to the left inlet of [<em>float]</em> will have a different effect. It will ask [<em>float</em>] and [<em>+ 1</em>] to add numbers together as fast as the computer will let them do it. Because Pd will not stop and ask you "are you sure you want to do this?", this operation will quickly use up all the memory resources which Pd has, and cause a stack overflow. Please see the sections on "Hot and Cold" as well as on "Trigger" in the "Dataflow Tutorials" section for more information on how to avoid stack overflows.</p>
+
+  <p><img title="counter_hot" alt="counter_hot" src="_booki/pure-data/static/PureData-DataFlow-counter_hot-en.png" height="233" width="454">&nbsp;</p>
+
+  <p><strong>I get the error message "connecting stream socket: Network is unreachable" when I start Pd!</strong></p>
+
+  <p>If you are using the Linux operating system, and see this message when you start Pd, it means your machine cannot make a network connection to itself.&nbsp; You must configure your loopback network device. In many Linux distributions, you can do this by answering "yes" when the system configuration tools ask if the machine will be a "network" (even if it won't).</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="trouble-shooting.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="trouble-shooting.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch012_starting.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch012_starting.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Starting Pure Data</h1>
+
+  <p>Now that you have Pd-Extended installed on your computer and configured, let's look at different ways to start it--from simply clicking an icon through starting from the command line and adding different startup flags or using a script to save different sets of startup information.</p>
+
+  <h2>Starting via an icon</h2>
+
+  <p>There are two ways of starting Pure Data. The way that will be used most commonly on Windows or Mac OS X will be to click on the icon which the installer put in your "My Programs" or "Applications" folder. On Windows, this is "Start -&gt; Pure Data -&gt; Pure Data".</p>
+
+  <p><img title="open_1" alt="open_1" src="_booki/pure-data/static/PureData-InstallingWin-open_1-en.png" width="441" height="262"></p>
+
+  <p>On Linux, your system may also have a menu bar, such as "Programs/Multimedia" or "Programs/Sound" where Pd can be started by clicking the menu item.</p>
+
+  <h2>Starting via command line</h2>
+
+  <p>The other way is to open Pd from the terminal or shell via a command line. This is most often done on Linux, but it can be done this way on any platform. To do this, one must know the location of the Pd application on his/her system, which can be different depending on where Pd was installed.&nbsp;</p>
+
+  <blockquote>
+    <h3>Linux (from xterm)</h3>
+    <pre>
+/usr/local/bin/pd
+</pre>
+
+    <h3>Mac OSX (from Terminal.app)</h3>
+    <pre>
+/Applications/Pd-extended.app/Contents/Resources/bin/pd
+</pre>
+
+    <h3>Windows (from the DOS shell or Command Prompt)</h3>
+    <pre>
+C:\Program Files\pd\bin\pd.exe
+</pre>
+  </blockquote>
+
+  <p>Why would we want to open Pd by command line? The most common reason would be is if we wanted to use a different set of flags than the default ones. For example, if you were using Pd in a live performance, and you wanted it to open up the same patch whenever you started it in this situation, you might use the command:</p>
+  <pre>
+/usr/local/bin/pd -open /home/pdfreek/liveset.pd
+</pre>
+
+  <p>Which would start Pd and open the patch <em>liveset.pd</em>. You could also add other startup <strong>flags</strong>, such as which soundcard and drivers to use, which external libraries to load or which search paths to add.&nbsp; Flags are additional pieces of information which can alter the configuration of Pd for that particular startup, rather than the <em>pdsettings</em> which we looked at in the <strong>ConfiguringPd</strong> chapter, which affect the program every time it starts.</p>
+
+  <p>Like almost any program launched by command line, you can add the flag "--help" to see a long list of configuration options, which gives you some idea of the different possibilities for starting up Pd:</p>
+  <pre>
+      $ /Applications/Pd-0.39.2-extended-test4.app/Contents/Resources/bin/pd --help
+      usage: pd [-flags] [file]...
+      audio configuration flags:
+      -r &lt;n&gt;           -- specify sample rate
+      -audioindev ...  -- audio in devices; e.g., "1,3" for first and third
+      -audiooutdev ... -- audio out devices (same)
+      -audiodev ...    -- specify input and output together
+      -inchannels ...  -- audio input channels (by device, like "2" or "16,8")
+      -outchannels ... -- number of audio out channels (same)
+      -channels ...    -- specify both input and output channels
+      -audiobuf &lt;n&gt;    -- specify size of audio buffer in msec
+      -blocksize &lt;n&gt;   -- specify audio I/O block size in sample frames
+      -sleepgrain &lt;n&gt;  -- specify number of milliseconds to sleep when idle
+      -nodac           -- suppress audio output
+      -noadc           -- suppress audio input
+      -noaudio         -- suppress audio input and output (-nosound is synonym)
+      -listdev         -- list audio and MIDI devices
+      -jack            -- use JACK audio API
+      -pa              -- use Portaudio API
+            (default audio API for this platform:  portaudio)
+      MIDI configuration flags:
+      -midiindev ...   -- midi in device list; e.g., "1,3" for first and third
+      -midioutdev ...  -- midi out device list, same format
+      -mididev ...     -- specify -midioutdev and -midiindev together
+      -nomidiin        -- suppress MIDI input
+      -nomidiout       -- suppress MIDI output
+      -nomidi          -- suppress MIDI input and output
+      other flags:
+      -path &lt;path&gt;     -- add to file search path
+      -nostdpath       -- don't search standard ("extra") directory
+      -stdpath         -- search standard directory (true by default)
+      -helppath &lt;path&gt; -- add to help file search path
+      -open &lt;file&gt;     -- open file(s) on startup
+      -lib &lt;file&gt;      -- load object library(s)
+      -font &lt;n&gt;        -- specify default font size in points
+      -typeface &lt;name&gt; -- specify default font (default: courier)
+      -verbose         -- extra printout on startup and when searching for files
+      -version         -- don't run Pd; just print out which version it is
+      -d &lt;n&gt;           -- specify debug level
+      -noloadbang      -- suppress all loadbangs
+      -stderr          -- send printout to standard error instead of GUI
+      -nogui           -- suppress starting the GUI
+      -guiport &lt;n&gt;     -- connect to pre-existing GUI over port &lt;n&gt;
+      -guicmd "cmd..." -- start alternatve GUI program (e.g., remote via ssh)
+      -send "msg..."   -- send a message at startup, after patches are loaded
+      -rt or -realtime -- use real-time priority
+      -nrt             -- don't use real-time priority
+</pre>
+
+  <p>To learn more about Pd's startup options, please see the <strong>Configuring Pd</strong> chapter.</p>
+
+  <h2>Starting from a script</h2>
+
+  <p>Once you have created a command line for your specific situation, you can save that command as a <strong>script</strong>, which is a short file containing a list of commands, which can be run by typing its name in the terminal or shell. The exact format of your script depends on which operating system you use.</p>
+
+  <h3>Windows</h3>
+
+  <p>Windows uses the DOS language for its commands, so we must create a .<strong>bat</strong> (DOS batch) file containing the location of the Pd program and the startup flags we want to use. Using a simple text editor, make a file named "<em>pdstart.bat</em>", and place the following in it, for example</p>
+  <pre>
+"c:\pd\bin\pd.exe" -font 10 -path "c:\pd\doc\vasp" -lib cyclone -lib iem_t3_lib -lib iem_mp3 -lib mjLib -lib OSC -lib percolate -lib vasp -lib xeq -lib xsample -lib zexy -lib iemlib1 -lib iemlib2 -listdev %1 %2 %3 %4 %5 %6 %7 %8 %9
+</pre>
+
+  <p>Though it may appear to be many lines, this command must in fact be one long line with no breaks. If the version of Windows you are running has a "Save as type" option, choose the type "All files" to prevent your .bat file from being saved as a text file. Once this is saved, you can double-click on the file to run it.</p>
+
+  <h3>Linux and OS X</h3>
+
+  <p>Since both Linux and OS X use the same Unix-type system to interpret and run command lines, the process for creating a script is the same for both. In your favorite text editor, create a new file and start it with the line:</p>
+  <pre>
+#! /bin/bash 
+</pre>
+
+  <p>which tells the operating system that what it is reading is a script, and that it will use the <strong>bash</strong> command line interpreter. On the line below that, copy this or a similar line:</p>
+  <pre>
+/usr/local/lib/pd -font 10 -path /home/pdfreek/pd/my_abstractions -lib cyclone -lib iem_t3_lib -lib iem_mp3 -lib mjLib -lib OSC -lib percolate -lib vasp -lib xeq -lib xsample -lib zexy -lib iemlib1 -lib iemlib2 -open /home/pdfreek/pd/liveset3.pd
+</pre>
+
+  <p>This should be all in one line, with no breaks. Please note that you should give it the correct path to the Pd program in the beginning (which could be different if you are running OS X for example), and you should replace the example flags with ones of your own.</p>
+
+  <p>Once you have written and saved this file with the <strong>.sh</strong> (shell script) file extension, such as "<em>start_pd.sh</em>", you must make it <strong>executable</strong> as a script with the following command:</p>
+  <pre>
+chmod +x start_pd.sh
+</pre>
+
+  <p>After you have done this, you can start this script, which will run Pd with all the flags you have added to it, by typing:</p>
+  <pre>
+sh start_pd.sh
+</pre>
+
+  <p>Some Linux window managers such as KDE or Gnome may support double-clicking to start shell scripts either by default or by selecting the default application. On OS X, you could configure the Finder to open .sh files with the Terminal.app by default (but then you would have to manually chose to open them with TextEdit.app for editing later on).</p>
+
+  <h2>Advanced scripting for starting Pd</h2>
+
+  <p>One of the beautiful things about the Unix system, which both Linux and OS X are based on, is that it is designed to allow many applications to communicate with each other and work together. This means that shell scripts can be constructed to do an enormous amount of tasks.</p>
+
+  <p>For example, the following script for Linux starts the JACK audio server (with some flags of its own), opens the Qjackctl interface for JACK and then starts Pd with the <em>-jack</em> flag&nbsp; and the <em>-open</em> flag listing two specific files:</p>
+  <pre>
+#! /bin/bash
+
+jackd -d alsa -d hw -r 44100 -p 1024 -s &amp;
+/usr/bin/qjackctl &amp; sleep 5 ; /usr/local/bin/pd -jack -open /home/derek/pd/delnet/delaynet.pd:/home/derek/pd/echoplex_footswitches/midiswitches.pd
+</pre>
+
+  <p>The <strong>ampersand</strong> (&amp;) between the commands means that the command preceeding it will be run in the background. In other words, the previous command will keep running while we execute the next ones, instead of quitting. The section "<strong>sleep 5</strong>" tells the shell to wait 5 seconds before running the next command, in this case in order to give JACK time to start up. The <strong>semicolon</strong> (;) is used to seperate jobs, meaning that the next command won't be run until the previous one is finished (in the case of "sleep 5") or sent to the background (in the case of the ampersand symbol).</p>
+
+  <p>This script could be expanded to open other applications (in the following case, the looping application <strong>SooperLooper</strong>), use the <strong>aconnect</strong> application to make ALSA MIDI connections from Pd to SooperLooper, and use the <strong>jack_connect</strong> command to make audio connections between Pd, SooperLooper and 6 channels of a sound card via the JACK audio server:</p>
+  <pre>
+#! /bin/bash
+
+jackd -d alsa -d hw -r 44100 -p 1024 -s &amp;
+/usr/bin/qjackctl &amp; sleep 5 ; /usr/local/bin/pd -jack -open /home/derek/pd/delnet/delaynet.pd:/home/derek/pd/echoplex_footswitches/midiswitches.pd &amp; sleep 5 ; /usr/local/bin/sooperlooper -L /home/derek/pd/echoplex_footswitches/3loops.slsess -m /home/derek/pd/echoplex_footswitches/3loops.slb &amp; sleep 5 ; /usr/local/bin/slgui &amp; sleep 5 ;  aconnect 'Pure Data':1 'sooperlooper_1':0 ; jack_connect alsa_pcm:capture_1 sooperlooper_1:common_in_1 ; jack_connect alsa_pcm:capture_2 sooperlooper_1:common_in_2 ; jack_disconnect alsa_pcm:capture_1 pure_data_0:input0 ; jack_disconnect alsa_pcm:capture_2 pure_data_0:input1 ; jack_disconnect alsa_pcm:capture_3 pure_data_0:input2 ; jack_disconnect alsa_pcm:capture_4 pure_data_0:input3 ; jack_connect alsa_pcm:capture_3 pure_data_0:input0 ; jack_disconnect pure_data_0:output0 alsa_pcm:playback_1 ; jack_disconnect pure_data_0:output1 alsa_pcm:playback_2 ; jack_disconnect pure_data_0:output2 alsa_pcm:playback_3 ; jack_disconnect pure_data_0:output3 alsa_pcm:playback_4 ; jack_connect pure_data_0:output0 alsa_pcm:playback_7 ; jack_connect pure_data_0:output1 alsa_pcm:playback_8 ; jack_connect sooperlooper_1:loop0_out_1  alsa_pcm:playback_1 ; jack_connect sooperlooper_1:loop0_out_2  alsa_pcm:playback_2 ; jack_connect sooperlooper_1:loop1_out_1  alsa_pcm:playback_3 ; jack_connect sooperlooper_1:loop1_out_2  alsa_pcm:playback_4 ; jack_connect sooperlooper_1:loop2_out_1  alsa_pcm:playback_5 ; jack_connect sooperlooper_1:loop2_out_2  alsa_pcm:playback_6
+</pre>
+
+  <p>Detailed syntax for <em>aconnect</em> and <em>jack_connect</em> can be found by typing:</p>
+  <pre>
+aconnect --help
+</pre>
+
+  <p>or</p>
+  <pre>
+jack_connect --help 
+</pre>
+
+  <p>Bash shell scripting is a huge area to investigate, curious readers are encouraged to check out one of the many websites and books detailing the Bash environment.</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch012_starting.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch012_starting.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,579 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="pdp.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="pdp.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="164" height="17" align="left" sdnum="1031;0;@">
+          <h2>Name</h2>
+        </td>
+
+        <td width="86" align="left">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td width="288" align="left">
+          <h2>Function</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle">
+          <h1>PDP</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Extended Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_affine</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_agc</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">automatic gain control</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_blur_hor</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">horizontal blur effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_blur</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">blur effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_blur_ver</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">vertical blur effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_cheby3o</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_contrast</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">contrast enhancement</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_conv_alledge</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">all edge sensitive convolution filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_conv_emboss</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">emboss effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_conv_smooth</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">averaging convolution filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_conv_sobel_edge</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">sobel edge detector</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_conv_sobel_hor</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">vertical sobel edge detector</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_conv_sobel_ver</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">horizontal sobel edge detector</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_diff</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">difference between current and previous frame</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_dither</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">dither effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_gain3</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">independent gain for 3 channels</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_gradient</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">gradient</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_grey</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_invert</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_m_inverse</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">matrix inverse</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_motion_blur</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">motion blur effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_motion_fade</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">motion triggered fade-out effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_motion_phase</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">motion phase shift effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_offset</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">add an offset to an image</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_phase_hor</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">horizontal phase shift effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_phase</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">phase shift effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_phase_ver</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">vertical phase shift effect</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_png_to</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">load + convert a png file</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_pps</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">measure number of packets per second</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_qt_control</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_qtloop2~</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_qtloop~</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_saturation</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">adjust colour saturation</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_save_png_sequence</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">saves a png sequence</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_sub</td>
+
+        <td align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_tag</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">tag a pdp message</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pdp_xv_keycursor</td>
+
+        <td align="left"><br></td>
+
+        <td align="left">keyboard/mouse controller</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="glue.html">GLUE</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="time.html">TIME</a></li>
+
+  <li><a href="midi.html">MIDI</a></li>
+
+  <li><a href="tables.html">TABLES</a></li>
+
+  <li><a href="misc.html">MISC</a></li>
+
+  <li><a href="audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="gem.html">GEM</a></li>
+
+  <li><a href="pdp.html">PDP</a></li>
+
+  <li><a href="physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="pdp.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="pdp.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

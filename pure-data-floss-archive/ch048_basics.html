@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch048_basics.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch048_basics.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>What GEM Is For<br></h1>
+
+  <p>GEM is the part of Pd used for creating motion graphics.&nbsp; You can use GEM to create and play back videos and still images, mix videos, draw shapes in 2D and 3D, move objects and shapes around.&nbsp; Because it is part of Pd, you can make your visuals react to sounds, generate them from sounds themselves.</p>
+
+  <h2>GEM &amp; OpenGL<br></h2>
+
+  <p>Since GEM is based in a large part on OpenGL, we recommend learning about OpenGL, and 3D graphics in general.&nbsp; The main OpenGL book is known as the "Red Book," titled <em>OpenGL Programming Guide: The Official Guide to Learning OpenGL.&nbsp;</em> It is outside the scope of this introduction to get into the details of 3D animation, but we will do our best to explain the basics.<br></p>
+
+  <h2>The Very Basics of Rendering<br></h2>
+
+  <p>When your graphics are "drawn" into the computer screen, we call this process <strong>rendering</strong>.&nbsp; Quite simply, your graphics may come from many different sources, such as video files, image files, and algorithmic animation, but at some point they all need to be combined together and displayed as <strong>pixels</strong> on your display, whether that display is a computer monitor, TV, LEDs, or a projector.&nbsp; Since you may not be drawing to all the pixels on your screen at once, we call this area a "window."&nbsp; You are probably very familiar with the concept of different windows on your computer.</p>
+
+  <p>The end result of the rendering process, the section of pixels that will be drawn to the screen, is called a "frame."&nbsp; Rendering happens discretely, at a certain number of frames per second (e.g. the <strong>framerate</strong>).&nbsp; Think of it as if the frames were images on a film strip, flashing by.&nbsp; Each one is an individual, separate image, and the illusion of motion is created just like in film, by showing sequences of slightly different frames.&nbsp; 25 frames per second (<strong>fps</strong>) is the default, and around 15 fps is about as slow as you can get before you lose the illusion of movement.</p>
+
+  <p>You should be aware that complex graphics may take a long time to render, possibly longer than the normal time between frames.&nbsp; In this case, you will not be able to reach the framerate you've set.<br></p>
+
+  <h2>[gemwin]</h2>
+
+  <p><strong>[gemwin]</strong> is the GEM object that represents the window into which your graphics will be drawn.&nbsp; It controls the timing of your graphics, by scheduling when frames should be drawn to the screen based on the framerate, and discards them if they have taken to long to render <strong>(is this true?)</strong>.&nbsp; By default it also clears the window every frame and sets it to a "background" color, specified as a list of R G B values.&nbsp;</p>
+
+  <p>Messages to [gemwin] change the size of that window, start and stop the rendering process, alter the position from which you look at your 3D , and control various other aspects of the window, such as <strong>antialising</strong>.&nbsp; Other messages to [gemwin] are explained in detail in the [gemwin] help patch.</p>
+
+  <p><br>
+  <img alt="gemwin.png" src="_booki/pure-data/static/PureData-GEM-gemwin-en.png" height="194" width="349"><br></p>
+
+  <p>Fig. 3: Some settings for [gemwin].<br></p>
+
+  <h2>gemhead</h2>
+
+  <p>[gemhead] is the start of a chain of graphics operations connected by patch cords that should be executed every frame.&nbsp; Drawing operations, including video effects, cascade from the top down, adding to each other flow downwards across objects.&nbsp; This chain of operations is triggered invisibly by [gemwin] according to the framerate you have set.&nbsp;&nbsp; You can turn this automatic rendering off by sending [gemhead] the message 0. Additionally, [gemhead] can be triggered manuall by a bang, which is useful when you want to control the order in which your graphics chains are drawn.&nbsp; With several gemheads, you can force this execution order by either giving them an argument or set their order number.&nbsp; Lower numbers are triggered first.&nbsp; The default ordering number is 50.</p>
+
+  <p><img alt="gemhead.png" src="_booki/pure-data/static/PureData-GEM-gemhead-en.png" height="167" width="349"></p>
+
+  <p>Fig. 4 The number argument after gemhead defines the order number.<br></p>
+
+  <p>&nbsp;</p>
+
+  <h2>Let's get started</h2>
+
+  <p>We will start from the very beginning. GEM is based on the principles of OpenGL. You can work with images and videos (which are by the way a number of images that change with every frame), and you can also work with 3D shapes like 3D models, curves or simple rectangles.<br>
+  <br>
+  Here is a first example that displays an image in your GEM window.</p>
+
+  <p>&nbsp;NOTE:&nbsp; This image "subway.png" needs to be placed in the same place&nbsp; as this patch..<br></p>
+
+  <p><img alt="GEM_basic.png" src="_booki/pure-data/static/PureData-GEM-GEM_basic-en.png" height="267" width="542"></p>
+
+  <p><br>
+  <br>
+  Fig. 1: A Basic GEM patch. The key objects in this example are [gemwin] and [gemhead].<br>
+  <br>
+  In order to open up a window into which you can draw stuff you have to create an object called [gemwin] which is your render context and you send it the messages "create" to create the window and "1" to start the rendering.<br>
+  <br>
+  Starting with a [gemhead] you create a <em>"render chain"</em>, that will draw things into your GEM window. In this case an image which is mapped onto a rectangle.<br>
+  <br>
+  Here is how it looks like.<br></p>
+
+  <p><img alt="GEM window" src="_booki/pure-data/static/PureData-GEM-001_first_basic_g-en.png" height="402" width="380"><br>
+  Fig. 2: GEM window<br></p>
+
+  <h2><br></h2>
+
+  <p>&nbsp;</p>
+
+  <h2>pix_objects and and 3D Shapes</h2>
+
+  <p>The order in which objects are connected in Figure 1 might seem a little strange to you. From your real life experience you would probably do it the other way round: First grab a piece of paper or a t-shirt and then draw an image onto it. In Gem this is different, you create the image first and then you decide what you're going to do with it: project it on a square, a sphere, a 3d model.<br>
+  <br>
+  Another basic principle of how OpenGL works, is that you distinguish between functions that affect your images and functions that affect your 3d shapes. Images have to be mapped onto 3d shapes. This means: usually no image will be drawn in the GEM window unless it is associated with a 3d shape, very often a rectangle, but of course there are also a lot of other shapes, more about that later.<br>
+  <br>
+  Eventually, this gives us two sets of GEM objects: the one that relate to image processing and another set that relates to shapes and their transformations. The first group will get a lot of attention, especially in the beginning of this manual, but on the other hand, always have in mind, that images are only one aspect of OpenGL.<br>
+  <br>
+  The objects that deal with textures are called <em>pix objects</em> and have the prefix "pix_" in their object name. The doorway into the shape world is called [pix_texture]. This object sends the image from your CPU memory to the graphics card memory from where it is "mapped" onto one or several shapes.<br>
+  <br></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch048_basics.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch048_basics.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

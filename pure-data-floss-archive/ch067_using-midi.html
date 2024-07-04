@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch067_using-midi.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch067_using-midi.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1><strong>Midi</strong></h1>
+
+  <p>This chapter will show you how to use midi to receive notes from midi keyboards or control messages from standard midi devices and also how to send midi to other programs or to midi hardware.</p>
+
+  <h2>Setup</h2>
+
+  <p>Before start working with midi, you should select your device in the dialog:&nbsp; Preferences/midi settings</p>
+
+  <p><img alt="Picture_1.png" src="_booki/pure-data/static/Picture_1-en.png" align="left" height="126" width="352"><br></p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p><br></p>
+
+  <p>&nbsp;</p>
+
+  <p>Then select which device you want to use for input/output midi, by default no device is selected. Before starting pd, you should plug your midi hardware, otherwise it will not show up in this dialog. In this case, we have selected our hardware "USB MIDI 1x1" (a midi interface)&nbsp; and the rest of "devices" called IAC are internal midi buses in osX.<br></p>
+
+  <p><img alt="usb_midi_ixi.png" src="_booki/pure-data/static/PureData-pd_midi-usb_midi_ixi-en.png" height="222" width="488"><br></p>
+
+  <p><strong>Note to OSX Users :</strong> In some cases with OSX you will need to check and activate the device in this "Audio midi setup" app. This can be found inside the utilities folder as shown below.<br></p>
+
+  <p><img alt="Picture_6.png" src="_booki/pure-data/static/PureData-pd_midi-Picture_6-en.png" height="288" width="526"> &nbsp;</p>
+
+  <h2>Channels and Ports</h2>
+
+  <p>Once we have chosen the midi device, we can check if it´s working. To do this you need to know a little about the concept of midi channels.</p>
+
+  <p>Midi channels are used to identify devices so you can receive and send notes with specific hardware (or software!).&nbsp; Usually midi devices use one 'channel' for sending and recieving this information. There are usually 16 midi channels in total.</p>
+
+  <h3>Multiple Devices<br></h3>
+
+  <p>Pd can use also multiple midi devices, so in the midi settings window (seen before), you can add more devices by clicking on the button "use multiple devices" and adding it in any free "port" (each one with the respective 16 channels...)<br></p>
+
+  <p>You can also in pd "filter" the midi messages by specifying which channel/port we want to "hear" with an "argument" in the midi object.<br></p>
+
+  <p>objects used to receive and send notes are [notein] and [noteout] respectively.</p>
+
+  <p>&nbsp;Here is an "extract" of the help for&nbsp; [notein], the object we will use when we want to connect a midi keyboard (or any other midi device that generates notes!) &nbsp;to pd in order to play sounds or doing anything.</p>
+
+  <p><img alt="noteinmodif.png" src="_booki/pure-data/static/PureData-pd_midi-noteinmodif-en.png" height="443" width="413">&nbsp;</p>
+
+  <h2>3-Midi hardware:&nbsp;</h2>
+
+  <p>Since midi was developed in the 1980´s you can find many devices compatibles with it that you can use with pd. Typically you can find synthesizers, midi interfaces, midi controllers, midi hubs and of course, the symbolic midi cable.&nbsp; the cable it´s a DIN 5 pin cable with two male conectors.&nbsp; the midi conector in the devices it´s always female, it doesn´t mater if it´s input or output so you have to take care when connecting the devices because it´s possible and easy to make a bad connection and then, your system will not work..</p>
+
+  <p>&nbsp;1- To connect any midi keyboard to pd, you have to connect the "midi out" of the keyboard with&nbsp; the "midi in" of your midi interface.&nbsp;</p>
+
+  <p>&nbsp;<img alt="topd.png" src="_booki/pure-data/static/PureData-pd_midi-topd-en.png" height="310" width="531"></p>
+
+  <p>A midi interface it´s a device that&nbsp; adds standard midi hardware ports to the computer, tipically via USB connection.</p>
+
+  <p><img alt="midi_interface.png" src="_booki/pure-data/static/PureData-pd_midi-midi_interface-en.png" height="325" width="495"></p>
+
+  <p>Note:&nbsp; There are modern keyboards that have an USB/ midi interface integrated&nbsp; to transmit midi directly to the computer via USB cable. &nbsp; in this cases, you will not need the classic midi cable.</p>
+
+  <p>&nbsp;<img alt="jp_to_pd.png" src="_booki/pure-data/static/PureData-pd_midi-jp_to_pd-en.png" height="393" width="583"></p>
+
+  <p>&nbsp;<br>
+  This is the setup&nbsp; Midi keyboard--&gt;midi interface--&gt;computer.&nbsp; In the midi settings configuration, you have to select your midi interface as midi input.&nbsp; when you create an [notein] object in pd and you play notes in the keyboard, you will see which note/s&nbsp; you are playing, the velocity and the channel.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Here, we can see that this keyboard is transmitting only in the channel 2.&nbsp; Usually you can change the transmitting channel of the keyboards by looking in his own configuration. &nbsp;</p>
+
+  <h2>4- Making notes in pd,&nbsp; Sending / reciving notes. &nbsp;</h2>
+
+  <p>A standard midi note it´s a message formed by a number that determines the pitch of the note, the velocity (volume)&nbsp; and the note off message that is the same note but with the velocity=0</p>
+
+  <p>to send notes with pd to external hardware/software, we use the object [noteout],</p>
+
+  <p>This example patch, generates random numbers, then "format" this number into a midi note with velocity and note off message and then send it "out"&nbsp; using the object noteout.</p>
+
+  <p>When you have selected the same internal midi bus in midi devices for in/out,&nbsp; ex: device in = IAC1&nbsp; / device out= IAC2, then you can create in pd a [notein] object to send midi notes to other pd patches.<br></p>
+
+  <p><img alt="rndmnotesentojp.png" src="_booki/pure-data/static/PureData-pd_midi-rndmnotesentojp-en.png" height="263" width="433"></p>
+
+  <p><img alt="pdtojp.png" src="_booki/pure-data/static/PureData-pd_midi-pdtojp-en.png" height="360" width="521"></p>
+
+  <p>&nbsp;</p>
+
+  <p>This is the setup Pd--&gt;midi interface--&gt;hardware synthesizer.</p>
+
+  <p>In this case, you need to select the midi interface as midi output device in the pd midi settings.</p>
+
+  <p>In this case, was needed&nbsp; also to add (and bang) the message "2" into the right inlet of the object [noteout]&nbsp; because this roland synthesizer only listens channel 2. We know this because before we connected the keyboard as input in Pd and then, we could see that this machine works only on channel 2.</p>
+
+  <p>&nbsp;</p>
+
+  <h2>5- Midi controllers</h2>
+
+  <p>When we want to control our pd patches with a midi controller &nbsp;we use the object [ctlin], this has 3 outlets, &nbsp;the left one outputs the controller value (0-127), the middle one outputs the controller number (cc) and the rightmost one outputs the channel and Port (channel "17" in Pd means midi channel 1 in port 2). &nbsp; In this picture we can see the output of [ctlin] object when I move one encoder&nbsp; in the midi controller "BCF2000" connected to the port 2.</p>
+
+  <p><img alt="bcf_.png" src="_booki/pure-data/static/PureData-pd_midi-bcf_-en.png" height="339" width="420">&nbsp;</p>
+
+  <p>When you create the ctlin object without arguments, it´s listening to all cc´s and to all channels.&nbsp; This is useful as an analysis tool&nbsp; to know which cc and channel sends each fader/ knob of your controller.&nbsp;</p>
+
+  <p>In some midi controllers, some faders send the same cc number than others but in other midi channel. &nbsp;&nbsp;</p>
+
+  <p>Tipically, &nbsp;we add the arguments cc (control change) and channel/port to the ctlin object &nbsp;to make it "hear" only the cc and channel specified &nbsp;because usually midi controllers have many knobs, faders, etc.. &nbsp;so each fader/knob it´s going to make only it´s specific/s function/s &nbsp;that you choose..</p>
+
+  <p>When we analyze each fader/potentiometer/button/etc,&nbsp; we can create a specific ctlin message to listen only one thing,&nbsp; this is the way to do&nbsp; an abstraction to have all the cc´s of our midi controller assigned to an individual output. &nbsp;</p>
+
+  <p>&nbsp;This is how it looks like my object "pd uc16", ready to receive the cc´s from my cheap midi controller evolution uc-16.&nbsp; it also reports in a "bang" which output of the abstraction correesponds to each potentiometer.<br></p>
+
+  <p><img alt="pd_uc16.png" src="_booki/pure-data/static/PureData-pd_midi-pd_uc16-en.png" height="168" width="562"><br></p>
+
+  <p>&nbsp; This is how a "tuned" uc-16 looks..</p><img alt="uc16tuned.png" src="_booki/pure-data/static/PureData-pd_midi-uc16tuned-en.png" height="238" width="478">
+
+  <p>&nbsp;</p>
+
+  <h2>&nbsp; 6- Sending midi to other softwares, sending CC (control change).</h2>
+
+  <p>we can use&nbsp; the same random notes patch we´ve seen before also to send notes to any other software running in the same computer.</p>
+
+  <p>Here, the trick is to have the same midi bus selected in Pd midi out device and in the midi in of the software you want to use..</p>
+
+  <p>Control change messages:</p>
+
+  <p>These are special messages used to change parameters in the midi devices such as "cutoff frequency", "resonance"... etc..&nbsp; There are about 127 different cc´s&nbsp; possibles in each midi channel.</p>
+
+  <p>In this patch we send the values of the slider to the cc number 7 in the channel 1.</p>
+
+  <p><img alt="fadersendingcc.png" src="_booki/pure-data/static/PureData-pd_midi-fadersendingcc-en.png" height="118" width="341">&nbsp;</p>
+
+  <h2>&nbsp;7- Another midi objects:</h2>
+
+  <p>There are more midi objects in pd and almost all of them are documented in the pd help.</p>
+
+  <p>[pgmin]&nbsp; / [pgmout] This objects receive and send "program changes".&nbsp; Program changes were used to change "programs" or sounds in synthesizers, patterns in rythmboxes, etc..</p>
+
+  <p>[bendin] / [bendout] This objects receive and send "pitchbend" changes. Argument is midi channel.</p>
+
+  <p>All the objects we have seen till now are the "basic" midi objects included also in pd vanilla but there are more objects like [midiin][sysexin] that runs only in linux&nbsp; or [touchin] and[polytouchin] that are not docummented yet..</p>
+
+  <p>In pd extended there are more "advanced" midi objects inside libraries such as maxlib or cyclone.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In the chapter <a href="http://en.flossmanuals.net/bin/view/PureData/MidiObjects">"list of objects"</a> you have a short explanation about this new objects.</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch067_using-midi.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch067_using-midi.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,821 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch079_audio-glue.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch079_audio-glue.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="194" height="17" align="left" sdnum="1031;0;@">
+          <h2>Name</h2>
+        </td>
+
+        <td width="112" align="left">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td width="424" align="left">
+          <h2>Function</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle">
+          <h1>Audio Glue</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Vanilla Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">adc~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">audio input</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">dac~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">audio output</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bang~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">output bang after each DSP cycle</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">block~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">specify block size and overlap</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">switch~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">switch DSP on and off</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">catch~ throw~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">summing signal bus and non-local connection</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">line~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">audio ramp generator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vline~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">high-precision audio ramp generator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">threshold~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">trigger from audio signal</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">snapshot~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">convert a signal to a number on demand</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vsnapshot~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">deluxe snapshot~</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">samplerate~</td>
+
+        <td align="left"><br></td>
+
+        <td align="left" sdnum="1031;0;@">get the sample rate</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">readsf~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">read a soundfile</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">receive~ send~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">one-to-many nonlocal signal connections</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">writesf~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">write audio signals to a soundfile</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">sig~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">convert numbers to audio signal</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Extended Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">blockmirror~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">play back a signal-vector in a time-reversed way</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">blockswap~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">swap the upper and lower half of a signal-vector</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">cooled~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">sound editor</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">dfreq~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">frequency detector that counts zero-crossings</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">envrms~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">like env~, but outputting rms instead of dB</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">fade~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">fade-in fade-out shaper (need line~)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">iem_blocksize~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">current blocksize of a window</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">iem_samplerate~</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">samplerate of a window in Hertz</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">int_fract~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">split signal float to integer and fractal part</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">Line~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left">line~ with lists and bang in the end</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">mp3play~</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">mpeg layer III player</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pack~ unpack~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">convert signals to float-packages</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">oggamp~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace pdogg</td>
+
+        <td align="left">streaming client</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">oggcast~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace pdogg</td>
+
+        <td align="left">stream to IceCast2 or JRoar</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">oggread~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace pdogg</td>
+
+        <td align="left">file player</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">oggwrite~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace pdogg</td>
+
+        <td align="left">strean to file</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">ogglive~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">patcher~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">16x16 patchbay inspired by Synthi AKS</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pdf~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">probability density function</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">peakenv~</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">signal-peak-envelope</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">polygate~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace motex</td>
+
+        <td align="left">switch between multiple signal inputs</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">prvu~</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">peak- rms- vu-meter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pvu~</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">peak- vu-meter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rvu~</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">rms- vu-meter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rlshift~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">shift signal vector elements left or right</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">Scope~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left"></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">sfplay sfrecord</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">play back/record (multichannel) soundfiles &lt;- NICHT VERWENDEN</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">sfread~ sfwrite~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace ggee</td>
+
+        <td align="left">NICHT VERWENDEN</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">sigzero~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">detects whether there is signal or not</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">spigot~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">signal router</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">tavg~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">arithmetic mean of a signal between two bangs</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">t3_sig~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">time tagged trigger sig~</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">t3_line~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">time tagged trigger line~</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bthresher~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">similar to thresher~ but with more control</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">thresher~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">an amplitude/frequency sensitive gating object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">unsig~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">signal to float converter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">xgroove~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">xrecord~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">xplay~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">zerocross~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">noise detector, counts zero crossings of signal</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">count~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left">sample counter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">record~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left">read and write sample values</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">simile~</td>
+
+        <td align="left" sdnum="1031;0;@">ekext flatspace</td>
+
+        <td align="left">compare two signals according to an error window</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">zeroxpos~</td>
+
+        <td align="left" sdnum="1031;0;@">ekext flatspace</td>
+
+        <td align="left">find n-th zero crossing in frame</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">piperead~ pipewrite~</td>
+
+        <td align="left" sdnum="1031;0;@">ext13 flatspace</td>
+
+        <td align="left">like sfread and write, but non-blocking</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">throw13~ t13~ catch13~ c13~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace [ext13]</td>
+
+        <td align="left">like catch~ and throw~, with set messages</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">receive13~ send13~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace [ext13]</td>
+
+        <td align="left">like r and s, with set messages</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">streamin~ streamout~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace ggee</td>
+
+        <td align="left">streaming client</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">blocksize_in_ms</td>
+
+        <td align="left" sdnum="1031;0;@">hcs</td>
+
+        <td align="left">blocksize in ms</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pwm~</td>
+
+        <td align="left" sdnum="1031;0;@">hcs</td>
+
+        <td align="left">pulse width modulation at audio rate</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">mat~ met~ maat~ meet~</td>
+
+        <td align="left" sdnum="1031;0;@">jmmmp</td>
+
+        <td align="left">mono/stereo level meter with amplitude control</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">snaps~</td>
+
+        <td align="left" sdnum="1031;0;@">jmmmp</td>
+
+        <td align="left">snapshot~ GUI implementation</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch079_audio-glue.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch079_audio-glue.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

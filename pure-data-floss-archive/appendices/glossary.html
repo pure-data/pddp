@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="glossary.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="glossary.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Glossary</h1>
+
+  <p>(Names of other glossary entries are in <strong>bold</strong> when they first appear in an entry, while the names of Pd objects appear in [square brackets].)</p>
+
+  <h2>Glossary Terms</h2>
+
+  <h2>Abstraction</h2>A reusable block of code saved as a separate Pd patch and used as if it were an <strong>object.</strong> Any abstraction to be used must either be saved in the same <strong>working directory</strong> as the Pd patch it is used in, or the directory it is saved in must be included in the <strong>path</strong> section of the Pd settings. Abstractions can be opened by clicking on them, and the <strong>GUI elements</strong> inside can be displayed even when closed by setting their <strong>properties</strong> to <strong>Graph on Parent</strong>. <strong>Inlets</strong> and <strong>outlets</strong> can be used to send and receive information to and from an abstraction, as well as <strong>send</strong> and <strong>receive</strong> pairs.
+
+  <h2>ADC</h2>Analog to Digital Converter - the line into Pd from the sound card. The Pd <strong>object</strong> for this is [adc~].<br>
+
+  <h2>ADSR</h2>(<strong>Attack</strong>,&nbsp; <strong>Decay</strong>, <strong>Sustain</strong> and <strong>Release</strong>) the common points of change (or breakpoints) in the <strong>envelope</strong> of a <strong>note</strong>.<br>
+
+  <h2>Aliasing</h2><br>
+  whenever a sound is replayed or synthesized whose <strong>frequency</strong> is over the <strong>Nyquist number</strong> (half the current <strong>sampling rate)</strong>, a second frequency will be heard "reflecting" off the Nyquist number downwards at the same increment in <strong>Herz.</strong> Example: if the sampling rate is 44,100 <strong>Hz</strong>, the Nyquist number would be 22,050. If one attempted to play a sound at 23,050 Hz, an additional tone at 21,050 Hz (the difference between the two frequencies subtracted from the Nyquist number) would be heard. <strong><br></strong>
+
+  <h2>ALSA</h2>Advanced Linux Sound Architecture -&nbsp; the default set of <strong>audio drivers</strong> for the Linux operating system.
+
+  <h2>AM Synthesis</h2>See <strong>Amplitude Modulation Synthesis</strong>.
+
+  <h2>Amplitude Modulation Synthesis</h2>A type of sound synthesis where the <strong>gain</strong> of one signal is controlled, or modulated, by the gain of another signal. The signal whose gain is being modulated is called the "carrier", and the signal responsible for the modulation is called the "modulator". In classical Amplitude Modulation, or <strong>AM Synthesis</strong>, both the modulator and the carrier are oscillators, however the carrier can also be another kind of signal, such as an instrument or vocal input. Amplitude Modulation using a very low frequency modulator is known as <strong>Tremolo</strong>, and the use of one audio signal to Amplitude Modulate another audio signal is known as <strong>Ring Modulation</strong>.<br>
+
+  <h2>Anything</h2>A keyword in certain objects which matches an atom or series, sometimes written as "a" or "any".
+
+  <h2>Argument</h2><br>
+  A piece of information sent to an <strong>object</strong> which sets a parameter of that object. Arguments can be sent as <strong>messages</strong>, or taken from <strong>creation arguments</strong>. Arguments are also used to replace <strong>variables</strong> (often represented by <strong>dollar signs</strong>) in messages and objects. By using the [pack] object, multiple arguments can be sent in a message.
+
+  <h2>Array</h2><br>
+  A way of graphically saving and manipulating numbers. It works in an X/Y format, meaning you can ask the array for information by sending it a value representing a location on the X (horizontal) axis, and it will return the value of that position value on the Y (vertical) axis. Arrays are often used to load soundfiles in Pd, and are displayed on screen in <strong>graphs</strong>.
+
+  <h2>ASIO</h2>Audio Stream Input/Output - an audio driver for low <strong>latency</strong> audio input and output developed by the Steinberg audio software company and available for many soundcards using the Windows operating system.
+
+  <h2>Attack</h2><br>
+  The beginning of a <strong>note</strong>, which is usually triggered by pressing a key on a keyboard or by a <strong>sequencer.</strong> A slow attack means the sound takes longer to reach full volume than a faster attack. See also <strong>envelope</strong>.
+
+  <h2>Atom</h2>A keyword meaning the most basic element of data.
+
+  <h2>Audio Driver</h2>Provides a system of input and output between the soundcard and applications using the soundcard. The more efficient the audio driver, the lower the <strong>latency</strong> of an audio system will be. Examples include <strong>MME</strong> and <strong>ASIO</strong> for Windows, <strong>CoreAudio</strong> for Mac OS X and <strong>OSS</strong>, <strong>ALSA</strong> and <strong>JACK</strong> for Linux.
+
+  <h2>Bandlimited</h2>When the waveform used by an <strong>oscillator</strong> has been constructed with a limited number of harmonics in order to reduce <strong>aliasing</strong>, then it is said to be bandlimited.<br>
+
+  <h2>Bang</h2>is special <strong>message</strong> in Pd, which many <strong>objects</strong> interpret as "do something now!", meaning do the operation the object is supposed to do with the information it already has received in its <strong>inlets</strong>. Bang can be sent via a <strong>GUI element</strong>, the [bang] object or a message box. [bang] can also be abbreviated to just [b].<br>
+
+  <h2>Bit Depth</h2>Refers to the number of bits used to write a <strong>sample</strong>. Each sample of 16-bit audio, which is the CD standard, is made from 16 bits which can either be 0 or 1. This gives 2<sub>16</sub> (or 2x2x2x2x2x2x2x2x2x2x2x2x2x2x2x2 = 65,536) number of possible values that sample can have. A higher bit depth means a greater <strong>dynamic range</strong>. In contrast to 16 bit audio for CDs, studio recordings are first made at 24 (or even 32) bit to preserve the most detail before transfer to CD, and DVDs are made at 24 bit, while video games from the 1980s remain famous for their distinctively rough "8 bit sound". Bit depth is also referred to as <strong>word length</strong>.
+
+  <h2>Buffer</h2>a chunk of memory inside the computer used to store sound. The soundcard uses a buffer to store audio from the audio applications for playback. If the <strong>latency</strong> of the system is too low for the soundcard and <strong>audio drivers</strong>, then the buffer will be too small and the soundcard will use all the audio data in the buffer before getting more from the audio application, resulting in an interruption know as a "dropout", or <strong>glitch.</strong><br>
+
+  <h2>Canvas</h2>An area of pixels in the <strong>patch</strong> which is used to add color or graphical layout to the patch. Since Pd remembers when things were put in the patch, a canvas is placed in the patch before any other objects which must be seen on top of it. Alternately, objects to be seen on top of the canvas can be Cut and then Pasted over it.
+
+  <h2>Carrier</h2>In <strong>Amplitude Modulation</strong> or <strong>Frequency Modulation</strong> synthesis, the carrier is the <strong>oscillator</strong> which is affected by the <strong>Modulator</strong>.
+
+  <h2>Clipping</h2>Clipping occurs when a signal is too loud for the soundcard to reproduce it. This happens when the <strong>samples</strong> used to represent the sound go out of the range between -1 and 1 due to amplifying them. Any samples out of this range will be <strong>truncated</strong> to fit within that range, resulting in <strong>distortion</strong>, a loss of audio detail and in <strong>frequencies</strong> which were not present in the original sound. The clipping point of a system is referred to as 0 dB in the <strong>gain</strong> scale, and the gain of any sound is measured in how far below the clipping point it is (-10 dB, -24 dB, etc).
+
+  <h2>Cold and Hot</h2>In Pd, the left-most <strong>inlet</strong> of an <strong>object</strong> is called "hot", which means that any input to that inlet causes the object to do its function and create output at the <strong>outlet</strong>. Any other inlet to the right of the left-most inlet is considered "cold", which means that input to these outlets is stored in the object until it receives input on the hot inlet, at which time all the information stored in the object is acted on.
+
+  <h2>Comment</h2>A line of text in a <strong>patch</strong> which explains some part of the patch, or is a reminder to the programmer or anyone else who opens the patch later on. Comments have no actual affect on the function of the patch.
+
+  <h2>Creation Argument</h2>Additional information given when an <strong>object</strong> is created. Example: making an object called [osc~ 440] would create a cosine <strong>oscillator</strong> (the name of the object) with a starting frequency of 440 <strong>Hz</strong> (the creation argument). See also <strong>Argument</strong>.
+
+  <h2>Cutoff Frequency</h2>The <strong>frequency</strong> at which a <strong>filter</strong> begins to affect a sound.
+
+  <h2>DAC</h2>Digital to Analog Converter - the line out to the sound card from Pd. The Pd <strong>object</strong> for this is called [dac~].
+
+  <h2>DC Offset</h2>DC offset is caused when a waveform doesn't cross the zero line, or has unequal amounts of signal in the positive and negative domains. This means that, in our model speaker, the membrane of the speaker does not return to its resting point during each cycle. This can affect the <strong>dynamic range</strong> of the sound. While DC offset can be useful for some kinds of synthesis, it is generally considered undesirable in an audio signal.
+
+  <h2>Decay</h2>The amount of time a sound takes to go from peak volume down to it's <strong>sustain</strong> level (in the case of an <strong>envelope</strong>), or to no sound at all (in the case of a <strong>delay</strong>).<br>
+
+  <h2>Decibel</h2>Decibel is a scale used to measure the <strong>gain</strong> or <strong>loudness</strong> of a sound. Decibel is usually abbreviated to dB and usually denotes how far under 0 dB (the <strong>clipping</strong> point of a system) a sound is (-10 dB, -24 dB, etc). The Decibel scale is <strong>logarithmic</strong>.
+
+  <h2>Delay</h2>The amount of time between one event and another. As an audio effect, a delay takes an incoming sound signal and delays it for a certain length of time. When mixed with the original sound, an "echo" is heard. By using <strong>feedback</strong> to return the delayed signal back into the delay (usually after lowering its <strong>gain</strong>), multiple echos with a <strong>decay</strong> result.&nbsp; The Pd <strong>objects</strong> to create a delay are named [delwrite~] and [delread~], and the pair must be given the same <strong>creation argument</strong> in order to communicate (i.e. [delwrite~ rastaman] and [delread~ rastaman]). As a setting in Pd, delay changes the <strong>latency</strong> of the program to allow for faster response time at the expense of more <strong>gliltches</strong> or vice versa.
+
+  <h2>Distortion</h2>Distortion occurs when an audio signal is changed in some way on the level of the <strong>samples</strong> which produces <strong>frequencies</strong> not present in the original. Distortion can be deliberate or unwanted, and can be produced by driving the signal to a <strong>clipping</strong> point, or by using mathematical transformations to alter the shape (or "waveform") of the signal (usually referred to as "waveshaping").<br>
+
+  <h2>Dollar Sign</h2>A <strong>symbol</strong> in Pd which is used to represent a <strong>variable</strong> in either a <strong>message</strong> or a <strong>creation argument</strong>. Multiple dollar signs can be used, as in "  ". In such a case,  will take the first <strong>argument</strong> in an incoming message,  the second,  the third, etc etc. And in the message "set ", any number sent to this message would replace , resulting in "set 1", "set 2", "set 3" etc depending on what number the message received. In the case of a creation argument used in an <strong>abstraction</strong>, one could create an abstraction named [myniceabs], and call it in a <strong>patch</strong> as [myniceabs 34], [myniceabs 66] and [myniceabs 88]. In this case, the initial <strong>frequency</strong> of an [osc~ ] <strong>object</strong> in [myniceabs] would be set to 34 <strong>Hz</strong>in the first abstraction, 66 Hz in the second and 88 Hz in the third, since the creation argument of the [osc~]<em>&nbsp;</em> object sets its starting frequency. <content-goes-here/>, however, is a special case, and is set to a unique random number for each abstraction it is used in (but it retains the same value everywhere inside that abstraction).
+
+  <h2>Dynamic Range</h2>Used to refer to the difference between the loudest sound that can possibly recorded and the quietest, as well as the amount of detail which can be heard in between. Sounds which are too quiet to be recorded are said to be below the <strong>noise floor</strong> of the recording system (microphone, recorder, sound card, audio software, etc).&nbsp; Sounds which are too loud will be <strong>clipped</strong>. In digital audio, the <strong>bit depth</strong> used to record the sound determines the dynamic range, while in analog electronics, the <strong>self-noise</strong> of the equipment also determines the dynamic range.<br>
+
+  <h2>Edit Mode</h2>The mode in Pd where <strong>objects</strong>, <strong>messages</strong>, <strong>comments</strong>, <strong>GUI elements</strong> and other parts of the Pd can be placed on the screen and moved around. Edit mode can be switched in and out of by using the Edit menu or the Control (or Apple) and "E" keys. The opposite of Edit mode is <strong>Play mode</strong>.
+
+  <h2>Envelope</h2><br>
+  A term used to describe changes to a sound over time. Traditionally, this is used to synthesize different instrumental sounds with <strong>Attack</strong>,&nbsp; <strong>Decay</strong>, <strong>Sustain</strong> and <strong>Release</strong> (or <strong>ADSR</strong>) which are triggered at the beginning of a <strong>note</strong>. A violin, for example, has a slow attack as the strings begin to vibrate, while a piano has a fast (or "percussive") attack which seperates it's distinctive sound (or "timbre") from that of other instruments.<br>
+
+  <h2>External</h2>An <strong>object</strong> in Pd which was not written into the core Pd program by the author, Miller S. Puckette. Externals are created and maintained by the Pure Data development community, and account for many of the additional fucntions of Pd, including the ability to manipulate video and 3D as well as stream MP3s and many other things. Externals are usually loaded as an <strong>external library</strong> at the start of a Pd session by including them in the <strong>startup flags,</strong> although some can be loaded as single objects at anytime as long as the location where that external is saved on your system is listed in the <strong>path</strong> setting of Pd.<br>
+
+  <h2>External Library</h2>A collection of <strong>externals</strong> written for Pd. Taken as a library, externals can be loaded at the start of a Pd session by including them in the <strong>startup flags.</strong>
+
+  <h2>Filter</h2>An audio effect which lowers the <strong>gain</strong> of <strong>frequencies</strong> above and/or below a certain point, called the <strong>cutoff frequency</strong>. The range it allows through is called the <strong>pass band</strong>, and the frequencies which are reduced are called the <strong>stop band</strong>. A High Pass filter [hip~] only allows frequencies above the cutoff frequency through. A Low Pass filter [hip~] allows only frequencies lower than the cutoff frequency through. A Band Pass filter [bp~] only allows frequencies close to the cutoff frequency through. The amount by which the filter lowers the gain of frequencies in the stop band is measured in <strong>Decibels</strong> per <strong>Octave</strong>, and is affected by the <strong>resonance (</strong>or "Q") of the filter, which determines the amount of <strong>feedback</strong> the filter uses and which frequency is most emphasized by the filter.
+
+  <h2>Feedback</h2>Feedback occurs in any system where the output is played back into the input. 100% feedback means all of the output is returned to the input. A classic example is holding a microphone in front of a speaker. Less than 100% feedback means that the signal is decreased in some way with each pass through the system. In <strong>delays</strong>, the amount of feedback determines how many repetitions of the "echo" one hears until the sound <strong>decays</strong> to zero. In a <strong>filter</strong>, feedback determines the <strong>resonance</strong> of the filter, and how much emphasis in given to the filter's <strong>cutoff frequency</strong>.
+
+  <h2>Float orFloating Point</h2>A <strong>number</strong> with a decimal point, which can be positive or negative and represent a range between -8388608 and 8388608. A special notation is used for extremely large or small floating point numbers, since Pd only uses up to 6 characters to represent a floating point number. Therefore, "1e+006" is a floating point number which represents "1000000" (or 1 with 6 decimal places after it), while "1e-006" represents "0.0000001" (or 1 with 6 decimal places in front of it).
+
+  <h2>FM Synthesis</h2>See <strong>Frequency Modulation Synthesis</strong>
+
+  <h2>Foldover</h2>Foldover occurs when a <strong>frequency</strong> higher than the <strong>Nyquist number</strong> is played or synthesized. See <strong>Aliasing</strong>.<br>
+
+  <h2>Frequency</h2>Refers to number of times in one second a vibration (in many cases a sonic vibration) occurs. Frequency is measured in <strong>Herz</strong>, and often indicates the <strong>pitch</strong> of a sound which is heard. Frequency is a <strong>linear</strong> scale, however, while pitch is <strong>logarithmic</strong>. This means that a sound which is heard as one <strong>octave</strong> above another one is twice the frequency in <strong>Hz</strong>, while two octaves above would be four times the frequency and three octaves above would be eight times.
+
+  <h2>Frequency Modulation Synthesis</h2>A type of sound synthesis where the <strong>frequency</strong> of one oscillator is controlled, or modulated, by the <strong>gain</strong> of another oscillator. The signal whose gain is being modulated is called the "carrier", and the signal responsible for the modulation is called the "modulator". In classical Amplitude Modulation, or <strong>AM Synthesis</strong>, both the modulator and the carrier are oscillators, however the carrier can also be another kind of signal, such as an instrument or vocal input. Very slow Amplitude Modulation is known as <strong>Tremolo</strong>.
+
+  <h2>Gain</h2>Expresses the strength of an audio signal, and is expressed in <strong>Decibels</strong>. The scale of gain is <strong>logarithmic</strong>, since it expresses the physical ratio of power between one sound and another. Gain is commonly measured in digital audio systems as the amount of Decibels below 0 dB, which is the <strong>clipping</strong> point (-10 dB, -24 dB, etc). See also <strong>loudness</strong>.
+
+  <h2>Glitch</h2>A sonic error occurring when the computer does not have enough time to process the audio coming in or out of an audio application before sending it to the sound card. This is a result of having too low a <strong>latency</strong>, so that the <strong>buffers</strong> of the sound card are not filled up as fast as the soundcard is playing them, resulting in an temporary but audible loss of sound. Glitches can occur when other processes interrupt the processor with various tasks (such as refreshing the display on the screen, reading or writing a hard drive, etc etc).<br>
+
+  <h2>Graph</h2>A graph is a graphical container that can hold several <strong>arrays.</strong> An array needs a graph to be displayed, so whenever you create an array from the menu, you will be asked whether you want to put it into a newly created graph or into an existing graph.
+
+  <h2>Graph on Parent</h2>A <strong>property</strong> of <strong>subpatches</strong> and <strong>abstractions</strong> where the <strong>GUI elements</strong> of the subpatch or abstraction are visible in the main <strong>patch</strong> even when that subpatch or abstraction is not open. This allows for better graphic design and usability for complicated patches.<br>
+
+  <h2>GUI element</h2>Graphical User Interface - visible parts of the Pd <strong>patch</strong> which are used to control it via the mouse or to display information, such as <strong>sliders</strong>, <strong>radio</strong> buttons, <strong>bangs</strong>, <strong>toggles</strong>, <strong>number</strong> boxes, <strong>VU</strong> meters, <strong>canvases</strong>, <strong>graphs</strong>, <strong>arrays</strong>, <strong>symbols</strong>, etc.<br>
+
+  <h2>Harmonics<br></h2>
+
+  <h2>HID</h2>see <strong>Human Interface Device</strong>
+
+  <h2>Hot and Cold</h2>In Pd, the left-most <strong>inlet</strong> of an <strong>object</strong> is called "hot", which means that any input to that inlet causes the object to do its function and create output at the <strong>outlet</strong>. Any other inlet to the right of the left-most inlet is considered "cold", which means that input to these outlets is stored in the object until it receives input on the hot inlet, at which time all the information stored in the object is acted on.<br>
+
+  <h2>Hradio</h2>A horizontal <strong>radio</strong> button. See also <strong>GUI element</strong>.
+
+  <h2>Hslider</h2>A horizontal <strong>slider</strong>. See also <strong>GUI element</strong>.
+
+  <h2>Hertz or Hz</h2>A term used to describe the number of times something occurs in one second. In digital audio, it is used to describe the <strong>sampling rate</strong>, and in acoustics it is used to describe the <strong>frequency</strong> of a sound. Thousands of Herz are described as KHz.
+
+  <h2>Human Interface Device</h2>A Human Interface Device (aka HID) is any device that is meant to allow humans to interact with a computer. Usually, HIDs are mice, keyboards, joysticks, tablets, gamepads, etc. There a number of unusual HIDs, like the Griffin PowerMate on the low end, or the SensAble PHANTOM 6DOF on the high end.
+
+  <h2>Index number</h2>Index numbers are used to look up values stored in <strong>Arrays</strong>. If we ask an array what is stored at index number "0", it will return the first value stored there. And if the array has 100 values stored in it, asking it for index number "99" will give the last value stored.
+
+  <h2>Inlet</h2>The small rectangular boxes at the top of <strong>objects</strong>, <strong>GUI elements</strong>, <strong>messages</strong>, <strong>subpatches</strong> and <strong>abstractions</strong>. They receive input from the <strong>outlets</strong> of the objects, messages, GUI elements, subpatches or abstractions above them. Inlets can be <strong>hot or cold</strong>.
+
+  <h2>Integer</h2>In Pd, this is a whole <strong>number</strong>, without a decimal point, which can be positive or negative. See also <strong>floating point</strong>.
+
+  <h2>JACK</h2>JACK Audio Connection Kit - a low <strong>latency</strong> audio system designed to run on Linux and Mac OSX in combination with various <strong>audio drivers</strong> such as <strong>ALSA</strong> and <strong>Portaudio.</strong> On Linux, the <strong>QJackctl</strong> application can be used to make audio and <strong>MIDI</strong> connections between the soundcard, MIDI devices such as keyboards and Pd. On Mac OSX, JACK is referred to as JackOSX, and the JackPilot application functions like QJackCtl, but only for audio connections.
+
+  <h2>Latency</h2>The amount of time needed to process all the <strong>samples</strong> coming from sound applications on your computer and send it to the soundcard for playback, or to gather <strong>samples</strong> from the sound card for recording or processing. A shorter latency means you will hear the results quicker, giving the impression of a more responsive system which musicians tend to appreciate when playing. However, with a shorter latency you run a greater risk of <strong>glitches</strong> in the audio. This is because the computer might not have enough time to process the sound before sending it to the soundcard. A longer latency means less glitches, but at the cost of a slower response time. Latency is measured in milliseconds.
+
+  <h2>Linear</h2>A scale of numbers which progresses in an additive fashion, such as by adding one (1, 2, 3, 4...), two (2, 4, 6, 8...) or ten (10, 20, 30, 40...). Another type of scale used in Pd is <strong>logarithmic</strong>. Multiplying an audio signal, for example, by either a linear or a logarithmic scale will produce very different results. The scale of <strong>frequency</strong> is linear, while the scales of <strong>pitch</strong> and <strong>gain</strong> are logarithmic.
+
+  <h2>List</h2>A special type of message that is a collection of data. Specifically, a "list" is a series of 3 or more atoms whose first atom is the selector "list", or, a series of 2 or more atoms whose first atom is numeric, which causes the "list" selector to be implied, i.e. [list one two(, [1 2(, [1 two(.
+
+  <h2>Logarithmic</h2>A scale of numbers which progresses according to a certain ratio, such as exponentially (2, 4, 8, 16, 256...). Another type of scale used in Pd is <strong>linear</strong>. Multiplying an audio signal, for example, by either a linear or a logarithmic scale will produce very different results. Both scales of <strong>pitch</strong> and <strong>gain</strong> are logarithmic, while the scale of <strong>frequency</strong> is linear.
+
+  <h2>Loudness</h2>Unlike <strong>gain</strong>, which expresses the physical power of a sound, loudness is the perceived strength of a sound. Higher <strong>frequencies</strong> are perceived as louder than mid-range or lower frequencies with the same amount of gain, and the amount of perceived difference varies from person to person.
+
+  <h2>Message</h2>A piece of information sent to the <strong>objects</strong> of a <strong>patch</strong>, often using the message <strong>GUI element</strong>. Messages tell objects which functions to perform and how, and can be simply numeric, include text which describes which function to change or even contain other information such as the location of soundfiles on the computer.<br>
+
+  <h2>MIDI</h2><br>
+  A system of describing musical information in electronic music using numbers between 0 and 127. There are various types of MIDI messages which can be sent in and out of Pd such as <strong>note</strong> ([notein], [noteout]), pitchbend ([pitchin], [pitchout]), continuous controller ([ctlin], [ctlout]) and program change ([pgmin], [pgmout]). MIDI messages can be sent to and from external MIDI devices, such as keyboards, slider boxes or hardware <strong>sequencers</strong>, or they can be exchanged with other MIDI applications inside the computer.
+
+  <h2>MME</h2><br>
+  The default set of <strong>audio drivers</strong> for the Windows operating system. MME drivers do not have as low <strong>latency</strong> as ASIO drivers.
+
+  <h2>Modulator</h2>In <strong>Amplitude Modulation</strong> or <strong>Frequency Modulation</strong> synthesis, the modulator is the <strong>oscillator</strong> which affects the <strong>Carrier</strong>.
+
+  <h2>Monophonic</h2>A monophonic electronic music instrument has one <strong>voice</strong>, meaning that only one <strong>note</strong> can be played at a time. See also <strong>polyphonic</strong>.
+
+  <h2>Noise Floor</h2>The part of the <strong>dynamic range</strong> which represents the quietest sound which can be recorded or played back. Sounds below this level (expressed in <strong>Decibels</strong>) will not be heard over the background noise of the system. In digital audio, the <strong>bit depth</strong> used to record the sound determines the noise floor, while in analog electronics, the <strong>self-noise</strong> of the equipment also determines the noise floor. Typical computer soundcards can have an analog noise floor between approximately -48 dB and -98 dB.
+
+  <h2>Normalize</h2>To normalize an audio signal means to adjust its <strong>gain</strong> to peak at the maximum the sound card allows before <strong>clipping</strong> (i.e. -1 and 1). This is done to maximize the <strong>dynamic range</strong> of the signal when it is played back.<br>
+
+  <h2>Note</h2>In electronic and computer music, a note is represented on the <strong>MIDI</strong> scale by two numbers between 0 and 127 (the amount of keys available on the MIDI keyboard). A note is triggered either by pressing a key on the keyboard or by a sequencer. A MIDI note has two values: it's <strong>pitch</strong> (the musical note it plays, expressed as a <strong>frequency</strong> which has been assigned to that note) and it's <strong>velocity</strong> (how hard the key is pressed, which determines how loud the note is heard). Notes also have an <strong>envelope</strong>, which determines the change in volume that note has over time.<br>
+
+  <h2>Number</h2>A <strong>GUI element</strong> used to display and store numbers. The number2 GUI element can also save numbers when that function is set in its <strong>properties</strong>.<br>
+
+  <h2>Nyquist Frequency</h2>A number which is half the <strong>sampling rate</strong> of the application which is being used, and represents the highest possible <strong>frequency</strong> which can be played back without <strong>aliasing</strong>. The Nyquist number is expressed in <strong>Herz</strong>. Example: if the sampling rate is 44,100 Hz, the Nyquist number would be 22,050. If one attempted to play a sound at 23,050 Hz, an aliased additional sound at 21,050 Hz (the difference between the two frequencies subtracted from the Nyquist number) would be heard.
+
+  <h2>Object</h2>The most basic building block of a Pd <strong>patch</strong>. Objects have a names, which could be considered the "vocabulary" of the Pd language, and the name of the object determines its function. Objects can take <strong>creation arguments</strong> to modify their functions at the time they are created. They receive information via <strong>inlets</strong> and send output via <strong>outlets</strong>. Objects with a tilde (~) in their name are audio generating or processing objects, otherwise they are objects to manipulate data (for example, an object named [+]&nbsp; would add two numbers together, and an object named [+~] would add two audio signals together). To see the documentation help file of any object, right click with the mouse, or use the Control (or Apple) key with a mouseclick.
+
+  <h2>Octave</h2>The interval between one musical note and another with 12 semitones (or 12 <strong>notes</strong> in the <strong>MIDI</strong> scale) between them, which is seen in acoustics as half or double the <strong>frequency</strong>. While frequency is a <strong>linear</strong> scale, however, while pitch is <strong>logarithmic</strong>. This means that a sound which is heard as one <strong>octave</strong> above another one is twice the frequency in Hz, while two octaves above would be four times the frequency, three octaves above would be eight times higher, and one octave below would be half the frequency.
+
+  <h2>Oscillator</h2>An audio generator which produces a continuous, repeating waveform. A cosine oscillator [osc~] produces a pure sinus wave with no harmonics, while a sawtooth or ramp oscillator [phasor~] produces a richer sound with many harmonics. Other shapes for a waveform include square, pulse or triangle. Each waveform is defined by a mathematical function, and each shape has its own harmonic spectrum.
+
+  <p><strong>OpenGL</strong><br>
+  (<strong>Open G</strong>raphics <strong>L</strong>ibrary) is a widely used, industry standard library of 2D and 3D graphics functions. &nbsp;</p>
+
+  <h2>OSS</h2>An outdated system of <strong>audio drivers</strong> for the Linux operating system, replaced by <strong>ALSA</strong>.
+
+  <h2>Outlet</h2>The small rectangular boxes at the bottom of <strong>objects</strong>, <strong>GUI elements</strong>, <strong>messages</strong>, <strong>subpatches</strong> and <strong>abstractions</strong>. They send output to the <strong>inlets</strong> of the objects, subpatches, abstractions, messages and GUI elements below them.&nbsp;
+
+  <h2>Oversampling</h2>The process of increasing the <strong class="craCompareDelete">sampling rate</strong> of digital audio, most often in order to remove <strong class="craCompareDelete">aliasing</strong> noise with a <strong class="craCompareDelete">filter</strong>.
+
+  <h2>Pass Band</h2>The range of <strong>frequencies</strong> allowed through by a <strong>filter</strong>.
+
+  <h2>Patch</h2>The document in which you build structures within Pd. One patch can contain many <strong>objects</strong>, <strong>comments</strong>, <strong>GUI elements</strong>, <strong>messages</strong>, <strong>subpatches</strong> and <strong>abstractions</strong>. If another patch is saved in the same <strong>working directory</strong> or in another directory listed in the <strong>path</strong> setting, then it can be used in the main or parent patch as an abstraction. Patches are saved as simple text files with the names and locations of all the contents listed inside. Patches are always saved with the .pd extension.&nbsp;
+
+  <h2>Path</h2>Is a setting of Pd which determines two things. The first is the directories on your computer which Pd searches to load <strong>externals</strong>, and the second is the directories where Pd searches to find <strong>abstractions</strong> used in patches. Path can be set with <strong>startup flags</strong>, or by entering the directories in the startup settings using the main window of Pd.
+
+  <h2>Pitch</h2>A part of a <strong>note</strong> in the <strong>MIDI</strong> specification which determines what pitch is heard when the note is played. It is represented by a number between 0 and 127, with each number representing a key on the MIDI keyboard. The relation of pitch to <strong>frequency</strong> is <strong>logarithmic</strong>. This means that a sound which is heard as one <strong>octave</strong> (+ 12 MIDI notes) above another one is twice the frequency in Hz, while two octaves (+ 24 MIDI notes) above would be four times the frequency, three octaves (+ 36 MIDI notes) above would be eight times,&nbsp; and one octave below (- 12 MIDI notes) would be half the frequency.
+
+  <h2>Play Mode</h2>The mode in Pd where the <strong>GUI elements</strong> and other parts of the Pd can be manipulated with the mouse. This is often when the <strong>patch</strong> is being played. Play mode can be switched in and out of by using the Edit menu or the Control (or Apple) and "E" keys. The opposite of Play mode is <strong>Edit mode</strong>.
+
+  <h2>Pointer</h2>A reference to a position in a scalar used to manipulate and read data from it.
+
+  <h2>Polyphonic</h2>A polyphonic electronic music instrument is capable of playing multiple <strong>notes</strong> at a time, allowing for chords and other musical techniques. The number of notes it can play is determined by the number of <strong>voices</strong> it has. See also <strong>monophonic</strong>.<br>
+
+  <h2>Portaudio</h2>A Free and Open Source set of <strong>audio drivers</strong> for Linux and Mac OS X.
+
+  <h2>Property</h2>All the <strong>GUI elements</strong> in Pd have a menu where their properties can be changed. This is accessed by using the right-click mouse button, or the Control (or Apple) key and a mouseclick. Under properties, the graphical appearance and function of the GUI element can be changed.
+
+  <h2>Radio</h2>A <strong>GUI element</strong> set of buttons which, when clicked, send the number of the box which was clicked to the <strong>outlet</strong>, or display numbers received by its <strong>inlet</strong>. Radio boxes can be vertical or horizontal, and the number of boxes seen can be changed in the <strong>properties</strong>.
+
+  <h2>Real-time</h2>A system where changes can be made in the program even as it is running, and the user can see or hear the results immediately. The opposite would be a non-real-time system, where data must be compiled or rendered by the computer in order to hear or see results.&nbsp;
+
+  <h2>Release</h2>The amount of time it takes for the <strong>gain</strong> of a <strong>note</strong> to reach zero after the key on the keyboard has been released. See also <strong>envelope</strong>.
+
+  <h2>Resonance</h2>The <strong>frequency</strong> in a filter or other system of <strong>feedback</strong> which is most emphasized, resulting in that frequency being the loudest.
+
+  <dl>
+    <dt>Ring Modulation</dt>
+
+    <dt>The use of one audio signal to Amplitude Modulate another audio signal.</dt>
+
+    <dd>
+      <h2>Sample</h2>In digital audio, a sample is the smallest possible element of a recorded sound. In CD audio, for example, it takes 44,100 samples to make one second of recorded sound, and so we can say that the <strong>sampling rate</strong> is 44,100 <strong>Herz</strong>. Samples also have a <strong>bit depth</strong> which determines the <strong>dynamic range</strong> that is possible to record and playback. Common bit depths are 8 (for old video games), 16 (for CD audio), 24 (for studio recording and DVDs) or 32 (for sounds inside the computer). In electronic music, a sample is also a prerecorded piece of sound which is played back by a <strong>sampler</strong>.
+
+      <h2>Sampler</h2>An electronic music instrument which plays back a recorded sound (or <strong>sample</strong>) whenever it is sent a <strong>note</strong>. The <strong>pitch</strong> of the note determines how fast or slow the sample is played back, which emulates the pitch changes in other instruments. Samples can be looped (played over and over) and one-shot (played once).
+
+      <h2>Sampling Rate</h2>The rate at which the computer records and plays back sound, which is measured in <strong>Herz</strong> representing the number of <strong>samples</strong> per second. CD audio is recorded and played at 44,100 Hz (or 44.1 KHz), while DVD audio runs at 96,000 Hz (or 96 KHz) and cheap consumer gadgets like voice recorders, video games, mobile phones, toys and some MP3 players often use a rate of 22,050 Hz (22.05 KHz) or even less. The sampling rate determines the highest <strong>frequency</strong> which can be recorded or played, which is expressed by the <strong>Nyquist number</strong>, or half the sampling rate. Sounds higher in frequency than the Nyquist rate will be <strong>aliased</strong>. Playing back sounds at a different sampling rate then they were recorded at will result in hearing that sound at the "wrong speed".
+
+      <h2>Scalar</h2>A graphical instance of a struct in Pd's graphical <strong>data structures</strong>.
+
+      <h2>Sequencer</h2>A <strong>MIDI</strong> device or application used to store <strong>notes</strong> which are sent to a <strong>synthesizer</strong> or <strong>sampler</strong>. Sequencers often play notes back at a rate specified in Beats per Minute.
+
+      <h2>Selector</h2>A symbolic <strong>atom</strong> that serves as an instruction to the receiving <strong>object</strong> as how to handle the message.
+
+      <h2>Self-noise</h2>The amount of analog noise a piece of electronic equipment produces without any further input, often due to parts of its circuitry or electromagnetic interference. Self-noise is measured in <strong>Decibels</strong>. The self noise of the equipment determines the <strong>noise floor</strong>. Professional or semiprofessional sound equipment often produces less self-noise than cheaper, consumer-grade equipment. Typical computer soundcards have self-noise which results in a noise floor between approximately -48 dB and -98 dB.
+
+      <h2>Send and Receive</h2>A method of communicating between <strong>objects</strong> in a <strong>patch</strong> without the connecting cables. The objects [send] and [receive] are used, with a shared <strong>creation argument</strong> which sets the "channel" they transmit on, for example [send volume] and [receive volume]. The names of the objects can be abbreviated to [s] and [r], and a pair for audio signals also exists ([send~] and [receive~], or [s~] and [r~]).
+
+      <h2>Shell</h2>The text-only interface to your computer, where commands are typed in order to start programs and get information. On Linux and Mac OSX, this is often called the "terminal". On Windows, it is referred to as the Command Prompt or as the DOS Prompt (now obsolete).
+
+      <h2>Slider</h2>A <strong>GUI element</strong> which sends a number to its <strong>outlet</strong> when it is moved with the mouse, or display numbers received by its <strong>inlet</strong>. Sliders can be horizontal or vertical, and when they are created have a typical <strong>MIDI</strong> range of 0 to 127. This range can be changed under the <strong>properties</strong>.<br>
+
+      <h2>Startup Flag</h2>When starting Pd from the <strong>shell</strong>, the startup flags are used to pass information to Pd about how it should run, what <strong>audio drivers</strong> it should use, how many channels, what <strong>patch</strong> to open at startup, which <strong>external libraries</strong> to load and what <strong>paths</strong> to use to find <strong>externals</strong> and <strong>abstractions</strong>.
+
+      <h2>Stop Band</h2>The <strong>frequencies</strong> which are reduced by a <strong>filter</strong>.
+
+      <h2>Struct</h2>An object to create templates for <strong>data structures</strong>.
+
+      <h2>Subpatch</h2>A graphical enclosure in a <strong>patch</strong> used to conceal parts of the patch which are not always used. Subpatches can be opened by clicking on them, and the <strong>GUI elements</strong> inside can be displayed even when closed by setting their <strong>properties</strong> to <strong>Graph on Parent</strong>. <strong>Inlets</strong> and <strong>outlets</strong> can be used to send and receive information to and from a subpatch, as well as <strong>send</strong> and <strong>receive</strong> pairs.
+
+      <h2>Sustain</h2>The level of <strong>gain</strong> a <strong>note</strong> holds after the <strong>attack</strong> and <strong>decay</strong>. The note holds this gain level until the key is <strong>released</strong>. See also <strong>envelope</strong>.<br>
+
+      <h2>Symbol</h2>A string of characters, that is not interpreted as a number used in mathematic calculations. Single, "printable" words without (unescaped) whitespace are common symbols, but it's possible to construct unprintable symbols, symbols with escaped whitespace or symbols that look like a number, but consist of only numeric characters with objects like [makefilename] or some <strong>externals</strong>. Such symbols currently will not be saved properly in a .pd-file and they cannot be created by manually editing a message box. Internally a symbol is defined as an <strong>atom</strong> of type "t_symbol" in Pd.<br>
+
+      <h2>Symbol Message</h2>A message that has the <strong>symbol</strong> "symbol" as <strong>selector</strong> followed by another symbol atom as its data part.
+
+      <h2>Truncate</h2>When a number goes out of a certain set of allowed boundaries, it will be truncated. This means that any numbers out of that range will be replaced by the closest number still within that range (either the highest or lowest). In a digital audio signal, this is called <strong>clipping</strong>.&nbsp;
+
+      <h2>Variable</h2>A type of "placeholder", often within a <strong>message</strong> and written as a <strong>dollar sign</strong>, which is meant to be replaced with other information. For example, in the message "  ", there are three variables to be replaced with actual information.<br>
+
+      <h2>Vector Based Graphics</h2>The graphical system used by Pd to display <strong>patches</strong> where every element on the screen is defined by a set of numbers describing their appearance rather than an image, and every change to these elements means that the computer must recalculate that part of the screen.
+
+      <h2>Velocity</h2>A part of a <strong>note</strong> in the <strong>MIDI</strong> specification which says how hard the key of the keyboard was pressed, and in turn determines the <strong>gain</strong> of that note when it is played. It is represented by a number between 0 and 127.&nbsp;
+
+      <h2>Voices</h2>A <strong>polyphonic</strong> electronic music instrument can play as many simultaneous <strong>notes</strong> as it has voices. A <strong>monophonic</strong> instrument, on the other had, can only play one note at a time and is said to have one voice.<br>
+
+      <h2>Vradio</h2>A vertical <strong>radio</strong> button. See also <strong>GUI element</strong>.
+
+      <h2>Vslider</h2>A vertical <strong>slider</strong>. See also <strong>GUI element</strong>.
+
+      <h2>VU</h2>A <strong>GUI element</strong> in Pd which is used to display the <strong>gain</strong> of an audio signal in <strong>Decibels</strong>.
+
+      <h2>Word Length</h2>See <strong>bit depth</strong>.
+
+      <h2>Working Directory</h2>In Pd this is the directory which the patch you are working in has been saved to. Any <strong>abstractions</strong> used in that patch must either be saved to that directory, or the directory in which those abstractions have been saved must be added to the <strong>path</strong> setting in the startup preferences.
+    </dd>
+  </dl>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="glossary.html">GLOSSARY</a></li>
+
+  <li><a href="links.html">LINKS</a></li>
+
+  <li><a href="credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="glossary.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="glossary.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

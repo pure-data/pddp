@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="dc-offset.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="dc-offset.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Normalizing &amp; DC Offset</h1>
+
+  <p>In order to optimize a signal for playback, it is often necessary to make some final adjustments to the <strong>gain</strong> of the signal to fit it into certain ranges which maximize the <strong>dynamic range</strong>, or the difference between the loudest and the quietest parts of the signal. Two very important processes are to remove the <strong>DC offset</strong> in the signal, and to <strong>normalize</strong> the signal.</p>
+
+  <p>DC offset is when a waveform has unequal amounts of signal in the positive and negative domains. Normally, we want the signal to have a middle point at zero to allow a maximum dynamic range. While DC offset can be useful in the control of some kinds of synthesis (such as <strong>Amplitude Modulation</strong> or <strong>Frequency Modulation</strong>), it is generally considered undesirable in an audio signal.</p>
+
+  <p><img title="dcoffset" alt="dcoffset" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-dcoffset-en.png" height="319" width="253">&nbsp;</p>
+
+  <p><em>An extreme example of DC offset: the waveform is only in the positive domain.</em>&nbsp;</p>
+
+  <p>And to normalize an audio signal means to adjust its gain to peak at the maximum the sound card allows before <strong>clipping</strong> (i.e. -1 and 1). This is done to maximize the dynamic range of the signal when it is played back.</p>
+
+  <p>For example, by default the [phasor~] object ramps from 0 to 1. The middle point (i.e. the DC Offset) is 0.5, and its dynamic range (the difference between the minimum and maximum values) is half the biggest possible. In order to get a waveform which uses the full dynamic range of the soundcard without any DC offset, we need to multiply its signal by two in order to double the dynamic range. This is the normalizing part. Since now the DC Offset is 1,Then we remove the DC offset by subtracting 1 from every sample value, resulting in a waveform which crosses zero at the midpoint of its ramp from -1 to 1.</p>
+
+  <p><img title="dcoffset1" alt="dcoffset1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-dcoffset1-en.png" height="330" width="473"></p>
+
+  <p>Likewise, the same can be done with the square waves we created by comparing the output of [phasor~] with 0.5 with a simple logic operation. The resulting 0 or 1 can be normalized to -1 and 1 with the same audio math.</p>
+
+  <p><img title="dcoffset2" alt="dcoffset2" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-dcoffset2-en.png" height="354" width="479"></p>
+
+  <p>Since we are using the [expr~] object to create a mathematical expression for the creation of the square wave anyway, we can include the normalizing and dc offset correction directly into that expression like this:</p>
+
+  <p><img title="dcoffset3" alt="dcoffset3" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-dcoffset3-en.png" height="345" width="261"></p>
+
+  <p>Here, we revisit the sawtooth wave generator, made from inverting the ramp of [phasor~], comparing it with the original ramp and deriving the minimum values. The sawtooth waveform which results has a DC offset of 0.25 and a gain from 0 to 0.5. By subtracting the 0.25 offset and multiplying by 4, the waveform is DC offset corrected and normalized.</p>
+
+  <p><img title="dcoffset4_1" alt="dcoffset4_1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-dcoffset4_1-en.png" height="588" width="591"></p>
+
+  <p>The same process can be reduced to a single [expr~] object which compares the ramps, performs the DC offset correction and normalizes the resulting waveform.</p>
+
+  <p><img title="dcoffset5" alt="dcoffset5" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-dcoffset5-en.png" height="324" width="539"></p>
+
+  <p>A DC Offset is a constant value, this means it has a frequency of 0Hz, because it never changes. A high pass <strong>filter</strong> can be used to remove the DC offset of a signal or combination of signals by removing frequencies below its <strong>cutoff frequency</strong>. In this case, the [hip~] object is set to attenuate frequencies at or below 1 Hz, resulting in a waveform centered on zero. It will not, however, normalize the signal afterward, nor will it prevent <strong>clipping</strong> (values greater than -1 or 1 which cannot be reproduced by the soundcard).</p>
+
+  <p><img title="dcoffset6" alt="dcoffset6" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-dcoffset6-en.png" height="437" width="457"></p>
+
+  <p>Many Pd programmers use a [hip~ 1] object just before each channel of the [dac~] to eliminate any accidental DC offset which may have accumulated in the audio signals of their patch.</p>
+
+  <p>Finally, a limiter can be used to automatically reduce the overall gain whenever the signal passing through it exceeds a certain level. In a so-called "lookahead limiter", the audio signal is delayed for a certain amount of time while the limiter decides if the signal needs to be reduced and by how much. The [limiter~] object in Pd is useful for this purpose, while the [z~] object delays the signal being measured long enough for the [limiter~] to output the amplification factor needed to keep the audio signal within bounds. Please check the help file for [limiter~] for a wide range of uses for this object.</p>
+
+  <p><img title="noiselimiter" alt="noiselimiter" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-noiselimiter-en.png" height="579" width="504"></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="frequency.html">FREQUENCY</a></li>
+
+  <li><a href="additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="filters.html">FILTERS</a></li>
+
+  <li><a href="envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="dc-offset.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="dc-offset.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

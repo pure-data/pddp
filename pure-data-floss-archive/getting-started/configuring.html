@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="configuring.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="configuring.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Configuring Pure Data</h1>
+
+  <p>Pd-Extended has done a lot to make installing and setting up Pure Data easier than ever before. But every computer system is different, and each Pd user will have different needs. This section shows how to configure the most basic parts of Pd, including the soundcard and MIDI devices, as well as some advanced configuration options for those wishing to customize their installation.</p>
+
+  <h2>Basic configuration</h2>
+
+  <p>The first thing we'll want to do once Pd is running is make sure that the audio is configured correctly. This includes choosing the correct drivers, the correct soundcard and the proper latency for your system to be both responsive and glitch-free. Also, if you have any MIDI devices (such as keyboards or fader boxes), you can set Pd up to use those as well. After that, you can test the audio and MIDI to make sure it is working properly.</p>
+
+  <h2>Audio drivers</h2>Pd can use a variety of audio <strong>drivers</strong> to connect to the soundcard. So our first step is to chose the correct ones. This can be done via the <strong>"Media"</strong> menu:
+
+  <p><strong>OSX :</strong> Media -&gt; portaudio/jack<br>
+  <strong>Linux :</strong> Media -&gt; OSS/ALSA/jack<br>
+  <strong>Windows :</strong> Media -&gt; ASIO (via portaudio)</p>
+
+  <p><img title="audiocfg" alt="audiocfg" src="_booki/pure-data/static/PureData-Configuring-audiocfg-en.png" height="295" width="216"></p>
+
+  <p>This part of the menu should list the available audio drivers on your system, and allow you to switch between them. The drivers you have depend on your operating system, and what drivers you have installed on that operating system. Keep in mind you may not have all of these installed on your computer:</p>
+
+  <p><strong>Linux</strong></p>
+
+  <ul>
+    <li>&nbsp;&nbsp; &nbsp;OSS</li>
+
+    <li>&nbsp;&nbsp; &nbsp;ALSA</li>
+
+    <li>&nbsp;&nbsp; &nbsp;jack</li>
+  </ul>
+
+  <p><strong>OS X</strong></p>
+
+  <ul>
+    <li>&nbsp;&nbsp; &nbsp;portaudio</li>
+
+    <li>&nbsp;&nbsp; &nbsp;jack</li>
+  </ul>
+
+  <p><strong>Windows</strong></p>
+
+  <ul>
+    <li>&nbsp;&nbsp; &nbsp;MMIO</li>
+
+    <li>&nbsp;&nbsp; &nbsp;ASIO</li>
+  </ul>
+
+  <p>Linux users are encouraged to investigate <strong>JACK (Jack Audio Connection Kit)</strong>, an audio server which allows different audio applications to be connected with virtual "cables" in your computer. JACK, and it's Graphical User Interface <strong>QJackctl</strong>, should be available from whatever Linux distribution you happen to be running.</p>
+
+  <p>Many OS X users have also reported that audio runs smoother and with less CPU load when using <strong>JackOSX</strong>, an implementation of the JACK server and user interface for the Mac OS. JackOSX can be found at <a href="http://jackosx.com/">http://jackosx.com/</a></p>
+
+  <p>And Windows users may find configuring their ASIO soundcards much easier by using <strong>ASIO4ALL</strong>, which can be downloaded from <a href="http://www.asio4all.com/">http://www.asio4all.com/</a></p>
+
+  <h2>MIDI drivers (Linux only)</h2>
+
+  <p><strong>Linux :</strong> Media -&gt; default-MIDI/ALSA-MIDI</p>
+
+  <p>This menu which allows you to switch between the built-in Pd MIDI drivers and the ALSA MIDI drivers, if they are installed. If the ALSA MIDI drivers are used, then JACK users can use the <strong>QJackctl</strong> application (available in most Linux distributions) to connect external MIDI devices and other MIDI applications running on the same computer to Pd.</p>
+
+  <h2>Audio Settings</h2>
+
+  <p><strong>OSX :</strong> Pd-extended -&gt; Preferences -&gt; Audio Settings<br>
+  <strong>Linux &amp; Windows :</strong> Media -&gt; Audio Settings</p>
+
+  <p><img title="audiocfg_1" alt="audiocfg_1" src="_booki/pure-data/static/PureData-Configuring-audiocfg_1-en.png" height="138" width="352"></p>
+
+  <p>This is one of the most important configuration menus in Pd. Here you can change the <strong>sample rate</strong>, <strong>delay</strong>, <strong>input</strong> and <strong>output</strong> devices as well as the number of <strong>channels</strong> they use.</p>
+
+  <blockquote>
+    <h3>Sample rate</h3>
+
+    <p>The sampling rate for CD quality audio is 44,100 Hz. Most computer soundcards run at this sampling rate, or at 48,000 Hz, by default. Choose the rate that matches the rate of your soundcard or audio drivers here.</p>
+  </blockquote>
+
+  <blockquote>
+    <h3>Delay (msec)</h3>
+
+    <p>Your computer needs a certain amount of time to process all the information coming out of Pd and send it to the soundcard for playback. Likewise, when you are recording, Pd needs a certain amount of time to gather all the information coming from the soundcard. The term for this delay is called <strong>latency</strong>, and it measures the amount of time between the moment when you tell Pd to do something (for example by playing a note on a keyboard), and when you hear the result of that action. A shorter latency means you will hear the results quicker, giving the impression of a more responsive system which musicians tend to appreciate. However, with a shorter latency you run a greater risk of getting an interruption or 'glitch' in the audio. This is because the computer does not have enough time to "think about" the sound before sending it to the soundcard. A longer latency means less chances of glitches, but at the cost of a slower response time. It is up to you to find the best balance for your own needs, but the default latency in Pd is 50 milliseconds. You can increase or decrease the latency of Pd by entering a value in milliseconds in this box. If you are using the JACK API, the delay will be set by your JACK audio server and manual inputs in the field 'delay' are without effect.<br></p>
+  </blockquote>
+
+  <blockquote>
+    <h3>Input Device</h3>
+
+    <p>Choose the soundcard you wish to use with Pd and the number of channels you want to use. In the case of a normal, stereo soundcard you would enter the number 2. For a multichannel soundcard, you may choose some or all of the channels. Make sure this is checked if you would like to record sound into Pd.</p>
+  </blockquote>
+
+  <blockquote>
+    <h3>Output Device</h3>
+
+    <p>Choose the same soundcard as you selected for the Input Device, and a matching number of channels as you selected for the Input Device as well. Although it may be possible to use different soundcards and unmatched numbers of channels for input and output on some systems, this can also cause problems for Pd, so experiment first. Make sure the checkbox next to the device is checked.</p>
+  </blockquote>
+
+  <h2>MIDI Settings</h2>
+
+  <p><strong>OSX :</strong> Pd -extended -&gt; Preferences -&gt; MIDI Settings<br>
+  <strong>Linux &amp; Windows :</strong> Media -&gt; MIDI Settings</p>
+
+  <p><img title="midicfg" alt="midicfg" src="_booki/pure-data/static/PureData-Configuring-midicfg-en.png" height="153" width="173"></p>
+
+  <p>On Linux, you have a choice of using the built-in MIDI drivers, or the ALSA-MIDI drivers if they are installed. If you are using the built-in drivers, you should be able to choose which devices to Pd will send and receive MIDI messages with. You may also select "use multiple devices" if you have several applications or devices using MIDI. This method is rather complex, because you must set up the devices by number using your startup flags and you will not be able to change them while Pd is running. Using the ALSA-MIDI drivers is easier to manage, and therefore recommended.</p>
+
+  <p>When using the ALSA MIDI drivers on Linux, you can tell Pd the number of In and Out Ports to use here. These are connections which other MIDI applications or devices can use to connect to and from Pd. To connect devices or applications, you can use ALSA MIDI with the JACK audio drivers and the <strong>Qjackctl</strong> if you have them installed. In Qjackctl, you will see a tab for MIDI, and be able to connect the inputs and outputs of MIDI devices and applications by clicking on them.</p>
+
+  <p>On Mac OS X, to use MIDI you must first open the "Audio MIDI Setup.app", which is located in your Applications/Utilities folder. Once this application is open, and you have connected your external MIDI devices (if any), you should be able to see your MIDI devices in this window. Minimize the "Audio MIDI Setup.app" and return to Pd and this "MIDI Settings" menu. Now you will be able to choose which devices with which Pd will send and receive MIDI messages. You may also select "use multiple devices" if you have several applications or devices using MIDI.</p>
+
+  <h2>Test Audio and MIDI</h2>
+
+  <p><strong>OSX, Linux &amp; Windows :</strong> Media -&gt; Test Audio and MIDI</p>
+
+  <p>To make sure that you've configured your audio and MIDI correctly, Pd includes a patch to test your setup. If you open "Test Audio and MIDI", you will see this window:<br>
+  <br>
+  <img title="testaudio" alt="testaudio" src="_booki/pure-data/static/PureData-Configuring-testaudio-en.png" height="460" width="593"></p>
+
+  <p>First, click one of the radio buttons marked either "-20" or "-40" under "TEST SIGNAL". If your audio is set up correctly, you will hear a test tone and you will see some of the number boxes above "AUDIO INPUT" changing to measure any incoming audio signal from the line in or microphone of your computer. If you have any external MIDI devices or a piece of MIDI software connected to Pd, you can test the connection by sending MIDI data to Pd and watching to see if the number boxes connected to [notein] and [ctlin] change.</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="configuring.html">CONFIGURING</a></li>
+
+  <li><a href="advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="configuring.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="configuring.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="starting-pduino.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="starting-pduino.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Somebody Should Set The Title For This Chapter!</h1>
+
+  <p><strong>Preparing Pduino</strong></p>
+
+  <p>• download the Pduino...zip-file from here <a href="http://at.or.at/hans/pd/objects.html#pduino">http://at.or.at/hans/pd/objects.html#pduino</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inside you will find pd-files (You will need them later!) and the maching Firmata-firmware-library for your arduino.app.</p>
+
+  <p>• update Firmata-library in your Arduino installation: you have to replace the old Firmata-folder with the new one. You should do this, to make sure, that the [arduino]-object and version of Firmata-library is matching. It is located here on Mac OS X:</p>
+
+  <p>...&nbsp; /Applications/Arduino.app/Contents/Recources/Java/libraries<br>
+  <br>
+  &nbsp;1. delete the existing 'Firmata' library in the above location<br>
+  &nbsp;2. move the included "Firmata" folder into your Arduino installation.&nbsp; (Do not<br>
+  &nbsp;&nbsp;&nbsp; move the whole "Firmata-xx.xx" folder, just the included "Firmata" folder.)</p>
+
+  <p><img alt="firmata.png" src="_booki/pure-data/static/pduino_osx_installation-firmata-en.png" align="left"><br>
+  <br></p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;For Linux replace the files in&nbsp; &lt;path to arduino&gt;/examples</p>
+
+  <p>• connect Arduino board and lauch Arduino application</p>
+
+  <p>• now setup your board:</p>
+
+  <p>select your Arduino board type <img alt="6.1_select_board.png" src="_booki/pure-data/static/pduino_osx_installation-6-1_select_board-en.png" align="left" height="327" width="466">(...)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>and your serial port<br></p>
+
+  <p><img alt="6.2_select_port.png" src="_booki/pure-data/static/pduino_osx_installation-6-2_select_port-en.png"></p>
+
+  <p>Here you can see if the usb-driver is correctly installed. If the usb-port /tty.usbserial... does not appear in the list you have to install the driver again.</p>
+
+  <p>After setting up the board and serial port,&nbsp; in the tool bar click the " <img alt="play.png" src="_booki/pure-data/static/PureData-Pduino-play-en.png" height="30" width="29"> Verify button "</p>
+
+  <p>&nbsp;</p>
+
+  <p>• in order to upload firmware, first press the reset switch button on your Arduino board, which is located closer to the main Atmel AVR ATmega chip on your board. The location of the reset switch on the board might vary based the type of the Arduino board.<br></p>
+
+  <p><img alt="Arduino_Board_15cm_Pfeil.jpg" src="_booki/pure-data/static/pduino_osx_installation-Arduino_Board_15cm_Pfeil-en.jpg" align="left" height="304" width="425"><br>
+  &nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p><br></p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>• now open menu &gt;File &gt;Examples &gt;Firmata &gt;SimpleAnalogFirmata and the Fimata&nbsp; will be opened in your Arduino application.</p>
+
+  <p>In this chapter we will introduce analog sensor examples; therefore we will upload <em>SimpleAnalogFirmata</em> to the board. For other types of sensors, such as any digital sensor or servo motor sensor, you need to choose the related Firmata based on your sensor type.</p>
+
+  <p><img alt="3_open_SimpleAnalog_Firmata.png" src="_booki/pure-data/static/pduino_osx_installation-3_open_SimpleAnalog_Firmata-en.png" align="left" height="334" width="468">&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp; &nbsp;&nbsp;</p>
+
+  <p>• press the upload-button in Arduino.app</p>
+
+  <p><img alt="7.1_uploadSimpleAnalogFirmata.png" src="_booki/pure-data/static/pduino_osx_installation-7-1_uploadSimpleAnalogFirmata-en.png" align="left" height="193" width="374"></p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>if it is finished you can see this at the bottom of the Arduino-window:&nbsp;</p>
+
+  <p><img alt="7.2_upload_done.png" src="_booki/pure-data/static/pduino_osx_installation-7-2_upload_done-en.png" align="left" height="226" width="377">&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>• now you can close Arduino application</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;<br></p>
+
+  <p><strong>Installing Pduino-objects</strong></p>
+
+  <p>• move the 3 pd-files, so called "pduino-objects", to Your pd-patches-folder<br></p>
+
+  <p><img alt="arduino_test.png" src="_booki/pure-data/static/pduino_osx_installation-arduino_test-en.png" align="left" height="150" width="422"><br></p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>or create a new folder:</p>
+
+  <p><img alt="path.png" src="_booki/pure-data/static/pduino_osx_installation-path-en.png" align="left" height="240" width="443"><br></p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p><img alt="newPath.png" src="_booki/pure-data/static/pduino_osx_installation-newPath-en.png" align="left" height="312" width="442">
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p><strong>Lauch Pure Data</strong><br></p>
+
+  <p>In Pure Data [arduino] object will set the connection with the firmata that you just uploaded to your Arduino board. When you create an [arduino] object in your patch, all the abstractions that are required for Pduino library will be loaded as well. The inlet of this object lets us to send messages to start serial port communication between the computer and Pd. Since there are more than one serial port in a computer, first we have to figure out the number of the serial port that the Arduino board is connected. Simply by sending a [devices( message to the [arduino] object, you can get the list of devices connected to your computer on the main Pd window.</p>
+
+  <p align="center">&nbsp;<img alt="arduino3.png" src="_booki/pure-data/static/PureData-Pduino-arduino3-en.png" height="100" width="222"></p>
+
+  <p align="left">Once you are sure that you have connected your Arduino board to the computer, click the [devices( message box and you get similar type of information in the main Pd window as below.<br></p>
+
+  <p>&nbsp;</p>
+
+  <p align="left">[comport]: available serial ports :</p>
+
+  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /dev/ttyUSB0<br></p>
+
+  <p>&nbsp;</p>
+
+  <p>In this case, Arduino board is connected on the port /dev/ttyUSB0 and its port number is 4. Therefore, in order to start Arduino - Pd communication, related to the above example,&nbsp; you send [open 4( message to the [arduino] object.</p>
+
+  <p><br></p>
+
+  <p align="center">&nbsp; <img alt="pduino1.png" src="_booki/pure-data/static/PureData-Pduino-pduino1-en.png" height="258" width="452"><br></p>
+
+  <p>&nbsp;</p>
+
+  <p>Main Pd window will display similar type of below information if the serial connection is opened successfully.<br></p>
+
+  <p>&nbsp;</p>
+
+  <p align="left">get_baud_ratebits: 115200.000000<br>
+  set_baudrate baudbits: 4098<br>
+  [comport] opened serial line device 4 (/dev/ttyUSB0)&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>Once you open the serial port connection, you can immediately receive data from your Arduino board. First you need to enable sensor data to pass through [arduino] object and later separate the sensor data types. In this below example, we focus on analog input sensors; therefore [route] object only enables analog sensor type. The later [route] object separates the analog input data so that you can receive each sensor data in a separate number box.&nbsp;</p>
+
+  <p align="center">&nbsp;&nbsp;<img alt="sendsensor_1.png" src="_booki/pure-data/static/PureData-Pduino-sendsensor_1-en.png" height="501" width="539"><br></p>
+
+  <p>Even though there is not any sensor connected to the Arduino analog pins yet, when you enable the data to flow through [arduino] object, analog input pins number boxes in above patch receive flow of numbers. These are simply noise data that the empty&nbsp; pins on Arduino board generates.</p>
+
+  <p>&nbsp;</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="pduino.html">PDUINO</a></li>
+
+  <li><a href="installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="starting-pduino.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="starting-pduino.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

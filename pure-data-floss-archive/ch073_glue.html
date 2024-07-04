@@ -1,0 +1,2615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch073_glue.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch073_glue.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td sdnum="1031;0;@" align="left" width="303" height="17">
+          <h2>Name</h2>
+        </td>
+
+        <td align="left" width="167">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td align="left" width="560">
+          <h2>Function</h2>
+        </td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td colspan="3" align="left" valign="middle" height="17">
+          <h1>GLUE</h1>
+        </td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td colspan="3" sdnum="1031;0;@" align="left" valign="middle" height="17"><strong>Vanilla Objects</strong></td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">bang</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">send 'bang' message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">change</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">eliminate redundancy in a number stream</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">float</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">store a floating point number</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">int</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">store an integer</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">makefilename</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">format a string with a variable field</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">moses</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">part a stream of numbers</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">pack</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">combine several atoms into one message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">print</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">print messages to the terminal window</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">receive</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">receive messages without patch cords</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">route</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">route messages according to their first element</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">select</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">compare numbers or symbols</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">send</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">send messages without patch cords</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">spigot</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">pass or block messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">swap</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">swap two numbers, respecting right-to-left order</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">symbol</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">store a symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">trigger</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">sequence messges in right-to-left order and convert data</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">unpack</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">split a message into atoms</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">until</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">looping mechanism</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">value</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">nonlocal shared value (named variable)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td colspan="3" sdnum="1031;0;@" align="left" valign="middle" height="17"><strong>Extended Objects</strong></td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">a2l any2list</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">convert "anythings" to "lists"</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">-dsp dsp01</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">DSP switch</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">any</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">store and recall any message (like f, or symbol)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">active</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">report if window is active / inactive</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">add2_comma</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">add a comma after a message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">add2_comma</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">add a comma after a message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">allow</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">lets only "allowed" floats or symbols through</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">alternate</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace markex</td>
+
+        <td align="left">alternate between two outlets</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">amplitude_n</td>
+
+        <td sdnum="1031;0;@" align="left">la-kitchen mapping</td>
+
+        <td align="left">return the amplitude covered by the last n values</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">any_argument float_argument symbol_argument</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">initiate internals</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">any2string string2any</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">converts ASCII strings to pd messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">Append</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">append a list to the incoming list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ascii-&gt;int float-&gt;ascii</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">convert a stream of ASCII digits to a single value</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">atoi</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">convert ASCII to integer</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">bang-eater</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">eat N bangs in every M bangs</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">bangbang</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">send a number of bangs in order</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">bfilt</td>
+
+        <td sdnum="1031;0;@" align="left">cxc flatspace</td>
+
+        <td align="left">modulo + select 0</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">bfilt2</td>
+
+        <td sdnum="1031;0;@" align="left">cxc flatspace</td>
+
+        <td align="left">bang filter</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">bondo</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">synx a group of messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">bpe</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">break point envelope</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">Bucket</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">pass numbers from outlet to outlet</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">buddy</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">sync incoming data, output when all inlets received data</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">button</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">a bang with a label</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">change_n</td>
+
+        <td sdnum="1031;0;@" align="left">la-kitchen</td>
+
+        <td align="left">returns 0 if the last n datas are the same</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">choice</td>
+
+        <td sdnum="1031;0;@" align="left">vanilla/choice</td>
+
+        <td align="left">search for a best match to an incoming list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">coll</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">store and edit collections of messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">compare-any</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">test if two anythings are the same</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">count_n</td>
+
+        <td sdnum="1031;0;@" align="left">la-kitchen</td>
+
+        <td align="left">counts from 0 to n-1</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">counter</td>
+
+        <td sdnum="1031;0;@" align="left">cxc</td>
+
+        <td align="left">counter -&gt; NV</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">counter gem-counter</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone flatspace markex</td>
+
+        <td align="left">counts the number of bangs received</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">cup</td>
+
+        <td sdnum="1031;0;@" align="left">ekext flatspace</td>
+
+        <td align="left">counts up</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">cycle</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">send data to individual outlets</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">debounce mapping</td>
+
+        <td sdnum="1031;0;@" align="left">la-kitchen</td>
+
+        <td align="left">blocks the value of incoming data for the further n samples after ech change</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">debounce_b</td>
+
+        <td sdnum="1031;0;@" align="left">la-kitchen</td>
+
+        <td align="left">blocks the input until a specified duration is over</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">decide</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">output 1/0 randomly</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">Decode</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">sent out 1/0 to a specific outlet</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">default</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">replace initial argument, if it is zero</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">demultiplex demux</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">demultiplex the input to the specified output</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">deny</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">blocks "denyed" floats or symbols</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">detox</td>
+
+        <td sdnum="1031;0;@" align="left">jasch_lib</td>
+
+        <td align="left">extract values, contents, attributes from xml-tag structures</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">disjoin join</td>
+
+        <td sdnum="1031;0;@" align="left">mapping</td>
+
+        <td align="left">split / joina range into two (0-1)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">dist</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">send data to a list of receive objects</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">dollarg</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">receive parent initial arguments &lt;list&gt;, like a $n</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">downsample</td>
+
+        <td sdnum="1031;0;@" align="left">mapping</td>
+
+        <td align="left">output 1 over n data</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">drip</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">unfolds a package to a sequence</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">dsp dsp~</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">control audio, measure dsp load</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">edge</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">detect rising or falling edge in floats</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">entry</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">text entry box</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">env env+ env-</td>
+
+        <td sdnum="1031;0;@" align="left">mapping</td>
+
+        <td align="left">normal / positive / megative envelope follower</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">exp_inc</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">linear and/or exponential increment counter, bang controlled</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">f+</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">counter with variable increment</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">fifo</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">first in first out buffer for floats</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">fifop</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">first in first out stack with priorities</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">float24</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">concatenate a list of float-fragment-strings to a 23 bit accurate mantissa</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">for++</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">incremental counter (triggered by internal metro)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">forward</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">send remote messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">fromsymbol tosymbol</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">transform symbol to numbers or messages and vice versa</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ftos</td>
+
+        <td sdnum="1031;0;@" align="left">ext13 flatspace</td>
+
+        <td align="left">float to symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">funnel</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">tag data based on the inlet it arrived in</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">gate</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone iemlib</td>
+
+        <td align="left">send data out the specified output</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">gcanvas</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">click and drag to get pixel values</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">glue</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">glue together 2 packates (append, prepend, ...)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">grab</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">intercept the output of another object</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">hid_one2twohid_one2threehid_one2four</td>
+
+        <td sdnum="1031;0;@" align="left">hid</td>
+
+        <td align="left">one-to-x mapping object</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">hysteresis</td>
+
+        <td sdnum="1031;0;@" align="left">mapping</td>
+
+        <td align="left">add hysteresis to input data</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_anything</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">latch for anything</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_append</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">append a message to any messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_i_route</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">variation of route (abbr. iiroute)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_prepend</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">prepend a message to any messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_receive iem_r iem_send iem_s</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">receive object with changeable receive label</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_route</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">improvement of route</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_sel_any</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">control a message-box with multiple content</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ignore</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">lets information through only when it was present at input longer than N ms</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">index</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">create a symbol-&gt;int map</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">init</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">initialize a message via loadbang (abbr. ii)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iso</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">queues up lists of pitches and attack points</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iter</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">split a list into a series of numbers</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ixprint</td>
+
+        <td sdnum="1031;0;@" align="left">cxc flatspace</td>
+
+        <td align="left">print without identifier</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">k_receive</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left"><br></td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">k_send</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left"><br></td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">kalashnikov uzi</td>
+
+        <td sdnum="1031;0;@" align="left">ext13 flatspace</td>
+
+        <td align="left">send a specified number of bangs as fast as possible</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">knob</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left"><br></td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">last_n</td>
+
+        <td sdnum="1031;0;@" align="left">la-kitchen mapping</td>
+
+        <td align="left">save the n last incoming datas into a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">last-x</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">make a list of the last x floats</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">lbang</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">loadbang which can be triggered more often</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">length</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">get the length of a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">lifo</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">last in first out buffer for floats</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">lifop</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">last-in-first-out stack with priorities</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="18">line3</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">line with 3rd order polynome</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">list-abs</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">apply abs() on floats of a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-apply</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">apply the object created by [arg1 arg2] on every list element</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-clip</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">clip for lists</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-compare</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">compare two lists element by element</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-delete</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">delete element at a position</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-drip</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">drips or serializes a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="18">list-drip2</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">drips two lists in sync (as long as 1st list lasts)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-dripslow</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">serialize a list on demand</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-enumerate</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">serialize a list and put numbers in front of each element</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-extend</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">build a list from incoming lists and output stored list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-fifo</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">first in, first out</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-filter</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">returns a sequence of items for which the adjusted operation is true</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-find</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">find positions of a value in a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-idx</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">get element at position idx</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-insert</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">insert LIST before ELEMENT at position POS in original list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-l2s</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">concatenate a list into a single symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-lastx</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">make a list of the last x floats</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-len</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">calculate lenght of a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-lifo</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">last in, first out</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-makefilename</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">change symbols in a list, floats pass unchanged</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-map</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">swiss army knife of list operations</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-map2</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">map an operation on element pairs from two lists</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-moses</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">like moses for lists</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-onearg</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">list with optional aegument</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-reduce</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">list goes element per element through a user-defined operation</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-replace</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">replace (overwrite) a list from position POS with a new list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-rev</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">reverse a list's order</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-rot</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">rotate a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-seek</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">walk through a list element by element</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-sieve</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">look up ocorrence of incoming floats in a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">list-splat</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">advanced list-split with negative indexes</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">list2int l2i</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">cast all floats of a list to integers</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">list2send</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">convert some kind of lists to a sent message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">list2symbol l2s symbol2list s2l</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">convert a list &lt;-&gt; symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">lister l</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">stores a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">listfifo</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">first in first out buffer for lists</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">listfunnel</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">send values out as list with source index</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="18">listmoses</td>
+
+        <td sdnum="1031;0;@" align="left">ekext flatspace</td>
+
+        <td align="left">splits two lists according to the values contained within the 1st list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">listto</td>
+
+        <td sdnum="1031;0;@" align="left">mapping</td>
+
+        <td align="left">separate a list into a stream of atoms</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">local_max local_min</td>
+
+        <td sdnum="1031;0;@" align="left">mapping</td>
+
+        <td align="left">give the value of every local maximum / minimum whenever there is a change in direction</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">lpt</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">write data to the parallel port</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">makesymbol</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">concatenate lists to formatted symbols</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">maskxor</td>
+
+        <td sdnum="1031;0;@" align="left">ekext</td>
+
+        <td align="left">exclusive-OR mask map</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">match</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone flatspace</td>
+
+        <td align="left">look for a series of numbers and output as a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">mergefilename</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">merge a list of symbols and floats to a symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">modulo_counter</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">increments counter-number from 0 to max-1 by a bang</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">multiplex mux</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">multiplex the selected inlet to the outlet</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">multiselect multisel</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace markex</td>
+
+        <td align="left">select object which accepts a list in the right inlet</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">nchange</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">a "new" [change]</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">next</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">try to separate messages into logical parts</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">niagara</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">divide a package into 2 subpackages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">nop</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">no operation</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">nroute</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">rout if Nth element is matched</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">once</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">only the first message passes through</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">onebang</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">traffic control for bang messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">oneshot</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace markex</td>
+
+        <td align="left">blocks after initial bang</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">OSCprepend</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">prepends first argument to an OSC message list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">packel</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">get the nth element of a package</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">parentdollarzero parent<content-goes-here/></td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">receives the parent <content-goes-here/> symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">pique</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">find peaks in an FFT spectrum</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">polymap</td>
+
+        <td sdnum="1031;0;@" align="left">ekext</td>
+
+        <td align="left">two-dimensional polyphony-restricted map</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">polystat</td>
+
+        <td sdnum="1031;0;@" align="left">ekext</td>
+
+        <td align="left">outputs statitics about voice usage</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">pre_inlet</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">before an incoming message be released to an outlet, a message of 2 items will be sent</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">prepend</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">prepend a message with another message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">prepend</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">list prefixer</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">prepend</td>
+
+        <td sdnum="1031;0;@" align="left">cxc</td>
+
+        <td align="left">list prefixer -&gt; NV</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">prepend_ascii</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">prepends a message + selector symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">prepend_output</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">an identifier</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">prepent</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">shortcut for [list prepend]-[list trim]</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">pwm</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">pulse width modulation at message rate</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">rec-name</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">automatic naming for a record / playback machine</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">receive13 r13 send13 s13</td>
+
+        <td sdnum="1031;0;@" align="left">ext13 flatspace</td>
+
+        <td align="left">like r and s, with set messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">receive2list</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">convert received message to a list message and then the incoming message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">recent</td>
+
+        <td sdnum="1031;0;@" align="left">ggee</td>
+
+        <td align="left">output only most „recent“ messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">relay</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">relay messages according to their first element</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">remote</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace motex</td>
+
+        <td align="left">send data to any receive object</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">repack</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">(re)pack atoms to packages of a given size</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">repeat</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">repeat a message several times</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">scrolllist</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">displays and scrolls a text in a patch window</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">segregate</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">segregate the input to various outlets, depending on the type</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">sendlocal sl receivelocal rl</td>
+
+        <td sdnum="1031;0;@" align="left">ggee</td>
+
+        <td align="left">send messages locally per canvas</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">serialize</td>
+
+        <td sdnum="1031;0;@" align="left">cxc flatspace ggee</td>
+
+        <td align="left">turn a stream of floats into a list</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">sguigot</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">spigot with GUI</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">sieve</td>
+
+        <td sdnum="1031;0;@" align="left">ekext</td>
+
+        <td align="left">takes integers and maps them to floats</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">simile</td>
+
+        <td sdnum="1031;0;@" align="left">ekext flatspace</td>
+
+        <td align="left">compare two numbers according to an error window</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">slider sliderh</td>
+
+        <td sdnum="1031;0;@" align="left">ggee</td>
+
+        <td align="left">slider from ggee</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">sort</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">shell-sort a list of floats</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">soundfile_info</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">show the header data of a wav file</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">speedlim maxlib_speedlim</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone iemlib</td>
+
+        <td align="left">speed limit for incoming messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">spell</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">convert input to ascii values</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">split maxlib_split</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone iemlib</td>
+
+        <td align="left">look for a range of numbers</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">split_my_msgs</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">split a strem of messages</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">split_path</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace hcs</td>
+
+        <td align="left">like splitfilename</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">split3</td>
+
+        <td sdnum="1031;0;@" align="left">iemlib</td>
+
+        <td align="left">part a numeric stream into 3 ways</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">splitfilename</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">split into path and filename</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">spray</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">distribute an integer to a numbered outlet</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">sprinkler</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">dynamic control message dissemination</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">sprintf</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">format a message of strings and numbers</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">sroute</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">settable route</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">state</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">saves settings in a patch to a file</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">strcat</td>
+
+        <td align="left">markex</td>
+
+        <td align="left">prepends its text to any symbol that is sent to it</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">strcmp</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">compare 2 lists as if they were strings</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">stripfilename</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">strip the first or last characters of a symbol</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">strippath</td>
+
+        <td sdnum="1031;0;@" align="left">ext13 flatspace</td>
+
+        <td align="left">strip a path from a filename</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">subst</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace motex</td>
+
+        <td align="left">self-similar substitution/diminution of rows</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">substitute</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">substitue a symbol for another symbol in a message</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">switch</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">output a message from a specific inlet</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">sync</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace motex</td>
+
+        <td align="left">extended trigger object based on sync from jMax</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">t3_bpe</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">time-tagged trigger break point envelope</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">take-two</td>
+
+        <td sdnum="1031;0;@" align="left">list-abs</td>
+
+        <td align="left">print all combinations of length 2 without repetition</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">temperature</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">output number of input changes in N ms</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">thresh</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">combine numbers into a list that are received close together</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ticker</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">toggle from ggee</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">tilt</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">measure "tilt" of input</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">toddle</td>
+
+        <td sdnum="1031;0;@" align="left">ggee</td>
+
+        <td align="left">bang that routes messages through</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">TogEdge</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">report zero / nonzero transitions</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">toggle_mess</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">control a message-box with multiple content (abbr. tm)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">transf_fader</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">transforms a slider range</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">universal</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">send a message to all instances of the same class in this patch (and subatches if desired)</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">unroute</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">merges all inputs into one output and prepend an identifier</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">unsymbol</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">convert a symbol to a anything selector</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">unwonk</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">unpack which sends unused symbols to the last outlet</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">Uzi</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">send a specified number of bangs as fast as possible</td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">xerox</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left"><br></td>
+
+        <td valign="top"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">zl</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">multi purpose list processing object</td>
+
+        <td valign="top"><br></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch073_glue.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch073_glue.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

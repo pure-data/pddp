@@ -1,0 +1,564 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch014_the-interface.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch014_the-interface.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>The Interface</h1>
+
+  <p>Now that Pd is installed let us look at the result when the main Pd window opens.</p>
+
+  <p><strong>Main Pd Window</strong><br>
+  <img alt="Pd opening window" src="_booki/pure-data/static/PureData-TheInterface-pd_opening-en.png" align="absmiddle" width="551" height="512"><br></p>
+
+  <p>As of Pd 0.39, all of the messages that Pd produces are sent to the main Pd window (before this, they were sent to the shell which was running Pd). When you start Pd, this main Pd window should tell you important information, such as the externals you are loading and whether any errors occurred while loading them, as well as any errors connecting to the soundcard. Later, you will also use this main Pd window to see information about the patch you are working on, as well as for debugging (correcting errors in your patch). So keep this window in a place where you can find it on your screen.</p>
+
+  <p>Here is an overview of common messages that you will encounter in the Main Pd Window:</p>
+
+  <p><strong>[import]</strong> tells details of the current version on Pd-extended, in this case 'Pd version 0.14.4 extended.'</p>
+
+  <p><strong>GEM:</strong> describes the details of the Graphics Environment of Multimedia available.</p>
+
+  <p><strong>libdir_loader:</strong> itemizes the various libraries loading into Pd-extended. This screen grab shows about 20% of the libraries that are loading.</p>
+
+  <p><strong>Error example:</strong> If you were reading the Pd window on a Mac, the Pd window might tell you that you did not have X11 library that is an application to display unix programs, a desirable component of Pd. See how that error message appears in the chapter InstallingOSX "Status: X11 Library not loaded."</p>
+
+  <p>There are a few other important features about this main Pd window. At the top of the window, you will find audio level indicators that provide a general idea of the loudness of the sound that you are sending to the soundcard. If this level goes to 100 or higher, you are sending too high a level and you will hear a distorted sound. The boxes marked "Clip" will also flash red. To use the audio level meters, check the box that says "peak meters" in the main Pd window.</p>
+
+  <p>Also found on the top part of the Main Pd Window is a box marked "compute audio", which you can use to turn on and off audio processing. When you open the "Test Audio and MIDI" patch, Pd will automatically turn audio processing on for you.</p>
+
+  <p>Last is a box marked "DIO". This stands for Digital In Out errors, and this box should flash red when Pd has difficulties sending data to your sound card. If you click this box, Pd will print a list of times when these DIO errors occurred in the main Pd window. The "console" box oggles the text displayed in the Pd window.<br></p>
+
+  <p><strong>Help Browser Window</strong><br>
+  <img alt="pd_browser.png" src="_booki/pure-data/static/PureData-pd_browser-en.png" width="395" height="364"></p>
+
+  <p>The last thing to point out before getting started with a new patch is the "Help" menu. You can access this resource from the "Help" menu on the top navigation bar. Under this drop-down menu, you can open the official Pd manual, written by Miller S. Puckette in "HTML" format, which can be viewed in your web browser. You can also open a file "Browser", pictured above, which will list the built-in help patches which come with Pd. &lt;/p</p>
+
+  <p>All of these documents are valuable resources, however many newcomers to Pd can find them confusing. We will cover some of these basics in the "Dataflow", "Audio" and "Patching Strategies" tutorials in this manual, after which you can return to the built-in help files with a bit better understanding.</p>
+
+  <h2>Starting a new Patch</h2>
+
+  <p>Under the "File" menu in the main Pd window, create a "New" Pd patch. It should look something like this:</p>
+
+  <p><img alt="pd_new_patch.png" src="_booki/pure-data/static/PureData-pd_new_patch-en.png" width="456" height="328"></p>
+
+  <p>Unlike other software for creating audio or video media, such as <strong>Ableton Live</strong>, <strong>CuBase</strong> or <strong>Final Cut Pro</strong>, where a new file shows you a variety of buttons, menus and timelines, Pd gives you a blank, white space. Within that white space, you can make a synthesizer or video mixer, translate sensor input into the movements of a robot or stream movies to the internet, for example. The difference between Pd and software like Live is that it doesn't start with any preconceived ideas about <strong>how</strong> to make your artwork. Where Live provides you with a set of tools suited primarily for the production of loop-driven dance music, Pd acts more like a text editor where anything is possible, so long as you know how to write it. It is this kind of possibility and freedom that attracts many artists to using Pd.</p>
+
+  <p>To explore these possibilities, you must understand Pd as being a written language like German or Chinese. As in any language, Pd has a vocabulary (the words used in the language) and a grammar (the way to put these words together so that they make sense). And like learning any language, you first have to learn how to say simple things like "What is your name?" before you can write poetry! So let's start simple.</p>
+
+  <p>You will notice that once we have opened a new Pd patch, there are a few new menu items to choose from. The "Edit" menu has all the kinds of functions you would expect from a text editor like <strong>Notepad</strong>, <strong>TextEdit</strong>, <strong>OpenOffice</strong> or <strong>Word</strong>, such as "Cut", "Paste", "Duplicate", "Select All", etc etc.</p>
+
+  <p>There is also a "Put" menu, containing a list of the kinds of things you will be putting in your patch, such as "Object", "Message", "Number", "Symbol", "Comment" and a range of GUI (Graphical User Interface) elements such as "Bang", "Toggle", "Slider", etc.</p>
+
+  <h2>Interface differences in Pure Data</h2>
+
+  <p>While the main functionality of Pure Data doesn't change between operating systems, the locations and contents of some of the menus do. Depending on the system you are running, you will be able to do the following:</p>
+
+  <h3>Linux</h3>
+
+  <p>From the "File" menu, you can:</p>
+
+  <ol>
+    <li>Create a "New" Pd patch</li>
+
+    <li>"Open" a Pd patch which is saved on your computer&nbsp;</li>
+
+    <li>Send a "Message" to the running Pd application&nbsp;</li>
+
+    <li>Set the search "Path" which Pd uses&nbsp;</li>
+
+    <li>Change the "Startup" flags which Pd uses&nbsp;</li>
+
+    <li>"Quit" Pd</li>
+  </ol>
+
+  <p>From the "Find" menu, you can:</p>
+
+  <ol>
+    <li>"Find last error" which occurred in the program</li>
+  </ol>
+
+  <p>From the "Windows" menu, you can:</p>
+
+  <ol>
+    <li>Change between the different open Pd patches</li>
+  </ol>
+
+  <p>From the "Media" menu, you can:</p>
+
+  <ol>
+    <li>Turn audio "ON" and "OFF"</li>
+
+    <li>Change between the different available audio drivers&nbsp;</li>
+
+    <li>Change between the different available MIDI drivers&nbsp;</li>
+
+    <li>Change the "Audio Settings"&nbsp;</li>
+
+    <li>Change the "MIDI Settings"&nbsp;</li>
+
+    <li>"Test Audio and MIDI"&nbsp;</li>
+
+    <li>View the CPU "Load Meter"</li>
+  </ol>
+
+  <p>And from the "Help" menu, you can:</p>
+
+  <ol>
+    <li>Read information "About Pd"</li>
+
+    <li>Open a "Browser" to see some help patches which are included in Pd<br></li>
+  </ol>
+
+  <h3>Mac OS X</h3>
+
+  <p>From the "Pd" menu (which should contain the version number as well), you can:</p>
+
+  <ol>
+    <li>Read information "About Pd"</li>
+
+    <li>Change the following "Preferences":<br>
+
+      <ol>
+        <li>Set the search "Path" which Pd uses</li>
+
+        <li>Change the "Startup" flags which Pd uses&nbsp;</li>
+
+        <li>Change the "Audio Settings"&nbsp;</li>
+
+        <li>Change the "MIDI Settings"&nbsp;</li>
+      </ol>
+    </li>
+
+    <li>Quit" Pd</li>
+  </ol>
+
+  <p>From the "File" menu, you can:</p>
+
+  <ol>
+    <li>Create a "New" Pd patch</li>
+
+    <li>"Open" a Pd patch which is saved on your computer&nbsp;</li>
+
+    <li>Send a "Message" to the running Pd application&nbsp;</li>
+
+    <li>"Quit" Pd<br></li>
+  </ol>From the "Find" menu, you can:
+
+  <ol>
+    <li>"Find last error" which occurred in the program</li>
+  </ol>From the "Media" menu, you can:
+
+  <ol>
+    <li>Turn audio "ON" and "OFF"</li>
+
+    <li>Change the "Audio Settings"&nbsp;</li>
+
+    <li>Change the "MIDI Settings"&nbsp;</li>
+
+    <li>"Test Audio and MIDI"&nbsp;</li>
+
+    <li>View the CPU "Load Meter<br></li>
+  </ol>
+
+  <p>From the "Windows" menu, you can:</p>
+
+  <ol>
+    <li>Change between the different open Pd patches</li>
+  </ol>
+
+  <p>And from the "Help" menu, you can:</p>
+
+  <ol>
+    <li>View the author's documentation as an HTML file</li>
+
+    <li>Open a "Browser" to see some help patches which are included in Pd<br></li>
+  </ol>
+
+  <h2>Placing, connecting and moving Objects in the Patch</h2>
+
+  <p><img alt="pd_put_menu.png" src="_booki/pure-data/static/PureData-pd_put_menu-en.png" width="177" height="371"></p>
+
+  <p>Use the "Put" menu to place an "<strong>Object</strong>" in your patch. Click on the patch to drop the object in its place. You will see a box made of a broken blue line, with a flashing cursor inside indicating that you should type something there.</p>
+
+  <p><img alt="pd_blank_object.png" src="_booki/pure-data/static/PureData-pd_blank_object-en.png" width="87" height="63"></p>
+
+  <p>Objects are the "vocabulary" of Pd. The more names of objects you know, the more complicated things you can do with Pd. If you type the word "print" inside this object and click again outside the box, you will create the [print] object. &lt;/p?</p>
+
+  <p>Return to the "Put" menu, and this time place a "<strong>Number</strong>" in your patch. Notice that the shape of the number box is different from the shape of the object box.</p>
+
+  <p><img alt="pd_number.png" src="_booki/pure-data/static/PureData-pd_number-en.png" width="69" height="49"></p>
+
+  <p>To get help associated with a specific object you can right-click it. or use the Control key and click on OS X. Then just select "help" from the drop-down menu (pictured below). This is something like the "dictionary entry" for the object, and should define what it does and also show several examples of its use.</p>
+
+  <p><img alt="object help" src="_booki/pure-data/static/PureData-object_help-en.png" width="457" height="331"></p>
+
+  <p>You should also notice that both the object and the number boxes have small rectangles at the corners. If these are at the top of the object, they are called "<strong>inlets</strong>", and at the bottom they are called "<strong>outlets</strong>". When you are working on your patch, your cursor is shaped like a pointing finger. If you put that finger over an outlet, it changes into a black circle which indicates that the outlet is selected.</p>
+
+  <p>Select the outlet of the the number box, click and drag that black circle until it reaches the inlet at the top of the [print] object. When you have done that, you will see the cursor change from the pointing finger to the black circle again. If let go of the mouse button now, you will make a connection from the outlet of the number box to the inlet of [print]. If you want to remove this connection, place your cursor over the connection until you see a black X and then click. The connection will turn blue and you can remove it with the Backspace or Delete key on your keyboard.</p>
+
+  <p><img alt="making and cutting connections" src="_booki/pure-data/static/PureData-make_cut_connections_final_1-en.png" width="553" height="553"></p>
+
+  <p>If you click on the patch away from the number box and [print] object and drag, you can draw a box which selects them. You will see they are selected because they will turn blue. Single objects can be selected by clicking once on them.</p>
+
+  <p><img alt="edit select" src="_booki/pure-data/static/PureData-edit_select-en.png" width="456" height="329"></p>
+
+  <p>Once the objects on screen are selected, you can:</p>
+
+  <ul>
+    <li>Move them by dragging them with the mouse</li>
+
+    <li>Move them in small increments with the Arrow keys</li>
+
+    <li>Move them in larger increments with the Shift and Arrow keys</li>
+
+    <li>Delete them with the Backspace or Delete keys</li>
+
+    <li>Copy them by using the Control and C keys (Apple and C keys on OS X) or the Copy menu item under Edit</li>
+
+    <li>Cut them by using the Control and X keys (Apple and X keys on OS X) or the Cut menu item under Edit</li>
+
+    <li>Once Cut or Copied, you can Paste them with the Control and V keys (Apple and V keys on OS X)&nbsp; or the Paste menu item under Edit</li>
+
+    <li>You can also Duplicate the selected items with the Control and D keys (Apple and D keys on OS X)&nbsp; or the Duplicate menu item under Edit</li>
+  </ul>It is recommended to use the duplicate function rather than the paste function, because pasted objects are placed directly on top of the previous object, making it difficult to see them. Duplicated objects are placed to the lower right side of the original, making them easier to find and move. <img alt="pd_duplicated_obj.png" src="_booki/pure-data/static/PureData-pd_duplicated_obj-en.png" width="156" height="57"><img alt="pd_pasted.png" src="_booki/pure-data/static/PureData-pd_pasted-en.png" width="125" height="56">
+
+  <p>Pasted or duplicated objects are automatically selected together, so you can grab ahold of them and move them immediately after placing them in the patch.</p>
+
+  <h2>Edit Mode and Play Mode</h2>
+
+  <p>So far we've been able to put objects in the patch, connect them, move them around or delete them. But how does one get some results from this patch? In this case, we have connected a number box to a [print] object, which should print the numbers we send to it in the main Pd window. Now we have to learn how to send numbers to the print object.</p>
+
+  <p>To make this happen, we need to change out of "<strong>Edit Mode</strong>" and into "<strong>Play Mode</strong>". You can do this by clicking on the "Edit Mode" item in the Edit menu, or by using the Control and E keys (Apple and E keys on OS X).</p>
+
+  <p><img alt="edit mode" src="_booki/pure-data/static/PureData-edit_mode-en.png" width="600" height="442"></p>
+
+  <p>When you enter into "Play Mode", you will see that the pointing finger cursor changes into an arrow cursor. This change signifies that the mouse will interact differently with the elements within the patch.</p>
+
+  <p><img alt="edit cursor" src="_booki/pure-data/static/PureData-edit_cursor-en.png" width="456" height="329"></p>
+
+  <p><img alt="play cursor" src="_booki/pure-data/static/PureData-play_cursor-en.png" width="456" height="329">&nbsp;</p>
+
+  <p>Now, if you click inside the Number object and drag your mouse up or down you can change the numbers inside of it. Any changed number is sent out through the outlet to any connected objects. Since the object is connected to the inlet of the [print] object the number is printed to the main Pd window.</p>
+
+  <p><img alt="play mode" src="_booki/pure-data/static/PureData-play_mode-en.png" width="600" height="442"></p>
+
+  <p>If you hold the Shift key while using the mouse to change the number, you will scroll through decimal numbers. Using the Alt key plus a mouseclick will toggle the Number box between 0 and 1. You can also change the number by clicking once on the number box, using your keyboard to change the value, and then pressing the Enter key to send the value to the outlet.</p>
+
+  <p><img alt="decimal" src="_booki/pure-data/static/PureData-decimal-en.png" width="600" height="442"></p>
+
+  <p>If you want to make any changes to a patch that is "Play Mode", you have to switch back to "Edit Mode". To do so, use the "Edit Mode" menu item or the key combination Control (or Apple) and E. Note that you are automatically placed in Edit Mode whenever you add any new item from the "Put" menu to your patch.</p>
+
+  <h2>Messages, Symbols and Comments</h2>
+
+  <p><br>
+  The "Message" box is used to store and send information to other objects, and can contain numbers or text. It also has a unique shape, which resembles an envelope like you would use to send a letter. Place two different messages above the number box in our exercise. Like the object, messages also give a flashing cursor indicating that you should enter some information when you create them. Enter "2" in one of the messages and "4" in the other, and connect both to your number box. Switch to Play Mode and click on each of the messages. When you do, you will see that the number box changes according to the message that you send it, and that the message is also sent onwards to the [print] object.</p>
+
+  <p><img alt="pd_msg_numb_print.png" src="_booki/pure-data/static/PureData-pd_msg_numb_print-en.png" width="270" height="134"></p>
+
+  <p>You can also send numbers and other information to the message box. Create a message with the text " is a beautiful number", and connect it to the [print] object. Then connect a Number to the inlet of the message, and in Play Mode change the value of the number. You will see in the main Pd window that whatever number you send to this message replaces the . This is because  is a "variable", and will take the value of whatever you send to it. This is important because different objects need to be sent different messages in order to do things. We will look at more uses for messages and variables later in the Dataflow Tutorial.</p>
+
+  <p><img alt="variable" src="_booki/pure-data/static/PureData-variable-en.png" width="600" height="442"></p>
+
+  <p>A "symbol" is another way of storing and sending information. Once created, you can use it to display the output of some objects, or you can type directly into it and hit Enter to send the text out. Please note that no spaces will appear in the symbol box when you type into it, since separate words would be considered separate symbols.</p>
+
+  <p>A "comment" is simply a way of making a note to yourself so that you (or someone else) can understand what you were trying to do later on. You can make as few or as many as you want, and they have no effect on the patch itself.</p>
+
+  <p><img alt="pd-symb_comment_1.png" src="_booki/pure-data/static/PureData-pd-symb_comment_1-en.png" width="287" height="90"></p>
+
+  <h2>GUI Objects</h2>
+
+  <p>Pd has a number of GUI objects you can use to graphically control your patch and to improve its visual appearance. These are:</p>
+
+  <p><img alt="pd-guis_1.png" src="_booki/pure-data/static/PureData-pd-guis_1-en.png" width="448" height="181"></p>
+
+  <ol>
+    <li><strong>Bang:</strong> this GUI object sends a Message named "Bang" every time it is clicked. "Bang" is a special message, which many Objects interpret as "do an action right now!". Using the Bang GUI object is the same as creating a Message box with the word Bang in it. The Bang GUI object can also be used to receive and display Bang messages. For more information on this, see the "Counter" chapter in the Dataflow Tutorial.</li>
+
+    <li><strong>Toggle:</strong> when clicked, the Toggle sends out one of two values--a zero when it is unchecked and a non-zero number when it is checked. The non-zero number is 1 by default, however this can be changed in the "Properties". The Toggle also has an inlet, which can be used to display whether an incoming number is zero or not.</li>
+
+    <li><strong>Number2:</strong> this is almost identical to the Number box, however it has further options in its "Properties", including the ability to save its current value when the patch is saved (by changing the "no init" box to "init"). The Number2 has an inlet which can be used to display incoming numbers as well.</li>
+
+    <li><strong>Vslider and Hslider:</strong> these are Vertical and Horizontal sliders which send out their current value when moved with the mouse. The default range of a slider is 0-127, which can be changed in the "Properties". Both sliders have an inlet which can be used to display incoming numbers within the range of the slider.</li>
+
+    <li><strong>Vradio and Hradio:</strong> these are Vertical and Horizonal "radio buttons", which send out their current value when one of the buttons in them is clicked with the mouse. The default size of a radio button is 8 buttons, which can be changed in the "Properties". Both types of radio buttons have an inlet each, which can be used to display integer (whole) numbers within the range of the radio buttons.</li>
+
+    <li><strong>VU:</strong> a VU meter displays the average volume level of any audio signal which is connected to it in Decibels. You may switch the value scale on the right side on and off in the "Properties".</li>
+
+    <li><strong>Canvas:</strong> a canvas is a rectangular area of pixels, whose size and color may be changed under its "Properties". Canvases are useful as backgrounds in your patch to improve its visual appearance and readability. Canvas also can be used as movable GUI objects that gather information about their position (x,y) inside a patcher. Keep in mind that Pd remembers the order in which anything is placed in the patch, so if you want your canvas to be behind certain objects, you must either create it first, or you must Select, Cut and Paste the objects you want in the foreground so that they appear in front of the canvas.</li>
+  </ol>
+
+  <h3>GUI Object Properties</h3>
+
+  <p>If you right-click (or Control and click on OS X) on any GUI object, you will see the "Properties" menu. Here, you can change many aspects of each GUI object, such as its default values, size in pixels or its color. To change colors on Linux and Windows you should see a selection of available colors. On OS X these boxes are empty, so you must click on the "Compose Color" button. You can also add a label to your GUI object as well as set the Send and Receive symbols. For more information on Send and Receive, please see the Send/Receive chapter of the Patching Strategies tutorial.</p>
+
+  <p><img alt="pd_gui_proper.png" src="_booki/pure-data/static/PureData-pd_gui_proper-en.png"></p>
+
+  <h2>Arrays and graphs</h2>
+
+  <p>An "array" is a way of graphically saving and manipulating numbers. It works in an X/Y format, meaning you can ask the table for a value by sending it a value representing a location on the X (horizontal) axis, and it will return the value of that position value on the Y axis.</p>
+
+  <p>To create an Array, use the "Put" menu. When the new array is created, you will see two menus where you can change the properties of the array.</p>
+
+  <p><img alt="pd_array_propert.png" src="_booki/pure-data/static/PureData-pd_array_propert-en.png"></p>
+
+  <p>In the "canvas" properties menu, you can set the "X range" and "Y range", which represent the length in units of each axis, as well as the visual size of the array in pixels. In the "array" properties menu, you can set the "size" of the Array, which represents its length on the X axis, as well as it's name. Each Array you create must have a unique name, otherwise you won't be able to read from them.</p>
+
+  <p>Once an array is created and you are in Play Mode, you can click on the line inside and draw curves into the array. Arrays can also be filled with information from datafiles or soundfiles on your computer, as well as with mathematical functions. We'll discuss arrays in more detail in the arrays chapter of the Dataflow Tutorial.</p>
+
+  <h3>Graph</h3><br>
+  A "graph" is simply a container a graphical container that can hold several arrays. An array needs a graph to be displayed, so whenever you create an array from the menu, you will be asked whether you want to put it into a newly created graph or into an existing graph.
+
+  <h2>A Note on using GUI Objects</h2>Pd uses a "vector-based" system for drawing the user interface. That means that every element on the screen is defined by a set of numbers rather than an image, and every change to these elements means that your computer must recalculate that part of the screen. For this reason, having a lot of GUI elements which are constantly changing is not recommended, as it can cause interruptions in the audio or slow down the response time of the interface.
+
+  <p>In particular, be careful not to use too many of the following:</p>
+
+  <ol>
+    <li>VU meters</li>
+
+    <li>Graphical bangs, number boxes, sliders or radio buttons with rapidly changing inputs</li>
+
+    <li>Arrays which are visible on the screen and which are redrawn</li>
+  </ol>
+
+  <p>For a way of "hiding" GUI elements when they are not in use, please see the Subpatches and Abstractions chapters of the Patching Strategies Tutorial. And for a way of "hiding" the connections between GUI elements, please see the Send/Receive chapter of the Patching Strategies Tutorial.</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch014_the-interface.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch014_the-interface.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

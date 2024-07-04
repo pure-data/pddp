@@ -1,0 +1,1651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="gem.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="gem.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="331" height="17" align="left" sdnum="1031;0;@">
+          <h2>Name</h2>
+        </td>
+
+        <td width="146" align="left">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td width="398" align="left">
+          <h2>Function</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle">
+          <h1>GEM</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Extended Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">accumrotate</td>
+
+        <td align="justify" sdnum="1031;0;@">manipulation</td>
+
+        <td align="left">accumulated rotation</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">alpha</td>
+
+        <td align="justify" sdnum="1031;0;@">manipulation</td>
+
+        <td align="left">enable alpha blending</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">ambient ambientRGB</td>
+
+        <td align="justify" sdnum="1031;0;@">manipulation</td>
+
+        <td align="left">ambient coloring</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">camera</td>
+
+        <td align="justify" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">circle</td>
+
+        <td align="justify" sdnum="1031;0;@">geometric</td>
+
+        <td align="left">renders a circle</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">color colorRGB</td>
+
+        <td align="justify" sdnum="1031;0;@">manipulation</td>
+
+        <td align="left">colouring</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left" sdnum="1031;0;@">colorSquare</td>
+
+        <td align="justify" sdnum="1031;0;@">geometric</td>
+
+        <td align="left">renders a square with several colors</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">cone</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a cone</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">cube</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a cone</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">cuboid</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a cuboid box</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">curve</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a bezier-curve</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">curve3d</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a 3d bezier-curve</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">cylinder</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a cylinder</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">depth</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">turn on / off depth test</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">diffuse diffuseRGB</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">diffuse colouring</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">disk</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a disk</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">emission emissionRGB</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">emission colouring</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">fragment_program</td>
+
+        <td align="justify">shader</td>
+
+        <td align="left">load and apply an ARB fragment shader</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">gemhead</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">connect gem objects to the window manager</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">gemkeyboard gemkeyname</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">keyboard events in the gem window</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">gemlist_info</td>
+
+        <td align="justify">information</td>
+
+        <td align="left">get current transformation of a gemlist</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">gemmouse</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">mouse events in the gem window</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">gemwin</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">access to the window manager</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">glsl_fragment</td>
+
+        <td align="justify">shader</td>
+
+        <td align="left">load a GLSL fragment shader</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">glsl_program</td>
+
+        <td align="justify">shader</td>
+
+        <td align="left">link GLSL-modules into a shader program</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">glsl_vertex</td>
+
+        <td align="justify">shader</td>
+
+        <td align="left">load a GLSL vertex shader</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">hsv2rgb rgb2hsv</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">convert between RGB and HSV colorspace</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">imageVertp</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">map luminance to height</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">light world_light</td>
+
+        <td align="justify">non-geometric</td>
+
+        <td align="left">adds a point-light to the scene</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_blobtracker</td>
+
+        <td align="justify">pix analysis</td>
+
+        <td align="left">blob detector and tracker</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">rgb2yuv yuv2rgb</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">convert between RGB and YUV colorspace</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">linear_path spline_path</td>
+
+        <td align="justify"><br></td>
+
+        <td align="left">reads out a table</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">model</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders an Alias/Wavefront-Model</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">multimodel</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">load multiple an Alias/Wavefront-Model and renders one of them</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">newWave</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a waving square (mass-spring-system)</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">ortho</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">orthographic rendering</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_color</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">defines color of particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_damp</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">change velocity of particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_draw</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">draw a particle system</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_follow</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">particle follow each other</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_gravity</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">sets the gravity-vector of the particle system</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_head</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">starts a particle system</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_info</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">gives all available information of all the particles in the system</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_killold</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">kill all particles which are older than the kill time</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_killslow</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">kill all particles which are slower than the kill speed</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_orbitpoint</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">make the particles orbit about the postion x,y,z</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_render</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">draw a particle system</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_sink</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">sets up a sink for the particles within the system</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_size</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">change size of the particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_source</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">add a particle source</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_targetcolor</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">change the color of the particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_targetsize</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">change the size of the particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_velcone</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">sets a cone to be the velocity-domain of new particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_velocity</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">sets velocity of new particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_velsphere</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">sets a sphere to be the velocity-domain of new particles</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">part_vertex</td>
+
+        <td align="justify">particle system</td>
+
+        <td align="left">add a particle at the specified outset</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_2grey</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">converts a pix to greyscale</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_a_2grey</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">converts a pix to greyscale based on alpha</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_add</td>
+
+        <td align="justify">pix image</td>
+
+        <td align="left">add 2 images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_aging</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">apply a super8-like aging effect</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_alpha</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">set the alpha values of an RGBA-pix</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_background</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">separate an object from a background</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_backlight</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">blacklighting effect</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_biquad pix_movement pix_tIIR</td>
+
+        <td align="justify">pix timebased effect</td>
+
+        <td align="left">timebased IIR filter</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_bitmask</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">mask out pixels</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_blob</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">get the „center of gravity“ of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_blur</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">deprecated, use pix_motionblur</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_buffer</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">storage place for a number of images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_buffer_read pix_buffer_write</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">read / write images to a pix_buffer</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_buf</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">buffer a pix</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_chroma_key</td>
+
+        <td align="justify">pix mix</td>
+
+        <td align="left">mix 2 images based on their color</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_clearblock</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">clear an image without destroying the picture</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_coloralpha</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">calculate the alpha-channels from the RGB data</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_colormatrix</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">transform the pixel values by a matrix</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_color</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">set the color-channels of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_colorreduce</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">reduce the number of color in the image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_compare</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">mix 2 images based on their luminance</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_composite</td>
+
+        <td align="justify">pix mix</td>
+
+        <td align="left">alpha-blend 2 images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_contrast</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">change contrast and saturation of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_convert</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">convert the colorspace of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_convolve</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">apply a convolution kernel</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_coordinate</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">set the texture coordinates for a pix</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_crop</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">get a subimage of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_curve</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">apply color curves to an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_data</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">get pixel data from an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_deinterlace</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">deinterlace an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_delay</td>
+
+        <td align="justify">pix timebased effect</td>
+
+        <td align="left">delay a series of images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_diff</td>
+
+        <td align="justify">pix mix</td>
+
+        <td align="left">get the difference between 2 pixes</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_dot</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">make dotty images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_draw</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">draw pixels on the screen</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_dump</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">dump all the pixel data of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_duotone</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">reduce the number of colors by thresholding</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_fiducialtrack</td>
+
+        <td align="justify">pix analysis</td>
+
+        <td align="left">fiducial [targe] detector and tracker</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_film</td>
+
+        <td align="justify">pix source</td>
+
+        <td align="left">load in a movie file</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_flip</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">flips the image along an axis</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_freeframe</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">run a FreeFrame object</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_gain</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">multiply pixel values</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_grey</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">convert the colorspace of an image into grey</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_halftone</td>
+
+        <td align="justify">pix fx</td>
+
+        <td align="left">make halftone patterns</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_histo</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">excerpt histograms of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_hsv2rgb pix_rgb2hsv</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">convert between RGB and HSV</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_imageInPlace</td>
+
+        <td align="justify">pix source</td>
+
+        <td align="left">loads multiple image files</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_image</td>
+
+        <td align="justify">pix source</td>
+
+        <td align="left">loads an image file</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_indycam</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">create pixes from an SGI video camera</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_info</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_invert</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">invert an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_kaleidoscope</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">kaleidoscope effect</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_levels</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">level adjustment</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_lumaoffset</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">offset pixels depending on the luminance</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_mask</td>
+
+        <td align="justify">pix mix</td>
+
+        <td align="left">mask out a pix</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_mean_color</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">get the mean color of the current image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_metaimage</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">display a pix by itself</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_mix</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">mix 2 images based on mixing factors</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_motionblur</td>
+
+        <td align="justify">pix timebased effect</td>
+
+        <td align="left">apply motionbluring on a series of images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_movement2</td>
+
+        <td align="justify">pix timebased effect</td>
+
+        <td align="left">timebased IIR filter for motion detection</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_movie</td>
+
+        <td align="justify">pix source</td>
+
+        <td align="left">load in a movie file</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_multiblob</td>
+
+        <td align="justify">pix analysis</td>
+
+        <td align="left">blob detector for multiple blobs</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_multiimage</td>
+
+        <td align="justify">pix source</td>
+
+        <td align="left">loads multiple image files</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_multiply</td>
+
+        <td align="justify">pix mix</td>
+
+        <td align="left">multiply 2 images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_normalize</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">normalize an images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_offset</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">add an offset to the color</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_pix2sig~ pix_sig2pix~</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">convert images &lt;-&gt; signals</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_posterize</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">posterialization effect</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_puzzle</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">shuffle an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_rds</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">random dot stereogram for luminance</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_record</td>
+
+        <td align="justify">pix output</td>
+
+        <td align="left">write a sequence of pixes to a movie file</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_rectangle</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">draw a rectangle into a pix</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_refraction</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">display a pix through glass bricks</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_resize</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">resize an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_rgba</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">convert the colorspace of an image to RGBA</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_roll</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">(sc)roll through an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_rtx</td>
+
+        <td align="justify">pix timebased effect</td>
+
+        <td align="left">Realtime vs. X tranformation</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_scanline</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">scan lines of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_set</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">set the pixel data of an image</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_share_read pix_share_write</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">read / write pixels from a shared memory region</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_snap2tex</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">take a screenshot and texture it</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_snap</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">snap a pix of the frame buffer</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_subtract</td>
+
+        <td align="justify">pix mix</td>
+
+        <td align="left">subtract 2 images</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_takealpha</td>
+
+        <td align="justify">pix mix</td>
+
+        <td align="left">transfer the alpha channel</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_texture</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">apply texture mapping</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_threshold_bernsen</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">apply dynamic thresholds to pixes for binarization</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_threshold</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">apply a threshold to pixes</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_videoDS</td>
+
+        <td align="justify">pix source</td>
+
+        <td align="left">live video capture with VideoShow (windows only)</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_video</td>
+
+        <td align="justify">pix source</td>
+
+        <td align="left">open a camera and get input</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_write</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">make a snapshot of the frame buffer and write it to a file</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_yuv</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">convert the colorspace of an image to YUV</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pix_zoom</td>
+
+        <td align="justify">pix</td>
+
+        <td align="left">zoom the pixels</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">polygon</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a polygon</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">polygon_smooth</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">turn on / off polygon smoothing</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">pqtorusknots</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a 3d knot</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">primTri</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a triangle with gradient colors</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">rectangle</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a rectangle</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">render_trigger</td>
+
+        <td align="justify">control</td>
+
+        <td align="left">triggers on rendering</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">ripple rubber</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders and distorts a square</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">rotate rotateXYZ</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">rotation</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">scale scaleXYZ</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">scale</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">scopeXYZ~</td>
+
+        <td align="justify">geometric DSP</td>
+
+        <td align="left">3d oscilloscope</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">separator</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">shearXY shearXZ shearYX shearYZ shearZX shearZY</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">shear</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">shininess</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">shininess of the material</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">slideSquares</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders sliding squares</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">specular specularRGB</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">specular coloring</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">sphere</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a sphere</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">spot_light</td>
+
+        <td align="justify">non-geometric</td>
+
+        <td align="left">adds a spot light to the scene</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">square</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a square</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">teapot</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a teapot</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">text2d text3d textextruded textoutline</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a line of text</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">torus</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a torus</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">translate translateXYZ</td>
+
+        <td align="justify">manipulation</td>
+
+        <td align="left">translation</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">triangle</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders an equilateral triangle</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">tube</td>
+
+        <td align="justify">geometric</td>
+
+        <td align="left">renders a complex tube</td>
+      </tr>
+
+      <tr>
+        <td height="18" align="left">vertex_program</td>
+
+        <td align="justify">shader</td>
+
+        <td align="left">set the ARB vertex shader</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="glue.html">GLUE</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="time.html">TIME</a></li>
+
+  <li><a href="midi.html">MIDI</a></li>
+
+  <li><a href="tables.html">TABLES</a></li>
+
+  <li><a href="misc.html">MISC</a></li>
+
+  <li><a href="audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="gem.html">GEM</a></li>
+
+  <li><a href="pdp.html">PDP</a></li>
+
+  <li><a href="physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="gem.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="gem.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

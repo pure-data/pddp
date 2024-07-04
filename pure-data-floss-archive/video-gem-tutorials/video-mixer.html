@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="video-mixer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="video-mixer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <p>&nbsp;</p>
+
+  <h1>GEM mini-video mixer..&nbsp;</h1>
+
+  <p>One of the first things you can&nbsp; do with GEM it´s a "video mixer".&nbsp; A video Mixer it used to be a "hardware" machine.&nbsp; basically, this machine combines the two inputs into a single output.&nbsp; Into a VJ setup, it used to be a very important piece, because that was the machine that allowed to mix in a creative way video content from vhs´s dvd´s video cams, ipods, laptops w video output or any other device with a compatible output..</p>
+
+  <p>Modern video mixers have more inputs, more outputs, different mixing modes and effects.<br></p>
+
+  <p>&nbsp;In pd it´s very practical to "emulate" that classic setup, one of&nbsp; the first benefits it´s that you can get rid of all that expensive hardware and do exactly the same function for a quarter of the price of a deccent video mixer.. (not counting the VHS´s, dvd players, video monitors and so..)</p>
+
+  <p>These are the basic elements you need to make the simplest two channel video mixer in gem:</p>
+
+  <p>&nbsp;Here we have two video players [pix_film], one video mixer [pix_mix] and the "output" [rectangle]&nbsp;</p>
+
+  <p>IMPORTANT: Pix_mix just works with same size images or movies.</p>
+
+  <p>Remember also that the slider that goes into the 3rd inlet of [pix_mix] has to be scaled between 0 and 1.<br></p>
+
+  <h2><img alt="minimixok.png" src="_booki/pure-data/static/PureData-GEM-minimixok-en.png" height="269" width="541"></h2>
+
+  <p>&nbsp;This is a good starting point to study the basic structure of a video mixer in gem but can be / should be modded when you want to make a serious use of it..</p>
+
+  <p>You can for example render each element of the composition in an diferent rectangle so you can modify rotation, position, size, etc in an independent way, instead of doing that with the final mix.</p>
+
+  <p>&nbsp;Also I recommend to make abstractions like "pd player" "pd chroma"&nbsp; "pd webcam"..&nbsp; So you will have a nice and clean modular interface.</p>
+
+  <p>&nbsp;</p>
+
+  <h2>1.5. Alpha, size..</h2>
+
+  <p>To control the alpha and the independent size of a pix, we do the next:</p>
+
+  <p>NOTE: We need to transform the colorspace into rbga and enable the alpha blending. We can see which object do that function and where they should be placed.<br></p>
+
+  <p>&nbsp; <img alt="opacisiz.png" src="_booki/pure-data/static/PureData-GEM-opacisiz-en.png" height="326" width="463"></p>
+
+  <h2>1.6.&nbsp; Color.</h2>
+
+  <p>With [colorRGB] we can colorize the video, images, etc..&nbsp; there´s also an object called [color]&nbsp; but in that case, we don´t have an independent "inlet" for each color component.&nbsp; If you want to make changes in the opacity, you have to add the [alpha] object before the [colorRGB]. Default values are ( 0 0 0 1).</p>
+
+  <p><img alt="coleur.png" src="_booki/pure-data/static/PureData-GEM-coleur-en.png" height="232" width="348"></p>
+
+  <h2>2- Adding webcam / live video input:</h2>
+
+  <p>&nbsp;In Gem, you can use a classic usb webcam as video source and also&nbsp; any standard DV camera connected to the firewire port.&nbsp;&nbsp;</p>
+
+  <p>&nbsp;It´s also possible to connect several cameras into pd.&nbsp; In this case, check the help of [pix_video] and you will see how.</p>
+
+  <p>This is the structure of a minimalistic "video input" apparatus: (for more info cick help in pix_video..)</p>
+
+  <p>This is all we need to see the webcam in the GEM window in osX.&nbsp; for linux<br></p>
+
+  <p><img alt="minivideo.png" src="_booki/pure-data/static/PureData-GEM-minivideo-en.png" height="295" width="445">&nbsp;</p>
+
+  <p>To add pix_video to the gem string we make this:&nbsp;</p>
+
+  <p><img alt="vid_webc.png" src="_booki/pure-data/static/PureData-GEM-vid_webc-en.png" height="289" width="492">&nbsp;</p>
+
+  <p>&nbsp;Here I added the message [dimen 512 384( &nbsp;to [pix_video] to adjust the dimension of the two sources to mix. If the size of the two sources in pix_mix doesn´t fit, this will not work!! .</p>
+
+  <p>&nbsp;By default, pix_video outputs 320x240 that is a decent resolution for realtime live video mixing so if you want to work in any other resolution, keep this in mind.</p>
+
+  <h2>3-chroma key&nbsp;</h2>
+
+  <p>Let´s continue modding the "mini_mixer" ..&nbsp;</p>
+
+  <p>&nbsp;<img alt="minimxchrm2.png" src="_booki/pure-data/static/PureData-GEM-minimxchrm2-en.png" height="376" width="565"></p>
+
+  <p><br></p>
+
+  <p>Here, instead of the [pix_mix] we have the object&nbsp; [pix_chroma_key].&nbsp; this obect its useful to make compositions and making transparent some parts. The [direction( message defines which video inlet will be "processed".</p>
+
+  <p>Also in Gem we can use another standard blend modes like add, substract, multiply, difference...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; we can find the objects in /reference/Gem or we can call them directly: [pix_subtract]&nbsp; [pix_diff] [pix_multiply] [pix_add].. It´s recommended to take a quick look into the help of this objects before using it, otherwise, probably you will get only&nbsp; Absolutely white images or absolutely black....<br></p>
+
+  <p>&nbsp;</p>
+
+  <p>In this example, we can see [pix_diff], this objects shows the difference between two pixes.<br></p>
+
+  <p><img alt="pixdiff.png" src="_booki/pure-data/static/PureData-GEM-pixdiff-en.png" height="331" width="495"><br></p>
+
+  <p>if we change "diff" for "multiply",&nbsp; this is what we get..</p>
+
+  <p><img alt="multiply.png" src="_booki/pure-data/static/PureData-GEM-multiply-en.png" height="306" width="474"><br></p>
+
+  <p>&nbsp; <img alt="adddd.png" src="_booki/pure-data/static/PureData-GEM-adddd-en.png" height="302" width="460"></p>
+
+  <p>&nbsp;</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="basics.html">BASICS</a></li>
+
+  <li><a href="moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="effects.html">EFFECTS</a></li>
+
+  <li><a href="recording.html">RECORDING</a></li>
+
+  <li><a href="screens.html">SCREENS</a></li>
+
+  <li><a href="video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="video-mixer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="video-mixer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

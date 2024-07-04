@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch028_envelope-generator.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch028_envelope-generator.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>The Envelope Generator</h1>
+
+  <p>The <strong>Envelope</strong> of a sound refers to changes in either its pitch or gain over the duration of a note. A gain envelope is the most common, because it is used to synthesize the dynamics of acoustic instruments. For example, a piano has a very sharp or percussive attack, with the note becoming loud quite quickly before gradually fading out. A violin, on the other hand, takes a longer time for the sound to build up as the strings begin to vibrate, and then fades away relatively quickly. A gain envelope has five main characteristics:</p>
+
+  <ol>
+    <li><strong>Attack</strong>: the length of time it takes the note to reach it's loudest point.</li>
+
+    <li><strong>Decay</strong>: the length of time after the Attack it takes the note to reach it's Sustain volume.</li>
+
+    <li><strong>Sustain</strong>: the volume of the note which is held until the note is Released.</li>
+
+    <li><strong>Release</strong>: the length of time it takes the note to fade to zero after the key on the keyboard has been released.</li>
+  </ol>
+
+  <p>This is commonly abbreviated as ADSR, and can be drawn graphically like this, where the horizontal axis represents time and the vertical axis represents volume:</p>
+
+  <p><img alt="adsr.png" src="_booki/pure-data/static/PureData-SimpleSynthesizer-adsr-en.png" height="392" width="584"></p>
+
+  <p>An additional parameter which comes from the MIDI world is called <strong>Velocity</strong>, and it refers to how hard the key of the keyboard has been pressed. In our synthesizer, Velocity will refer to the volume of the note at its loudest point, i.e the peak of the Attack.</p>
+
+  <h2>Simple Envelope Generator Using [line]</h2>
+
+  <p>The simplest Envelope Generator can be made using the object [line]. This object takes two numbers, a target and a time (in milliseconds), and interpolates numbers to that target in the time given. If it is sent a single number, the time of the ramp is assumed to be zero, and [line] "jumps" to that value. It remembers that last value that it reached, so the next pair of numbers will start a new ramp from the current value. If a new pair of numbers is sent to [line] while it is still making a ramp, it will immediately stop that ramp and start the new one.</p>
+
+  <p><img title="eg1" alt="eg1" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-eg1-en.png" height="243" width="299"></p>
+
+  <p>To make a simple up/down, or Attack/Decay envelope, we need to send two different messages to [line]. The first will tell it to go to "1" in a certain amount of time, the second will tell it to go back to "0" in a certain amount of time. These two messages can be triggered with a single "bang" message, as long as we delay the triggering of the second message long enough for the first ramp to finish, using the [delay] object.</p>
+
+  <p><img title="eg2" alt="eg2" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-eg2-en.png" height="463" width="457"></p>
+
+  <h2>Complex Envelope Generator Using [vline~]</h2>
+
+  <p>A more complex envelope can be created with the [vline~] object. This object can be programmed to make sequences of ramps in order, and with a delay in between them. For example, the message "10 1000, 0 0 1000, 1 1000 3000" would tell [vline~] to do the following:</p>
+
+  <p>Ramp up to "10" in 1000ms, then jump to "0" in 0ms after waiting 1000ms (from the start of the ramp), and finally ramp back up to "1" in 1000ms after waiting 3000ms (from start of the ramp).</p>
+
+  <p><img title="eg3" alt="eg3" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-eg3-en.png" height="519" width="455"></p>
+
+  <p>Because it accepts more complex messages, [vline~] is useful for the traditional Attack/Decay/Sustain/Release envelope. Also, [vline~] is an audio object rather than a numeric object, which means it is more suitable for audio multiplication, as we will see in the next section.</p>
+
+  <p><img title="eg4" alt="eg4" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-eg4-en.png" height="458" width="446"></p>
+
+  <h2>Envelopes Stored In Arrays</h2>
+
+  <p>For an envelope with an arbitrary curve, a table is the most useful way to go. First we must create a table, by using the Put menu to place and Array in the patch. When we do that, we will see two Properties dialogs appear. In one, we name the Array "envelope" and set a length of 100 units. In the second we can change the graphical appearance and the range of the X and Y axes. In this case, set the X range to "0 to 99", and the Y range to "1 to 0". The size can be anything that is convenient, and is measured in pixels. You can get these Properties dialogs back by Right-clicking or CTL+clicking on the Array. These dialogs appear under the screenshot below.</p>
+
+  <p>To read a table, we can use the object [tabread]. The [tabread] object takes a creation argument of the name of the table it is supposed to read.&nbsp; In order to draw inside the table, you should click on the line and drag with the mouse. A value sent to the inlet of [tabread] represents a point on the X axis, and the output is the corresponding value on the Y axis.</p>
+
+  <p><img title="eg5" alt="eg5" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-eg5-en.png" height="714" width="426"></p>
+
+  <p>If we want to read a table continuously from start to finish, we can use [line] to send a continuous stream of numbers to [tabread], starting with the first position on the X axis of the table ("0"), and ending with the last position ("99"). Remember that [line] takes a pair of numbers, the target ("99", the end of the table) and the time it takes to get there (4000 milliseconds, or 4 seconds). When we want to start over from the beginning of the table, we send a single number, "0", and the [line] object jumps back to it.</p>
+
+  <p>In the example below, [tabread] gets values between 0-1 from the table "pitch_envelope". We multiply these numbers by 127 with a [*] (Multiplication) object, to get a MIDI note value between 0-127. After that, we use a [mtof] (MIDI to Frequency) object to convert the MIDI notes into a frequency in Hertz. The frequency is sent to a sine wave oscillator [osc~] object, which sends audio to the [dac~] (Digital to Analog Converter), Pd's connection to the soundcard.</p>
+
+  <p><img title="eg6" alt="eg6" src="_booki/pure-data/static/PureData-SimpleSynthesizer-AudioTutorials-eg6-en.png" height="640" width="439"></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch028_envelope-generator.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch028_envelope-generator.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

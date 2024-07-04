@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="advanced-configuration.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="advanced-configuration.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Advanced configuration</h1>
+
+  <p>Since Pd-Extended is installed with most of the settings, search paths and external libraries already configured, many users won't have to worry about configuring these parts of Pure Data at all. Advanced users, however, may be interested in customizing these settings. The settings which can be changed in Pure Data are the same as those available when starting from the command line:</p>
+  <pre>
+audio configuration flags:   -r &lt;n&gt;           -- specify sample rate   -audioindev ...  -- audio in devices; e.g., "1,3" for first and third   -audiooutdev ... -- audio out devices (same)   -audiodev ...    -- specify input and output together   -inchannels ...  -- audio input channels (by device, like "2" or "16,8")   -outchannels ... -- number of audio out channels (same)   -channels ...    -- specify both input and output channels   -audiobuf &lt;n&gt;    -- specify size of audio buffer in msec   -blocksize &lt;n&gt;   -- specify audio I/O block size in sample frames   -sleepgrain &lt;n&gt;  -- specify number of milliseconds to sleep when idle   -nodac           -- suppress audio output   -noadc           -- suppress audio input   -noaudio         -- suppress audio input and output (-nosound is synonym)   -listdev         -- list audio and MIDI devices   -oss             -- use OSS audio API   -32bit           ----- allow 32 bit OSS audio (for RME Hammerfall)   -alsa            -- use ALSA audio API   -alsaadd &lt;name&gt;  -- add an ALSA device name to list   -jack            -- use JACK audio API   -pa              -- use Portaudio API   -asio              -- use ASIO drivers and API   -mmio            -- use MMIO drivers and API MIDI configuration flags:   -midiindev ...   -- midi in device list; e.g., "1,3" for first and third   -midioutdev ...  -- midi out device list, same format   -mididev ...     -- specify -midioutdev and -midiindev together   -nomidiin        -- suppress MIDI input   -nomidiout       -- suppress MIDI output   -nomidi          -- suppress MIDI input and output   -alsamidi        -- use ALSA midi API other flags:   -path &lt;path&gt;     -- add to file search path   -nostdpath       -- don't search standard ("extra") directory   -stdpath         -- search standard directory (true by default)   -helppath &lt;path&gt; -- add to help file search path   -open &lt;file&gt;     -- open file(s) on startup   -lib &lt;file&gt;      -- load object library(s)   -font-size &lt;n&gt;     -- specify default font size in points   -font-face &lt;name&gt;  -- specify default font   -font-weight &lt;name&gt;-- specify default font weight (normal or bold)   -verbose         -- extra printout on startup and when searching for files   -version         -- don't run Pd; just print out which version it is   -d &lt;n&gt;           -- specify debug level   -noloadbang      -- suppress all loadbangs   -stderr          -- send printout to standard error instead of GUI   -nogui           -- suppress starting the GUI   -guiport &lt;n&gt;     -- connect to pre-existing GUI over port &lt;n&gt;   -guicmd "cmd..." -- start alternatve GUI program (e.g., remote via ssh)   -send "msg..."   -- send a message at startup, after patches are loaded   -noprefs         -- suppress loading preferences on startup   -rt or -realtime -- use real-time priority   -nrt             -- don't use real-time priority   -nosleep         -- spin, don't sleep (may lower latency on multi-CPUs)
+</pre>
+
+  <p>All of the Audio and MIDI configuration flags in this list are set using the menus described above. Note that not all settings are available on all platforms (for example, there are no -asio or -mme options on Mac OS X or Linux, nor the -alsa, -oss, -pa or -jack settings on Windows, etc...)</p>
+
+  <p>The next most-important configuration options have to do with the external libraries which Pd loads at startup time (and thus which objects you will be able to use), as well as the locations in your file system where Pd can search for these externals and for other resources the program uses to run.</p>
+
+  <p>Pure Data uses a system called <strong>pdsettings</strong> to store all these options and use them every time Pd starts up. The pdsettings can be configured through various menus in the application, as we saw with the audio and MIDI settings. But they can also be configured by other tools, which are specific to each operating system.</p>
+
+  <p>We'll start by looking at the built-in menus for <strong>Startup</strong> and <strong>Path</strong>, and then we'll look at other methods to change the configuration options.</p>
+
+  <h2>Startup Flags</h2>
+
+  <p><strong>OSX</strong> : Pd-extended -&gt; Preferences -&gt; Startup<br>
+  <strong>Linux &amp; Windows</strong> : File -&gt; Startup</p>
+
+  <p><img title="flags2" alt="flags2" src="_booki/pure-data/static/PureData-Configuring-flags2-en.png" height="351" width="476"></p>
+
+  <p>The things we want to pay attention to in this menu are the externals we load, which are listed as "Pd binaries to load (on next startup)", and whether or not we "defeat real-time scheduling".</p>
+
+  <p>Under "Pd binaries to load", you can make a list of the external libraries which you have installed on your system which you would like to be available in Pd. You will then be able to run these externals the next time you start Pd. Because you are using the <strong>Pd-extended</strong> distribution, this section should be completed for you with a list of the externals which come with the distribution.</p>
+
+  <p>If you would like to add more libraries to the ones listed, the simplest way is to add them to an existing line of the Startup menu, like so:</p>
+  <pre>
+Gem:my_new_lib
+</pre>
+
+  <p>And then click "Save all settings" and "OK". However, Pd-Extended is still a program which is under development, and this method has been noted to have some problems lately, so you may wish to try the <strong>Platform-Specific Configuration Tools</strong> below.</p>
+
+  <p>If you are running Pd on Linux, you may want to experiment with using "real-time scheduling" to improve the audio quality by allowing Pd faster access to the soundcard. On some systems, however, you must run Pd as the administrator of the system (i.e. "root" or "su") to have permission to do this. To use "real-time scheduling", enter the following in your "startup flags"</p>
+  <pre>
+ -rt 
+</pre>
+
+  <p>&nbsp;<img title="rtflag" alt="rtflag" src="_booki/pure-data/static/PureData-Configuring-rtflag-en.png" height="92" width="298"></p>
+
+  <p>But keep in mind that if Pd overloads or locks up your system by using too much of the processer's resources, it can be very difficult to quit the program when using "real-time scheduling".</p>
+
+  <p>Users on Mac OS X should <strong>not</strong> use the "real-time scheduling" flag, and should click the box which says "defeat real-time scheduling" for better audio quality.</p>
+
+  <h2>Path</h2>
+
+  <p><strong>OSX</strong> : Pd-extended -&gt; Preferences -&gt; Path<br>
+  <strong>Linux &amp; Windows</strong> : File -&gt; Path</p>
+
+  <p><img title="osx.install.7" alt="osx.install.7" src="_booki/pure-data/static/PureData-InstallingOSX-osx-install-7-en.png" height="344" width="573"></p>
+
+  <p>Shown here is the Mac OS X menu for setting the Paths. These are the <strong>Search Paths</strong> that Pd will use to locate external libraries, help patches, and other any patches, fonts, soundfiles, videos ar anything else which you may need while working in the program. If you would like to add more directories to the ones listed, the simplest way is to add them to an existing line of the Path menu, like this:</p>
+  <pre>
+/Library/Pd:/home/my_name/my_new_path
+</pre>
+
+  <p>And then click "Save all settings" and "OK". However, as with the Startup menu, some people have had problems using this method, so you may wish to try the <strong>Platform-Specific Configuration Tools</strong> below.</p>
+
+  <p>Quite a bit of this configuration has been taken care of by Pd-Extended already, so let's look at some real-world examples of when you might want to add a path. One situation would be if you want to use an audio file or a collection of audio files in your patch, but you don't want to have to specify the whole location every time it's needed in any object or message.</p>
+
+  <p>So, instead of typing</p>
+  <pre>
+/home/beaver/my_soundfiles/spoken/boy/geewhiz.wav 
+</pre>
+
+  <p>or</p>
+  <pre>
+/home/beaver/my_soundfiles/spoken/girl/golly.wav 
+</pre>
+
+  <p>you could add</p>
+  <pre>
+/home/beaver/my_soundfiles/spoken 
+</pre>
+
+  <p>to your Path, and then call these soundfiles by typing:</p>
+  <pre>
+boy/geewhiz.wav girl/golly.wav 
+</pre>
+
+  <p>Another very common situation is when you would like to use a Pd patch you have saved as an <strong>abstraction</strong> (which essentially treats the saved patch like another Pd object) inside another Pd patch. In this case, you must either have the patch you wish to use as an abstraction saved in the folder as the "parent" patch you wish use it in, or you must add the folder containing the abstraction to your Path. For example the path:</p>
+  <pre>
+/home/pdfreek/puredata/abstractions/reverb_tools 
+</pre>
+
+  <p>might contain various kinds of reverb abstractions that the user "pdfreek" created to be reused in other patches. For more information about abstractions, please see the <strong>DataFlow Tutorials</strong> chapter.&nbsp;</p>
+
+  <p>Finally, if you want to compile your own external Pd libraries, or use ones which you have downloaded from the internet, then you need to place the binary files (which end in <strong>.pd_linux</strong> for Linux, <strong>.pd_darwin</strong> for OS X and <strong>.dll</strong> for Windows) in a folder and add that folder to your path, such as:</p>
+  <pre>
+~/pd/extra 
+</pre>
+
+  <p>where ~/ means your home directory (i.e. <em>/home/"username"</em> on Linux and <em>/User/"username"</em> on Mac OS X). Please note that in the case of <strong>name clashes</strong> (where two objects or files have the same name), the one which is loaded last takes precedence over all others. An example of this is the object [counter], which exists in several external libraries, and which has a different function in each one!</p>
+
+  <h2>Platform-Specific Configuration Tools</h2>
+
+  <p>Since Pd-extended and the vanilla version of Pure Data really function as separate apps, they each of their own separate files for saving configuration settings. Also, this settings file is saved with a format, name, and location that is appropriate for the operating system you are using.&nbsp; The locations for the Pd settings files are:</p>
+
+  <h4>Pd-extended<br></h4>
+
+  <ul>
+    <li><strong>OS X:</strong> <em>~/Library/Preferences/org.puredata.pd.plist</em> (~ means your home folder)</li>
+  </ul>
+
+  <ul>
+    <li><strong>Windows:</strong> <em>HKEY_LOCAL_MACHINE -&gt; SOFTWARE -&gt; Pd-extended</em> (using REGEDIT.EXE, etc.)&nbsp;</li>
+  </ul>
+
+  <ul>
+    <li><strong>Linux</strong>: <em>~/.pdextended</em> (~ means your home folder)</li>
+  </ul>
+
+  <h4>Pure Data vanilla<br></h4>
+
+  <ul>
+    <li><strong>OS X:</strong> <em>~/Library/Preferences/org.puredata.pd.plist</em> (~ means your home folder)</li>
+  </ul>
+
+  <ul>
+    <li><strong>Windows:</strong> <em>HKEY_LOCAL_MACHINE -&gt; SOFTWARE -&gt; Pd</em> (using REGEDIT.EXE/REGEDIT32.EXE)&nbsp;</li>
+  </ul>
+
+  <ul>
+    <li><strong>Linux</strong>: <em>~/.pdsettings</em> (~ means your home folder)</li>
+  </ul>
+
+  <p>&nbsp;</p>
+
+  <h3><strong>Linux</strong></h3>
+
+  <p>Linux users may edit the file directly via command line applications such as <strong>joe</strong>, <strong>vim</strong>, <strong>pico</strong> or <strong>nano</strong>, or with whatever other text editing application comes with your distribution:</p>
+  <pre>
+$ nano /home/derek/.pdsettings  GNU nano 1.2.4                       File: /home/derek/.pdsettings  audioapi: 5 noaudioin: False audioindev1: 0 4 noaudioout: False audiooutdev1: 0 4 audiobuf: 50 rate: 44100 nomidiin: False midiindev1: 0 nomidiout: False midioutdev1: 0 path1: /home/derek/pd/rradical/memento path2: /home/derek/pd/ix_toxy path3: /home/derek/pd/berlin path4: /home/derek/pd/rradical/memento/tutorial path5: /home/derek/workshop_patches path6: /usr/local/lib/pd/doc/5.reference path7: /usr/local/lib/pd/extra/xjimmies npath: 7 standardpath: 1 verbose: 0 loadlib1: pool loadlib2: iemlib1 loadlib3: iemlib2 loadlib4: iem_mp3 loadlib5: iem_t3_lib loadlib6: OSC loadlib7: zexy nloadlib: 7 defeatrt: 0 flags: -alsamidi -rt                                             [ Read 31 lines ] ^G Get Help      ^O WriteOut      ^R Read File     ^Y Prev Page     ^K Cut Text      ^C Cur Pos ^X Exit          ^J Justify       ^W Where Is      ^V Next Page     ^U UnCut Txt     ^T To Spell  
+</pre>
+
+  <p>Remember that if you add a new <em>path</em> or <em>loadlib</em>, then you will need to give it a number higher than the last existing one, and you will need to change the <em>npath</em> or <em>nloadlib</em> to the number of new paths or loadlibs you have added. In the above <em>pdsettings</em>, to add the loadlib <strong>pdp</strong>, you would have to add/change the following:</p>
+  <pre>
+loadlib8: pdp nloadlib: 8 
+</pre>
+
+  <h3><strong>OS X</strong></h3>
+
+  <p>OS X users may wish to try using the <strong>Property List Editor.app</strong>, which can be installed from the <strong>XCode Tools</strong> or <strong>Server Tools</strong> CDs available for free from Apple:</p>
+
+  <p><a href="http://developer.apple.com/tools/xcode/">http://developer.apple.com/tools/xcode/</a></p>
+
+  <p>Here is the Property List Editor, with the <em>org.puredata.pdextended.plist</em> file open:</p>
+
+  <p><img title="osx.install.8" alt="osx.install.8" src="_booki/pure-data/static/PureData-InstallingOSX-resized_600x365_osx-install-8-en.png" height="365" width="600"></p>
+
+  <p>You can click directly in the <em>Value</em> field to change a value, or use the <em>New Sibling</em> button to add a new line.&nbsp;</p>
+
+  <p>The command line utility <strong>defaults</strong> can also be used. The following line in the terminal lists all the <em>pdsettings</em> in <em>org.puredata.pdextended.plist</em>:</p>
+  <pre>
+<code>defaults read org.puredata.pd</code>extended
+</pre>
+
+  <p>The following command can be used to write a new line to pdsettings:</p>
+  <pre>
+<code>defaults write org.puredata.</code><code>pd</code>extended loadlib30 test
+</pre>
+
+  <p>and this command can be used to delete one line from pdsettings:</p>
+  <pre>
+defaults delete org.puredata.<code>pd</code>extended loadlib30
+</pre>
+
+  <p>In this case, <em>loadlib30</em> represents the next possible line that could be added to load a library (29 libraries are loaded already), and <em>test</em> represents a hypothetical library which we add to the startup in the first case using the <em>write</em> command, and remove from the startup in the second case by using the <em>delete</em> command. For more information about defaults, type:</p>
+  <pre>
+ defaults --help
+</pre>
+
+  <h3><strong>Windows</strong></h3>
+
+  <p>Windows users may also use the <strong>REGEDIT</strong> program to edit their <em>pdsettings</em>. This program comes with the Windows operating system, and can be located under the name REGEDIT.EXE or REGEDT32.EXE (Windows XP or newer). Please note: manually editing the Windows Registry files using a text editor instead of REGEDIT is generally considered unsafe, since errors here can disrupt the entire operating system! Those interested in more details about the Registry should read:</p>
+
+  <p><a href="http://en.wikipedia.org/wiki/Windows_Registry#Editing">http://en.wikipedia.org/wiki/Windows_Registry#Editing</a></p>
+
+  <p><img alt="regedit.png" src="_booki/pure-data/static/PureData-Configuring-regedit-en.png" height="328" width="600"></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="configuring.html">CONFIGURING</a></li>
+
+  <li><a href="advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="advanced-configuration.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="advanced-configuration.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

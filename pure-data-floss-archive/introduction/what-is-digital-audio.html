@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="what-is-digital-audio.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="what-is-digital-audio.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>What is digital audio?&nbsp;<br></h1>
+
+  <p>Since we'll be using <strong>Pure Data</strong> to create sound, and since Pd treats sound as just another set of numbers, it might be useful to review how digital audio works. We will return to these concepts in the audio tutorial later on.</p>
+
+  <p><img title="Analogue_Digital_Conversion" alt="Analogue_Digital_Conversion" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-Analogue_Digital_Conversion-en.png"><br></p>
+
+  <p><em>A diagram showing how sound travels through your computer. The "Analog to Digital" &amp; "Digital to Analog Conversion" is done by the soundcard. The "Digital System" in this case is</em> <em>Pure Data.</em><br>
+  <em>Source: <a href="http://en.wikipedia.org/wiki/Image:Analogue_Digital_Conversion.png">http://en.wikipedia.org/wiki/Image:Analogue_Digital_Conversion.png</a></em><br></p>
+
+  <h2>Frequency and Gain<br></h2>
+
+  <p>First, imagine a loudspeaker. It moves the air in front of it and makes a sound. The membrane of the speaker must vibrate from it's center position (at rest) backwards and forwards. The number of times per second it vibrates makes the <strong>frequency</strong> (the note, tone or pitch) of the sound you hear, and the distance it travels from it's resting point determines the <strong>gain</strong> (the volume or loudness) of the sound. Normally, we measure frequency in <strong>Hertz</strong> (Hz) and loudness or gain in <strong>Decibels</strong> (dB).</p>
+
+  <p><img title="speaker" alt="speaker" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-speaker-en.png">&nbsp;</p>
+
+  <p>A microphone works in reverse - vibrations in the air cause its membrane to vibrate. The microphone turns these acoustic vibrations into an electrical current. If you plug this microphone into your computer's soundcard and start recording, the soundcard makes thousands of measurements of this electric current per second and records them as numbers.</p>
+
+  <h2>Sampling Rate and Bit Depth<br></h2>
+
+  <p>To make audio playable on a Compact Disc, the computer must make 44,100 measurements (called <strong>samples</strong>) per second, and record each one as a <strong>16-bit number</strong>. One <strong>bit</strong> is a piece of information which is either 0 or 1, and if there are 16 bits together to make one sample then there are 2<sup>16</sup> (or 2x2x2x2x2x2x2x2x2x2x2x2x2x2x2x2 = 65,536) possible values that each sample could have. Thus, we can say that CD-quality audio has a <strong>sampling rate</strong> of 44,100 Hz and a <strong>bit-depth</strong> or <strong>word length</strong> of 16 bits. In contrast, professional music recordings are usually made at 24-bit first to preserve the highest amount of detail before being mixed down to 16-bit for CD, and older computer games were famous for having a distinctively rough 8-bit sound. By increasing the sampling rate, we are able to record higher sonic frequencies, and by increasing the bit-depth or word length we are able to use a greater <strong>dynamic range</strong> (the difference between the quietest and the loudest sounds it is possible to record and play).<br></p>
+
+  <p><img title="Pcm" alt="Pcm" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-Pcm-en.png"><br></p>
+
+  <p><em>An example of 4-bit sampling of a signal (shown in red). This image shows that 16 possible values can be made from 4-bits--a very low dynamic range indeed! In Pd, our scale of numbers goes from -1 to 1, with 0 in the middle. Source: <a href="http://en.wikipedia.org/wiki/Image:Pcm.svg">http://en.wikipedia.org/wiki/Image:Pcm.svg</a><br></em><br>
+  The number we use to record each sample has a value between -1 and +1, which would represent the greatest range of movement of our theoretical loudspeaker, with 0 representing the speaker at rest in the middle position.</p>
+
+  <p><img title="waveform" alt="waveform" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-waveform-en.png" height="296" width="258"></p>
+
+  <p><em>Graphical depiction of a sine wave, which crosses zero from the negative to the positive domain.</em><br></p>
+
+  <p>When we ask Pd to play back this sound, it will read the samples back and send them to the soundcard. The soundcard then converts these numbers to an electrical current which causes the loudspeaker to vibrate the air in front of it and make a sound we can hear.<br></p>
+
+  <h2>Speed and Pitch Control<br></h2>
+
+  <p>If we want to change the speed at which the sound is played, we can read the samples back faster or slower than the original sampling rate. This is the same effect as changing the speed of record or a tape player. The sound information is played back at a different speed, and so the pitch of the sound changes in relation to the change in speed. A faster playback rate increases the pitch of the sound, while a slower playback rate lowers the pitch.<br></p>
+
+  <h2>Volume Control, Mixing and Clipping</h2>
+
+  <p>If we want to change the volume of the sound, we have to multiply the numbers which represent the sound by another number. Multiplying them by a number greater than 1 will make the sound louder, and multiplying them by a number between 1 and zero will make the sound quieter. Multiplying them by zero will <strong>mute</strong> them - resulting in no sound at all. We can also mix two or more sounds by adding the stream of numbers which represent them together to get a new stream of sound. All of these operations can take place in real-time as the sound is playing.<br>
+  <br>
+  However, if the range of numbers which represents the sound becomes greater than -1 to 1, any numbers outside of that range will be truncated (reduced to either -1 or 1) by the soundcard. The resulting sound will be <strong>clipped</strong> (distorted). Some details of the sound will be lost and frequencies that were not present before will be heard.</p><img title="clikpping" alt="clikpping" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-clikpping-en.png" height="265" width="453"><br>
+  <em>The waveform on the left is at full volume (i.e. it's peaks are at -1 and 1). The volume of the waveform on the right has been doubled, so that it peaks at -2 and 2. The graph shows what would be heard from the soundcard: a clipped signal with the peaks of the sinewave removed.</em><br>
+
+  <h2>The Nyquist Number and Foldover/Aliasing</h2>
+
+  <p>Another problem occurs if one tries to play back a frequency which is greater then half the sampling rate which the computer is using. If one is using a sampling rate of 44,100 Hz, the highest frequency one could theoretically play back without errors is 22,050 Hz. The reason being, a computer needs at least two samples to reproduce a single frequency. The number that represents half the sampling rate is called the <strong>Nyquist number</strong>.<br>
+  <br>
+  If you were to tell Pd to play a frequency of 23,050 Hz, what you would hear is one tone at 23,050 Hz, and a second tone at 21,050 Hz. The difference between the Nyquist number (22,050 Hz) and the synthesized sound (23,050 Hz) is 1,000 Hz, which you would both add to and subtract from the Nyquist number to find the actual frequencies heard. So as one increased the frequency of the sound over the Nyquist number, you would hear one tone going up, and another coming down. This problem is referred to as <strong>foldover</strong> or <strong>aliasing</strong>.</p>
+
+  <p><img title="AliasingSines" alt="AliasingSines" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-AliasingSines-en.png">&nbsp;</p>
+
+  <p><em>Here we can see two possible waveforms which could be described by the samples show. The red line shows the intended waveform, and the blue line shows the "aliased" waveform at</em> <em>&lt;Desired Frequency&gt; -</em> <em>(&lt;Desired Frequency&gt; - &lt;Nyquist Number&gt;)</em><em>.</em><br>
+  <em>Source: <a href="http://en.wikipedia.org/wiki/Image:AliasingSines.png">http://en.wikipedia.org/wiki/Image:AliasingSines.png</a></em></p>
+
+  <h2>DC Offset</h2>
+
+  <p><strong>DC offset</strong> is caused when a waveform doesn't cross the zero line, or has unequal amounts of signal in the positive and negative domains. This means that, in our model speaker, the membrane of the speaker does not return to its resting point during each cycle. This can affect the dynamic range of the sound. While DC offset can be useful for some kinds of synthesis, it is generally considered undesirable in an audio signal.</p>
+
+  <p>&nbsp;</p>
+
+  <p><img title="dcoffset" alt="dcoffset" src="_booki/pure-data/static/PureData-WhatIsDigitalAudio-dcoffset-en.png" height="319" width="253"></p>
+
+  <p><em>An example of DC offset: the waveform is only in the positive domain.</em><br></p>
+
+  <h2>Block Size</h2>
+
+  <p>Computers tend to process information in batches or chunks. In Pd, these are known as <strong>Blocks</strong>. One block represents the number of audio samples which Pd will compute before giving output. The default block size in Pd is 64, which means that every 64 samples, Pd makes every calculation needed on the sound and when all these calculations are finished, then the patch will output sound. Because of this, a Pd patch cannot contain any <strong>DSP loops</strong>, which are situations where the output of a patch is sent directly back to the input. In such a situation, Pd would be waiting for the output of the patch to be calculated before it could give output! In other words, an impossible situation. Pd can detect DSP loops, and will not compute audio when they are present. For more information, see the "Troubleshooting" section.<br></p>
+
+  <h2>It's All Just Numbers&nbsp;<br></h2>
+
+  <p>The main thing to keep in mind when starting to learn Pure Data is that audio and everything else is just numbers inside the computer, and that often the computer doesn't care whether the numbers you are playing with represent text, image, sound or other data. This makes it possible to make incredible transformations in sound and image, but it also allows for the possibility to make many mistakes, since there is no 'sanity checks' in Pure Data to make sure you are asking the program to do something that is possible. So sometimes the connections you make in Pd may cause your computer to freeze or the application to crash. To protect against this save your work often and try not to let this bother you, because as you learn more and more about this language you will make fewer and fewer mistakes and eventually you will be able to program patches which are as stable and predictable as you want them to be.<br>
+  &nbsp;</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="what-is-digital-audio.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="what-is-digital-audio.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

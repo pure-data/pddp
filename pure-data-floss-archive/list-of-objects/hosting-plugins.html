@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="hosting-plugins.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="hosting-plugins.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Using LADSPA Plugins</h1>
+
+  <p>There are three puredata objects that can host a LADSPA plugin:</p>
+
+  <p><strong>[plugin~]</strong> was developed by Jarno Seppänen<br></p>
+
+  <p><a href="http://pure-data.sourceforge.net/old/documentation.php#plugin~">http://pure-data.sourceforge.net/old/documentation.php#plugin~</a></p>
+
+  <p><strong>[ladspa~]</strong> was developed by Moumar and its help file also has some stability issues</p>
+
+  <p><a title="ladspa~" href="http://bitbucket.org/moumar/ladspa/wiki/Home%20">http://bitbucket.org/moumar/ladspa/wiki/Home</a></p>
+
+  <p><strong>[dssi~]</strong> was developed by Jamie Bullock and can be found here:<br></p>
+
+  <p><a title="dssi~" href="http://puredata.info/Members/jb/">http://puredata.info/Members/jb/</a></p>
+
+  <h2><strong>Setting up Pd to use [plugin~]</strong><br></h2>
+
+  <p>[plugin~] requires the path to your LADSPA directory to be set as the LADSPA_PATH in the environment.</p>
+
+  <p>Here's a quick explanation on how to set your PATH variable:<br></p>
+
+  <p>open a terminal app</p>
+
+  <p>then type in the following at the prompt:<br></p>
+  <pre>
+<font><font class="post">export LADSPA_PATH=/usr/lib/ladspa:/usr/local/lib/ladspa:~/.ladspa</font></font>
+</pre>
+
+  <p>check to see that you've set your path correctly by typing</p>
+  <pre>
+echo $LADSPA_PATH
+</pre>
+
+  <p>Of course the above only works for the time you are logged into your computer. In other words, if you log out or reboot you will have to type this in again.</p>
+
+  <p>If you want these changes to be permanent then do the following:</p>
+
+  <p><strong>(THIS WORKS FOR LINUX [and maybe OS X] SYSTEMS ONLY)</strong><br></p>
+
+  <p>open a terminal and type in</p>
+  <pre>
+nano ~/.bashrc 
+</pre>
+
+  <p>This will open your .bashrc file in a text editor in your terminal.</p>
+
+  <p><strong>***PLEASE MAKE A BACK-UP COPY OF THIS FILE BEFORE EDITING!!!***<br></strong></p>
+
+  <p>Scroll to the bottom and type in</p>
+  <pre>
+ PATH=$LADSPA_PATH:/usr/lib/ladspa:~/.ladspa:/usr/local/lib/ladspa 
+</pre>
+
+  <p>Do not use spaces and don't forget the colons in between paths. And remember to save your changes. You can put a comment using a '#' at the beginning of a line. Adding a comment will help you to remember what something is or does when you look at it later on.<br></p>
+
+  <p>If you already have the ladspa-sdk installed on your system you can use the command "listplugins" in a terminal to get a list of all the LADSPA plugins on your system.</p>
+
+  <p>No worries, if you don't have the ladspa-sdk,&nbsp; you can install it easily by entering the following in a terminal:<br></p>
+  <pre>
+ sudo apt-get install ladspa-sdk 
+</pre>
+
+  <p>In fact, it might be useful for you to save a text file of all your plugins for reference.</p>
+
+  <p>If you'd like to do this then type the following into a terminal:</p>
+  <pre>
+listplugins &gt; ~/my_dir_name_here/plugs.txt
+</pre>
+
+  <h2>Using the [plugin~] object in a patch</h2>
+
+  <p>&nbsp;&nbsp;<img src="_booki/pure-data/static/plugin_patch5b.jpg"><br></p>
+
+  <p>&nbsp; Fig 1. - Cheat Sheet for using [plugin~]<br></p>
+
+  <p>&nbsp;</p>
+
+  <p>In order to use the [plugin~] object in a patch you will have to know how to' talk' to it, i.e. what messages it takes to control it.</p>
+
+  <p>First we'll try using a plugin that comes with the ladspa-sdk we've just downloaded</p>
+
+  <p>here is some info about the plugins that come with the ladspa-sdk:</p>
+
+  <p><a title="ladspa-sdk plugins" href="http://www.ladspa.org/ladspa_sdk/example_plugins.html">http://www.ladspa.org/ladspa_sdk/example_plugins.html</a></p>
+
+  <p>Let's start with something simple like a noise generator to get the hang of things.</p>
+
+  <p>First we need to find the 'Plugin Label' in order to instantiate the plugin</p>
+
+  <p>the simplest way to do this is to use a command that installed along with the ladspa-sdk</p>
+
+  <p>Looking in '/usr/lib/ladspa' directory we see the filename for the noise plugin is 'noise.so'&nbsp;<br></p>
+
+  <p>so let's open a terminal and type in the following:</p>
+  <pre>
+analyseplugin noise.so 
+</pre>
+
+  <p>we should see a report in the terminal:<br></p>
+
+  <p>Plugin Name: "White Noise Source"<br>
+  Plugin Label: "noise_white"<br>
+  Plugin Unique ID: 1050<br>
+  Maker: "Richard Furse (LADSPA example plugins)"<br>
+  Copyright: "None"<br>
+  Must Run Real-Time: No<br>
+  Has activate() Function: No<br>
+  Has deativate() Function: No<br>
+  Has run_adding() Function: Yes<br>
+  Environment: Normal or Hard Real-Time<br>
+  Ports:&nbsp;&nbsp;&nbsp; "Amplitude" input, control, 0 to ..., default 1, logarithmic<br>
+  &nbsp;&nbsp;&nbsp; "Output" output, audio<br>
+  <br></p>
+
+  <p>The Plugin Label for the noise.so plugin is "noise_white"</p>
+
+  <p>So place a [plugin~] object in your patch and enter the label we found in the previous step into it.</p>
+
+  <p>After instantiating the plugin we should see a report about the plug in the Pd console:</p>
+
+  <p><br>
+  verbose( 1):plugin~: found plugin "noise_white" in library "/usr/lib/ladspa/noise.so"<br>
+  verbose( 1):plugin~: constructed plugin "White Noise Source" successfully<br>
+  verbose( 1):plugin~: plugin ports: audio 0/1 ctrl 1/0<br>
+  verbose( 1):plugin~: plugin active<br>
+  plugin~: "White Noise Source"</p>
+
+  <p>We see that we have yet another name for the plugin of "White Noise Source" but we will ignore that for now.</p>
+
+  <p>On the third line we see we have one control port which uses the left inlet.</p>
+
+  <p>But we still need more info in order to use the plugin.<br></p>
+
+  <p>Place a message box in your patch and type in</p>
+
+  <p>[info]<br></p>
+
+  <p>connect it to the left inlet of [plugin~ noise_white] and the outlet of the [plugin~]</p>
+
+  <p>to a [print] -or- [pd/print] object<br></p>
+
+  <p>after sending the [info] message</p>
+
+  <p>we should see in the Pd console:</p>
+
+  <p>print: port in control Amplitude 0 1<br>
+  print: port out audio Output 0 1</p>
+
+  <p>The control port we want to use is called Amplitude and has a range from 0 - 1</p>
+
+  <p>In order to use this parameter we need to count the number of control ports</p>
+
+  <p>and use that number in a message box</p>
+
+  <p>Since we only have one control port (Amplitude) the number we'll use is '#1'<br></p>
+
+  <p>Enter the following into a message box:&nbsp;</p>
+
+  <p>[control #1 ]&nbsp;</p>
+
+  <p>and connect that to the [plugin~ noise_white] object left inlet<br></p>
+
+  <p>next we need to add a number box or a slider and set its range to 0 - 1</p>
+
+  <p>connect that to the inlet of the message box</p>
+
+  <p>Then connect the output of the plugin to a [dac~] and turn on the patch</p>
+
+  <p>as you slowly move the slider from 0 - 1 you should hear the white noise being generated.</p>
+
+  <h2>Summary<br></h2>
+
+  <p>While the above seems somewhat complicated it's simpler than it looks and can be broken down into the following steps:</p>
+
+  <p>1 - find the "Plugin Label" on the command line</p>
+
+  <p>2 - send&nbsp; an [info] message to [plugin~ &lt;Plugin Label&gt;] for a list of control ports<br></p>
+
+  <p>3 - count control ports<br></p>
+
+  <p>4 - send data to the port number of the parameter you want to control<br></p>
+
+  <p>it becomes much easier after you've performed these four simple steps a couple of times.</p>
+
+  <p><strong>More info on LADSPAs in general:</strong><br>
+  <br>
+  <a href="http://linuxdevcenter.com/pub/a/linux/2001/02/02/ladspa.html%20" target="" title="LADSPA info">http://linuxdevcenter.com/pub/a/linux/2001/02/02/ladspa.html</a></p><br>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="glue.html">GLUE</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="time.html">TIME</a></li>
+
+  <li><a href="midi.html">MIDI</a></li>
+
+  <li><a href="tables.html">TABLES</a></li>
+
+  <li><a href="misc.html">MISC</a></li>
+
+  <li><a href="audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="gem.html">GEM</a></li>
+
+  <li><a href="pdp.html">PDP</a></li>
+
+  <li><a href="physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="hosting-plugins.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="hosting-plugins.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

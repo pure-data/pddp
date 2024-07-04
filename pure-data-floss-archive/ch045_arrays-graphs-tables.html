@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch045_arrays-graphs-tables.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch045_arrays-graphs-tables.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Arrays, Graphs and Tables<br></h1>
+
+  <p>Often, we need a way to conveniently store large amounts of data and to be able to instantly access it. Pd uses <strong>Arrays</strong> for this purpose. An array can be thought of as a container in the computer's memory with neatly indexed drawers with data that can be looked up instantly. They are used for many purposes, including the loading of soundfiles into Pd.</p>
+
+  <p>Arrays are accessed by their <strong>Index number</strong>. These numbers are used to look up values stored in the array. So if we ask an array what is stored at index number "0", it will return the first value stored there. And if the array has 100 values stored in it, asking it for index number "99" will give the last value in the array.<br>
+  <br>
+  Arrays are displayed on screen in <strong>Graphs</strong>. A graph plots out the data stored in the array using an X/Y format, meaning that the index numbers of the array are shown on the X (horizontal) axis, and the values stored at those index numbers are shown on the Y (vertical) axis. This graph is created automatically, whenever we create an array.<br></p>
+
+  <p>However, when we don't need to see the array on screen, we can hide it away inside a <strong>Table.</strong>&nbsp; A table is a <strong>subpatch</strong> which contains both the array and its graph. In this case, it is used with a <strong>creation argument</strong> which gives the name of the array. For example, if you create an <strong>object</strong> named [table mytablename], then inside the [table] object you will find an array named "mytablename" inside its own <strong>graph</strong>.<br></p>
+
+  <h2>Creating an Array&nbsp;</h2>
+
+  <p>To create a new array, choose "Array" from "Put" menu and a dialog appears:</p>
+
+  <p><img title="array1" alt="array1" src="_booki/pure-data/static/PureData-DataFlow-array1-en.png" height="216" width="186"><br></p>
+
+  <p>Here the name and size of array can be defined. The name of the array should be unique and <content-goes-here/> can be used in a name (i.e.: <content-goes-here/>-sample1) to avoid crosstalk. The size of the array defines how many elements it will hold. If the array will be used to control a 16-step sequencer, the only 16 elements are needed. But if it will contain a two seconds of audio at a 44.1KHz sampling rate, then the array would require 88200 elements. (The array can also be resized later, however, when the soundfile is loaded into it.)<br></p>
+
+  <p>The "save contents" button will cause Pd to save the contents of an array within the patch file. This is useful when it stores data that might be used each time the patch is opened, for example to modulate the frequency or amplitude of a sound. However, this is not recommended if soundfiles will be loaded into it, as the audio data will be stored as text information inside the Pd patch!<br></p>
+
+  <p>The next three options, "draw as points", "polygon" or "bezier curve", define how data will be visualized: as discreet points (horizontal lines), as cornered zigzagging connected lines or smoothed bezier-curved line:<br></p>
+
+  <p><img title="arrays1" alt="arrays1" src="_booki/pure-data/static/PureData-DataFlow-arrays1-en.png" height="565" width="591"><br></p>
+
+  <p>The last option is whether to display the array "in new graph", or use an existing one ("in last graph"). Most often, each array will use its own, new graph. However, displaying multiple arrays in one graph can be a way of visually comparing information.&nbsp;</p>
+
+  <h2>Using Arrays to Display Audio&nbsp;</h2>
+
+  <p>Sometimes arrays can be used to display the waveform of sound signals. Using [tabwrite~], sound signals are recorded into table. Every time a [tabwrite~] receives a "bang" from the [metro] object, it will start recording (sampling) the incoming audio signal into the array, graphing it when it reaches the end of array:</p>
+
+  <p><img title="arrays_scope" alt="arrays_scope" src="_booki/pure-data/static/PureData-DataFlow-arrays_scope-en.png" height="245" width="405">&nbsp;</p>
+
+  <p>In above example, [tabwrite~] is sent a "bang" every half second to continuously display the waveform produced from two [phasor~]s, and a [clip~] object.</p>
+
+  <h2>Writing Data to an Array&nbsp;</h2>
+
+  <p>Data can be put as values into tables too, simply by sending an index number (X-coordinate) and a value (Y-coordinate) to [tabwrite] (no tilde!) object:</p>
+
+  <p><img title="array_tabwrite" alt="array_tabwrite" src="_booki/pure-data/static/PureData-DataFlow-array_tabwrite-en.png" height="276" width="530"><br></p>
+
+  <p>In above example, for each index number&nbsp; (they are produced with a counter and start from beginning (0) with [mod 100] at 100) a random value between -1 and 1 is written to a table.</p>
+
+  <h2>Reading Data from Arrays<br></h2>
+
+  <p>Tables can be read (looked up) in two ways: to get discrete numbers, or to directly read them as audio waveforms. With [tabread] an index number is taken as an X-coordinate and value in the table (Y-coordinate) is output. In the following example an array is used in a repeating sequencer-like fashion as a simple rudimentary control for an sawtooth oscillator:</p>
+
+  <p><img title="array_tabreadsequencer" alt="array_tabreadsequencer" src="_booki/pure-data/static/PureData-DataFlow-array_tabreadsequencer-en.png" height="360" width="477"><br></p>
+
+  <p>With [tabosc4~] table data is used as an oscillating waveform - like sinewave is used in sinewave oscillator [osc~] and sawtooth wave is used in [phasor~]:</p>
+
+  <p><img title="array_tabosc4" alt="array_tabosc4" src="_booki/pure-data/static/PureData-DataFlow-array_tabosc4-en.png" height="270" width="567"><br></p>
+
+  <p>In above example an oscillating waveform from table7 is used to modulate frequency of an oscillator that is using the same waveform to synthesize sound. Changing the table in realtime will influence the modulation and oscillation. Source for hours of fun!</p>
+
+  <h2>Using Arrays to Play Back Samples<br></h2>
+
+  <p>Another way to read data from a table is to play it as a sound recording - which usually is, especially if array is filled with data from a sound file. For this [soundfiler] object comes handy, as is shown in the following examples. In first, array is played using simple and straightforward [tabplay~] object, which offers flexibility of playing from a specific point for a specific length. Remember, digital sound recording is, simply put, high frequency measurements (sample rate, i.e.: 44.1kHz) of sound vibrations. In Pd, when soundfile is loaded into a table, every single measurement (sample) can be accessed. That is why, 44100 samples equals 1 second (in most cases).</p>
+
+  <p><img title="array-play_1" alt="array-play_1" src="_booki/pure-data/static/PureData-DataFlow-array-play_1-en.png" height="344" width="596">&nbsp;</p>
+
+  <p><br>
+  Following to the aforementioned possibility of accessing individual samples within a sound recording that's been loaded into an array, a [tabread4~] object allows more computational flexibility. Below, [phasor~] object produces ramps (sawtooth wave) from 0 to 1 at the audio rate (commonly 44100 times in a second). If frequency of the [phasor~] oscilator is 1Hz, it will output a ramp from 0 to 1 in exactly one second. If multiplied by 44100 and sent to [tabread4~], it will read first 44100 indices (indexes) in a second and output the values as an audio signal - example below tries to demonstrates that with a twist or two:</p>
+
+  <p><img title="array_tabread4" alt="array_tabread4" src="_booki/pure-data/static/PureData-DataFlow-array_tabread4-en.png" height="349" width="574"><br>
+  <br>
+  First twist comes from an idea of changing the frequency of phasor, and this way slowing down the ramps. This would however shift the pitch of the sound - like changing speed of a vinyl record. This is prevented by multiplication with higher number of samples, which effectively turn the parameter into the length of a sample that is being looped instead of slowing it down. Looping is here because [phasor~] starts again at 0 after it has reached 1. The other twist is the starting point, which simply shifts the whole loop by adding number of samples (seconds multiplied by 44100).<br>
+  <br></p><br>
+
+  <p>&nbsp;</p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch045_arrays-graphs-tables.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch045_arrays-graphs-tables.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

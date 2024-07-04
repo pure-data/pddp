@@ -1,0 +1,879 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="misc.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="misc.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td sdnum="1031;0;@" align="left" width="226" height="17">
+          <h2>Name</h2>
+        </td>
+
+        <td align="left" width="138">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td align="left" width="490">
+          <h2>Function</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" align="left" valign="middle" height="17">
+          <h1>Misc</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" sdnum="1031;0;@" align="left" valign="middle" height="17"><strong>Vanilla Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">loadbang</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">send „bang“ automatically when patch loads</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">serial</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">serial device control for NT only</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">netsend</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">send Pd messages over a network</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">netreceive</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">listen for incoming messages from network</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">qlist</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">text-based sequencer</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">textfile</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">read and write textfiles</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">openpanel</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">„open“ dialog</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">savepanel</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">„save as“ dialog</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">bag</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">collection of numbers</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">poly</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">MIDI-style polyphonic voice allocator</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">key keyup</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">numeric key values from keyboard</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">keyname</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">symbolic key name</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">declare</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">set search path and/or load libraries</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" sdnum="1031;0;@" align="left" valign="middle" height="17"><strong>Extended Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">hid</td>
+
+        <td align="left">hcs</td>
+
+        <td align="left">HID protocoll reader</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">classpath</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">returns each path in the global classpath</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">import</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">loads libraries from the path to local namespace</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">parazit</td>
+
+        <td sdnum="1031;0;@" align="left">gnd</td>
+
+        <td align="left">a patch for disrupting other patches using internal messages<br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">netclient</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">simple client that connects to netserver or to pd's native netreceive object</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">netdist</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">distribute data to several netreceive</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">netrec</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">?report of netsend connections?</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">netserver</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace maxlib</td>
+
+        <td align="left">netclient</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">getenv</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace motex</td>
+
+        <td align="left">sends value of an environment variable argument on bang</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">init ii</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">initialize anything by loadbang</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">grid</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">iem_pbank_csv</td>
+
+        <td align="left">flatspace iemlib</td>
+
+        <td align="left">parameter-bank with csv-syntax</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">mapper</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">msgfile</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">read and write messages into text files</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">operating_system</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace zexy</td>
+
+        <td align="left">get the current OS</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">pool</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">a hierarchical storage</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">stripdir</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">strips all leading directories from a path</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">system</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace motex</td>
+
+        <td align="left">send a system message to the console</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">vbap</td>
+
+        <td sdnum="1031;0;@" align="left">ggee</td>
+
+        <td align="left">vector based amplitude panning external</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">wintablet</td>
+
+        <td sdnum="1031;0;@" align="left"><br></td>
+
+        <td align="left">external for using Wacom tablets on Windows</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ENV</td>
+
+        <td sdnum="1031;0;@" align="left">cxc flatspace</td>
+
+        <td align="left">get and set environment variables</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">proc</td>
+
+        <td sdnum="1031;0;@" align="left">cxc flatspace</td>
+
+        <td align="left">interface to the linux proc filesystem</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">comment</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">text comment with some formatting options, meant to be Max/MSP compatible</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">mousefilter</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">passes numbers only when mousebutton is up</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">MouseState</td>
+
+        <td sdnum="1031;0;@" align="left">cyclone</td>
+
+        <td align="left">report mouse x/y/deltax/y and buttonpress</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">linuxevent</td>
+
+        <td sdnum="1031;0;@" align="left">deprecated flatspace</td>
+
+        <td align="left">outputs raw events from the linux event system</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">linuxmouse</td>
+
+        <td sdnum="1031;0;@" align="left">deprecated flatspace</td>
+
+        <td align="left">takes events directly from a linux event device</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">filesize fsize</td>
+
+        <td sdnum="1031;0;@" align="left">ext13 flatspace</td>
+
+        <td align="left">gives size of a file</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">wavinfo</td>
+
+        <td sdnum="1031;0;@" align="left">ext13 flatspace</td>
+
+        <td align="left">get samples, channels, bitspersample, amplerate of a file</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">beatpipe</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">event scheduler / quantizer</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">comport</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">serial port interface</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">folder_list</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace hcs</td>
+
+        <td align="left">listing of files based on a wildcard pattern</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">getdir</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">get the directory this patch is operating in</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">ifeel</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace hcs</td>
+
+        <td align="left">control the pulse of an iFeel mouse</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">image</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">incorporate images</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">openpatch opa</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">open a patch file</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">popen</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace</td>
+
+        <td align="left">shell commands</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">popup</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace iemlib</td>
+
+        <td align="left">popup menu</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">shell</td>
+
+        <td sdnum="1031;0;@" align="left">flatspace ggee</td>
+
+        <td align="left">run commands in a UNIX shell</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">failsafe</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">turns off dsp and / or quits pd</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">file_type</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">find the file type of a file</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">gid-&gt;group_name group_name-&gt;gid</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">convert group name &lt;-&gt; GID</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">group</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">fetch password data based on a UID or group name</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">passwd</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">fetch password data based on a UID or username</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">stat</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">gets information about files</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">uid-&gt;username username-&gt;uid</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">convert group name &lt;-&gt; GID</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">version</td>
+
+        <td sdnum="1031;0;@" align="left">hcs</td>
+
+        <td align="left">version of the currently running Pd</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">joystick</td>
+
+        <td sdnum="1031;0;@" align="left">hid</td>
+
+        <td align="left">use a joystick device with Pd</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">keyboard</td>
+
+        <td sdnum="1031;0;@" align="left">hid</td>
+
+        <td align="left">use a keyboard device with Pd</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">keygate</td>
+
+        <td sdnum="1031;0;@" align="left">hid mapping</td>
+
+        <td align="left">simple keyboard-controlled gate</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">mouse</td>
+
+        <td sdnum="1031;0;@" align="left">hid</td>
+
+        <td align="left">use a mouse device with Pd</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">datei-l datei-o</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">send the message „open ...“</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">datei-r</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">send the message „read ...“</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">datei-w</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">send the message „write ...“</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">pd-colors</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">Tcl/Tk and data structure's color palettes</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">gui-edit</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">GUI-editor abstraction</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">oscD</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">counts received OSC messages</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">oscS</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">interface for [sendOSC]</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">tastin</td>
+
+        <td sdnum="1031;0;@" align="left">jmmmp</td>
+
+        <td align="left">gate for keyboard input</td>
+      </tr>
+
+      <tr>
+        <td sdnum="1031;0;@" align="left" height="17">keybang</td>
+
+        <td sdnum="1031;0;@" align="left">keyboardkeys</td>
+
+        <td align="left">key bang GUI</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">keytoggle</td>
+
+        <td sdnum="1031;0;@" align="left">keyboardkeys</td>
+
+        <td align="left">key toggle GUI</td>
+      </tr>
+
+      <tr>
+        <td align="left" height="17">keyupdown</td>
+
+        <td sdnum="1031;0;@" align="left">keyboardkeys</td>
+
+        <td align="left">increase/decrease of any value GUI</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="glue.html">GLUE</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="time.html">TIME</a></li>
+
+  <li><a href="midi.html">MIDI</a></li>
+
+  <li><a href="tables.html">TABLES</a></li>
+
+  <li><a href="misc.html">MISC</a></li>
+
+  <li><a href="audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="gem.html">GEM</a></li>
+
+  <li><a href="pdp.html">PDP</a></li>
+
+  <li><a href="physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="misc.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="misc.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,791 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="oscillatrors-and-tables.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="oscillatrors-and-tables.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="391" height="17" align="left" sdnum="1031;0;@">
+          <h2>Name</h2>
+        </td>
+
+        <td width="139" align="left">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td width="415" align="left">
+          <h2>Function</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle">
+          <h1>Audio Oscillators and Tables</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Vanilla Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">phasor~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">sawtooth generator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">cos~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">cosine waveshaper</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">osc~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">cosine wave oscillator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">tabwrite~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">write a signal in an array</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">tabplay~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">play a table as a sample (non-transposing)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">tabread~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">table lookup</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">tabread4~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">4-point interpolating table lookup</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">tabosc4~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">4-point interpolating table oscillator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">tabsend~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">writes one block of a signal continuously to an array</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">tabreceive~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">read a block of signal from an array continuously</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Extended Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">agogo~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bamboo~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">blotar~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bonk~</td>
+
+        <td align="left" sdnum="1031;0;@">vanilla/bonk~</td>
+
+        <td align="left">attack detector for small percussion instruments</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bowed~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bowedbar~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">brass~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">buzz~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">subctractive synthesis without filters</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">cabasa~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">cavoc~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">An 8 rule cellular automata that generates spectra</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">cavoc27~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">A 27 rule cellular automata object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">chase~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">uses a sync signal to determine who gets out which outlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">clarinet~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">dcblock~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">blocks DC components in audio signals</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">dirac~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">produces a unit:sample:sequence</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">escalator~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">fiddle~</td>
+
+        <td align="left" sdnum="1031;0;@">vanilla</td>
+
+        <td align="left">pitch estimator and sinusoidal peak finder</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">flute~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">formant~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">formant synthesis</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">gq~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">equalizer with variable number of filter banks</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">guiro~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">LFO_noise~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">2-point-interpolated time-stretched white noise</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">loop~</td>
+
+        <td align="left" sdnum="1031;0;@">extra flatspace loop~</td>
+
+        <td align="left">phase generator for looping samples</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lrshift~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace lrshift~</td>
+
+        <td align="left">shift signal vector elements left or right</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">mandolin~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">marimba~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">morse</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace mjlib</td>
+
+        <td align="left">convert text to morse code</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">munger~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">granular sampling instrument</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">noish~ noisi~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">draws a random number every n samples and interpolates between</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">paf~ 0.06</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pink~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone iemlib</td>
+
+        <td align="left">pink noise (-3dB per octave)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">plucked~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rechteck~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a squarewave generator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">scrub~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">sinesum</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">examples of sinesum</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">sleigh~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">sleigh bell</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">step~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">unit:step sequence or a rectangle:window</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">susloop~</td>
+
+        <td align="left" sdnum="1031;0;@">bsaylor flatspace</td>
+
+        <td align="left">another phase generator for sample looping</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">syncgrain~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">implements synchronous granular synthesis</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vibraphone~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left"><br></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">testsig~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">choose noise, osc, phasor by clicking</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">dynwav~</td>
+
+        <td align="left" sdnum="1031;0;@">creb flatspace</td>
+
+        <td align="left">dynamic wavetable: use a signal block as wavetable</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">junction~</td>
+
+        <td align="left" sdnum="1031;0;@">creb flatspace</td>
+
+        <td align="left">circulant lossless signal junction</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">sbosc~</td>
+
+        <td align="left" sdnum="1031;0;@">creb</td>
+
+        <td align="left" sdnum="1031;0;@">smallband oscillator (i.e. for formant synthesis)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">scrollgrid1D~</td>
+
+        <td align="left" sdnum="1031;0;@">creb</td>
+
+        <td align="left" sdnum="1031;0;@">a stabilized scroll grid chaotic oscillator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">index~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left" sdnum="1031;0;@">sample playback without interpolation</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lookup~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left" sdnum="1031;0;@">transfer funcion lookup table</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">peek~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left" sdnum="1031;0;@">read and write sample values</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">play~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left" sdnum="1031;0;@">position based sample playback</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rand~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left" sdnum="1031;0;@">bandlimited random noise</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">wave~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left" sdnum="1031;0;@">variable size wavetable</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">ambi_rot</td>
+
+        <td align="left" sdnum="1031;0;@">iem_ambi</td>
+
+        <td align="left" sdnum="1031;0;@">ambisonic rotation</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">ambi_encode ambi_decode ambi_decode3 ambi_decode_cube</td>
+
+        <td align="left" sdnum="1031;0;@">iem_ambi</td>
+
+        <td align="left">ambisonic encoding / decoding</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">bin_ambi_reduced_decode_fft2 bin_ambi_reduced_decode_2</td>
+
+        <td align="left" sdnum="1031;0;@">iem_bin_ambi</td>
+
+        <td align="left">ambisonic binaural encoding / decoding</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="../network-data/send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="../network-data/osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="glue.html">GLUE</a></li>
+
+  <li><a href="math.html">MATH</a></li>
+
+  <li><a href="time.html">TIME</a></li>
+
+  <li><a href="midi.html">MIDI</a></li>
+
+  <li><a href="tables.html">TABLES</a></li>
+
+  <li><a href="misc.html">MISC</a></li>
+
+  <li><a href="audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="gem.html">GEM</a></li>
+
+  <li><a href="pdp.html">PDP</a></li>
+
+  <li><a href="physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="oscillatrors-and-tables.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="oscillatrors-and-tables.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

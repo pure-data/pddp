@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="http://archive.flossmanuals.net/pure-data/"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="../_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="osc.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="osc.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1>Open Sound Control (OSC)</h1>
+
+  <p><a href="http://51858360.de.strato-hosting.eu/puredata/osc_patches.zip">zip file of patches</a><br></p>
+
+  <p>The OSC objects are for sharing musical data over a network. OSC is a standard that lets you format and structure messages. OSC enables communication at a higher level than the PureData [netsend] objects and is both more flexible and more precise than MIDI. OSC is network enabled, using common network cables and hardware.</p>
+
+  <p>Using OSC you can exchange data with a number of devices, such as Lemur, iPhone (through OSCulator), Monome, or applications such as Ardour, Modul8, Reaktor and many more. Most modern programming languages are OSC enabled, notably Processing, Java, Python, C++, Max/MSP and SuperCollider.<br></p>
+
+  <h2>Setting up an OSC connection</h2>
+
+  <p>There are several OSC implementations in PureData. At the time of writing, the mrpeach implementation is best supported. PureData is in the process of migrating to mrpeach OSC objects, but in the current release you still have to import them explicitly.</p>
+
+  <h3>Sending a simple message<br></h3>
+
+  <p><img alt="Sending OSC messages" src="_booki/pure-data/static/PureData-Network-OSC-osc_udpsend_2-en.png" height="274" width="340"><br>
+  <em>osc_udpsend.pd</em></p>
+
+  <p>Sending a connect message to an [udpsend] object opens an UDP connection to another computer. As with [netsend], you have to provide an <strong>IP address</strong> or <strong>hostname</strong>, and a <strong>port</strong> number.</p>
+
+  <p>The UDP connection you just opened can only really send bytes. In order to send an OSC message over the opened connection, you have to pack it first, using the [packOSC] object.</p>
+
+  <h3>Receiving a simple message<br></h3>
+
+  <p><img alt="Receiving OSC messages" src="_booki/pure-data/static/PureData-Network-OSC-osc_udpreceive-en.png" height="198" width="286"><br></p>
+
+  <p><em>osc_udpreceive.pd</em></p>
+
+  <p>The [udpreceive] object tells the patch to listen to a given port number.</p>
+
+  <p>The OSC message has to be unpacked using the [unpackOSC] object.</p>
+
+  <h3>IP addresses, hostnames<br></h3>
+
+  <p>If both sending and receiving PureData patches are on <em>the same computer</em>, you can use the special loopback interface: the IP address is 127.0.0.1 and the hostname is "localhost".</p>
+
+  <p>If both computers are on <em>a local network</em>, you can use their network names, or else, to find out a computers IP address, open a terminal and type "ifconfig" (Mac/Linux) or "ipconfig /all" (Windows).</p>
+
+  <p>If you want to open a remote connection to a computer <em>over the internet</em>, consider using TCP instead of UDP (see below) and proceed as with a local connection.</p>
+
+  <h3>Ports</h3>
+
+  <p>Every computer has a large number of ports. Each service (such as a webserver, a database etc.) may listen or send data through it's assigned port. Which port is used for what is a matter of configuration, but PureData uses port 9001 by default. You can choose another port if you want to, just make sure the port you choose is not already in use. If you are communicating with another application, you will have to find out which port it is using.<br></p>
+
+  <h3>UDP vs. TCP<br></h3>
+
+  <p>In all these examples, you can replace the [udpsend] and [udpreceive] objects by their corresponding TCP counterparts [tcpsend] and [tcpreceive]. The TCP protocol is much more reliable than UDP, so if you are connecting to a computer over the internet, or data packets are lost or shuffled underway, use TCP.</p>
+
+  <h2>The OSC address pattern</h2>
+
+  <p>The first part of an OSC message is an URL-style address (in the previous example, “/test”). The address lets you route the data on the receiving end.</p>
+
+  <p>This example sends 2 different OSC messages. Messages are told apart by their address components (/test/voice and /test/mute).<br></p>
+
+  <p><img alt="Sending OSC messages with different address patterns" src="_booki/pure-data/static/PureData-Network-OSC-osc_pathsend_1-en.png" height="338" width="356">&nbsp;</p>
+
+  <p><em>osc_pathsend.pd</em></p>
+
+  <p>On the receiving end, the messages are routed using the [routeOSC] object and used to control an oscillator.<br></p>
+
+  <p><img alt="Receiving OSC messages with different address patterns" src="_booki/pure-data/static/PureData-Network-OSC-osc_pathreceive_1-en.png" height="384" width="396">&nbsp;</p>
+
+  <p><em>osc_pathreceive.pd</em></p>
+
+  <p><strong>It is important to understand that OSC does not come with predefined messages, like MIDI does. It is up to you to define the messages you want to send and receive.</strong></p>
+
+  <h2>OSC arguments</h2>
+
+  <p>An OSC message can have any number of arguments. This example creates a message with 2 arguments for note (MIDI note number) and amplitude.</p>
+
+  <p><img alt="Sending OSC messages with arguments" src="_booki/pure-data/static/PureData-Network-OSC-osc_argssend-en.png" height="471" width="422">&nbsp;</p>
+
+  <p><em>osc_argssend.pd</em><br></p>
+
+  <p>On the receiving patch, the arguments are unpacked using the [unpack] object, and used to control an oscillator's pitch and amplitude.</p>
+
+  <p><img alt="Receiving OSC messages with arguments" src="_booki/pure-data/static/PureData-Network-OSC-osc_argsreceive-en.png" height="421" width="432">&nbsp;</p>
+
+  <p><em>osc_argsreceive.pd</em><br></p>
+
+  <h2>Types</h2>
+
+  <p>The previous examples all send typed-guessed messages. It is also possible (and good practice) to set the types of the arguments.</p>
+
+  <p>Common types are:</p>
+
+  <p>i: integer</p>
+
+  <p>f: float</p>
+
+  <p>s: string</p>
+
+  <p>T: TRUE</p>
+
+  <p>F: FALSE</p>
+
+  <p>This example uses the [sendtyped] object to send a <strong>boolean</strong> (true or false), an <strong>integer</strong> (a MIDI note number) and a <strong>float</strong> (amplitude).<br></p>
+
+  <p><img alt="Sending OSC messages with typed arguments" src="_booki/pure-data/static/PureData-Network-OSC-osc_typesend-en.png" height="408" width="412">&nbsp;</p>
+
+  <p><em>osc_typesend.pd</em><br></p>
+
+  <p>Depending on the value of the first argument (the boolean argument), the receiving patch puts out a sine or a sawtooth wave.</p>
+
+  <p><img alt="Receiving OSC messages with typed arguments" src="_booki/pure-data/static/PureData-Network-OSC-osc_typereceive_1-en.png" height="538" width="500">&nbsp;</p>
+
+  <p><em>osc_typereceive.pd</em></p>
+
+  <p><strong>Note that PureData and OSC use different types. PureData only knows floats, strings and symbols.</strong></p>
+
+  <h2>Bundles</h2>
+
+  <p>Sometimes you might want to send several messages at the same time. This example sends one bundle containing 3 notes.</p>
+
+  <p>Bundles are enclosed in square brackets. Inside the brackets, you can pack any number of messages.</p>
+
+  <p><img alt="sending an OSC bundle" src="_booki/pure-data/static/PureData-Network-OSC-osc_bundlesend_1-en.png" height="517" width="483">&nbsp;</p>
+
+  <p><em>osc_bundlesend.pd</em><br></p>
+
+  <p>Receiving a bundle is no different than receiving a single message.</p>
+
+  <p><img alt="Receiving OSC bundles" src="_booki/pure-data/static/PureData-Network-OSC-osc_bundlereceive_1-en.png" height="550" width="409"></p><em>osc_bundlereceive.pd</em>
+
+  <h2>Designing your namespace</h2>
+
+  <p><br>
+  Unlike MIDI, OSC requires you to define your own messages. This is one of OSC's main advantages, and if you are doing anything more complex than the examples above, you should start by getting your set of messages (your <strong>namespace</strong>) right. There is no single strategy to do this, but here are some ideas to get you started.<br></p>
+
+  <h3>Connecting to hardware or external applications</h3>
+
+  <p>The easiest case, since these will come with their own predefined set of commands. You will find them specified in the documentation. Not much you can do here but stick to the specs.<br></p>
+
+  <h3>Connecting to another PureData patch or to your own application written in another language</h3>
+
+  <p><em>Avoiding name conflicts</em>: Keep in mind that you, or the person using your patch, are on a network. This network is shared by a number of computers running a number of applications, some of which might be using OSC too. So you should be careful to avoid name conflicts. A conflict happens when two applications use the same address pattern but mean different things. To avoid this, the first part of your address pattern should be unique. A foolproof, albeit pedantic, method is to use your domain as a prefix for all your messages e.g. /net/mydomain/...<br></p>
+
+  <p><em>Type conversion caveats</em>: PureData and OSC use different data types, so type conversion takes place every time you send or receive anything else than a float or a string. Due to the way data is handled internally, PureData can only work accurately with 24 bit numbers. Above this, integers gradually loose precision. Since OSC can carry 32 bit integers, you will get strange results above 16777216.<br></p>
+
+  <h3>Using a predefined namespace</h3>
+
+  <p>If this is your life's work (or your idée fixe), then using a predefined, domain-specific namespace might be a good move. Examples of these include: SYNoscopy for MIDI style controls (<a href="http://stud3.tuwien.ac.at/~e0725639/OSC-SYN.txt">specification</a> and <a href="http://gombology.net">examples</a>) and <a href="http://www.gdif.org/">GDIF</a>, for music related movements and gestures. You can also look at one of the many open source applications listed at <a href="http://opensoundcontrol.org">opensoundcontrol.org</a> for inspiration.<br>
+  <br></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="../introduction/index.html">INTRODUCTION</a></li>
+
+  <li><a href="../introduction/graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="../introduction/what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="../installing/osx.html">OSX</a></li>
+
+  <li><a href="../installing/windows.html">WINDOWS</a></li>
+
+  <li><a href="../installing/ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="../installing/debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="../getting-started/configuring.html">CONFIGURING</a></li>
+
+  <li><a href="../getting-started/advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="../getting-started/starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="../the-interface/the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="../the-interface/trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="../audio-tutorials/simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="../audio-tutorials/frequency.html">FREQUENCY</a></li>
+
+  <li><a href="../audio-tutorials/additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="../audio-tutorials/amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="../audio-tutorials/square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="../audio-tutorials/generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="../audio-tutorials/dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="../audio-tutorials/antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="../audio-tutorials/filters.html">FILTERS</a></li>
+
+  <li><a href="../audio-tutorials/envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="../audio-tutorials/amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="../audio-tutorials/controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="../audio-tutorials/step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="../audio-tutorials/4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="../dataflow-tutorials/dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="../dataflow-tutorials/sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="../dataflow-tutorials/messages.html">MESSAGES</a></li>
+
+  <li><a href="../dataflow-tutorials/math.html">MATH</a></li>
+
+  <li><a href="../dataflow-tutorials/lists.html">LISTS</a></li>
+
+  <li><a href="../dataflow-tutorials/order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="../dataflow-tutorials/abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="../dataflow-tutorials/dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="../dataflow-tutorials/graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="../dataflow-tutorials/arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="../video-gem-tutorials/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../video-gem-tutorials/basics.html">BASICS</a></li>
+
+  <li><a href="../video-gem-tutorials/moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="../video-gem-tutorials/video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="../video-gem-tutorials/effects.html">EFFECTS</a></li>
+
+  <li><a href="../video-gem-tutorials/recording.html">RECORDING</a></li>
+
+  <li><a href="../video-gem-tutorials/screens.html">SCREENS</a></li>
+
+  <li><a href="../video-gem-tutorials/video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="../sensors/game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="../sensors/pduino.html">PDUINO</a></li>
+
+  <li><a href="../sensors/installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="../sensors/installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="../sensors/installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="../sensors/starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="../sensors/light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="../midi/using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="../streaming/audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="../streaming/oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="../list-of-objects/introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="../list-of-objects/glue.html">GLUE</a></li>
+
+  <li><a href="../list-of-objects/math.html">MATH</a></li>
+
+  <li><a href="../list-of-objects/time.html">TIME</a></li>
+
+  <li><a href="../list-of-objects/midi.html">MIDI</a></li>
+
+  <li><a href="../list-of-objects/tables.html">TABLES</a></li>
+
+  <li><a href="../list-of-objects/misc.html">MISC</a></li>
+
+  <li><a href="../list-of-objects/audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="../list-of-objects/audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="../list-of-objects/oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="../list-of-objects/audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="../list-of-objects/audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="../list-of-objects/sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="../list-of-objects/data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="../list-of-objects/gem.html">GEM</a></li>
+
+  <li><a href="../list-of-objects/pdp.html">PDP</a></li>
+
+  <li><a href="../list-of-objects/physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="../list-of-objects/obsolete.html">OBSOLETE</a></li>
+
+  <li><a href="../list-of-objects/hosting-plugins.html">HOSTING PLUGINS</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="../appendices/glossary.html">GLOSSARY</a></li>
+
+  <li><a href="../appendices/links.html">LINKS</a></li>
+
+  <li><a href="../appendices/credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="osc.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="osc.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

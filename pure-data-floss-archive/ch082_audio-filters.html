@@ -1,0 +1,1277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch082_audio-filters.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch082_audio-filters.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <table border="1" cellpadding="1" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="363" height="17" align="left" sdnum="1031;0;@">
+          <h2>Name</h2>
+        </td>
+
+        <td width="179" align="left">
+          <h2>Library/Path</h2>
+        </td>
+
+        <td width="516" align="left">
+          <h2>Function</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle">
+          <h1>Audio Filters</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Vanilla Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">env~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">envelope follower</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vcf~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">voltage-controlled bandpass filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">noise~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">uniformly distributed white noise</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hip~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">one-pole high pass filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lop~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">one-pole low pass filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bp~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">bandpass filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">biquad~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">2-pole-2-zero filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">samphold~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">sample and hold unit</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">print~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">print out raw values of a signal</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">rpole~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">real one-pole (recursive) filter, raw</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">rzero~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">real one-zero (non-recursive) filter, raw</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">rzero_rev~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">real one-zero (non-recursive) „reverse“ filter, raw</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">cpole~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">complex one-pole (recursive) filter, raw</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">czero~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">complex one-zero (non-recursive) filter, raw</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">czero_rev~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">complex one-zero (non-recursive) „reverse“ filter, raw</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="17" align="left" valign="middle" sdnum="1031;0;@"><strong>Extended Objects</strong></td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bandpass equalizer highpass highshelf hlshelf lowpass lowshelf notch</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace ggee</td>
+
+        <td align="left">coefficients for biquad~</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">1p1z</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">control IIR filter 1. order</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">aenv~</td>
+
+        <td align="left" sdnum="1031;0;@">bsaylor flatspace</td>
+
+        <td align="left">asymptotic ADSR envelope generator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">allpass~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left">allpass filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">ap1~ ap2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">allpass 1. / 2. order</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bpq2~ bp2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">bandpass 2.order with Q inlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bpw2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">bandpass 2.order with bandwidth inlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bsq2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">bandstop 2.order (notch) with Q inlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">bsw2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">bandstop 2.order (notch) with bandwidth inlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">burrow~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a cross-referenced filtering object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">centerring~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectral modulation object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">codepend~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a classic block convolution object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">comb~</td>
+
+        <td align="left" sdnum="1031;0;@">cyclone</td>
+
+        <td align="left">comb filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">complex</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">mod~ frequency shifter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">compressor~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">audio compressor</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">complex-mod~</td>
+
+        <td align="left" sdnum="1031;0;@">vanilla</td>
+
+        <td align="left">frequency shifter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">convol~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">convobrosfilter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">crossx~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a cross synthesis object with gating</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">cverb~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">implementation of the Csound reverb</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">dentist~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a partial knockout object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">disarrain~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">an interpolating version of disarray~</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">disarray~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectral redistribution object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">drown~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a noise reduction (or increase) object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">enveloper~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">the (old???) envelope generator of iemlib</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">ether~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">another spectral compositing object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">filter~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">multiple object for all useful IIR-filters 1. and 2. order like lowpass, highpass, bandpass, bandstop, allpass, etc</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">filterbank~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">outputs the frequence response against a set of band pass filters</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">filtersme1~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a hard filtering of low(soft) frequencies</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">filtersme2~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">filtering by drawing with mouse in array</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">FIR~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">convolve a signal with an array</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">freeverb~</td>
+
+        <td align="left" sdnum="1031;0;@">freeverb</td>
+
+        <td align="left">Schroeder/Moorer reverb model</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hilbert~</td>
+
+        <td align="left" sdnum="1031;0;@">vanilla</td>
+
+        <td align="left">phase quadrature of input for complex modulation</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hml_shelf~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">high-mid-low-shelving filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hp1~ hp2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">highpass 1. / 2. order</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hp2_butt~ hp3_butt~ hp4_butt~ hp5_butt~ hp6_butt~ hp7_butt~ hp8_butt~ hp9_butt~ hp10_butt</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">highpass 2.3.4.5.6.7.8.9.10.order with butterworth characteristic</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hp2_cheb~ hp3_cheb~ hp4_cheb~ hp5_cheb~ hp6_cheb~ hp7_cheb~ hp8_cheb~ hp9_cheb~ hp10_cheb~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">highpass 2.3.4.5.6.7.8.9.10.order with chebyshev characteristic</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hp2_bess~ hp3_bess~ hp4_bess~ hp5_bess~ hp6_bess~ hp7_bess~ hp8_bess~ hp9_bess~ hp10_bess~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">highpass 2.3.4.5.6.7.8.9.10.order with bessel characteristic</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">hp2_crit~ hp3_crit~ hp4_crit~ hp5_crit~ hp6_crit~ hp7_crit~ hp8_crit~ hp9_crit~ hp10_crit~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">highpass 2.3.4.5.6.7.8.9.10.order with critical damping</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">leaker~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a sieve based cross fader</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">limiter~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">a limiter/compressor module</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lp1~ lp2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">lowpass 1. / 2. order</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lp1_t~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">lowpass 1.order with time_constant inlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lp2_butt~ lp3_butt~ lp4_butt~ lp5_butt~ lp6_butt~ lp7_butt~ lp8_butt~ lp9_butt~ lp10_butt~</td>
+
+        <td align="left">iemlib</td>
+
+        <td align="left">lowpass 2.3.4.5.6.7.8.9.10.order with butterworth characteristic</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lp2_cheb~ lp3_cheb~ lp4_cheb~ lp5_cheb~ lp6_cheb~ lp7_cheb~ lp8_cheb~ lp9_cheb~ lp10_cheb~</td>
+
+        <td align="left">iemlib</td>
+
+        <td align="left">lowpass 2.3.4.5.6.7.8.9.10.order with chebyshev characteristic</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lp2_bess~ lp3_bess~ lp4_bess~ lp5_bess~ lp6_bess~ lp7_bess~ lp8_bess~ lp9_bess~ lp10_bess~</td>
+
+        <td align="left">iemlib</td>
+
+        <td align="left">lowpass 2.3.4.5.6.7.8.9.10.order with bessel characteristic</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">lp2_crit~ lp3_crit~ lp4_crit~ lp5_crit~ lp6_crit~ lp7_crit~ lp8_crit~ lp9_crit~ lp10_crit~</td>
+
+        <td align="left">iemlib</td>
+
+        <td align="left">lowpass 2.3.4.5.6.7.8.9.10.order with critical damping</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">maverage~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">moving average filter with IIR</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">mindwarp~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectral formant warping object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">moog~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace ggee</td>
+
+        <td align="left">signal controlled "moog" resonant lowpass</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">morphine~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a morphing object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">multiverb~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">Schroeder/Moorer reverb model</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">multyq~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a four band filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pan~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">equal power stereo panning</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pansig~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace motex</td>
+
+        <td align="left">same as above but takes a signal modulator rather than a float</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">para_bp2~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">parametril bandpass 2. order</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pin~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace mjlib</td>
+
+        <td align="left">randomly delivers the input signal to either the right or left outlet with a given probability</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pitchnoise~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">Harmonic/inharmonic monophonic timbre separator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">presidency~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectral sampler with pitch control</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pvgrain~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectrum analyzer for granular resynthesis</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pvharm~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a harmonizer</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pvoc~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">an additive synthesis phase vocoder</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pvtuner~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectrum quantizer for tuning to arbitrary scales</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pvwarp~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a non-linear frequency warper</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">reanimator~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">an audio texture mapper</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">resent~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">similar to residency~ but with independent bin control</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">residency~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectral sampler useful for time scaling</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">scrape~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a noise reduction (or increase) object with frequency control</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">shapee~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a frequency shaping object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">swinger~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a phase swapping object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">taint~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a cross synthesis object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vacancy~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectral compositing object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">xsyn~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a cross synthesis with compression object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">pvcompand~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">a spectral compressor/expander object</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">quantize~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">quantize a signal with a variable step-number</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">mov_avrg_kern~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace iemlib</td>
+
+        <td align="left">moving average filter kernel</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">mypol2rec~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">fft stuff, needed as abstraction for some other patches</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">myrec2pol~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">fft stuff, as above (ggee)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">para_pb2~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">parametrical bandpass ???</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rbpq2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">resonance bandpass 2.order with Q inlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rbpw2~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">resonance bandpass 2.order with bandwidth inlet</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">reccombfilter~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">rough combfilter feedback</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rev1~</td>
+
+        <td align="left" sdnum="1031;0;@">vanilla</td>
+
+        <td align="left">series of allpass with exponentially growing delay lines</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rev2~</td>
+
+        <td align="left" sdnum="1031;0;@">vanilla</td>
+
+        <td align="left">simple 1-in, 4-out reverberator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">rev3~</td>
+
+        <td align="left" sdnum="1031;0;@">vanilla</td>
+
+        <td align="left">hard-core, 2-in, 4-out reverberator</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">schroeder~</td>
+
+        <td align="left" sdnum="1031;0;@"><br></td>
+
+        <td align="left">schroeder reverb</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">swap~</td>
+
+        <td align="left" sdnum="1031;0;@">flatspace zexy</td>
+
+        <td align="left">byte-swap a 16bit signal</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">svf~</td>
+
+        <td align="left" sdnum="1031;0;@">bsaylor cyclone flatspace</td>
+
+        <td align="left">state-variable filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vcf_hp2~ vcf_hp4~ vcf_hp6~ vcf_hp8~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">highpass 2.4.6.8.order with freq and Q signal inlets</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vcf_lp2~ vcf_lp4~ vcf_lp6~ vcf_lp8~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">lowpass 2.4.6.8.order with freq and Q signal inlets</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vcf_bp2~ vcf_bp4~ vcf_bp6~ vcf_bp8~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">bandpass 2.4.6.8.order with freq and Q signal inlets</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left" sdnum="1031;0;@">vcf_rbp2~ vcf_rbp4~ vcf_rbp6~ vcf_rbp8~</td>
+
+        <td align="left" sdnum="1031;0;@">iemlib</td>
+
+        <td align="left">resonance bandpass 2.4.6.8.order with freq and Q signal inlets</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">bdiag~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">block diagonal state space system (spectral processor)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">cheby~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">chebyshev polynomial waveshaper</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">dist~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">dist~ waveshaper</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">eadsr~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">exp. attack decay sustain release</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">ead~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">exp. attack decay</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">ear~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">exp. attack release</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">lattice~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">lattice~ filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">permut~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">random permute a signal block</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">qmult~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">multiply 2 quaternion signals</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">qnorm~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">normalize a quaternion signal (or any 4 channel sig)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">resofilt~</td>
+
+        <td align="left">creb</td>
+
+        <td align="left">a reso filter (4pole, 3pole)</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">xfm~</td>
+
+        <td align="left">creb flatspace</td>
+
+        <td align="left">coupled frequency modulation</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">reson~</td>
+
+        <td align="left">cxc cyclone flatspace markex</td>
+
+        <td align="left">interpolating reson filter</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">pan_gogins~</td>
+
+        <td align="left">deprecated flatspace</td>
+
+        <td align="left">modification of pan~</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">voiding_detector~</td>
+
+        <td align="left">ekext</td>
+
+        <td align="left">estimates wether a frame of speech is voiced or unvoiced</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">scramble~</td>
+
+        <td align="left">ext13 flatspace</td>
+
+        <td align="left">big fun with spoken words or beats</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">ap1c~ ap2c~</td>
+
+        <td align="left">iemlib</td>
+
+        <td align="left">allpass 1. / 2. order for filter cascades</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">hp1c~ hp2c~</td>
+
+        <td align="left">iemlib</td>
+
+        <td align="left">highpass 1. / 2. order for filter cascades</td>
+      </tr>
+
+      <tr>
+        <td height="17" align="left">lp1c~ lp2c~</td>
+
+        <td align="left">iemlib</td>
+
+        <td align="left">lowpass 1. / 2. order for filter cascades</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch082_audio-filters.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch082_audio-filters.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="LTR">
+  <head>
+    <title>Pure Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="_templates/fm_resources/fl2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="_templates/fm_resources/fm_book.css" type="text/css" />
+   <link type="text/css" href="_templates/prettify/src/prettify.css" rel="Stylesheet" >
+<script type="text/javascript" src="_templates/prettify/src/prettify.js"></script>
+
+
+
+    <script type="text/javascript" src="_templates/jquery/js/jquery-1.6.1.min.js"></script>
+
+    <script type="text/javascript" src="_templates/fm_resources/fm_book.js"></script>
+</head>
+<body onload="prettyPrint();">
+<div id="home">
+  <a href="../index.html"><img src="_templates/fm_resources/top_read_back.gif" border="0" alt="" /></a>
+</div>
+
+<div id="pdf">
+  <a href="../_booki/pure-data/pure-data.epub"><img src="_templates/fm_resources/epub.gif" border="0" alt="" /></a>
+  <a href="../_booki/pure-data/pure-data.pdf"><img src="_templates/fm_resources/pdf.gif" border="0" alt="" /></a>
+  <a href="_all.html"><img src="_templates/fm_resources/print.gif" border="0" alt="" /></a>
+</div>
+
+<div id="index-book-title">
+	Pure Data
+</div>
+<div id="main">
+  <div class="navbar">
+    <div class="arrow top left"><a href="ch035_sequencer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow top right"><a href="ch035_sequencer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+<!--    <div id="edit-links">
+      <a href='http://www.booki.cc/'>Edit this Book</a>
+    </div>
+-->
+  </div>
+
+  <div class="fm-content">
+    <div id="main-content">
+  <h1><strong>Building a Simple Sequencer</strong>: A step by step guide</h1>
+
+  <p><strong>Basic elements&nbsp;</strong></p>
+
+  <p>*Refer to the Interface chapter for understanding the basic elements including Objects, Numbers, Messages, Symbols and Comments.</p>
+
+  <p><strong>Using the Interface</strong></p>
+
+  <p>*Refer to the Interface chapter for controlling objects, properties and making connections.&nbsp;</p>
+
+  <p><strong>1. Create a switch&nbsp;</strong></p>
+
+  <p>Put a Toggle into the patch.&nbsp;<br></p>
+
+  <p>* We have chosen to use a toggle in this example, however there are many ways to turn your sequencer on and off, including sending a message to the object.<br></p>
+
+  <p><strong>2. Regulate the timing&nbsp;</strong></p>
+
+  <p><strong>a.</strong> Put a <strong>[metro]</strong> object with a creation argument into the patch. A [metro] object sends a bang periodically so here this will regulate the time interval between bangs.&nbsp;</p>
+
+  <p>For example, if you put a [metro] with a creation argument of 300, your bangs will output at 300 milisecond intervals.</p>
+
+  <p>* The [metro] has two inlets: the first (left) for turning it on and off, the second (right) for altering the creation argument.<br></p>
+
+  <p><strong>b.</strong> Connect the outlet of the Toggle to the first inlet of the [metro].</p>
+
+  <p><strong>c.</strong> Put a number box into the patch.&nbsp; This provides you with a variable and enables you to alter the frequency of your bangs.<br></p>
+
+  <p><strong>d.</strong> Connect the outlet of the number box to the second (right) inlet of the [metro].&nbsp;<br></p>
+
+  <p>&nbsp;<img alt="sim_seq1.pd" src="_booki/pure-data/static/_PureData_Sequencer-sim_seq1-pd-en.png" height="343" width="460"></p>
+
+  <p><strong>3. Set up a counter</strong></p>
+
+  <p><strong>a.</strong> Put in a [float] (this can be written as [float] or [f]).&nbsp; This stores the number on its right inlet, and outputs the result when it receives a bang.&nbsp;<br></p>
+
+  <p><strong>b.</strong> Connect the outlet of the [metro] to the inlet of the [float].<br></p>
+
+  <p><strong>c</strong>. Put in an addition arithmetic object with a creation argument of 1 [+ 1]. This will set up the counting of the object.</p>
+
+  <p><strong>d.</strong> Connect the outlet of the [float] to the first inlet of the [+ 1] object and the outlet of the [+ 1] object to the right inlet of the [float]. This will store the number in the [float]'s right inlet and the result will be sent when the [float] receives a bang.</p>
+
+  <p>* Be aware of stack overflow which happens when you connect the output of the [+ 1] object to the first&nbsp; inlet of the [float]&nbsp; This creates a feedback loop by sending the creation argument in a neverending circle between the [+ 1] object and the [float] (if you let this go it could crash your system!).</p>
+
+  <p><strong>d.</strong> Put in a [number box] and connect the [float]'s output to the number box's inlet. This enables you to see what is happening to your creation argument.&nbsp;</p>
+
+  <p>* The [number box] is being used in this example as a visual aid and enables you to observe what is happening.<br></p>
+
+  <p><strong>e.</strong> Put a [mod] object with a creation argument which will specify the number of steps in your sequencer into the patch. This will define how many steps the sequencer has and distribute the input accordingly.&nbsp; For example, if you put a [mod] with a creation argument of 4, you will build a 4 step sequencer.</p>
+
+  <p><strong>f.</strong> Put a [horizontal radio] object into the patch. This acts as a visual aid and enables you to see the individual steps of the sequencer as they happen.&nbsp;</p>
+
+  <p><img alt="sim_seq2.pd" src="_booki/pure-data/static/_PureData_Sequencer-sim_seq2-pd-en.png" height="496" width="480"><br></p>
+
+  <p><strong>4. Set up a distribution channel</strong></p>
+
+  <p><strong>a.</strong> Put a [select] object with creation arguments numbering the sequencer's steps. This distributes the bangs to the corresponding outlets.&nbsp; For example, put in an object of [select 0 1 2 3] for a 4 step sequencer (start with 0 because mod objects output 0 as well).</p>
+
+  <p>* Every time you create a [select] object, the number of outlets will be equal to the number of creation arguments with an extra outlet in order to distribute the surplus signals.</p>
+
+  <p><strong>b.</strong> Put the number of [float] objects for each step of the sequencer into the patch.</p>
+
+  <p><strong>c.</strong> Connect the outlets from the [select] object to the inlets of the corresponding [float] objects.<br></p>
+
+  <p><strong>d.</strong> Put a vertical slider into the patch for each step of the sequencer. These enable you to adjust the pitch of the individual steps in the sequence. For example, put in four vertical sliders for a four step sequencer.<br></p>
+
+  <p><strong>e.</strong> Connect the outlet of the vertical sliders to the second (right) inlets of the [float] objects.&nbsp; This enables you to change the pitch of each step and hear it only when the counter hits that note.</p>
+
+  <p><strong><img alt="sim_seq3.pd" src="_booki/pure-data/static/_PureData_Sequencer-sim_seq3-pd-en.png" height="554" width="600"><br></strong></p>
+
+  <p><strong>5. Convert a midi number to frequency</strong><br></p>
+
+  <p><strong>a.</strong> Put a <strong>[mtof]</strong> (midi to frequency) object into the patch.&nbsp; This converts the incoming midi numbers to frequency.</p>
+
+  <p><strong>b.</strong> Connect the outlets of the [float] objects to the inlet of the [mtof] object.</p>
+
+  <p><strong>6. Send the frequency to audio</strong></p>
+
+  <p><strong>a.</strong> Put an <strong>[osc~]</strong> (oscillator) object with a creation argument into the patch.&nbsp; This outputs audio - ie. a pure sine wave.<br></p>
+
+  <p>* Refer to the Oscillator chapter in Audio Tutorials for more.<br></p>
+
+  <p><strong>b.</strong> Connect the outlet of the [mtof] object to the inlet of the [osc~] object.<br></p>
+
+  <p><strong>7. Send the audio to a soundcard</strong><br></p>
+
+  <p><strong>a.</strong> Put a <strong>[dac~]</strong> object into the patch.&nbsp; A [dac~] object is a digital to analogue converter and creates a line out to the sound card.</p>
+
+  <p><strong>b.</strong> Connect the outlet of the [osc~] object to the inlet of the [dac~] object.</p>
+
+  <p><img alt="sim_seq4.pd.png" src="_booki/pure-data/static/_PureData_Sequencer-sim_seq4-pd-en.png" height="630" width="600">&nbsp;</p>
+
+  <p>CONGRATULATIONS! You have now created a functioning sequencer in Pure Data.</p>
+
+  <p>This is how the sequencer should look:</p>
+
+  <p><img alt="sim_seq5.pd.png" src="_booki/pure-data/static/_PureData_Sequencer-sim_seq5-pd-en.png" height="520" width="250"><br></p>
+
+  <p>* We have chosen to use the above elements to set up a sequencer however there are many ways to set one up, including using a table. We're sure you will discover these as you delve deeper into the world of Pure Data.<br></p>
+</div>
+
+<ul class="menu-goes-here">
+  <li class="booki-section">INTRODUCTION</li>
+
+  <li><a href="index.html">INTRODUCTION</a></li>
+
+  <li><a href="ch002_graphical-programming.html">GRAPHICAL PROGRAMMING</a></li>
+
+  <li><a href="ch003_what-is-digital-audio.html">WHAT IS DIGITAL AUDIO?</a></li>
+
+  <li class="booki-section">INSTALLING</li>
+
+  <li><a href="ch005_osx.html">OSX</a></li>
+
+  <li><a href="ch006_windows.html">WINDOWS</a></li>
+
+  <li><a href="ch007_ubuntu.html">UBUNTU</a></li>
+
+  <li><a href="ch008_debian.html">DEBIAN</a></li>
+
+  <li class="booki-section">GETTING STARTED</li>
+
+  <li><a href="ch010_configuring.html">CONFIGURING</a></li>
+
+  <li><a href="ch011_advanced-configuration.html">ADVANCED CONFIGURATION</a></li>
+
+  <li><a href="ch012_starting.html">STARTING</a></li>
+
+  <li class="booki-section">THE INTERFACE</li>
+
+  <li><a href="ch014_the-interface.html">THE INTERFACE</a></li>
+
+  <li><a href="ch015_trouble-shooting.html">TROUBLE SHOOTING</a></li>
+
+  <li class="booki-section">AUDIO TUTORIALS</li>
+
+  <li><a href="ch017_simple-synth.html">SIMPLE SYNTH</a></li>
+
+  <li><a href="ch018_oscillators.html">OSCILLATORS</a></li>
+
+  <li><a href="ch019_frequency.html">FREQUENCY</a></li>
+
+  <li><a href="ch020_additive-synthesis.html">ADDITIVE SYNTHESIS</a></li>
+
+  <li><a href="ch021_amplitude-modulation.html">AMPLITUDE MODULATION</a></li>
+
+  <li><a href="ch022_frequency-modulation.html">FREQUENCY MODULATION</a></li>
+
+  <li><a href="ch023_square-waves.html">SQUARE WAVES</a></li>
+
+  <li><a href="ch024_generating-waveforms.html">GENERATING WAVEFORMS</a></li>
+
+  <li><a href="ch025_dc-offset.html">DC OFFSET</a></li>
+
+  <li><a href="ch026_antialiasing.html">ANTIALIASING</a></li>
+
+  <li><a href="ch027_filters.html">FILTERS</a></li>
+
+  <li><a href="ch028_envelope-generator.html">ENVELOPE GENERATOR</a></li>
+
+  <li><a href="ch029_amplifier.html">AMPLIFIER</a></li>
+
+  <li><a href="ch030_controlling-the-synth.html">CONTROLLING THE SYNTH</a></li>
+
+  <li><a href="ch031_step-sequencer.html">STEP SEQUENCER</a></li>
+
+  <li><a href="ch032_4-stage-sequencer.html">4 STAGE SEQUENCER</a></li>
+
+  <li class="booki-section">DATAFLOW TUTORIALS</li>
+
+  <li><a href="ch034_dataflow.html">DATAFLOW</a></li>
+
+  <li><a href="ch035_sequencer.html">SEQUENCER</a></li>
+
+  <li><a href="ch036_messages.html">MESSAGES</a></li>
+
+  <li><a href="ch037_math.html">MATH</a></li>
+
+  <li><a href="ch038_lists.html">LISTS</a></li>
+
+  <li><a href="ch039_order-of-operations.html">ORDER OF OPERATIONS</a></li>
+
+  <li><a href="ch040_wireless-connections.html">WIRELESS CONNECTIONS</a></li>
+
+  <li><a href="ch041_subpatches.html">SUBPATCHES</a></li>
+
+  <li><a href="ch042_abstractions.html">ABSTRACTIONS</a></li>
+
+  <li><a href="ch043_dollar-signs.html">DOLLAR SIGNS</a></li>
+
+  <li><a href="ch044_graph-on-parent.html">GRAPH ON PARENT</a></li>
+
+  <li><a href="ch045_arrays-graphs-tables.html">ARRAYS, GRAPHS, TABLES</a></li>
+
+  <li class="booki-section">VIDEO (GEM) TUTORIALS</li>
+
+  <li><a href="ch047_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch048_basics.html">BASICS</a></li>
+
+  <li><a href="ch049_moving-images.html">MOVING IMAGES</a></li>
+
+  <li><a href="ch050_video-mixer.html">VIDEO MIXER</a></li>
+
+  <li><a href="ch051_effects.html">EFFECTS</a></li>
+
+  <li><a href="ch052_recording.html">RECORDING</a></li>
+
+  <li><a href="ch053_screens.html">SCREENS</a></li>
+
+  <li><a href="ch054_video-tracking.html">VIDEO TRACKING</a></li>
+
+  <li class="booki-section">SENSORS</li>
+
+  <li><a href="ch056_game-controllers.html">GAME CONTROLLERS</a></li>
+
+  <li><a href="ch057_pduino.html">PDUINO</a></li>
+
+  <li><a href="ch058_installing-arduino-redhat.html">INSTALLING ARDUINO (REDHAT)</a></li>
+
+  <li><a href="ch059_installing-arduino-osx.html">INSTALLING ARDUINO (OSX)</a></li>
+
+  <li><a href="ch060_installing-pduino.html">INSTALLING PDUINO</a></li>
+
+  <li><a href="ch061_starting-pduino.html">STARTING PDUINO</a></li>
+
+  <li><a href="ch062_light-sensor.html">LIGHT SENSOR</a></li>
+
+  <li class="booki-section">NETWORK DATA</li>
+
+  <li><a href="ch064_send-and-receive.html">SEND AND RECEIVE</a></li>
+
+  <li><a href="ch065_osc.html">OSC</a></li>
+
+  <li class="booki-section">MIDI</li>
+
+  <li><a href="ch067_using-midi.html">USING MIDI</a></li>
+
+  <li class="booki-section">STREAMING</li>
+
+  <li><a href="ch069_audio-streaming.html">AUDIO STREAMING</a></li>
+
+  <li><a href="ch070_oggcast.html">OGGCAST</a></li>
+
+  <li class="booki-section">LIST OF OBJECTS</li>
+
+  <li><a href="ch072_introduction.html">INTRODUCTION</a></li>
+
+  <li><a href="ch073_glue.html">GLUE</a></li>
+
+  <li><a href="ch074_math.html">MATH</a></li>
+
+  <li><a href="ch075_time.html">TIME</a></li>
+
+  <li><a href="ch076_midi.html">MIDI</a></li>
+
+  <li><a href="ch077_tables.html">TABLES</a></li>
+
+  <li><a href="ch078_misc.html">MISC</a></li>
+
+  <li><a href="ch079_audio-glue.html">AUDIO GLUE</a></li>
+
+  <li><a href="ch080_audio-math.html">AUDIO MATH</a></li>
+
+  <li><a href="ch081_oscillatrors-and-tables.html">OSCILLATRORS AND TABLES</a></li>
+
+  <li><a href="ch082_audio-filters.html">AUDIO FILTERS</a></li>
+
+  <li><a href="ch083_audio-delay.html">AUDIO DELAY</a></li>
+
+  <li><a href="ch084_sub-window.html">SUB WINDOW</a></li>
+
+  <li><a href="ch085_data-templates.html">DATA TEMPLATES</a></li>
+
+  <li><a href="ch086_gem.html">GEM</a></li>
+
+  <li><a href="ch087_pdp.html">PDP</a></li>
+
+  <li><a href="ch088_physical-modelling.html">PHYSICAL MODELLING</a></li>
+
+  <li><a href="ch089_obsolete.html">OBSOLETE</a></li>
+
+  <li class="booki-section">APPENDICES</li>
+
+  <li><a href="ch091_glossary.html">GLOSSARY</a></li>
+
+  <li><a href="ch092_links.html">LINKS</a></li>
+
+  <li><a href="ch093_credits.html">CREDITS</a></li>
+</ul>
+
+  </div>
+<br><br>
+  <div class="navbar">
+    <div class="arrow bottom left"><a href="ch035_sequencer.html#"><img src="_templates/fm_resources/lefttext.png" style="height:20px !important;" alt="" /></a></div>
+    <div class="arrow bottom right"><a href="ch035_sequencer.html#"><img src="_templates/fm_resources/righttext.png" style="height:20px !important;" alt="" /></a></div>
+  </div>
+</div>
+
+</body>
+</html>
+
