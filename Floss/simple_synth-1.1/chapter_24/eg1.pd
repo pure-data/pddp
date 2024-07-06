@@ -1,0 +1,14 @@
+#N canvas 28 27 383 312 10;
+#X obj 69 187 line;
+#X msg 23 60 222 1000;
+#X msg 69 105 0 500;
+#X text 96 61 Go to 222 in 1000ms (= 1 second);
+#X text 122 104 Go to 0 in 500ms (1/2 second);
+#X msg 111 150 1;
+#X text 156 150 Go immediately to 1;
+#X floatatom 69 228 5 0 0 0 - - -;
+#X text 250 34 eg1.pd;
+#X connect 0 0 7 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 5 0 0 0;

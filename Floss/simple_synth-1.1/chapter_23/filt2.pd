@@ -1,0 +1,47 @@
+#N canvas 532 43 626 725 10;
+#N canvas 0 22 450 300 graph1 0;
+#X array hip 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 270 381 graph;
+#X obj 119 382 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X text 248 468 -1;
+#X text 254 423 0;
+#X text 254 377 1;
+#X text 140 380 Graph output;
+#X text 82 464 Line out to soundcard.;
+#X obj 119 405 metro 100;
+#X obj 42 463 dac~;
+#X obj 42 207 noise~;
+#X obj 63 270 mtof;
+#X obj 66 247 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 6100 1;
+#X text 144 271 [mtof] converts MIDI notes to frequency in Hertz.;
+#X text 145 227 Slider sends MIDI note values (0-127).;
+#X text 145 207 Generate white noise.;
+#N canvas 0 22 450 300 graph2 0;
+#X array hip_display 6 float 5;
+#A 0 -0.9857 -0.9857 -0.9857 0.97142 0.97141 0.97141;
+#X coords 0 1 5 -1 200 100 1;
+#X restore 42 69 graph;
+#X text 87 171 Frequency in Hz;
+#X text 257 110 Volume of sound passed;
+#X text 40 172 0;
+#X text 207 172 20 \, 0;
+#X text 247 156 0;
+#X text 250 66 1;
+#X text 40 28 Graphical depiction of a High Pass Filter.;
+#X text 144 319 [hip~] allows frequencies above the cutoff frequency
+to pass and reduces or eliminates frequencies below it.;
+#X obj 82 433 tabwrite~ hip;
+#X text 443 28 filt2.pd;
+#X text 68 70 cutoff frequency ^;
+#X obj 42 319 hip~;
+#X connect 1 0 7 0;
+#X connect 7 0 24 0;
+#X connect 9 0 27 0;
+#X connect 10 0 27 1;
+#X connect 11 0 10 0;
+#X connect 27 0 8 0;
+#X connect 27 0 8 1;
+#X connect 27 0 24 0;

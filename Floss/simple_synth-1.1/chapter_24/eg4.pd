@@ -1,0 +1,35 @@
+#N canvas 635 24 504 604 10;
+#N canvas 0 22 450 300 graph2 0;
+#X array adsr_envelope 5 float 1;
+#A 0 -1.00667 0.989999 0.41 0.42 -1.01333;
+#X coords 0 1 4 -1 300 100 1;
+#X restore 30 100 graph;
+#X text 47 106 Attack;
+#X text 159 106 Decay;
+#X text 131 206 x axis = time;
+#X text 350 149 y axis = value;
+#X text 219 106 Sustain;
+#X text 279 106 Release;
+#X text 30 40 Graphical representation of a complex \, or;
+#X text 30 58 Attack/Decay/Sustain/Release (ADSR) envelope.;
+#X obj 31 399 snapshot~;
+#X floatatom 31 430 5 0 0 0 - - -;
+#X obj 41 352 metro 100;
+#X obj 31 284 vline~;
+#X obj 41 319 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X text 99 400 Make sure "compute audio" is turned on!;
+#X text 84 279 Ramp up to 10 in 1000ms \, ramp down to 0.7 in 1000ms
+after waiting 1000ms \, ramp down to 0 in 1000ms after waiting another
+3000ms.;
+#X text 27 203 0;
+#X text 339 95 1;
+#X text 295 203 4000ms;
+#X text 339 185 0;
+#X text 397 25 eg4.pd;
+#X msg 31 249 1 1000 \, 0.7 1000 1000 \, 0 1000 3000;
+#X connect 9 0 10 0;
+#X connect 11 0 9 0;
+#X connect 12 0 9 0;
+#X connect 13 0 11 0;
+#X connect 21 0 12 0;

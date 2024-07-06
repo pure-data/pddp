@@ -1,0 +1,38 @@
+#N canvas 16 397 570 424 10;
+#X obj 240 74 osc~;
+#X text 237 22 SINE WAVE;
+#N canvas 0 22 450 300 graph1 0;
+#X array additive_sine 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 260 225 graph;
+#X obj 109 223 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 30 307 dac~;
+#X text 238 312 -1;
+#X text 244 267 0;
+#X text 244 221 1;
+#X text 130 221 Graph output;
+#X text 75 308 Line out to soundcard.;
+#X text 422 8 osc6.pd;
+#X text 27 22 SINE WAVE;
+#X obj 30 74 osc~;
+#X obj 72 274 tabwrite~ additive_sine;
+#X obj 30 132 *~ 0.5;
+#X obj 30 47 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -6 0 10
+-262144 -1 -1 220 256;
+#X obj 240 47 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -6 0 10
+-262144 -1 -1 221 256;
+#X text 102 128 Adding two waveforms with a very small difference in
+frequency results in a periodic modulation equal to the difference
+between the two in Hz. Output is again scaled by 0.5 to prevent clipping.
+;
+#X obj 109 246 metro 100;
+#X connect 0 0 14 0;
+#X connect 3 0 18 0;
+#X connect 12 0 14 0;
+#X connect 14 0 4 0;
+#X connect 14 0 4 1;
+#X connect 14 0 13 0;
+#X connect 15 0 12 0;
+#X connect 16 0 0 0;
+#X connect 18 0 13 0;

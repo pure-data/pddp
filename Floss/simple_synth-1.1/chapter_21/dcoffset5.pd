@@ -1,0 +1,25 @@
+#N canvas 712 129 699 466 12;
+#X obj 328 160 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 328 189 metro 100;
+#N canvas 0 23 1440 855 (subpatch) 0;
+#X array Triangle 1000 float 0 black black;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 95 336 graph;
+#X text 73 421 -1;
+#X text 79 376 0;
+#X text 79 330 1;
+#X obj 93 33 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 #fcfcfc
+#000000 #000000 5000 1;
+#X obj 94 64 mtof;
+#X obj 94 96 phasor~ 200;
+#X obj 94 131 expr~ (min($v1 \, 1 - $v1) - 0.25) * 4;
+#X obj 202 232 tabwrite~ Triangle;
+#X obj 97 271 dac~;
+#X connect 0 0 1 0;
+#X connect 1 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 9 0 11 0;

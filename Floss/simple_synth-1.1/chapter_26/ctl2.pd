@@ -1,0 +1,36 @@
+#N canvas 230 22 639 609 10;
+#X obj 36 81 notein 1;
+#X obj 36 138 mtof;
+#X text 172 80 [notein] receives MIDI notes (left outlet) and Velocity
+(right outlet) from a MIDI keyboard. Use Preferences to set the proper
+MIDI devices to receive.;
+#X obj 36 174 osc~;
+#X obj 36 366 *~;
+#X obj 36 399 dac~;
+#X obj 81 214 / 127;
+#X text 174 134 The MIDI Note output gets converted to a frequency
+in Hertz which controls the [osc~].;
+#X text 482 52 ctl2.pd;
+#X obj 81 306 line~;
+#X obj 132 251 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -6 0 10
+-262144 -1 -1 50 256;
+#X obj 81 277 pack 0 50;
+#X text 178 366 Finally \, multiply the audio from the oscillator by
+the scaled Velocity number \, as it is interpolated by the [line~].
+;
+#X text 177 276 This section is our Attack/Decay Envelope Generator.
+[line~] needs two numbers \, a target and a time. The target is the
+scaled Velocity from above \, and the interpolation time is set here
+to 50 milliseconds. It can be changed with the Number box.;
+#X text 177 213 Divide the Velocity output (0-127) by 127 to get a
+new \, scaled value between 0 and 1;
+#X connect 0 0 1 0;
+#X connect 0 1 6 0;
+#X connect 1 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 0 5 1;
+#X connect 6 0 11 0;
+#X connect 9 0 4 1;
+#X connect 10 0 11 1;
+#X connect 11 0 9 0;

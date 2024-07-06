@@ -1,0 +1,37 @@
+#N canvas 37 36 657 466 10;
+#X obj 75 110 mtof;
+#X obj 78 87 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#N canvas 0 22 450 300 graph1 0;
+#X array ringmod 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 290 245 graph;
+#X obj 139 243 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 75 134 phasor~;
+#X obj 60 327 dac~;
+#X text 268 332 -1;
+#X text 274 287 0;
+#X text 274 241 1;
+#X text 160 241 Graph output;
+#X text 105 328 Line out to soundcard.;
+#X obj 60 184 *~;
+#X text 481 12 osc8.pd;
+#X obj 102 294 tabwrite~ ringmod;
+#X obj 60 36 adc~;
+#X text 167 148 Multiply the audio signal from the soundcard input
+[adc~] by output of the [phasor~] \, which causes a modulation of the
+gain of the signal. Audio is only output when both signals are present
+at the input.;
+#X text 167 33 [adc~] is the line in from the soundcard. Make sure
+you have the correct audio input selected in the PD preferences!;
+#X obj 139 266 metro 100;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 3 0 17 0;
+#X connect 4 0 11 1;
+#X connect 11 0 5 0;
+#X connect 11 0 5 1;
+#X connect 11 0 13 0;
+#X connect 14 0 11 0;
+#X connect 17 0 13 0;

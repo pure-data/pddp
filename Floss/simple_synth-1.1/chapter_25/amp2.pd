@@ -1,0 +1,29 @@
+#N canvas 0 22 493 396 10;
+#X obj 30 341 dac~;
+#X obj 30 304 *~;
+#X obj 30 36 osc~ 440;
+#X obj 45 273 line~;
+#X obj 48 79 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 10 -262144
+-1 -1 7800 1;
+#X text 209 78 Slider goes from 0-127;
+#X obj 45 129 / 127;
+#X text 136 130 Divide by 127 to get a value between 0-1.;
+#X obj 45 178 pack 0 50;
+#X text 95 269 Use [line~] to generate an audio ramp \, which will
+;
+#X text 95 287 smooth out the change in volume and eliminate clicks.
+;
+#X text 133 176 [pack] puts together two numbers into one;
+#X text 135 197 message. Here the target for [line~] comes;
+#X text 135 216 from the slider \, and the "interpolation time";
+#X text 135 233 is a constant 50ms.;
+#X text 96 316 Multiply the audio signal from the [osc~];
+#X text 96 331 by the ramp coming from [line~].;
+#X text 348 41 amp2.pd;
+#X connect 1 0 0 0;
+#X connect 1 0 0 1;
+#X connect 2 0 1 0;
+#X connect 3 0 1 1;
+#X connect 4 0 6 0;
+#X connect 6 0 8 0;
+#X connect 8 0 3 0;

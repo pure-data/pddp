@@ -1,0 +1,71 @@
+#N canvas 0 76 884 702 10;
+#X obj 22 9 cnv 15 550 70 empty empty empty 20 12 0 14 -257985 -66577
+0;
+#X obj 22 86 cnv 15 550 150 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 22 243 cnv 15 550 150 empty empty empty 20 12 0 14 -4032 -66577
+0;
+#X obj 22 399 cnv 15 550 150 empty empty empty 20 12 0 14 -258113 -66577
+0;
+#X obj 40 168 phasor~;
+#X obj 122 168 phasor~;
+#X obj 40 207 *~ 0.5;
+#X obj 40 479 *~;
+#X obj 40 521 dac~;
+#X obj 55 455 vline~;
+#X obj 110 334 line~;
+#X obj 40 17 key;
+#X obj 110 252 mtof;
+#X text 497 11 INPUT STAGE;
+#X text 466 89 OSCILLATOR STAGE;
+#X text 492 249 FILTER STAGE;
+#X text 508 401 AMP STAGE;
+#X obj 40 43 trigger float float bang;
+#X text 212 32 For each key press \, [trigger] will first send a "bang"
+to the AMP STAGE \, then a "float" to the FILTER STAGE \, and another
+"float" the the OSCILLATOR STAGE.;
+#X text 191 445 Attack = 150 \, Decay = 150 \, Sustain = 200 \, Release
+= 1000;
+#X text 193 470 Each "bang" from [trigger] sends a message to [vline~]
+which tells it to make a complex audio ramp. This ramp goes to the
+Audio Multiplication [*~] object and controls the gain of the audio
+stream.;
+#X obj 110 308 pack 0 300;
+#X obj 40 94 mtof;
+#X obj 110 280 * 1.5;
+#X msg 181 416 1 150 \, 0.9 150 150 \, 0 1000 500;
+#X obj 40 361 vcf~ 220 3;
+#X obj 124 363 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -6 0 10
+-262144 -1 -1 3 256;
+#X text 210 283 Change the float from [key] to a frequency in Hz \,
+and multiply it by 1.5 so the [vcf~] is a half octave above the [osc~]
+frequencies. [pack] makes a message with this frequency together with
+500 This tells [line~] "ramp to this number in 500 milliseconds". The
+output of [line~] sweeps the [vcf~] to the target frequency in 500ms.
+The Resonance of [vcf~] is set to "3".;
+#X text 212 152 Change the float from [key] to a frequency in Hz \,
+send it to the first [osc~]. Multiply the frequency in Hz by 0.99 to
+get a slightly detuned frequency and send it to the second [osc~].
+Add the two [osc~] signals together and multiply by 0.5 to keep from
+clipping later.;
+#X obj 122 130 * 0.99;
+#X connect 4 0 6 0;
+#X connect 5 0 6 0;
+#X connect 6 0 25 0;
+#X connect 7 0 8 0;
+#X connect 7 0 8 1;
+#X connect 9 0 7 1;
+#X connect 10 0 25 1;
+#X connect 11 0 17 0;
+#X connect 12 0 23 0;
+#X connect 17 0 22 0;
+#X connect 17 1 12 0;
+#X connect 17 2 24 0;
+#X connect 21 0 10 0;
+#X connect 22 0 4 0;
+#X connect 22 0 29 0;
+#X connect 23 0 21 0;
+#X connect 24 0 9 0;
+#X connect 25 0 7 0;
+#X connect 26 0 25 2;
+#X connect 29 0 5 0;

@@ -1,0 +1,49 @@
+#N canvas 613 22 671 606 10;
+#N canvas 0 22 450 300 graph1 0;
+#X array fm 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 290 365 graph;
+#X obj 139 363 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 59 447 dac~;
+#X text 268 452 -1;
+#X text 274 407 0;
+#X text 274 361 1;
+#X text 160 361 Graph output;
+#X text 104 448 Line out to soundcard.;
+#X text 448 26 osc9.pd;
+#X obj 74 238 *~;
+#X obj 59 275 +~;
+#X obj 62 42 hsl 128 15 0 127 0 1 empty empty carrier_frequency -2
+-6 0 10 -262144 -1 -1 1900 1;
+#X obj 59 76 mtof~;
+#X obj 102 415 tabwrite~ fm;
+#X obj 74 119 nbx 5 14 -1e+37 1e+37 0 1 empty empty modulation_frequency_in_Hz
+60 6 0 10 -262144 -1 -1 1000 256;
+#X obj 89 201 nbx 5 14 -1e+37 1e+37 0 1 empty empty modulation_amount_in_Hz
+60 6 0 10 -262144 -1 -1 2000 256;
+#X text 147 276 Add the modulator to carrier frequency.;
+#X text 138 71 [mtof~] creates the "carrier" audio signal which will
+be modulated.;
+#X text 149 233 Multiply the modulating signal by the amount of modulation
+we want.;
+#X obj 74 148 osc~;
+#X text 144 146 This [osc~] is the "modulator" oscillator. It determines
+how quickly the frequency of the carrier oscillator changes \, and
+by how much.;
+#X obj 59 309 osc~;
+#X text 147 307 This [osc~] is the "carrier" oscillator \, whose frequency
+is changed by the "modulator".;
+#X obj 139 386 metro 100;
+#X connect 1 0 23 0;
+#X connect 9 0 10 1;
+#X connect 10 0 21 0;
+#X connect 11 0 12 0;
+#X connect 12 0 10 0;
+#X connect 14 0 19 0;
+#X connect 15 0 9 1;
+#X connect 19 0 9 0;
+#X connect 21 0 2 0;
+#X connect 21 0 2 1;
+#X connect 21 0 13 0;
+#X connect 23 0 13 0;

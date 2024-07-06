@@ -1,0 +1,53 @@
+#N canvas 327 35 787 625 10;
+#X obj 85 66 key;
+#X obj 40 125 mtof;
+#X obj 40 293 osc~;
+#X obj 40 446 dac~;
+#X floatatom 97 104 5 0 0 0 - - -;
+#X text 501 26 ctl1.pd;
+#X obj 143 66 keyup;
+#X floatatom 167 104 5 0 0 0 - - -;
+#X obj 143 238 bng 15 250 50 0 empty empty empty 0 -6 0 10 -262144
+-1 -1;
+#X obj 85 175 bng 15 250 50 0 empty empty empty 0 -6 0 10 -262144 -1
+-1;
+#X msg 85 201 1;
+#X msg 143 266 0;
+#X obj 40 402 *~;
+#X obj 85 352 line~;
+#X obj 136 297 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -6 0 10
+-262144 -1 -1 50 256;
+#X obj 85 323 pack 0 50;
+#X text 211 63 [key] inputs the ASCII code for each key on the computer
+keyboard that has been pressed. [keyup] sends the ASCII code of a key
+when it is released.;
+#X text 213 404 The ramp from [line~] smoothly changes the gain of
+the signal from the [osc~].;
+#X text 212 322 This section is our Attack/Decay Envelope Generator.
+[line~] needs two numbers \, a target and a time. The target is either
+the "0" or "1" from above \, and the interpolation time is set here
+to 50 milliseconds. It can be changed with the Number box.;
+#X text 213 169 Send a "bang" message when a key is pressed \, which
+triggers the message "1 50" to the [line~] object via the [pack 0 50]
+object.;
+#X text 213 233 Send a "bang" message when a key is released \, which
+triggers the message "0 50" to the [line~] object via the [pack 0 50]
+object.;
+#X text 213 124 Convert the ASCII code to a frequency in Hz and send
+it to the [osc~].;
+#X connect 0 0 4 0;
+#X connect 0 0 1 0;
+#X connect 0 0 9 0;
+#X connect 1 0 2 0;
+#X connect 2 0 12 0;
+#X connect 6 0 7 0;
+#X connect 6 0 8 0;
+#X connect 8 0 11 0;
+#X connect 9 0 10 0;
+#X connect 10 0 15 0;
+#X connect 11 0 15 0;
+#X connect 12 0 3 0;
+#X connect 12 0 3 1;
+#X connect 13 0 12 1;
+#X connect 14 0 15 1;
+#X connect 15 0 13 0;

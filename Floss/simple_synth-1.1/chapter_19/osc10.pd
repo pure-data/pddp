@@ -1,0 +1,43 @@
+#N canvas -1 22 604 507 10;
+#N canvas 0 22 450 300 graph1 0;
+#X array pwm 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 270 266 graph;
+#X obj 119 267 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 42 348 dac~;
+#X text 248 353 -1;
+#X text 254 308 0;
+#X text 254 262 1;
+#X text 140 265 Graph output;
+#X text 82 349 Line out to soundcard.;
+#X text 435 16 osc10.pd;
+#X obj 42 80 mtof;
+#X obj 45 57 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 6700 1;
+#X obj 42 104 phasor~;
+#X text 41 34 SQUARE WAVE OSCILLATOR;
+#X obj 119 290 metro 100;
+#X obj 82 318 tabwrite~ pwm;
+#X text 186 81 [mtof] converts MIDI notes to frequency in Hertz.;
+#X text 187 57 Slider sends MIDI note values (0-127).;
+#X text 186 105 [phasor~] makes a ramping waveform.;
+#X text 186 189 [expr~] checks if the value of the ramp is greater
+;
+#X obj 42 192 expr~ $v1 > $v2;
+#X obj 129 138 nbx 5 14 0 100 0 1 empty empty pulse_width_(0-100) 60
+6 0 10 -262144 -1 -1 91 256;
+#X obj 129 156 / 100;
+#X text 188 207 than the second input (0-1 range). If so \, then it
+outputs 1 \, otherwise 0;
+#X text 187 159 Divide by 100 to get range from 0-1;
+#X connect 1 0 13 0;
+#X connect 9 0 11 0;
+#X connect 10 0 9 0;
+#X connect 11 0 19 0;
+#X connect 13 0 14 0;
+#X connect 19 0 2 0;
+#X connect 19 0 2 1;
+#X connect 19 0 14 0;
+#X connect 20 0 21 0;
+#X connect 21 0 19 1;

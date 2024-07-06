@@ -1,0 +1,42 @@
+#N canvas 594 419 657 466 10;
+#X text 455 5 osc7.pd;
+#X obj 60 50 mtof;
+#X obj 63 27 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 11600 1;
+#N canvas 0 22 450 300 graph1 0;
+#X array am 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 290 265 graph;
+#X obj 139 263 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 60 347 dac~;
+#X text 211 51 [mtof] converts MIDI notes to frequency in Hertz.;
+#X text 212 27 Slider sends MIDI note values (0-127).;
+#X text 211 75 [phasor~] makes a ramping waveform.;
+#X text 268 352 -1;
+#X text 274 307 0;
+#X text 274 261 1;
+#X text 160 261 Graph output;
+#X text 105 348 Line out to soundcard.;
+#X obj 102 314 tabwrite~ am;
+#X obj 60 184 *~;
+#X text 163 150 The LFO [osc~] often has a frequency slower than 1
+Hz.;
+#X text 165 183 Multiply the audio signal from the [phasor~] by output
+of the LFO \, which causes a modulation of the gain of the signal.
+;
+#X obj 139 286 metro 100;
+#X obj 75 114 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -6 0 10
+-262144 -1 -1 0.5 256;
+#X obj 60 73 phasor~;
+#X obj 75 150 osc~ 0.5;
+#X connect 1 0 20 0;
+#X connect 2 0 1 0;
+#X connect 4 0 18 0;
+#X connect 15 0 5 0;
+#X connect 15 0 5 1;
+#X connect 15 0 14 0;
+#X connect 18 0 14 0;
+#X connect 19 0 21 0;
+#X connect 20 0 15 0;
+#X connect 21 0 15 1;

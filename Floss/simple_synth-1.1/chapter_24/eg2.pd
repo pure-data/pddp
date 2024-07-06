@@ -1,0 +1,36 @@
+#N canvas 419 25 508 608 10;
+#N canvas 0 22 450 300 graph2 0;
+#X array ad_envelope 5 float 1;
+#A 0 -1.00667 0.02 0.999999 -0.0299996 -0.993332;
+#X coords 0 1 4 -1 300 100 1;
+#X restore 31 100 graph;
+#X text 58 126 Attack;
+#X text 250 126 Decay;
+#X text 154 205 x axis = time;
+#X text 361 169 y axis = value;
+#X text 30 40 Graphical representation of a simple up/down \, or;
+#X text 30 58 Attack/Decay (AD) envelope.;
+#X obj 32 397 line;
+#X floatatom 32 438 5 0 0 0 - - -;
+#X text 95 319 Go to 1 in 1000ms;
+#X msg 84 360 0 1000;
+#X text 139 361 Go to 0 in 1000ms;
+#X msg 32 240 bang;
+#X obj 84 284 delay 1000;
+#X text 161 249 [delay] will wait 1000ms after the input "bang" \,
+;
+#X text 163 268 while the first ramp is being executed \, and then
+;
+#X text 162 287 it will send a "bang" to trigger the second ramp.;
+#X msg 32 321 1 1000;
+#X text 29 201 0;
+#X text 341 95 1;
+#X text 295 203 2000ms;
+#X text 341 186 0;
+#X text 299 19 eg2.pd;
+#X connect 7 0 8 0;
+#X connect 10 0 7 0;
+#X connect 12 0 17 0;
+#X connect 12 0 13 0;
+#X connect 13 0 10 0;
+#X connect 17 0 7 0;

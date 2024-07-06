@@ -1,0 +1,37 @@
+#N canvas 8 22 614 695 10;
+#X obj 18 409 snapshot~;
+#X floatatom 18 440 5 0 0 0 - - -;
+#X obj 28 362 metro 100;
+#X msg 18 42 1 1000;
+#X msg 46 248 stop;
+#X msg 35 109 0;
+#X obj 18 294 vline~;
+#X msg 27 74 0 1000;
+#X obj 28 329 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X text 16 482 [vline~] and [snapshot] are audio objects \, so make
+;
+#X text 19 497 sure "compute audio" is turned on!;
+#X text 97 409 [snapshot~] tells us the value of the audio signal;
+#X text 100 426 every time it receives a "bang".;
+#X text 97 362 [metro] sends a "bang" every so many milliseconds.;
+#X text 83 108 Jump down to 0 in 0ms;
+#X text 84 74 Ramp down to 0 in 1000ms;
+#X text 83 38 Ramp up to 1 in 1000ms;
+#X text 89 247 "stop" message freezes vline~ at its current value.
+;
+#X text 65 328 Toggle 1/0 to turn on/off the metro.;
+#X text 84 144 Ramp up to 10 in 1000ms \, jump down to 0 in 0ms after
+waiting 1000ms \, ramp up again to 1 in 1000ms after waiting another
+3000ms.;
+#X msg 41 197 10 1000 \, 0 0 1000 \, 1 1000 3000;
+#X text 373 27 eg3.pd;
+#X connect 0 0 1 0;
+#X connect 2 0 0 0;
+#X connect 3 0 6 0;
+#X connect 4 0 6 0;
+#X connect 5 0 6 0;
+#X connect 6 0 0 0;
+#X connect 7 0 6 0;
+#X connect 8 0 2 0;
+#X connect 20 0 6 0;

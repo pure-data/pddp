@@ -1,0 +1,60 @@
+#N canvas 40 50 705 785 10;
+#X text 22 8 Graphical table used to create an envelope. Click;
+#X text 22 26 on the line inside the table with the mouse and hold
+;
+#X text 22 44 down to draw a new line.;
+#X text 334 172 0;
+#X text 334 80 1;
+#X text 312 188 99;
+#X text 166 192 X;
+#X text 333 123 Y;
+#X msg 60 296 0;
+#X text 94 296 Reset [line] to 0 \, the start of the table.;
+#X text 88 270 Go to position 99 on the table in 4000ms (4 seconds).
+;
+#X msg 27 270 99 4000;
+#X obj 27 377 tabread pitch_envelope;
+#X obj 27 328 line;
+#X obj 27 537 osc~;
+#X obj 27 574 dac~;
+#X obj 27 503 mtof;
+#X text 339 -8 eg6.pd;
+#N canvas 0 22 450 300 graph3 0;
+#X array pitch_envelope 100 float 1;
+#A 0 -0.00249994 0.00249994 0.0324992 0.0574986 0.127497 0.157496 0.107497
+0.0924977 0.0924977 0.247494 0.367491 0.41249 0.632484 0.617485 0.602485
+0.602485 0.602485 0.602485 0.647484 0.752481 0.747481 0.722482 0.697483
+0.667483 0.637484 0.607485 0.577486 0.547486 0.517487 0.487488 0.457489
+0.437489 0.41749 0.687483 0.682483 0.687483 0.689983 0.692483 0.702483
+0.712482 0.724982 0.737482 0.749981 0.762481 0.767481 0.772481 0.777481
+0.777481 0.777481 0.777481 0.767481 0.757481 0.687483 0.572486 0.337492
+0.282493 0.267493 0.602485 0.597485 0.582486 0.562486 0.527487 0.502488
+0.482488 0.467488 0.476933 0.486377 0.495821 0.505265 0.514709 0.524154
+0.533598 0.543042 0.552486 0.567486 0.582486 0.597485 0.592485 0.582486
+0.569986 0.557486 0.532487 0.507487 0.485821 0.464155 0.442489 0.42249
+0.40249 0.382491 0.349991 0.317492 0.279993 0.242494 0.219995 0.197495
+0.172496 0.079998 0.0649984 0.039999 0.00999975;
+#X coords 0 1 99 0 300 100 1;
+#X restore 25 84 graph;
+#X obj 27 450 * 127;
+#X text 80 336 [line] sends a stream of numbers from 0-99 to read the
+table from start to finish.;
+#X text 81 409 This [tabread] reads the table called "pitch_envelope".
+Values output are from 0-1.;
+#X text 80 450 Values from table "pitch_envelope" are multiplied by
+127 to convert them to MIDI notes.;
+#X text 79 501 The MIDI notes are converted to a frequency in Hertz.
+;
+#X text 80 536 [osc~] outputs a tone which is the number of the frequency
+sent to it.;
+#X text 23 218 This table goes from 0-99 on the X axis and 0-1 on the
+Y axis. Right-click or CTL+click to see/set the Properties.;
+#X text 22 188 0;
+#X connect 8 0 13 0;
+#X connect 11 0 13 0;
+#X connect 12 0 19 0;
+#X connect 13 0 12 0;
+#X connect 14 0 15 0;
+#X connect 14 0 15 1;
+#X connect 16 0 14 0;
+#X connect 19 0 16 0;

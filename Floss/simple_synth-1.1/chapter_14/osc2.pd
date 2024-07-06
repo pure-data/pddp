@@ -1,0 +1,30 @@
+#N canvas 566 23 602 338 10;
+#X obj 60 50 mtof;
+#X obj 63 27 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 6800 1;
+#N canvas 0 22 450 300 graph1 0;
+#X array sawtooth 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 290 141 graph;
+#X obj 139 139 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 60 74 phasor~;
+#X obj 60 223 dac~;
+#X text 211 51 [mtof] converts MIDI notes to frequency in Hertz.;
+#X text 212 27 Slider sends MIDI note values (0-127).;
+#X text 211 75 [phasor~] makes a ramping waveform.;
+#X text 268 228 -1;
+#X text 274 183 0;
+#X text 274 137 1;
+#X text 160 137 Graph output;
+#X text 105 224 Line out to soundcard.;
+#X obj 102 190 tabwrite~ sawtooth;
+#X text 448 8 osc2.pd;
+#X obj 139 162 metro 100;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 3 0 16 0;
+#X connect 4 0 5 0;
+#X connect 4 0 5 1;
+#X connect 4 0 14 0;
+#X connect 16 0 14 0;

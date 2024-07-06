@@ -1,0 +1,59 @@
+#N canvas 186 22 625 803 10;
+#N canvas 0 22 450 300 graph1 0;
+#X array logic 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 270 435 graph;
+#X obj 119 436 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 42 517 dac~;
+#X text 248 522 -1;
+#X text 254 477 0;
+#X text 254 431 1;
+#X text 140 434 Graph output;
+#X text 82 518 Line out to soundcard.;
+#X obj 82 487 tabwrite~ logic;
+#X obj 42 80 mtof;
+#X obj 45 57 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 9600 1;
+#X obj 42 131 expr~ $v1 > 0.5;
+#X obj 42 104 phasor~;
+#X obj 212 80 mtof;
+#X obj 215 57 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 4600 1;
+#X obj 212 131 expr~ $v1 > 0.5;
+#X obj 212 104 phasor~;
+#X obj 57 317 expr~ $v1 > 0.5;
+#X obj 57 290 phasor~;
+#X obj 57 264 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -6 0 10
+-262144 -1 -1 5 256;
+#X obj 42 185 &&~;
+#X text 41 34 SQUARE WAVE OSCILLATOR;
+#X text 209 34 SQUARE WAVE OSCILLATOR;
+#X text 54 242 SQUARE WAVE LFO;
+#X obj 119 459 metro 100;
+#X text 188 266 Try replacing either the AND [&&~] or the OR [||~]
+with an EQUAL [==~] object to hear the difference it makes in the sound
+and the graph.;
+#X obj 42 359 ||~;
+#X text 84 185 AND checks if binary values are both 1 \, and outputs
+a 1 if they are and a 0 if they are not.;
+#X text 84 356 OR checks if binary values are both 0 \, and outputs
+a 1 if they are and a 0 if they are not.;
+#X text 435 16 osc12.pd;
+#X connect 1 0 24 0;
+#X connect 9 0 12 0;
+#X connect 10 0 9 0;
+#X connect 11 0 20 0;
+#X connect 12 0 11 0;
+#X connect 13 0 16 0;
+#X connect 14 0 13 0;
+#X connect 15 0 20 1;
+#X connect 16 0 15 0;
+#X connect 17 0 26 1;
+#X connect 18 0 17 0;
+#X connect 19 0 18 0;
+#X connect 20 0 26 0;
+#X connect 24 0 8 0;
+#X connect 26 0 2 0;
+#X connect 26 0 2 1;
+#X connect 26 0 8 0;

@@ -1,0 +1,47 @@
+#N canvas 31 43 626 725 10;
+#N canvas 0 22 450 300 graph1 0;
+#X array lop 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 270 381 graph;
+#X obj 119 382 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X text 248 468 -1;
+#X text 254 423 0;
+#X text 254 377 1;
+#X text 140 380 Graph output;
+#X text 82 464 Line out to soundcard.;
+#X obj 119 405 metro 100;
+#X obj 42 463 dac~;
+#X obj 82 433 tabwrite~ lop;
+#X obj 42 207 noise~;
+#X obj 42 319 lop~;
+#X text 405 22 filt1.pd;
+#X obj 63 270 mtof;
+#X obj 66 247 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 5200 1;
+#X text 137 271 [mtof] converts MIDI notes to frequency in Hertz.;
+#X text 138 227 Slider sends MIDI note values (0-127).;
+#X text 138 207 Generate white noise.;
+#X text 137 319 [lop~] allows frequencies below the cutoff frequency
+to pass and reduces or eliminates frequencies above it.;
+#N canvas 0 22 450 300 graph2 0;
+#X array lop_display 6 float 5;
+#A 0 0.971422 0.971422 0.971422 -0.985703 -0.985712 -0.985712;
+#X coords 0 1 5 -1 200 100 1;
+#X restore 42 69 graph;
+#X text 87 172 Frequency in Hz;
+#X text 257 100 Volume of sound passed;
+#X text 40 173 0;
+#X text 207 173 20 \, 0;
+#X text 247 156 0;
+#X text 250 66 1;
+#X text 101 73 ^ cutoff frequency;
+#X text 40 28 Graphical depiction of a Low Pass Filter.;
+#X connect 1 0 7 0;
+#X connect 7 0 9 0;
+#X connect 10 0 11 0;
+#X connect 11 0 9 0;
+#X connect 11 0 8 0;
+#X connect 11 0 8 1;
+#X connect 13 0 11 1;
+#X connect 14 0 13 0;

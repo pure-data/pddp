@@ -1,0 +1,17 @@
+#N canvas 267 58 486 308 10;
+#X obj 50 154 dac~;
+#X obj 50 117 *~;
+#X obj 50 -24 osc~ 440;
+#X obj 68 19 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 10 -262144
+-1 -1 0 1;
+#X obj 65 69 / 127;
+#X text 156 70 Divide by 127 to get a value between 0-1.;
+#X text 229 18 Slider goes from 0-127;
+#X text 108 111 Sending numbers to the [*~] object without using;
+#X text 107 127 [line~] to smooth them out will result in clicks!;
+#X text 352 -27 amp1.pd;
+#X connect 1 0 0 0;
+#X connect 1 0 0 1;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 1;

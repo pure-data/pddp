@@ -1,0 +1,35 @@
+#N canvas 11 427 548 328 10;
+#X obj 40 40 mtof;
+#X obj 43 17 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 5700 1;
+#N canvas 0 22 450 300 graph1 0;
+#X array square 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 270 155 graph;
+#X obj 119 156 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 40 91 expr~ $v1 > 0.5;
+#X obj 40 64 phasor~;
+#X obj 82 207 tabwrite~ square;
+#X obj 40 237 dac~;
+#X text 191 41 [mtof] converts MIDI notes to frequency in Hertz.;
+#X text 192 17 Slider sends MIDI note values (0-127).;
+#X text 191 65 [phasor~] makes a ramping waveform.;
+#X text 191 92 [expr~] checks if the value of the ramp is greater;
+#X text 193 110 than 0.5. If so \, then it outputs 1 \, otherwise 0
+;
+#X text 248 242 -1;
+#X text 254 197 0;
+#X text 254 151 1;
+#X text 140 154 Graph output;
+#X text 81 238 Line out to soundcard.;
+#X text 438 2 osc3.pd;
+#X obj 119 179 metro 100;
+#X connect 0 0 5 0;
+#X connect 1 0 0 0;
+#X connect 3 0 19 0;
+#X connect 4 0 7 0;
+#X connect 4 0 7 1;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X connect 19 0 6 0;

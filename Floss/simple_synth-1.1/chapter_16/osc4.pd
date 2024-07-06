@@ -1,0 +1,40 @@
+#N canvas 66 40 574 428 10;
+#X obj 240 70 mtof;
+#X obj 243 47 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X obj 30 70 mtof;
+#X obj 33 47 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X obj 30 94 phasor~;
+#X text 27 22 SAWTOOTH WAVE;
+#X obj 240 94 osc~;
+#X text 237 22 SINE WAVE;
+#X obj 30 152 *~ 0.5;
+#X text 87 150 Add the two signals together and;
+#X text 87 165 multiply by 0.5 to prevent clipping.;
+#N canvas 0 22 450 300 graph1 0;
+#X array additive 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 260 215 graph;
+#X obj 109 213 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 30 297 dac~;
+#X text 238 302 -1;
+#X text 244 257 0;
+#X text 244 211 1;
+#X text 130 211 Graph output;
+#X text 75 298 Line out to soundcard.;
+#X obj 72 264 tabwrite~ additive;
+#X text 408 8 osc4.pd;
+#X obj 109 236 metro 100;
+#X connect 0 0 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 8 0;
+#X connect 6 0 8 0;
+#X connect 8 0 13 0;
+#X connect 8 0 13 1;
+#X connect 8 0 19 0;
+#X connect 12 0 21 0;
+#X connect 21 0 19 0;

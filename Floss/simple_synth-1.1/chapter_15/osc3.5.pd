@@ -1,0 +1,17 @@
+#N canvas 567 383 496 340 10;
+#X obj 50 100 mtof;
+#X obj 53 27 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 6200 1;
+#X obj 50 267 dac~;
+#X obj 50 174 osc~;
+#X text 324 24 osc3.5.pd;
+#X text 127 58 <--number/message cable;
+#X text 127 138 <--number/message cable;
+#X text 127 218 <--audio cable;
+#X text 126 265 <--audio object (with ~ in name);
+#X text 126 175 <--audio object (with ~ in name);
+#X text 126 99 <--dataflow object (without ~ in name);
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 3 0 2 0;
+#X connect 3 0 2 1;

@@ -1,0 +1,30 @@
+#N canvas 6 22 555 378 10;
+#X obj 50 50 mtof;
+#X obj 53 27 hsl 128 15 0 127 0 1 empty empty empty -2 -6 0 8 -262144
+-1 -1 4800 1;
+#N canvas 0 22 450 300 graph1 0;
+#X array sine 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 280 145 graph;
+#X obj 129 143 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X obj 50 227 dac~;
+#X text 201 51 [mtof] converts MIDI notes to frequency in Hertz.;
+#X text 202 27 Slider sends MIDI note values (0-127).;
+#X text 258 232 -1;
+#X text 264 187 0;
+#X text 264 141 1;
+#X text 150 141 Graph output;
+#X text 95 228 Line out to soundcard.;
+#X obj 50 74 osc~;
+#X obj 92 194 tabwrite~ sine;
+#X text 201 75 [osc~] makes a cosine waveform.;
+#X text 448 2 osc1.pd;
+#X obj 129 166 metro 100;
+#X connect 0 0 12 0;
+#X connect 1 0 0 0;
+#X connect 3 0 16 0;
+#X connect 12 0 4 0;
+#X connect 12 0 4 1;
+#X connect 12 0 13 0;
+#X connect 16 0 13 0;

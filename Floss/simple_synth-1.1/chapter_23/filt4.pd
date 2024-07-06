@@ -1,0 +1,60 @@
+#N canvas 650 43 610 726 10;
+#N canvas 0 22 450 300 graph1 0;
+#X array vcf 1000 float 0;
+#X coords 0 1 999 -1 200 100 1;
+#X restore 270 501 graph;
+#X obj 119 502 tgl 15 1 empty empty empty 0 -6 0 10 -262144 -1 -1 1
+1;
+#X text 248 588 -1;
+#X text 254 543 0;
+#X text 254 497 1;
+#X text 140 500 Graph output;
+#X text 82 584 Line out to soundcard.;
+#X obj 119 525 metro 100;
+#X obj 42 582 dac~;
+#X obj 42 27 noise~;
+#X text 154 27 Generate white noise.;
+#X obj 99 360 nbx 5 14 0 20 0 1 empty empty empty 0 -6 0 10 -262144
+-1 -1 6 256;
+#X text 463 28 filt4.pd;
+#X obj 42 418 vcf~ 220 1;
+#X obj 82 552 tabwrite~ vcf;
+#X obj 85 263 *~;
+#X obj 70 310 +~;
+#X obj 73 67 hsl 128 15 0 127 0 1 empty empty center_frequency -2 -6
+0 10 -262144 -1 -1 11100 1;
+#X obj 70 101 mtof~;
+#X obj 85 144 nbx 5 14 -1e+37 1e+37 0 1 empty empty modulation_frequency_in_Hz
+60 6 0 10 -262144 -1 -1 0.25 256;
+#X obj 100 226 nbx 5 14 -1e+37 1e+37 0 1 empty empty modulation_amount_in_Hz
+60 6 0 10 -262144 -1 -1 10000 256;
+#X obj 85 173 osc~;
+#X text 155 171 This [osc~] is the "modulator" oscillator. It determines
+how quickly the center frequency of the [vcf~] changes \, and by how
+much.;
+#X text 164 414 [vcf~] passes the center frequency unchanged \, and
+reduces or eliminates frequencies above and below it. The center frequency
+is determined by an audio signal. You can hear the center frequency
+changed by the "modulator" oscillator.;
+#X text 154 99 [mtof~] creates the center frequency for [vcf~] to be
+modulated.;
+#X text 158 311 Add the modulator to center frequency of [vcf~].;
+#X text 160 258 Multiply the modulating signal by the amount of modulation
+we want.;
+#X text 165 354 The third inlet controls the Resonance \, i.e. how
+far above or below the center frequency the filter still allows sound
+to pass. Generally this number is between 0-10.;
+#X connect 1 0 7 0;
+#X connect 7 0 14 0;
+#X connect 9 0 13 0;
+#X connect 11 0 13 2;
+#X connect 13 0 8 0;
+#X connect 13 0 8 1;
+#X connect 13 0 14 0;
+#X connect 15 0 16 1;
+#X connect 16 0 13 1;
+#X connect 17 0 18 0;
+#X connect 18 0 16 0;
+#X connect 19 0 21 0;
+#X connect 20 0 15 1;
+#X connect 21 0 15 0;
