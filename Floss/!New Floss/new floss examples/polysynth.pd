@@ -1,4 +1,4 @@
-#N canvas 632 38 623 559 12;
+#N canvas 432 104 817 571 12;
 #X declare -path ./abstractions;
 #X obj 109 433 output~;
 #X obj 106 386 rev2~ 90 80 3000 20;
@@ -11,6 +11,12 @@
 #X text 91 51 This example implements a polyphonic synthesizer with the [clone] object, f 36;
 #X obj 137 17 declare -path ./abstractions;
 #X text 251 343 phase modulation instead;
+#N canvas 756 188 650 462 waveforms 1;
+#X obj 207 202 loadbang;
+#X msg 207 227 \; sawtooth sinesum 4096 1 0.5 0.333333 0.25 0.2 0.166667 0.142857 0.125 0.111111 0.1 0.090909 0.0833333 0.076923 0.0714286 0.0666667 0.0625 \, normalize;
+#X obj 344 318 array define sawtooth 4099;
+#X connect 0 0 1 0;
+#X restore 497 280 pd waveforms;
 #X connect 1 0 0 0;
 #X connect 1 1 0 0;
 #X connect 1 2 0 1;

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<HTML lang="en">
+<HEAD>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<TITLE>Pd Manual - Chapter 7: Appendix III.</TITLE>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="pdmanual.css" media="screen">
+<link rel="icon" href="favicon.ico">
+</HEAD>
+<BODY>
+
+<div class="nav nav-top">
+    <div class="nav-back"><A href="../index.htm">&lt; Table of contents</A></div>
+    <div class="nav-forward"><A href="chapter2.htm">Chapter 2: Basic Digital Audio &gt;</A></div>
+</div>
+
+<div id="corpus">
+
+<IMG id="logo" src="icon.png" ALT="pd icon">
+
+<H2>Chapter 7: Appendix III)</H2>
+<H2>A Gentle Introduction to DSP,</H2>
+<H2>Synthesis and Patching with Pd</H2>
+
+<P> By “gentle introduction,” we mean something like a “for dummies” guide—intended for beginners and newcomers. This appendix can be read on its own, but the earlier chapters in this manual provide a more detailed look at how Pure Data (Pd) is structured and how it runs. This section presents a quick overview and some basics of DSP (Digital Signal Processing), synthesis techniques, and patching examples that cut right to the chase.
+
+<H3> <A href="#s7.1" id="s7.1"> 7.1. Pure Data Introduction: a realtime graphical programming language.</A> </H3>
+
+<P> Traditionally, computer programmers have used text-based languages to write applications. The typical process involves writing lines of code into a file, then running the program afterward to see the results. However, many sound and visual artists—as well as other non-programmers—often find this approach difficult and unintuitive for creating things.
+
+<P> This is where Pure Data comes in handy because it is a graphical programming environment. Instead of writing lines of code, users create programs - called "patches" - by placing visual objects on the screen and connecting them with patch cords. These objects represent functions and messages sent to them via connections dictate their behaviour and output. A patch then forms an interactive diagram that represents the data flow and actually performs the laid out operations.
+
+<figure>
+    <IMG src="7.1.1.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.1.1</u> A Pure Data Patch</figcaption>
+</figure>
+
+<P> This visual metaphor draws heavily from the electronic music paradigm of modular synthesis, where sounds are created and shaped by electronic devices called modules, which are connected together via patch cables to produce, again, a “patch”—whose sonic result depends on the types of modules used and how they are connected.
+
+<figure>
+    <IMG src="7.1.2.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.1.2</u> An analog synthesizer patch.</figcaption>
+</figure>
+
+<P> Just like a physical synthesizer, Pd works in real time. This means it is interactive, allowing changes to be made while the program is running, so users can hear or see the results immediately. This makes Pd a powerful tool for artists who want to create sound or video in live performance situations. The program is always running—there’s no separation between writing and running it—and each editing action on the program takes effect right away.
+
+<P> One thing to keep in mind when starting to learn Pure Data is that audio—and everything else—are just numbers inside the computer. Often, the computer doesn’t care whether those numbers represent sound or any other kind of data. This makes it possible to create incredible sound transformations but also means you can easily make mistakes, since Pd does not perform “sanity checks” to ensure your instructions are valid. Hence, sometimes the connections you make can produce unwanted results or cause your computer to crash and freeze. Try not to let this bother you, because as you learn more and more about this language you will make fewer and fewer mistakes and eventually you will be able to program patches which are as stable and predictable as you want them to be.
+
+
+<P> The Pd community has created additional external objects (or library of objects) for a wide variety of purposes, such as video processing, MP3 and QuickTime playback and streaming, manipulation and display of 3D objects, modeling of virtual physical objects, connecting to arduinos to read and send data, and whatnot. Virtually any kind of programming is possible with Pure Data, as long as there are external libraries providing the necessary basic building blocks. However, this gentle introduction will focus solely on native objects, which offer a limited set of audio-only functionality.
+
+<H3> <A href="#s7.2" id="s7.2"> 7.2. Basic Digital Audio.</A> </H3>
+
+<P> Unlike an analog synthesizer, Pure Data deals with digital audio and treats sound as digital numbers. To run Pd on your computer, you need a sound card to convert analog audio input into digital, and to convert digital sound back to analog on the output.
+
+<figure>
+    <IMG src="7.2.1.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.1</u> A diagram showing how sound travels through your computer. The "Analog to Digital" & "Digital to Analog Conversion" is done by the soundcard. The "Digital System" in this case is Pure Data. Source: http://en.wikipedia.org/wiki/Image:Analogue_Digital_Conversion.png</figcaption>
+</figure>
+
+<P> A microphone works by capturing vibrations in the air, causing its membrane to vibrate. The microphone’s circuitry converts these acoustic vibrations into an electrical current. An analog-to-digital converter then takes thousands of sample measurements of this electrical current every second and records them as numbers. A digital-to-analog converter turns these numbers back into voltage, which drives a loudspeaker to move the air in front of it and produce sound.
+
+<figure>
+    <IMG src="7.2.2.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.2</u> speaker</figcaption>
+</figure>
+
+<P> The membrane of the speaker must vibrate from its center position (at rest) backward and forward. The number of times per second it vibrates determines the frequency (or pitch) of the sound you hear, and the amplitude of its movement from the resting point determines the gain (the volume or loudness). Frequency is normally measured in Hertz (Hz), which counts cycles per second, while amplitude is measured in decibels (dB).
+
+<H4> <A href="#s7.2.1" id="s7.2.1">7.2.1. Sample Rate and Bit Depth</A> </H4>
+
+<P> When converting from analog to digital, we measure the amplitude over time by taking samples. For example, a common sampling rate is 44,100 measurements per second, also called a sampling frequency of 44.1 kHz (kilohertz). Modern sound cards can sample at frequencies up to 192 kHz. Other common sampling rates are 48 and 96 kHz.
+
+<P> The sampled amplitude is then converted into a digital number. The resolution of this number is called bit-depth or word length. Common values are 16, 24, 32, and even 64 bits. One bit is a piece of information that can be either 0 or 1. For example, if there are 16 bits used to represent one sample, there are 2¹⁶ (or 2 × 2 × 2 × … × 2, sixteen times, which equals 65,536) possible values for each sample.
+
+<P>By increasing the sampling rate, we can record higher sonic frequencies. By increasing the bit-depth or word length, we gain a greater dynamic range (the difference between the quietest and loudest sounds it is possible to record and play).
+
+<figure>
+    <IMG src="7.2.3.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.3</u> An example of 4-bit sampling of a signal (shown in red). This image shows that 16 possible values can be made from 4-bits--a very low dynamic range indeed! Source: http://en.wikipedia.org/wiki/Image:Pcm.svg</figcaption>
+</figure>
+
+<P>In Pd, audio signals can use either 32-bit or 64-bit floating-point precision, depending on your version. While this level of precision can be stored in a sound file, the actual analog output is limited by your sound card—typically to 24 or 16 bits. Audio signals meant for playback should stay within the range of -1 to 1, where 0 represents the speaker at its resting (center) position. However, Pd can generate audio signal values outside this range. As we’ll see later, such values are often used to control parameters—like setting "440" as the frequency of an oscillator in Hertz (Hz).
+
+<P>Being either 32 or 64 bit float means that some of the bits are used to represent decimal values, but not only for the range inside -1 to 1. Instead, it's for all possible numbers. Hence, we do not have 2³² possible values for audio signals in 32 bit float precision. And it’s tricky, because 32 bit float provides more resolution to represent very tiny values than bigger decimal ones. Nonetheless, we can make a rough assessment of a more or less 24 bit resolution for 32 bit floating point numbers within the -1 to 1 range! This matches the alleged bit resolution of professional audio cards, but it's also worth noting that they can't actually perform that task, reaching about 20 bit precision at most (which is already more than enough for any real world application anyway).
+
+<figure>
+    <IMG src="7.2.4.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.4</u> Graphical plot of a sine wave, from -1 to 1.</figcaption>
+</figure>
+
+<P> The patch above plots the signal from an [osc~] object (a sine wave oscillator) into an array. We write the signal data into the array using the [tabwrite~] object, which plots the signal each time it receives a bang. The bangs come from a [metro] object, which sends a bang every 100 ms when it's turned on by a toggle GUI object.
+
+<H4> <A href="#s7.2.2" id="s7.2.2">7.2.2. Amplitude Control, Mixing and Clipping</A> </H4>
+
+<P> If we want to change the volume of the sound, we have to multiply the numbers that represent the sound by another number. Multiplying them by a number greater than 1 will make the sound louder, and multiplying them by a number between 1 and 0 will make the sound quieter. Multiplying them by 0 will mute them—resulting in no sound at all. The waveform from Figure 7.2.4 is at full volume (i.e., its peaks are at -1 and 1). The volume of the waveform below has been halved (so it peaks at -0.5 and 0.5).
+
+<figure>
+    <IMG src="7.2.5.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.5</u> Amplitude control.</figcaption>
+</figure>
+
+<P> We can also mix two or more sounds by adding the streams of numbers that represent them together to get a new stream of sound. However, if the audio range falls outside the -1 to 1 limits, it gets clipped in the sound card output or when writing to an audio file (for instance, -1.5 becomes -1 and 1.5 becomes 1). This is called "clip distortion", and it's a very common type of digital distortion that happens when we don't take care to keep the audio's volume within the -1 to 1 range.
+
+<figure>
+    <IMG src="7.2.6.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.6</u> Mixing and clip distortion.</figcaption>
+</figure>
+
+<P> Above, we mix together two sine waves. To the left, the array plot shows the waveform reaching outside the graph bounds. To the right, we clip it before plotting, which shows what would be heard from the sound card: a clipped signal with the peaks of the waveform removed.
+
+<H3> <A href="#s7.2.3" id="s7.2.3">7.2.3. Nyquist Frequency and Foldover/Aliasing</A> </H3>
+
+<P> Another problem occurs if one tries to play back a frequency which is greater then half the sampling rate. For instance, if Pd is using a sampling rate of 44,100 Hz, the highest frequency one could theoretically play back without errors is 22,050 Hz. This is the Nyquist theorem and half the sampling rate is also known as the Nyquist frequency. This gives us a period of only two samples, the minimum required to represent a frequency.
+
+<P> Another problem occurs if one tries to play back a frequency greater than half the sampling rate. This According to the Nyquist theorem, the highest frequency you can represent is half the samping rate. So if Pd is running at a sample rate of 44,100 Hz, this frequency (also known as the Nyquist frequency) is 22,050 Hz. This gives us a period of only two samples, which is the minimum required to represent a sine waveform.
+
+<P> In this case, if you were to tell Pd to play a frequency of 24,100 Hz, what you would get is 20,000 Hz. What happened is that the frequency above Nyquist was folded back. The difference between the synthesized sound (24,100 Hz) and the Nyquist frequency (22,050 Hz) is 2,050 Hz, and what we get is the Nyquist frequency minus this difference (22,050 - 2,050 = 20,000). This is also known as foldover or aliasing.
+
+<figure>
+    <IMG src="7.2.7.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.7</u> Here we can see two possible waveforms which could be described by the samples show. The red line shows the intended waveform, and the blue line shows the "aliased" waveform at <Desired Frequency> - (<Desired Frequency> - <Nyquist Number>). Source: http://en.wikipedia.org/wiki/Image:AliasingSines.png</figcaption>
+</figure>
+
+<H3> <A href="#s7.2.4" id="s7.2.4">7.2.4. DC Offset and Unipolar Signals</A> </H3>
+
+<P> DC stands for "Direct Current", as opposed to "Alternating Current", which is what normal audio signals are (where 0 volts represents silence or the speaker at rest). A DC signal is a constant voltage that doesn’t oscillate, so it has a frequency of 0 Hz. The DC offset is a constant voltage added to the signal, shifting the speaker’s resting point away from zero. An audio signal that goes both above and below zero is called a bipolar signal. If there's a DC offset, the waveform can be pushed entirely into the positive or negative side, becoming a unipolar signal.
+
+<P> In some cases you may need a unipolar signal for things like modulation. Other than that, a DC component is generally an undesirable artifact—especially in the output—so it needs to be removed. A DC offset can easily push a waveform outside the -1 to 1 bounds, resulting in clip distortion. In the figure below, we add a constant value of 0.5 as the DC component, which imposes an offset of 0.5 on the sine wave, resulting in a unipolar signal. Note, however, that the gain is also adjusted so it doesn't get clipped.
+
+<figure>
+    <IMG src="7.2.7.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.2.7</u> An example of a Unipolar Signal with DC offset: the waveform is only in the positive domain.</figcaption>
+</figure>
+
+<H3> <A href="#s7.2.5" id="s7.2.5">7.2.5. Block Size </A> </H3>
+
+<P> Music software usually processes sound in batches or chunks. In Pd, these are known as “blocks.” The block size represents the number of audio samples Pd will compute as a batch before producing output. The default block size in Pd is 64, which means every 64 samples Pd calculates the output for all 64 samples. In some other software, you might see this referred to as “buffer size” (in number of samples) or “latency” (in milliseconds).
+
+<P> You can change the block size for different subwindows in a patch, which is useful for things like FFT analysis where a bigger block is needed. Another example is feedback loops, where you might want single-sample feedback (so you need a block size of just one sample).
+
+<H3> <A href="#s7.3" id="s7.3"> 7.3. Sampler.</A> </H3>
+
+<P> Sampler.
+
+<H3> <A href="#s7.4" id="s7.4"> 7.4. Basic DSP FX.</A> </H3>
+
+<P> FX.
+
+<H4> <A href="#s7.4.1" id="s7.4.1">7.4.1. AM / Tremolo</A> </H4>
+
+<P> AM.
+
+<H4> <A href="#s7.4.2" id="s7.421">7.4.2. Filters</A> </H4>
+
+<P> Filters.
+
+<H4> <A href="#s7.4.3" id="s7.4.3">7.4.3. Delays</A> </H4>
+
+<P> Reverb.
+
+<H4> <A href="#s7.4.4" id="s7.4.4">7.4.4. Reverb</A> </H4>
+
+<P> Reverb.
+
+<H3> <A href="#s7.5" id="s7.5"> 7.5. Oscillators.</A> </H3>
+
+<P> Oscillators are the basic signal generators in electronic music. There are different techniques to combine, filter or modulate them to create different rich sounds. As mentioned before, in Pure Data, audio signals are represented by a stream of numbers between the values of -1 and 1. Therefore, the output of oscillators send out values within this range.
+
+<P> In this section we’ll mention the most common oscillators, each with a different waveform (and different waveforms make different sounds).  The waveform is the shape of one period of that oscillator. The main waveforms are: Sine, Sawtooth, Square, Triangle and Impulse.
+
+<P> Pure Data is very limited on oscillators, at least native/vanilla ones. You can get many oscillators from external libraries, such as the ELSE library., but Vanilla provides only a couple of oscillators: [osc~] and [tabosc4~]. The former is a sine wave oscillator and the latter a wavetable oscillator that we can use to create other waveforms.
+
+<P> Oscillators need to operate on a frequency range we can hear, and that is from about 20 Hz to 20 kHz if you’re young and you haven’t damaged your hearing yet with loud and noisy music. But you may also want oscillators to operate on a lower frequency than 20 Hz, like 1 Hz or 0.1 Hz, for control purposes. These are then called LFOs (Low Frequency Oscillators). In Pd you can turn any oscillator into a low frequency one just by setting the desired frequency.
+
+<H4> <A href="#s7.5.1" id="s7.5.1">7.5.1. Sine wave</A> </H4>
+
+<P> The Sine Wave Oscillator makes a pure tone with no harmonics. The shape follows a sine function. Pd’s [osc~] is actually a cosine wave oscillator, which is the same as a sine wave but the phase is shifted at 90º, which means the start and end of the period is shifted at a quarter of the period.
+
+<P> A sine wave starts at 0 and goes up to 1 at the quarter of the period, then goes back at 0 at the half of the period, when it moves to the negative part and goes down to -1 at 3/4 of the period until it finally reached 0 back at the end of the period. A Cosine starts at 1, goes down to -1 and back.
+
+<figure>
+    <IMG src="7.5.1.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.5.1</u> Sinusoidal Oscillator</figcaption>
+</figure>
+
+<P> The inner workings of the [osc~] object is not that it computes the sine or cosine function. Instead it uses a lookup table of 2048 points. In a sense, it is basically a wavetable oscillator just like [tabosc4~], but with a previously built and set cosine table.
+
+<P> You can also implement [osc~] with [phasor~] connected to a [cos~] object. The [phasor~] object generates a phase ramp from 0 to 1, so the phase is the position in the cycle and the ‘0’ and ‘1’ points are supposed to be the same, so we have circular/periodic phase cycles. The [cos~] object is also a table lookup that expects the index/position from values within the 0 to 1 range, and it uses the exact same table as the [osc~] object. By implementing a sinusoidal oscillator like this you have access to the phase and the advantage is that we can perform Phase Modulation, as we’ll see later.
+
+<figure>
+    <IMG src="7.5.2.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.5.2</u> [phasor~] and [cos~]</figcaption>
+</figure>
+
+<P> Sine Wave Oscillator makes a pure tone with no harmonics. The shape follows a sine function. Pd’s [osc~] is actually a cosine wave oscillator, which is the same as a sine wave but the start and end of the period is shifted at 90º, which means a quarter of the period. A sine wave starts at 0 and goes up to 1
+
+<H4> <A href="#s7.5.2" id="s7.5.2">7.5.2. Sawtooth</A> </H4>
+
+<P> Any waveform other than a sine wave is not a pure tone anymore and this means it is formed by a sum of pure tones and these other tones harmonics (which are multiple frequencies of the fundamental frequency). The Sawtooth waveform contains both odd and even harmonics of the fundamental frequency, and the sum or harmonics is actually “infinite” for a “perfect” Sawtooth waveform, which is a perfect ramp.
+
+<P> The problem with a digital waveform that includes an infinite sum of multiples of the fundamental frequency is that, at one point, you’ll reach the Nyquist Frequency limit and you’ll start to have folder and aliasing. Hence, for digital oscillators, you need “Band Limited” waveforms, which limits the frequency bandwidth below Nyquist and prevents aliasing, so they’re also called “Anti-Aliased Oscillators”.
+
+<P> A perfect Sawtooth waveform, nonetheless, might be useful as a control signal, that is, as a LFO! Let’s then design both types of waveforms, a non band limited for LFO purposes and a band limited to prevent aliasing. For both we’ll create tables for lookup, which is what is more efficient. Let’s then start with a non limited one. We need to create a table, populate it with the waveform and use [tabosc4~] as the oscillator.
+
+<figure>
+    <IMG src="7.5.3.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.5.3</u> saw</figcaption>
+</figure>
+
+<P> As for a band limited version, we’ll define a fixed maximum number of harmonics so we don’t get foldover. This is not the best or more sophisticated strategy to design band limited oscillators, it’s just a more convenient strategy for Pure Data Vanilla. You can check Miller’s audio examples for more advanced techniques that include a transition table and oversampling plus filtering. You can also try externals that offer band limited oscillators that use different techniques such as the oscillators from the ELSE library, that uses Band-limited Impulse Trains (BLIT).
+
+<P> In order to define a maximum number of harmonics, we’ll use the ‘sinesum’ command that we can send to arrays. The way that sinesum works is that you send it a list of the amplitudes of the harmonics you wish to graph. A sawtooth wave is formed by a sum of harmonics whose amplitude decay as a factor of the harmonic number. The formula is 1/h (where "h" indicates the number of the harmonic) and it means the amplitude of the first harmonic is 1/1 = 1, the second is 1/2 = 0.5, the third is 1/3 = 0.33333, and so on.
+
+<P> The more harmonics you have, the more it looks like a non limited sawtooth wave. We just need to find a good amount of harmonics to choose to prevent aliasing, but of course this depends on the fundamental frequency, so we need to stipulate a maximum highest fundamental note.
+
+<P> The C6 pitch is somewhat in a very high range and we’ll consider this to be the limit. This pitch is about 1 Khz and then 20 harmonics is a save range for around that limit. Of course this depends on the sample rate and we’re considering a 44.1 kHz one, whose Nyquist frequency is 22.05 kHz. For this case, 20 harmonics above C6 is about 20.93 Khz, which is still fairly below Nyquist.
+
+<P> It is still save to go a bit over the C6 limit and even if you cross the line a little bit, you’ll only get the very top harmonics aliased, and these have a very low amplitude and you won’t get significant distortion until the amount of foldover is really high. That is to say you can take more risks if you will.
+
+<P> You can also choose a different amount with more harmonics if you want to remain on the lower musical range. Another option is to increase the sample rate so you can have more headroom for harmonics.
+
+<P> Let’s finally check the examples. Here is a message to compute a very rudimentary sawtooth wave using only four harmonics:
+
+<figure>
+    <IMG src="7.5.4.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.5.4</u> 4 harmonics</figcaption>
+</figure>
+
+<P> Because the graph is the product of several sine waves being added up, the waveform can go outside the normal -1 to 1 bounds of an audio signal. If we send a "normalize  1" message to the array, it adjusts the range of the signal to fit within the bounds of -1 and 1. Below, we have two examples of sawtooth waves, both normalized to the range of -1 to 1. As can be seen, the more harmonics used to calculate the waveform, the closer it gets to its idealized mathematical form:
+
+<figure>
+    <IMG src="7.5.5.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.5.5</u> norm</figcaption>
+</figure>
+
+<P> We then use[tabosc4~] to load these waveforms from arrays.
+
+<figure>
+    <IMG src="7.5.6.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.5.6</u> [tabosc4~]</figcaption>
+</figure>
+
+<H4> <A href="#s7.5.3" id="s7.5.3">7.5.3. Square</A> </H4>
+
+<P> Square.
+
+<H4> <A href="#s7.5.4" id="s7.5.4">7.5.4. Triangle</A> </H4>
+
+<P> Triangle.
+
+<H4> <A href="#s7.5.5" id="s7.5.5">7.5.3. Impulse</A> </H4>
+
+<P> Impulse.This makes it ideal for filtering and for synthesizing string sounds. The shape of this wave ramps up sharply from "0" to "1", then immediately drops back to "0".
+
+
+
+<H3> <A href="#s7.6" id="s7.6"> 7.6. Controls.</A> </H3>
+
+<P> It.
+
+<H4> <A href="#s7.6.1" id="s7.6.1">7.6.1. Metronome</A> </H4>
+
+<P> Envelope.
+
+<H4> <A href="#s7.6.2" id="s7.6.2">7.6.2. Random</A> </H4>
+
+<P> Envelope.
+
+<H4> <A href="#s7.6.3" id="s7.6.3">7.6.3. Envelope</A> </H4>
+
+<P> Envelope.
+
+<H4> <A href="#s7.6.4" id="s7.6.4">7.6.4. LFO/</A> </H4>
+
+<P> LFO.
+
+<H4> <A href="#s7.6.5" id="s7.6.5">7.6.5. LFO/</A> </H4>
+
+<P> LFNoise.
+
+<H4> <A href="#s7.6.6" id="s7.6.6">7.6.6. Sequencers</A> </H4>
+
+<P> Sequencers.
+
+<H4> <A href="#s7.6.7" id="s7.6.7">7.6.7. Sample & Hold</A> </H4>
+
+<P> Sample & Hold.
+
+<H4> <A href="#s7.6.8" id="s7.6.8">7.6.8. MIDI Input</A> </H4>
+
+<P> MIDI Input.
+
+
+<H3> <A href="#s7.7" id="s7.7"> 7.7. Building Monophonic and Polyphonic synths.</A> </H3>
+
+<P> It's time to build us a simple monophonic and polyphonic synthesizers. A synthesizer is one of the most fundamental instruments in electronic music. Its essential function is to generate a musical tone when it receives a note from either a keyboard or a sequencer. A modular analog synthesizer is composed of several modules, or parts, which are connected together in order to build a synthesizer. You basically 3 types of modules: 1) Sound generators: such as an oscillator, a noise generator a sampler; 2)FXs and modifiers, such as a Filter, a Reverb or an amplifier; 3) Controllers, such as LFOs (Low Frequency Oscillators), Sequencers, Envelope Generators, etc.
+
+<figure>
+    <IMG src="7.7.1.png" ALT="Include Pic">
+        <figcaption><u>Fig. 7.7.1</u> The MiniMoog is one of the most famous analog synthesizers in the world. We'll take a shot at reproducing some of its basic features in this tutorial. Source: http://en.wikipedia.org/wiki/Image:Minimoog.JPG</figcaption>
+</figure>
+
+<P> The patch cables in a modular analog synthesizer transmit electrical voltage, which can be a sound signal but you can also have constant electrical voltage signals that are used to control the parameters of a module, aka “CV” (Control Voltage). For instance, a note sequencer sends electrical voltage that represents frequencies and these are fed into an oscillator.
+
+<P> Since analog synthesizer modules are controlled by voltage, we have terms such as “VCO” (Voltage Controlled Oscillator), “VCF” (Voltage Controlled Filter) and “VCA” (Voltage Controlled Amplifier) to refer to common modules. Digital synthesizers, on the other hand, are controlled by MIDI messages.
+
+<P> In Pure Data we can use control data numbers and sometimes also audio signals to control parameters of an object. For example, the [osc~] object is a sinusoidal object that can both control data and signals to set its frequency. When you connect a MIDI keyboard, you have control data, but if you’re using a signal, it’s like you’re using “CV”. Therefore, you can say it is also a “VCO”.
+
+
+<H3> <A href="#s7.8" id="s7.8"> 7.8. Basic Techniques.</A> </H3>
+
+<P> It.
+
+<H4> <A href="#s7.8.1" id="s7.8.1">7.8.1. Additive</A> </H4>
+
+<P> Additive.
+
+<H4> <A href="#s7.8.2" id="s7.8.2">7.8.2. Subtractive</A> </H4>
+
+<P> Subtractive.
+
+<H4> <A href="#s7.8.3" id="s7.8.3">7.8.3. FM</A> </H4>
+
+<P> FM.
+
+
+
+</div>
+<div class="nav nav-bottom">
+    <div class="nav-back"><A href="chapter1.htm">&lt; Chapter 1: Introduction</A></div>
+    <div class="nav-home"><A href="../index.htm#s2">Table of contents</A></div>
+    <div class="nav-forward"><A href="chapter3.htm">Chapter 3: Installing and configuring Pd &gt;</A></div>
+</div>
+
+
+</BODY>
+</HTML>
